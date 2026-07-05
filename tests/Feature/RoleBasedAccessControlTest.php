@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Support\Facades\Route;
 
@@ -12,7 +12,7 @@ beforeEach(function () {
 
 test('guests are redirected to login when accessing authenticated routes', function () {
     $response = $this->get('/dashboard');
-    
+
     $response->assertRedirect('/login');
     $this->assertGuest();
 });
@@ -53,7 +53,7 @@ test('require capability middleware blocks unauthorized users', function () {
     })->middleware(['web', 'auth', 'capability:user.manage']);
 
     $response = $this->actingAs($user)->get('/test-manage-users');
-    
+
     // Employee doesn't have user.manage capability, so 403 Forbidden is expected
     $response->assertStatus(403);
 });
@@ -68,7 +68,7 @@ test('require capability middleware allows authorized users', function () {
     })->middleware(['web', 'auth', 'capability:user.manage']);
 
     $response = $this->actingAs($user)->get('/test-manage-users-allowed');
-    
+
     // Owner has user.manage capability, so 200 OK is expected
     $response->assertStatus(200);
     $response->assertSee('success');

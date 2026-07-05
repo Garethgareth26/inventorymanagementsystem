@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = $request->user();
-        
+
         // Update last login timestamp
         $user->update(['last_login_at' => now()]);
 
