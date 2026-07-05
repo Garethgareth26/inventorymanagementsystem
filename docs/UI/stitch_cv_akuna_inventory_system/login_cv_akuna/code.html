@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - CV Akuna Inventory Management System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#585f6c",
+                        "on-primary": "#ffffff",
+                        "class-c": "#FFFFFF",
+                        "success": "#10B981",
+                        "inverse-on-surface": "#f0f1f2",
+                        "warning": "#F59E0B",
+                        "on-surface": "#191c1d",
+                        "border-subtle": "#E5E7EB",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#dae2ff",
+                        "text-main": "#111827",
+                        "surface-variant": "#e1e3e4",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "on-secondary-container": "#5e6572",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-primary-fixed": "#001848",
+                        "inverse-surface": "#2e3132",
+                        "class-a": "#E0E7FF",
+                        "on-tertiary-fixed": "#380d00",
+                        "secondary-fixed": "#dce2f3",
+                        "text-muted": "#4B5563",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#737685",
+                        "surface-tint": "#0c56d0",
+                        "on-secondary-fixed-variant": "#404754",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#151c27",
+                        "inverse-primary": "#b2c5ff",
+                        "tertiary": "#7b2600",
+                        "surface-container": "#edeeef",
+                        "on-error": "#ffffff",
+                        "primary": "#003d9b",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "secondary-container": "#dce2f3",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-bright": "#f8f9fa",
+                        "surface": "#f8f9fa",
+                        "primary-container": "#0052cc",
+                        "danger": "#EF4444",
+                        "on-primary-container": "#c4d2ff",
+                        "on-background": "#191c1d",
+                        "tertiary-fixed": "#ffdbcf",
+                        "class-b": "#F3F4F6",
+                        "secondary-fixed-dim": "#c0c7d6",
+                        "on-tertiary-container": "#ffc6b2",
+                        "background": "#f8f9fa",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#434654",
+                        "surface-container-high": "#e7e8e9",
+                        "outline-variant": "#c3c6d6",
+                        "tertiary-container": "#a33500",
+                        "surface-dim": "#d9dadb",
+                        "tertiary-fixed-dim": "#ffb59b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "sidebar-collapsed": "64px",
+                        "sidebar-expanded": "240px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "header-height": "64px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "display-kpi": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "table-data": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-kpi": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["18px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "table-data": ["13px", { "lineHeight": "16px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .input-glow:focus {
+            box-shadow: 0 0 0 2px rgba(0, 61, 155, 0.2);
+            outline: none;
+            border-color: #003d9b;
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen flex items-center justify-center font-body-md text-text-main p-md">
+<!-- Linear/Transactional Page - Navigation Suppressed -->
+<main class="w-full max-w-md bg-class-c border border-border-subtle rounded-lg p-xl">
+<div class="text-center mb-xl flex flex-col items-center">
+<div class="w-16 h-16 bg-primary rounded-lg flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-on-primary" style="font-size: 32px;">inventory_2</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-text-main font-bold">CV Akuna</h1>
+<p class="font-body-md text-body-md text-text-muted mt-sm">Inventory Management System</p>
+</div>
+<form action="#" class="space-y-lg" method="POST">
+<div class="space-y-sm">
+<label class="block font-label-caps text-label-caps text-text-muted uppercase" for="email">Email or Username</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[18px]">person</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-border-subtle rounded-DEFAULT text-body-md bg-class-c text-text-main placeholder-text-muted input-glow transition-all duration-200 font-body-md" id="email" name="email" placeholder="admin@cvakuna.com" required="" type="text"/>
+</div>
+</div>
+<div class="space-y-sm">
+<div class="flex items-center justify-between">
+<label class="block font-label-caps text-label-caps text-text-muted uppercase" for="password">Password</label>
+<a class="font-body-sm text-body-sm text-primary hover:text-primary-fixed-variant transition-colors" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-text-muted text-[18px]">lock</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-border-subtle rounded-DEFAULT text-body-md bg-class-c text-text-main placeholder-text-muted input-glow transition-all duration-200 font-body-md" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<div class="pt-sm">
+<button class="w-full flex justify-center py-2 px-4 border border-transparent rounded-DEFAULT shadow-sm text-body-md font-body-md font-medium text-on-primary bg-primary hover:bg-primary-fixed-variant focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors" type="submit">
+                    Sign In
+                </button>
+</div>
+</form>
+<div class="mt-lg border-t border-border-subtle pt-lg text-center">
+<p class="font-body-sm text-body-sm text-text-muted">
+                Authorized personnel only. <br/> Access attempts are logged.
+            </p>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EOQ Simulation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary": "#585f6c",
+                      "on-primary": "#ffffff",
+                      "class-c": "#FFFFFF",
+                      "success": "#10B981",
+                      "inverse-on-surface": "#f0f1f2",
+                      "warning": "#F59E0B",
+                      "on-surface": "#191c1d",
+                      "border-subtle": "#E5E7EB",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#dae2ff",
+                      "text-main": "#111827",
+                      "surface-variant": "#e1e3e4",
+                      "on-tertiary-fixed-variant": "#812800",
+                      "on-secondary-container": "#5e6572",
+                      "surface-container-highest": "#e1e3e4",
+                      "on-primary-fixed": "#001848",
+                      "inverse-surface": "#2e3132",
+                      "class-a": "#E0E7FF",
+                      "on-tertiary-fixed": "#380d00",
+                      "secondary-fixed": "#dce2f3",
+                      "text-muted": "#4B5563",
+                      "on-error-container": "#93000a",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#737685",
+                      "surface-tint": "#0c56d0",
+                      "on-secondary-fixed-variant": "#404754",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed": "#151c27",
+                      "inverse-primary": "#b2c5ff",
+                      "tertiary": "#7b2600",
+                      "surface-container": "#edeeef",
+                      "on-error": "#ffffff",
+                      "primary": "#003d9b",
+                      "on-primary-fixed-variant": "#0040a2",
+                      "secondary-container": "#dce2f3",
+                      "primary-fixed-dim": "#b2c5ff",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f3f4f5",
+                      "surface-bright": "#f8f9fa",
+                      "surface": "#f8f9fa",
+                      "primary-container": "#0052cc",
+                      "danger": "#EF4444",
+                      "on-primary-container": "#c4d2ff",
+                      "on-background": "#191c1d",
+                      "tertiary-fixed": "#ffdbcf",
+                      "class-b": "#F3F4F6",
+                      "secondary-fixed-dim": "#c0c7d6",
+                      "on-tertiary-container": "#ffc6b2",
+                      "background": "#f8f9fa",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#434654",
+                      "surface-container-high": "#e7e8e9",
+                      "outline-variant": "#c3c6d6",
+                      "tertiary-container": "#a33500",
+                      "surface-dim": "#d9dadb",
+                      "tertiary-fixed-dim": "#ffb59b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "sidebar-collapsed": "64px",
+                      "sidebar-expanded": "240px",
+                      "base": "4px",
+                      "xs": "4px",
+                      "header-height": "64px"
+              },
+              "fontFamily": {
+                      "label-caps": ["Inter"],
+                      "display-kpi": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "table-data": ["Inter"]
+              },
+              "fontSize": {
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "display-kpi": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-md": ["18px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "table-data": ["13px", {"lineHeight": "16px", "fontWeight": "400"}]
+              }
+      }
+          },
+        }
+    </script>
+<style>
+        body { background-color: #f8f9fa; color: #191c1d; }
+    </style>
+</head>
+<body class="flex bg-background h-screen overflow-hidden text-on-background font-body-md">
+<!-- Sidebar Component (Rendered via JSON directives) -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full w-sidebar-expanded z-40 p-md bg-surface-container-lowest dark:bg-inverse-surface border-r border-border-subtle dark:border-outline-variant">
+<div class="flex items-center mb-xl">
+<span class="material-symbols-outlined text-primary mr-sm text-2xl">precision_manufacturing</span>
+<div>
+<h1 class="font-headline-md text-headline-md font-black text-primary dark:text-primary-fixed">CV Akuna</h1>
+<p class="font-label-caps text-label-caps text-text-muted">Inventory Management</p>
+</div>
+</div>
+<div class="flex-1 space-y-sm">
+<a class="flex items-center space-x-sm px-sm py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center space-x-sm px-sm py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-caps text-label-caps">Inventory Assets</span>
+</a>
+<!-- Active Tab based on 'Inventory Optimization' context -->
+<a class="flex items-center space-x-sm px-sm py-sm bg-primary-fixed dark:bg-primary-container text-on-primary-fixed dark:text-on-primary-container font-semibold rounded-lg scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="font-label-caps text-label-caps">Production Control</span>
+</a>
+<a class="flex items-center space-x-sm px-sm py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-caps text-label-caps">Purchasing</span>
+</a>
+<a class="flex items-center space-x-sm px-sm py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps text-label-caps">Supply Chain Reports</span>
+</a>
+<a class="flex items-center space-x-sm px-sm py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">System Settings</span>
+</a>
+</div>
+<div class="mt-auto pt-md border-t border-border-subtle space-y-sm">
+<button class="w-full bg-primary text-on-primary py-sm rounded-lg font-label-caps hover:bg-primary-container transition-colors shadow-sm">Add New SKU</button>
+<a class="flex items-center space-x-sm px-sm py-sm text-secondary hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps">Help Center</span>
+</a>
+<a class="flex items-center space-x-sm px-sm py-sm text-secondary hover:bg-surface-container rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps">Log Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-sidebar-expanded flex flex-col h-screen overflow-y-auto">
+<!-- Top App Bar Component -->
+<header class="flex items-center justify-between px-lg h-header-height w-full bg-surface dark:bg-on-surface border-b border-border-subtle dark:border-outline-variant sticky top-0 z-30">
+<div class="flex items-center space-x-lg">
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md text-text-main font-semibold">EOQ Simulation: RM-492 Alumina</h2>
+</div>
+<div class="flex items-center space-x-md">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-2 top-2 text-text-muted text-sm">search</span>
+<input class="pl-8 pr-4 py-1 text-sm border border-border-subtle rounded bg-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-fixed-dim" placeholder="Search..." type="text"/>
+</div>
+<button class="text-secondary hover:bg-surface-container-low p-1 rounded transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-secondary hover:bg-surface-container-low p-1 rounded transition-colors"><span class="material-symbols-outlined">help</span></button>
+<button class="text-secondary hover:bg-surface-container-low p-1 rounded transition-colors"><span class="material-symbols-outlined">settings</span></button>
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-border-subtle object-cover" data-alt="A small, professional user avatar portrait of an industrial manager, light mode aesthetic, sharp focus, 50-100 words detailed description..." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzf2q7e-F4d6oPDSBeMyhh92jjGX8qwk7rk20hGzKUcwZAy0GqHr9hk-mQsfFLVwwvKtQBIqBMEIS5uIOswyRvumRzKwjlYrK-1cEqKKpMvM38fR1CTP1JVBCESjzQY3l3MS5cBOeLttAkb5dtBBdxBtiI7sWNpmFC0SlelETRLHrhW5Dmk7cdVvAN6MfL61ZicM3V_-vHq-cK907NiQ286QWDAYhOMyAiURVcCCyA4YzNDQAT0P4DnA"/>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-lg max-w-[1440px] mx-auto w-full">
+<div class="mb-lg">
+<p class="font-body-sm text-text-muted mb-1">Inventory Optimization / Raw Materials</p>
+<h3 class="font-headline-lg text-headline-lg text-text-main">Economic Order Quantity (EOQ) Analyzer</h3>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-lg items-start">
+<!-- Left Panel: Inputs -->
+<div class="xl:col-span-4 bg-white border border-border-subtle rounded-lg p-md shadow-sm">
+<div class="flex justify-between items-center mb-md border-b border-border-subtle pb-sm">
+<h4 class="font-headline-md text-headline-md text-text-main">Parameters</h4>
+<span class="material-symbols-outlined text-text-muted">tune</span>
+</div>
+<form class="space-y-md">
+<div>
+<label class="block font-label-caps text-label-caps text-secondary mb-xs">Annual Demand (D)</label>
+<div class="relative">
+<input class="w-full border border-border-subtle rounded bg-white px-3 py-2 text-text-main font-table-data focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-fixed-dim font-mono" type="number" value="12000"/>
+<span class="absolute right-3 top-2 text-text-muted text-xs">Units</span>
+</div>
+<p class="font-body-sm text-text-muted mt-1 text-xs">Projected usage for next 12 months.</p>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-secondary mb-xs">Order Cost (S)</label>
+<div class="relative">
+<span class="absolute left-3 top-2 text-text-muted text-sm">$</span>
+<input class="w-full border border-border-subtle rounded bg-white pl-7 pr-3 py-2 text-text-main font-table-data focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-fixed-dim font-mono" type="number" value="250.00"/>
+</div>
+<p class="font-body-sm text-text-muted mt-1 text-xs">Fixed cost per order placed.</p>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-secondary mb-xs">Holding Cost (H)</label>
+<div class="relative">
+<span class="absolute left-3 top-2 text-text-muted text-sm">$</span>
+<input class="w-full border border-border-subtle rounded bg-white pl-7 pr-3 py-2 text-text-main font-table-data focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-fixed-dim font-mono" type="number" value="3.50"/>
+<span class="absolute right-3 top-2 text-text-muted text-xs">/Unit/Yr</span>
+</div>
+<p class="font-body-sm text-text-muted mt-1 text-xs">Cost to hold one unit for a year.</p>
+</div>
+<div class="pt-sm border-t border-border-subtle mt-lg">
+<p class="font-body-sm text-text-muted text-xs text-center mb-sm bg-surface-container-low py-1 rounded border border-border-subtle border-dashed">
+                                EOQ = √<span class="overline">(2 × D × S) / H</span>
+</p>
+<button class="w-full bg-primary text-on-primary py-2 rounded font-label-caps text-label-caps hover:bg-primary-fixed-variant transition-colors flex items-center justify-center space-x-2" type="button">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+<span>Simulate</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Right Panel: Comparison View -->
+<div class="xl:col-span-8 bg-white border border-border-subtle rounded-lg p-md shadow-sm min-h-[500px] flex flex-col">
+<div class="flex justify-between items-center mb-md border-b border-border-subtle pb-sm">
+<h4 class="font-headline-md text-headline-md text-text-main">Simulation Results</h4>
+<span class="font-label-caps text-label-caps px-2 py-1 bg-surface-container-low text-secondary rounded">Draft Mode</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-lg">
+<!-- Current Official -->
+<div class="border border-border-subtle rounded-lg p-md bg-surface-bright relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<h5 class="font-label-caps text-label-caps text-secondary mb-2">Current Official EOQ</h5>
+<div class="font-display-kpi text-display-kpi text-text-main">1,050 <span class="text-sm font-normal text-text-muted">units</span></div>
+<div class="mt-4 space-y-2 border-t border-border-subtle pt-2">
+<div class="flex justify-between font-body-sm text-text-main">
+<span class="text-text-muted">Total Annual Cost:</span>
+<span class="font-mono">$7,250.00</span>
+</div>
+<div class="flex justify-between font-body-sm text-text-main">
+<span class="text-text-muted">Orders / Year:</span>
+<span class="font-mono">11.4</span>
+</div>
+</div>
+</div>
+<!-- Simulated Result -->
+<div class="border border-primary-fixed rounded-lg p-md bg-primary-fixed/10 relative overflow-hidden ring-1 ring-primary-fixed-dim">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="flex justify-between items-start mb-2">
+<h5 class="font-label-caps text-label-caps text-primary">Simulated Result</h5>
+<span class="flex items-center text-success text-xs font-semibold bg-success/10 px-1 rounded"><span class="material-symbols-outlined text-[10px] mr-1">trending_down</span> -12% Cost</span>
+</div>
+<div class="font-display-kpi text-display-kpi text-primary-fixed-variant">1,309 <span class="text-sm font-normal text-text-muted">units</span></div>
+<div class="mt-4 space-y-2 border-t border-primary-fixed pt-2">
+<div class="flex justify-between font-body-sm text-text-main">
+<span class="text-text-muted">Total Annual Cost:</span>
+<span class="font-mono font-semibold">$6,380.50</span>
+</div>
+<div class="flex justify-between font-body-sm text-text-main">
+<span class="text-text-muted">Orders / Year:</span>
+<span class="font-mono">9.1</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Chart Placeholder -->
+<div class="flex-1 border border-border-subtle border-dashed rounded bg-surface-container-lowest flex items-center justify-center p-md relative">
+<!-- Abstract representation of cost curve -->
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 50% 50%, #e1e3e4 1px, transparent 1px); background-size: 16px 16px;"></div>
+<div class="text-center z-10">
+<span class="material-symbols-outlined text-4xl text-outline-variant mb-2">monitoring</span>
+<p class="font-body-sm text-text-muted">Total Cost Curve Visualization</p>
+</div>
+</div>
+<div class="mt-lg pt-md border-t border-border-subtle flex justify-end space-x-sm">
+<button class="px-4 py-2 bg-white border border-border-subtle text-text-main font-label-caps rounded hover:bg-surface-container-low transition-colors">Reset</button>
+<button class="px-4 py-2 bg-primary text-on-primary font-label-caps rounded hover:bg-primary-fixed-variant transition-colors shadow-sm flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">check_circle</span>
+                            Terapkan Parameter
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

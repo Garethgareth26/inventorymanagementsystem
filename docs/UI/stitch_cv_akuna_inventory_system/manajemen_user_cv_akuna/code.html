@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-surface" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CV Akuna - User Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "class-c": "#FFFFFF",
+                      "on-error-container": "#93000a",
+                      "on-background": "#191c1d",
+                      "error": "#ba1a1a",
+                      "on-secondary": "#ffffff",
+                      "text-main": "#111827",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container": "#edeeef",
+                      "secondary-fixed-dim": "#c0c7d6",
+                      "error-container": "#ffdad6",
+                      "success": "#10B981",
+                      "surface-bright": "#f8f9fa",
+                      "secondary-fixed": "#dce2f3",
+                      "tertiary-fixed": "#ffdbcf",
+                      "surface-tint": "#0c56d0",
+                      "on-primary-fixed-variant": "#0040a2",
+                      "on-primary-fixed": "#001848",
+                      "on-surface-variant": "#434654",
+                      "on-secondary-fixed-variant": "#404754",
+                      "on-tertiary-container": "#ffc6b2",
+                      "inverse-on-surface": "#f0f1f2",
+                      "surface-container-highest": "#e1e3e4",
+                      "inverse-surface": "#2e3132",
+                      "on-primary-container": "#c4d2ff",
+                      "surface-dim": "#d9dadb",
+                      "on-secondary-container": "#5e6572",
+                      "border-subtle": "#E5E7EB",
+                      "on-surface": "#191c1d",
+                      "secondary": "#585f6c",
+                      "on-tertiary-fixed": "#380d00",
+                      "surface-container-high": "#e7e8e9",
+                      "primary": "#003d9b",
+                      "text-muted": "#4B5563",
+                      "surface-container-low": "#f3f4f5",
+                      "primary-fixed-dim": "#b2c5ff",
+                      "on-primary": "#ffffff",
+                      "danger": "#EF4444",
+                      "outline": "#737685",
+                      "background": "#f8f9fa",
+                      "outline-variant": "#c3c6d6",
+                      "primary-fixed": "#dae2ff",
+                      "class-a": "#E0E7FF",
+                      "on-secondary-fixed": "#151c27",
+                      "on-error": "#ffffff",
+                      "class-b": "#F3F4F6",
+                      "on-tertiary": "#ffffff",
+                      "inverse-primary": "#b2c5ff",
+                      "surface-variant": "#e1e3e4",
+                      "surface": "#f8f9fa",
+                      "primary-container": "#0052cc",
+                      "on-tertiary-fixed-variant": "#812800",
+                      "tertiary": "#7b2600",
+                      "tertiary-fixed-dim": "#ffb59b",
+                      "tertiary-container": "#a33500",
+                      "warning": "#F59E0B",
+                      "secondary-container": "#dce2f3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "header-height": "64px",
+                      "sm": "8px",
+                      "sidebar-expanded": "240px",
+                      "sidebar-collapsed": "64px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "md": "16px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-kpi": [
+                              "Inter"
+                      ],
+                      "table-data": [
+                              "Inter"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-kpi": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "table-data": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface h-full flex overflow-hidden font-body-md">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full w-sidebar-expanded z-40 p-md bg-surface-container-lowest dark:bg-inverse-surface border-r border-border-subtle dark:border-outline-variant flat no shadows">
+<div class="flex items-center gap-sm mb-xl px-sm">
+<span class="font-headline-md text-headline-md font-black text-primary dark:text-primary-fixed">CV Akuna</span>
+</div>
+<div class="mb-lg px-sm">
+<span class="font-label-caps text-label-caps text-text-muted mb-xs block">Inventory Management</span>
+</div>
+<ul class="flex flex-col gap-xs flex-1 overflow-y-auto">
+<li>
+<a class="flex items-center gap-sm px-md py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all hover:bg-surface-container-high dark:hover:bg-on-secondary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-md py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all hover:bg-surface-container-high dark:hover:bg-on-secondary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-xl">inventory_2</span>
+<span class="font-body-md text-body-md">Inventory Assets</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-md py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all hover:bg-surface-container-high dark:hover:bg-on-secondary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-xl">precision_manufacturing</span>
+<span class="font-body-md text-body-md">Production Control</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-md py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all hover:bg-surface-container-high dark:hover:bg-on-secondary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-xl">shopping_cart</span>
+<span class="font-body-md text-body-md">Purchasing</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-md py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all hover:bg-surface-container-high dark:hover:bg-on-secondary-fixed-variant" href="#">
+<span class="material-symbols-outlined text-xl">analytics</span>
+<span class="font-body-md text-body-md">Supply Chain Reports</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-md py-sm bg-primary-fixed dark:bg-primary-container text-on-primary-fixed dark:text-on-primary-container font-semibold rounded-lg scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-body-md text-body-md">System Settings</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto flex flex-col gap-xs pt-lg border-t border-border-subtle px-sm">
+<button class="w-full bg-primary text-on-primary rounded font-body-md py-sm hover:bg-primary-container transition-colors mb-sm flex justify-center items-center gap-xs">
+<span class="material-symbols-outlined text-sm">add</span> Add New SKU
+            </button>
+<a class="flex items-center gap-sm px-md py-sm text-secondary hover:bg-surface-container rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-xl">help</span>
+<span class="font-body-md text-body-md">Help Center</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-secondary hover:bg-surface-container rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-xl">logout</span>
+<span class="font-body-md text-body-md">Log Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-sidebar-expanded min-w-0 h-full overflow-hidden">
+<!-- TopAppBar (Mobile Only) -->
+<header class="md:hidden flex items-center justify-between px-md h-header-height w-full bg-surface dark:bg-on-surface border-b border-border-subtle dark:border-outline-variant shrink-0">
+<span class="font-headline-lg text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed">CV Akuna</span>
+<button class="text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto p-md md:p-xl flex justify-center">
+<div class="w-full max-w-[1440px] flex flex-col gap-lg">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-sm pb-md border-b border-border-subtle">
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-text-main">User Management</h1>
+<p class="font-body-sm text-body-sm text-text-muted mt-xs">Manage system access, roles, and audit login activity.</p>
+</div>
+<button class="bg-primary text-on-primary px-md py-sm rounded flex items-center gap-xs font-body-md font-semibold hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+                        Add User
+                    </button>
+</div>
+<!-- Filters & Search -->
+<div class="flex flex-col sm:flex-row gap-sm items-center justify-between bg-surface-container-lowest p-md rounded-lg border border-border-subtle">
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span>
+<input class="w-full pl-9 pr-3 py-2 bg-surface-container-lowest border border-border-subtle rounded focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 font-body-sm text-body-sm" placeholder="Search users by name or email..." type="text"/>
+</div>
+<div class="flex gap-sm w-full sm:w-auto">
+<select class="bg-surface-container-lowest border border-border-subtle rounded px-3 py-2 font-body-sm text-body-sm focus:outline-none focus:border-primary">
+<option value="">All Roles</option>
+<option value="owner">Owner</option>
+<option value="admin">Admin</option>
+<option value="staff">Staff</option>
+</select>
+<select class="bg-surface-container-lowest border border-border-subtle rounded px-3 py-2 font-body-sm text-body-sm focus:outline-none focus:border-primary">
+<option value="">All Status</option>
+<option value="active">Aktif</option>
+<option value="inactive">Nonaktif</option>
+</select>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-lg overflow-hidden flex-1 flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-class-b border-b border-border-subtle">
+<th class="py-sm px-md font-label-caps text-label-caps text-text-muted uppercase tracking-wider w-1/4">Nama</th>
+<th class="py-sm px-md font-label-caps text-label-caps text-text-muted uppercase tracking-wider w-1/4">Email</th>
+<th class="py-sm px-md font-label-caps text-label-caps text-text-muted uppercase tracking-wider w-1/6">Role</th>
+<th class="py-sm px-md font-label-caps text-label-caps text-text-muted uppercase tracking-wider w-1/6">Status</th>
+<th class="py-sm px-md font-label-caps text-label-caps text-text-muted uppercase tracking-wider w-1/6">Login Terakhir</th>
+<th class="py-sm px-md w-[48px]"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle font-table-data text-table-data">
+<!-- Row 1 -->
+<tr class="hover:bg-class-a/20 transition-colors group h-[48px]">
+<td class="py-sm px-md font-semibold text-text-main">Budi Santoso</td>
+<td class="py-sm px-md text-text-muted">budi.s@cvakuna.com</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-secondary-container text-on-secondary-fixed">Owner</span>
+</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center gap-1.5 text-success">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                                            Aktif
+                                        </span>
+</td>
+<td class="py-sm px-md text-text-muted font-mono text-[12px]">2023-10-24 08:12</td>
+<td class="py-sm px-md text-right">
+<button class="text-text-muted hover:text-primary transition-colors p-1 rounded hover:bg-surface-container opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-class-a/20 transition-colors group h-[48px]">
+<td class="py-sm px-md font-semibold text-text-main">Siti Aminah</td>
+<td class="py-sm px-md text-text-muted">siti.a@cvakuna.com</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-surface-container-high text-on-surface">Admin</span>
+</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center gap-1.5 text-success">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                                            Aktif
+                                        </span>
+</td>
+<td class="py-sm px-md text-text-muted font-mono text-[12px]">2023-10-24 09:30</td>
+<td class="py-sm px-md text-right">
+<button class="text-text-muted hover:text-primary transition-colors p-1 rounded hover:bg-surface-container opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-class-a/20 transition-colors group h-[48px]">
+<td class="py-sm px-md font-semibold text-text-main">Joko Widodo</td>
+<td class="py-sm px-md text-text-muted">joko.w@cvakuna.com</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-surface-container-high text-on-surface">Staff</span>
+</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center gap-1.5 text-text-muted">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                                            Nonaktif
+                                        </span>
+</td>
+<td class="py-sm px-md text-text-muted font-mono text-[12px]">2023-10-20 17:45</td>
+<td class="py-sm px-md text-right">
+<button class="text-text-muted hover:text-primary transition-colors p-1 rounded hover:bg-surface-container opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-class-a/20 transition-colors group h-[48px]">
+<td class="py-sm px-md font-semibold text-text-main">Agus Prasetyo</td>
+<td class="py-sm px-md text-text-muted">agus.p@cvakuna.com</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-surface-container-high text-on-surface">Staff</span>
+</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center gap-1.5 text-success">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                                            Aktif
+                                        </span>
+</td>
+<td class="py-sm px-md text-text-muted font-mono text-[12px]">2023-10-24 10:15</td>
+<td class="py-sm px-md text-right">
+<button class="text-text-muted hover:text-primary transition-colors p-1 rounded hover:bg-surface-container opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination/Footer -->
+<div class="bg-surface border-t border-border-subtle p-sm flex items-center justify-between text-body-sm text-text-muted mt-auto">
+<span>Showing 1 to 4 of 4 entries</span>
+<div class="flex gap-1">
+<button class="p-1 rounded hover:bg-surface-container disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-container disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

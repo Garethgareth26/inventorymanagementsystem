@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Purchase Order List - CV Akuna</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary": "#585f6c",
+                      "on-primary": "#ffffff",
+                      "class-c": "#FFFFFF",
+                      "success": "#10B981",
+                      "inverse-on-surface": "#f0f1f2",
+                      "warning": "#F59E0B",
+                      "on-surface": "#191c1d",
+                      "border-subtle": "#E5E7EB",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#dae2ff",
+                      "text-main": "#111827",
+                      "surface-variant": "#e1e3e4",
+                      "on-tertiary-fixed-variant": "#812800",
+                      "on-secondary-container": "#5e6572",
+                      "surface-container-highest": "#e1e3e4",
+                      "on-primary-fixed": "#001848",
+                      "inverse-surface": "#2e3132",
+                      "class-a": "#E0E7FF",
+                      "on-tertiary-fixed": "#380d00",
+                      "secondary-fixed": "#dce2f3",
+                      "text-muted": "#4B5563",
+                      "on-error-container": "#93000a",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#737685",
+                      "surface-tint": "#0c56d0",
+                      "on-secondary-fixed-variant": "#404754",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed": "#151c27",
+                      "inverse-primary": "#b2c5ff",
+                      "tertiary": "#7b2600",
+                      "surface-container": "#edeeef",
+                      "on-error": "#ffffff",
+                      "primary": "#003d9b",
+                      "on-primary-fixed-variant": "#0040a2",
+                      "secondary-container": "#dce2f3",
+                      "primary-fixed-dim": "#b2c5ff",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f3f4f5",
+                      "surface-bright": "#f8f9fa",
+                      "surface": "#f8f9fa",
+                      "primary-container": "#0052cc",
+                      "danger": "#EF4444",
+                      "on-primary-container": "#c4d2ff",
+                      "on-background": "#191c1d",
+                      "tertiary-fixed": "#ffdbcf",
+                      "class-b": "#F3F4F6",
+                      "secondary-fixed-dim": "#c0c7d6",
+                      "on-tertiary-container": "#ffc6b2",
+                      "background": "#f8f9fa",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#434654",
+                      "surface-container-high": "#e7e8e9",
+                      "outline-variant": "#c3c6d6",
+                      "tertiary-container": "#a33500",
+                      "surface-dim": "#d9dadb",
+                      "tertiary-fixed-dim": "#ffb59b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "sidebar-collapsed": "64px",
+                      "sidebar-expanded": "240px",
+                      "base": "4px",
+                      "xs": "4px",
+                      "header-height": "64px"
+              },
+              "fontFamily": {
+                      "label-caps": ["Inter"],
+                      "display-kpi": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "table-data": ["Inter"]
+              },
+              "fontSize": {
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "display-kpi": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-md": ["18px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "table-data": ["13px", {"lineHeight": "16px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .dropdown-menu { display: none; }
+        .dropdown-menu.active { display: block; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<aside class="flex flex-col fixed left-0 top-0 h-full w-sidebar-expanded z-40 p-md bg-surface-container-lowest dark:bg-inverse-surface border-r border-border-subtle dark:border-outline-variant hidden md:flex">
+<div class="flex items-center gap-sm mb-lg">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary font-bold">CV</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-black text-primary dark:text-primary-fixed">CV Akuna</h1>
+<p class="font-label-caps text-label-caps dark:text-surface-variant text-text-muted">Inventory Management</p>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary-fixed-dim text-on-primary font-label-caps text-label-caps py-sm px-md rounded-DEFAULT mb-lg transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">add</span>
+            Add New SKU
+        </button>
+<nav class="flex-1 flex flex-col gap-xs">
+<a class="flex items-center gap-sm px-sm py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+                Inventory Assets
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">precision_manufacturing</span>
+                Production Control
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm bg-primary-fixed dark:bg-primary-container text-on-primary-fixed dark:text-on-primary-container font-semibold rounded-lg font-label-caps text-label-caps transition-all scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+                Purchasing
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+                Supply Chain Reports
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+                System Settings
+            </a>
+</nav>
+<div class="mt-auto flex flex-col gap-xs border-t border-border-subtle pt-sm">
+<a class="flex items-center gap-sm px-sm py-sm text-secondary hover:bg-surface-container rounded-lg font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+                Help Center
+            </a>
+<a class="flex items-center gap-sm px-sm py-sm text-secondary hover:bg-surface-container rounded-lg font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+                Log Out
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-sidebar-expanded flex flex-col min-h-screen bg-background">
+<!-- TopAppBar (Mobile Fallback / Header Actions) -->
+<header class="flex items-center justify-between px-lg h-header-height w-full bg-surface dark:bg-on-surface border-b border-border-subtle dark:border-outline-variant sticky top-0 z-30">
+<div class="flex items-center gap-md">
+<button class="md:hidden text-secondary hover:bg-surface-container-low p-xs rounded-lg transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Purchase Orders</h2>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span>
+<input class="pl-[32px] pr-sm py-xs text-body-sm font-body-sm bg-surface-container-lowest border border-border-subtle rounded-DEFAULT focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 w-64 transition-all" placeholder="Search PO..." type="text"/>
+</div>
+<div class="flex items-center gap-xs">
+<button class="p-xs text-text-muted hover:bg-surface-container-low rounded-lg transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-xs text-text-muted hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container border border-border-subtle ml-sm overflow-hidden flex-shrink-0 cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A small, professional headshot of an inventory manager in a brightly lit industrial setting. High contrast, sharp focus, cool white balance. Professional corporate UI avatar style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPsClCyZn7AqJGrezP8hlMhNjlBR7Xz8BZIIjiNXV1KW7O8SA5o58D6PuOzWtt-HHguWkszgtHGKMDOMc143SOaAtJn5vzCkIldzD6YKuEFOfcwfd3XFx01EhiXlJj6Y4Qd3xFkqoVcqs8mNnAMaTJONDH3zagqOZyXQBjLfWc5SCRZXy0yDtyyKU3EqMKpaCqT16eptszigKLvUrNsgOCRsRkyc578P1RX2qn_VCIicWKe87wZNWZ1Q"/>
+</div>
+</div>
+</div>
+</header>
+<div class="p-lg max-w-[1440px] mx-auto w-full flex-1 flex flex-col gap-md">
+<!-- Actions & Filters Bar -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md bg-surface-container-lowest p-md border border-border-subtle rounded-DEFAULT">
+<!-- Filters -->
+<div class="flex flex-wrap items-center gap-md">
+<div class="flex items-center gap-xs">
+<span class="font-label-caps text-label-caps text-text-muted uppercase">Status:</span>
+<select class="text-body-sm font-body-sm border border-border-subtle rounded-DEFAULT bg-surface-container-lowest py-xs pl-sm pr-lg focus:outline-none focus:border-primary">
+<option>Semua Status</option>
+<option>Menunggu</option>
+<option>Dalam Proses</option>
+<option>Diterima</option>
+</select>
+</div>
+<div class="flex items-center gap-xs">
+<span class="font-label-caps text-label-caps text-text-muted uppercase">Type:</span>
+<select class="text-body-sm font-body-sm border border-border-subtle rounded-DEFAULT bg-surface-container-lowest py-xs pl-sm pr-lg focus:outline-none focus:border-primary">
+<option>Semua Tipe</option>
+<option>Rutin</option>
+<option>Darurat</option>
+</select>
+</div>
+</div>
+<!-- Primary Action with Dropdown -->
+<div class="relative group">
+<button class="bg-primary hover:bg-primary-fixed-dim text-on-primary font-body-sm text-body-sm py-xs px-md rounded-DEFAULT transition-colors flex items-center gap-xs shadow-sm" onclick="document.getElementById('po-dropdown').classList.toggle('active')">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Buat PO
+                        <span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+<!-- Dropdown Content -->
+<div class="dropdown-menu absolute right-0 mt-xs w-40 bg-surface-container-lowest border border-border-subtle rounded-DEFAULT shadow-lg z-20 py-xs" id="po-dropdown">
+<a class="block px-sm py-xs text-body-sm font-body-sm text-on-surface hover:bg-surface-container-low transition-colors" href="#">PO Rutin</a>
+<a class="block px-sm py-xs text-body-sm font-body-sm text-error hover:bg-error-container/20 transition-colors" href="#">PO Darurat</a>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-DEFAULT overflow-hidden flex-1 flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-class-b border-b border-border-subtle">
+<tr>
+<th class="py-xs px-md font-label-caps text-label-caps text-secondary uppercase tracking-wider">Kode PO</th>
+<th class="py-xs px-md font-label-caps text-label-caps text-secondary uppercase tracking-wider">Bahan Baku</th>
+<th class="py-xs px-md font-label-caps text-label-caps text-secondary uppercase tracking-wider">Supplier</th>
+<th class="py-xs px-md font-label-caps text-label-caps text-secondary uppercase tracking-wider">Jenis</th>
+<th class="py-xs px-md font-label-caps text-label-caps text-secondary uppercase tracking-wider text-right">Jumlah</th>
+<th class="py-xs px-md font-label-caps text-label-caps text-secondary uppercase tracking-wider">Status</th>
+<th class="py-xs px-md font-label-caps text-label-caps text-secondary uppercase tracking-wider">Tanggal Pesan</th>
+<th class="py-xs px-md font-label-caps text-label-caps text-secondary uppercase tracking-wider">Estimasi Tiba</th>
+<th class="py-xs px-md font-label-caps text-label-caps text-secondary uppercase tracking-wider text-right">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Row 1 -->
+<tr class="hover:bg-primary-fixed/30 transition-colors group">
+<td class="py-sm px-md font-table-data text-table-data font-medium text-text-main">
+<span class="font-mono text-xs">PO-2310-001</span>
+</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-main">Kain Katun Putih</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-muted">PT Tekstil Sentosa</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-xs py-[2px] rounded-DEFAULT bg-surface-container font-label-caps text-[10px] text-secondary">Rutin</span>
+</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-main text-right tabular-nums">500 Roll</td>
+<td class="py-sm px-md">
+<div class="inline-flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+<span class="font-label-caps text-label-caps text-warning">Dalam Proses</span>
+</div>
+</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-muted tabular-nums">12 Okt 2023</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-muted tabular-nums">15 Okt 2023</td>
+<td class="py-sm px-md text-right">
+<button class="text-text-muted hover:text-primary transition-colors p-xs rounded hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-primary-fixed/30 transition-colors group">
+<td class="py-sm px-md font-table-data text-table-data font-medium text-text-main">
+<span class="font-mono text-xs">PO-2310-002</span>
+</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-main">Benang Jahit Hitam</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-muted">CV Benang Mas</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-xs py-[2px] rounded-DEFAULT bg-error/10 font-label-caps text-[10px] text-error font-bold border border-error/20">Darurat</span>
+</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-main text-right tabular-nums">1,200 Cone</td>
+<td class="py-sm px-md">
+<div class="inline-flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps text-secondary">Menunggu</span>
+</div>
+</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-muted tabular-nums">13 Okt 2023</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-muted tabular-nums">14 Okt 2023</td>
+<td class="py-sm px-md text-right">
+<button class="text-text-muted hover:text-primary transition-colors p-xs rounded hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-primary-fixed/30 transition-colors group">
+<td class="py-sm px-md font-table-data text-table-data font-medium text-text-main">
+<span class="font-mono text-xs">PO-2309-145</span>
+</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-main">Resleting YKK 15cm</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-muted">PT Zipper Indo</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-xs py-[2px] rounded-DEFAULT bg-surface-container font-label-caps text-[10px] text-secondary">Rutin</span>
+</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-main text-right tabular-nums">5,000 Pcs</td>
+<td class="py-sm px-md">
+<div class="inline-flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+<span class="font-label-caps text-label-caps text-success">Diterima</span>
+</div>
+</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-muted tabular-nums">28 Sep 2023</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-muted tabular-nums">10 Okt 2023</td>
+<td class="py-sm px-md text-right">
+<button class="text-text-muted hover:text-primary transition-colors p-xs rounded hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-primary-fixed/30 transition-colors group">
+<td class="py-sm px-md font-table-data text-table-data font-medium text-text-main">
+<span class="font-mono text-xs">PO-2310-004</span>
+</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-main">Kancing Kemeja 11L</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-muted">Toko Kancing Abadi</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-xs py-[2px] rounded-DEFAULT bg-surface-container font-label-caps text-[10px] text-secondary">Rutin</span>
+</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-main text-right tabular-nums">10,000 Pcs</td>
+<td class="py-sm px-md">
+<div class="inline-flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+<span class="font-label-caps text-label-caps text-warning">Dalam Proses</span>
+</div>
+</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-muted tabular-nums">13 Okt 2023</td>
+<td class="py-sm px-md font-table-data text-table-data text-text-muted tabular-nums">18 Okt 2023</td>
+<td class="py-sm px-md text-right">
+<button class="text-text-muted hover:text-primary transition-colors p-xs rounded hover:bg-surface-container">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination footer -->
+<div class="mt-auto border-t border-border-subtle p-sm flex items-center justify-between bg-surface-container-lowest">
+<span class="font-body-sm text-body-sm text-text-muted">Showing 1 to 4 of 48 entries</span>
+<div class="flex gap-xs">
+<button class="px-sm py-xs border border-border-subtle rounded text-text-muted hover:bg-surface-container transition-colors disabled:opacity-50" disabled="">Prev</button>
+<button class="px-sm py-xs border border-primary bg-primary text-on-primary rounded font-medium">1</button>
+<button class="px-sm py-xs border border-border-subtle rounded text-text-muted hover:bg-surface-container transition-colors">2</button>
+<button class="px-sm py-xs border border-border-subtle rounded text-text-muted hover:bg-surface-container transition-colors">3</button>
+<button class="px-sm py-xs border border-border-subtle rounded text-text-muted hover:bg-surface-container transition-colors">Next</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('po-dropdown');
+            const button = dropdown.previousElementSibling;
+            if (!dropdown.contains(e.target) && !button.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+    </script>
+</body></html>

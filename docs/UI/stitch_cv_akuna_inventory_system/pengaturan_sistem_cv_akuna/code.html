@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>System Settings - CV Akuna</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "class-c": "#FFFFFF",
+                      "on-error-container": "#93000a",
+                      "on-background": "#191c1d",
+                      "error": "#ba1a1a",
+                      "on-secondary": "#ffffff",
+                      "text-main": "#111827",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container": "#edeeef",
+                      "secondary-fixed-dim": "#c0c7d6",
+                      "error-container": "#ffdad6",
+                      "success": "#10B981",
+                      "surface-bright": "#f8f9fa",
+                      "secondary-fixed": "#dce2f3",
+                      "tertiary-fixed": "#ffdbcf",
+                      "surface-tint": "#0c56d0",
+                      "on-primary-fixed-variant": "#0040a2",
+                      "on-primary-fixed": "#001848",
+                      "on-surface-variant": "#434654",
+                      "on-secondary-fixed-variant": "#404754",
+                      "on-tertiary-container": "#ffc6b2",
+                      "inverse-on-surface": "#f0f1f2",
+                      "surface-container-highest": "#e1e3e4",
+                      "inverse-surface": "#2e3132",
+                      "on-primary-container": "#c4d2ff",
+                      "surface-dim": "#d9dadb",
+                      "on-secondary-container": "#5e6572",
+                      "border-subtle": "#E5E7EB",
+                      "on-surface": "#191c1d",
+                      "secondary": "#585f6c",
+                      "on-tertiary-fixed": "#380d00",
+                      "surface-container-high": "#e7e8e9",
+                      "primary": "#003d9b",
+                      "text-muted": "#4B5563",
+                      "surface-container-low": "#f3f4f5",
+                      "primary-fixed-dim": "#b2c5ff",
+                      "on-primary": "#ffffff",
+                      "danger": "#EF4444",
+                      "outline": "#737685",
+                      "background": "#f8f9fa",
+                      "outline-variant": "#c3c6d6",
+                      "primary-fixed": "#dae2ff",
+                      "class-a": "#E0E7FF",
+                      "on-secondary-fixed": "#151c27",
+                      "on-error": "#ffffff",
+                      "class-b": "#F3F4F6",
+                      "on-tertiary": "#ffffff",
+                      "inverse-primary": "#b2c5ff",
+                      "surface-variant": "#e1e3e4",
+                      "surface": "#f8f9fa",
+                      "primary-container": "#0052cc",
+                      "on-tertiary-fixed-variant": "#812800",
+                      "tertiary": "#7b2600",
+                      "tertiary-fixed-dim": "#ffb59b",
+                      "tertiary-container": "#a33500",
+                      "warning": "#F59E0B",
+                      "secondary-container": "#dce2f3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "header-height": "64px",
+                      "sm": "8px",
+                      "sidebar-expanded": "240px",
+                      "sidebar-collapsed": "64px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "md": "16px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-kpi": [
+                              "Inter"
+                      ],
+                      "table-data": [
+                              "Inter"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-kpi": [
+                              "36px",
+                              {
+                                      "lineHeight": "44px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "table-data": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full w-sidebar-expanded z-40 p-md bg-surface-container-lowest border-r border-border-subtle">
+<div class="flex items-center gap-sm mb-xl">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-black text-primary">CV Akuna</h1>
+<p class="font-label-caps text-label-caps text-secondary">Inventory Management</p>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-2 px-4 rounded font-body-md font-medium mb-lg hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            Add New SKU
+        </button>
+<div class="flex flex-col gap-xs flex-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-caps text-label-caps">Inventory Assets</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="font-label-caps text-label-caps">Production Control</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-caps text-label-caps">Purchasing</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-caps text-label-caps">Supply Chain Reports</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary-fixed text-on-primary-fixed font-semibold rounded-lg scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-caps text-label-caps">System Settings</span>
+</a>
+</div>
+<div class="mt-auto pt-md border-t border-border-subtle flex flex-col gap-xs">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps">Log Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 md:ml-sidebar-expanded flex flex-col min-h-screen">
+<!-- TopAppBar (Mobile Only) -->
+<header class="md:hidden flex items-center justify-between px-lg h-header-height w-full bg-surface border-b border-border-subtle sticky top-0 z-30">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary">CV Akuna</h1>
+<button class="text-primary p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Page Canvas -->
+<main class="flex-1 p-md md:p-lg max-w-[1440px] mx-auto w-full">
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">System Settings</h2>
+<p class="text-text-muted font-body-sm">Manage global configuration parameters (Owner Access Only).</p>
+</div>
+<!-- Settings Tabs -->
+<div class="border-b border-border-subtle mb-lg">
+<nav aria-label="Settings Tabs" class="flex gap-lg">
+<a class="text-text-muted font-medium pb-sm hover:text-primary transition-colors" href="#">
+                        Company Profile
+                    </a>
+<a class="text-primary border-b-2 border-primary font-bold pb-sm" href="#">
+                        Calculation Parameters
+                    </a>
+<a class="text-text-muted font-medium pb-sm hover:text-primary transition-colors" href="#">
+                        Notifications
+                    </a>
+</nav>
+</div>
+<!-- Content Grid (Bento Style) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
+<!-- Left Column: Primary Calculation Parameters -->
+<div class="lg:col-span-2 flex flex-col gap-md">
+<!-- Safety Stock & Z-Factor Panel -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded p-md">
+<div class="mb-md border-b border-border-subtle pb-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calculate</span>
+                                Safety Stock Configuration
+                            </h3>
+<p class="text-text-muted font-body-sm mt-1">Configure statistical parameters for reorder point calculations.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Service Level Z-Factor</label>
+<div class="relative">
+<input class="w-full bg-surface-bright border border-border-subtle rounded px-3 py-2 font-table-data focus:border-primary focus:ring-1 focus:ring-primary transition-shadow" step="0.01" type="number" value="1.65"/>
+<span class="absolute right-3 top-2.5 text-text-muted font-body-sm">95%</span>
+</div>
+<p class="text-text-muted text-[11px] mt-1">Standard dev multiplier for demand variability.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Lead Time Variability (Days)</label>
+<input class="w-full bg-surface-bright border border-border-subtle rounded px-3 py-2 font-table-data focus:border-primary focus:ring-1 focus:ring-primary transition-shadow" type="number" value="3"/>
+</div>
+<div class="flex flex-col gap-sm md:col-span-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Default Carrying Cost (%)</label>
+<div class="flex items-center gap-3">
+<input class="w-full h-2 bg-surface-container rounded-lg appearance-none cursor-pointer accent-primary" max="35" min="5" type="range" value="20"/>
+<span class="font-table-data w-12 text-right">20%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ABC Classification Thresholds -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded p-md">
+<div class="mb-md border-b border-border-subtle pb-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">sort</span>
+                                ABC Analysis Thresholds
+                            </h3>
+<p class="text-text-muted font-body-sm mt-1">Define cumulative value percentages for inventory categorization.</p>
+</div>
+<div class="flex flex-col gap-md">
+<div class="flex items-center justify-between border-b border-surface-container pb-2">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded bg-error-container text-on-error-container flex items-center justify-center font-bold">A</span>
+<div>
+<p class="font-body-md font-medium">Class A Items</p>
+<p class="font-body-sm text-text-muted">High value, tight control</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-muted font-body-sm">Top</span>
+<input class="w-20 bg-surface-bright border border-border-subtle rounded px-2 py-1 font-table-data text-right focus:border-primary focus:ring-1 focus:ring-primary" type="number" value="80"/>
+<span class="text-text-muted font-body-sm">%</span>
+</div>
+</div>
+<div class="flex items-center justify-between border-b border-surface-container pb-2">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded bg-warning text-white flex items-center justify-center font-bold">B</span>
+<div>
+<p class="font-body-md font-medium">Class B Items</p>
+<p class="font-body-sm text-text-muted">Moderate value, standard control</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-muted font-body-sm">Next</span>
+<input class="w-20 bg-surface-bright border border-border-subtle rounded px-2 py-1 font-table-data text-right focus:border-primary focus:ring-1 focus:ring-primary" type="number" value="15"/>
+<span class="text-text-muted font-body-sm">%</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded bg-success text-white flex items-center justify-center font-bold">C</span>
+<div>
+<p class="font-body-md font-medium">Class C Items</p>
+<p class="font-body-sm text-text-muted">Low value, relaxed control</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-text-muted font-body-sm">Remaining</span>
+<div class="w-20 bg-surface-container border border-transparent rounded px-2 py-1 font-table-data text-right text-text-muted cursor-not-allowed">5</div>
+<span class="text-text-muted font-body-sm">%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Cost Defaults & Actions -->
+<div class="flex flex-col gap-md">
+<div class="bg-surface-container-lowest border border-border-subtle rounded p-md">
+<div class="mb-md border-b border-border-subtle pb-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface">Cost Defaults</h3>
+</div>
+<div class="flex flex-col gap-sm mb-md">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Default Ordering Cost ($)</label>
+<input class="w-full bg-surface-bright border border-border-subtle rounded px-3 py-2 font-table-data focus:border-primary focus:ring-1 focus:ring-primary" type="number" value="50.00"/>
+<p class="text-text-muted text-[11px] mt-1">Cost per PO processed.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Currency Base</label>
+<select class="w-full bg-surface-bright border border-border-subtle rounded px-3 py-2 font-table-data focus:border-primary focus:ring-1 focus:ring-primary">
+<option value="USD">USD ($)</option>
+<option value="EUR">EUR (€)</option>
+<option value="GBP">GBP (£)</option>
+</select>
+</div>
+</div>
+<!-- System Status Widget -->
+<div class="bg-surface-bright border border-border-subtle rounded p-md">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-2 h-2 rounded-full bg-success"></div>
+<span class="font-label-caps text-label-caps text-on-surface">Engine Status: Online</span>
+</div>
+<p class="font-body-sm text-text-muted">Last calculation run: Today, 04:00 AM</p>
+<button class="mt-4 w-full bg-surface-container-highest text-on-surface font-body-md py-2 rounded hover:bg-border-subtle transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+                            Force Recalculation
+                        </button>
+</div>
+<!-- Action Bar -->
+<div class="mt-auto flex gap-3 pt-md border-t border-border-subtle">
+<button class="flex-1 bg-surface-container-lowest border border-border-subtle text-on-surface font-body-md py-2 rounded hover:bg-surface-container transition-colors">
+                            Discard
+                        </button>
+<button class="flex-1 bg-primary text-on-primary font-body-md py-2 rounded hover:bg-primary-container transition-colors">
+                            Save Changes
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

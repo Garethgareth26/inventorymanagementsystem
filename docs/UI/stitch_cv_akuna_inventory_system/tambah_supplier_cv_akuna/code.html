@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CV Akuna - Create Supplier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "class-c": "#FFFFFF",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1d",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "text-main": "#111827",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "secondary-fixed-dim": "#c0c7d6",
+                        "error-container": "#ffdad6",
+                        "success": "#10B981",
+                        "surface-bright": "#f8f9fa",
+                        "secondary-fixed": "#dce2f3",
+                        "tertiary-fixed": "#ffdbcf",
+                        "surface-tint": "#0c56d0",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "on-primary-fixed": "#001848",
+                        "on-surface-variant": "#434654",
+                        "on-secondary-fixed-variant": "#404754",
+                        "on-tertiary-container": "#ffc6b2",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container-highest": "#e1e3e4",
+                        "inverse-surface": "#2e3132",
+                        "on-primary-container": "#c4d2ff",
+                        "surface-dim": "#d9dadb",
+                        "on-secondary-container": "#5e6572",
+                        "border-subtle": "#E5E7EB",
+                        "on-surface": "#191c1d",
+                        "secondary": "#585f6c",
+                        "on-tertiary-fixed": "#380d00",
+                        "surface-container-high": "#e7e8e9",
+                        "primary": "#003d9b",
+                        "text-muted": "#4B5563",
+                        "surface-container-low": "#f3f4f5",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "on-primary": "#ffffff",
+                        "danger": "#EF4444",
+                        "outline": "#737685",
+                        "background": "#f8f9fa",
+                        "outline-variant": "#c3c6d6",
+                        "primary-fixed": "#dae2ff",
+                        "class-a": "#E0E7FF",
+                        "on-secondary-fixed": "#151c27",
+                        "on-error": "#ffffff",
+                        "class-b": "#F3F4F6",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#b2c5ff",
+                        "surface-variant": "#e1e3e4",
+                        "surface": "#f8f9fa",
+                        "primary-container": "#0052cc",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "tertiary": "#7b2600",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "tertiary-container": "#a33500",
+                        "warning": "#F59E0B",
+                        "secondary-container": "#dce2f3"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.125rem",
+                        lg: "0.25rem",
+                        xl: "0.5rem",
+                        full: "0.75rem"
+                    },
+                    spacing: {
+                        xs: "4px",
+                        "header-height": "64px",
+                        sm: "8px",
+                        "sidebar-expanded": "240px",
+                        "sidebar-collapsed": "64px",
+                        lg: "24px",
+                        xl: "32px",
+                        md: "16px",
+                        base: "4px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-kpi": ["Inter"],
+                        "table-data": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "headline-md": ["18px", { lineHeight: "28px", fontWeight: "600" }],
+                        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "display-kpi": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "table-data": ["13px", { lineHeight: "16px", fontWeight: "400" }],
+                        "label-caps": ["11px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "body-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+                        "headline-lg": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #F9FAFB; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        input:focus, textarea:focus { outline: none; border-color: #003d9b; box-shadow: 0 0 0 2px rgba(0, 61, 155, 0.2); }
+    </style>
+</head>
+<body class="text-text-main h-screen flex overflow-hidden">
+<!-- Side Nav Bar -->
+<aside class="flex flex-col fixed left-0 top-0 h-full w-sidebar-expanded z-40 p-md bg-surface-container-lowest border-r border-border-subtle hidden md:flex">
+<div class="flex items-center gap-sm mb-xl px-sm">
+<span class="material-symbols-outlined text-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1; font-size: 32px;">precision_manufacturing</span>
+<div>
+<h1 class="font-headline-md text-headline-md font-black text-primary">CV Akuna</h1>
+<p class="font-label-caps text-label-caps text-secondary">Inventory Management</p>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-2 px-4 rounded font-body-md font-semibold mb-lg flex items-center justify-center gap-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-sm">add</span> Add New SKU
+        </button>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-secondary hover:bg-surface-container rounded-lg transition-all font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary-fixed text-on-primary-fixed font-semibold rounded-lg transition-all font-body-sm scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span> Inventory Assets
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-secondary hover:bg-surface-container rounded-lg transition-all font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">precision_manufacturing</span> Production Control
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-secondary hover:bg-surface-container rounded-lg transition-all font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span> Purchasing
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-secondary hover:bg-surface-container rounded-lg transition-all font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span> Supply Chain Reports
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-secondary hover:bg-surface-container rounded-lg transition-all font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span> System Settings
+            </a>
+</nav>
+<div class="mt-auto pt-4 border-t border-border-subtle space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-secondary hover:bg-surface-container rounded-lg transition-all font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span> Help Center
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-secondary hover:bg-surface-container rounded-lg transition-all font-body-sm font-medium" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span> Log Out
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col ml-0 md:ml-[240px] h-screen overflow-hidden bg-background">
+<!-- Top App Bar (Mobile Only for Navigation, Contextual on Desktop) -->
+<header class="flex items-center justify-between px-lg h-header-height w-full bg-surface border-b border-border-subtle shrink-0">
+<div class="flex items-center gap-2">
+<button class="md:hidden p-2 text-secondary hover:bg-surface-container rounded-lg">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="hidden sm:flex text-sm font-body-sm text-text-muted">
+<ol class="inline-flex items-center space-x-1 md:space-x-2">
+<li class="inline-flex items-center">
+<a class="hover:text-primary transition-colors" href="#">Master Data</a>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Suppliers</a>
+</div>
+</li>
+<li aria-current="page">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<span class="text-on-surface font-medium">Create</span>
+</div>
+</li>
+</ol>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-lowest border border-border-subtle rounded-lg text-sm focus:border-primary focus:ring-1 focus:ring-primary w-64 transition-all" placeholder="Search..." type="text"/>
+</div>
+<button class="text-secondary hover:bg-surface-container-low p-2 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-danger rounded-full border-2 border-surface"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container text-primary flex items-center justify-center font-bold text-sm cursor-pointer border border-primary-fixed-dim">
+                    JD
+                </div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 overflow-y-auto p-4 md:p-8">
+<div class="max-w-3xl mx-auto w-full">
+<!-- Page Header -->
+<div class="mb-8">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Create New Supplier</h2>
+<p class="font-body-md text-body-md text-text-muted">Enter details below to add a new supplier to the master data records.</p>
+</div>
+<!-- Form Card -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl overflow-hidden">
+<form class="p-6 md:p-8 space-y-6">
+<!-- Form Section: Basic Info -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Supplier Code -->
+<div class="space-y-sm">
+<label class="block font-label-caps text-label-caps text-secondary uppercase" for="kode">Supplier Code (Kode) <span class="text-danger">*</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">tag</span>
+<input class="w-full pl-9 pr-3 py-2 bg-surface-container-lowest border border-border-subtle rounded font-table-data text-table-data text-on-surface placeholder-text-muted transition-all" id="kode" name="kode" placeholder="e.g. SUP-001" required="" type="text"/>
+</div>
+<p class="text-[11px] text-text-muted mt-1">Unique identifier for this supplier.</p>
+</div>
+<!-- Supplier Name -->
+<div class="space-y-sm">
+<label class="block font-label-caps text-label-caps text-secondary uppercase" for="nama">Supplier Name (Nama) <span class="text-danger">*</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">domain</span>
+<input class="w-full pl-9 pr-3 py-2 bg-surface-container-lowest border border-border-subtle rounded font-body-sm text-body-sm text-on-surface placeholder-text-muted transition-all" id="nama" name="nama" placeholder="Enter company name" required="" type="text"/>
+</div>
+</div>
+</div>
+<!-- Form Section: Contact Details -->
+<div class="space-y-sm pt-4 border-t border-border-subtle">
+<h3 class="font-headline-md text-[15px] font-semibold text-on-surface mb-4">Contact &amp; Location</h3>
+<!-- Address -->
+<div class="space-y-sm mb-4">
+<label class="block font-label-caps text-label-caps text-secondary uppercase" for="alamat">Address (Alamat)</label>
+<textarea class="w-full p-3 bg-surface-container-lowest border border-border-subtle rounded font-body-sm text-body-sm text-on-surface placeholder-text-muted transition-all resize-y" id="alamat" name="alamat" placeholder="Full street address..." rows="3"></textarea>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Contact Person/Number -->
+<div class="space-y-sm">
+<label class="block font-label-caps text-label-caps text-secondary uppercase" for="kontak">Contact Information (Kontak)</label>
+<div class="relative flex">
+<span class="inline-flex items-center px-3 border border-r-0 border-border-subtle bg-surface-container-low text-secondary rounded-l font-body-sm">
+<span class="material-symbols-outlined text-[18px]">phone</span>
+</span>
+<input class="flex-1 w-full p-2 bg-surface-container-lowest border border-border-subtle rounded-r font-body-sm text-body-sm text-on-surface placeholder-text-muted transition-all" id="kontak" name="kontak" placeholder="Phone number or email" type="text"/>
+</div>
+</div>
+<!-- Status (Optional addition for realism) -->
+<div class="space-y-sm">
+<label class="block font-label-caps text-label-caps text-secondary uppercase" for="status">Status</label>
+<select class="w-full p-2 bg-surface-container-lowest border border-border-subtle rounded font-body-sm text-body-sm text-on-surface transition-all appearance-none" id="status" name="status">
+<option value="active">Active</option>
+<option value="inactive">Inactive</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-end gap-3 pt-6 border-t border-border-subtle mt-8">
+<button class="px-5 py-2 bg-surface-container-lowest border border-border-subtle text-text-main font-body-sm font-medium rounded hover:bg-surface-container-low transition-colors" type="button">
+                                Cancel
+                            </button>
+<button class="px-5 py-2 bg-primary text-on-primary font-body-sm font-medium rounded hover:bg-primary-container transition-colors shadow-sm flex items-center gap-2" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                                Save Supplier
+                            </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BOM Editor - CV Akuna</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "class-c": "#FFFFFF",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1d",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "text-main": "#111827",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "secondary-fixed-dim": "#c0c7d6",
+                        "error-container": "#ffdad6",
+                        "success": "#10B981",
+                        "surface-bright": "#f8f9fa",
+                        "secondary-fixed": "#dce2f3",
+                        "tertiary-fixed": "#ffdbcf",
+                        "surface-tint": "#0c56d0",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "on-primary-fixed": "#001848",
+                        "on-surface-variant": "#434654",
+                        "on-secondary-fixed-variant": "#404754",
+                        "on-tertiary-container": "#ffc6b2",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container-highest": "#e1e3e4",
+                        "inverse-surface": "#2e3132",
+                        "on-primary-container": "#c4d2ff",
+                        "surface-dim": "#d9dadb",
+                        "on-secondary-container": "#5e6572",
+                        "border-subtle": "#E5E7EB",
+                        "on-surface": "#191c1d",
+                        "secondary": "#585f6c",
+                        "on-tertiary-fixed": "#380d00",
+                        "surface-container-high": "#e7e8e9",
+                        "primary": "#003d9b",
+                        "text-muted": "#4B5563",
+                        "surface-container-low": "#f3f4f5",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "on-primary": "#ffffff",
+                        "danger": "#EF4444",
+                        "outline": "#737685",
+                        "background": "#f8f9fa",
+                        "outline-variant": "#c3c6d6",
+                        "primary-fixed": "#dae2ff",
+                        "class-a": "#E0E7FF",
+                        "on-secondary-fixed": "#151c27",
+                        "on-error": "#ffffff",
+                        "class-b": "#F3F4F6",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#b2c5ff",
+                        "surface-variant": "#e1e3e4",
+                        "surface": "#f8f9fa",
+                        "primary-container": "#0052cc",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "tertiary": "#7b2600",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "tertiary-container": "#a33500",
+                        "warning": "#F59E0B",
+                        "secondary-container": "#dce2f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "header-height": "64px",
+                        "sm": "8px",
+                        "sidebar-expanded": "240px",
+                        "sidebar-collapsed": "64px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-kpi": ["Inter"],
+                        "table-data": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["18px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-kpi": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "table-data": ["13px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md flex min-h-screen">
+<!-- SideNavBar Component -->
+<nav class="flex flex-col fixed left-0 top-0 h-full w-sidebar-expanded z-40 p-md bg-surface-container-lowest dark:bg-inverse-surface border-r border-border-subtle dark:border-outline-variant">
+<!-- Header -->
+<div class="flex items-center gap-sm mb-xl">
+<div class="w-8 h-8 rounded bg-primary-container flex items-center justify-center text-on-primary-container font-bold">
+                CV
+            </div>
+<div>
+<h1 class="font-headline-md text-headline-md font-black text-primary dark:text-primary-fixed">CV Akuna</h1>
+<p class="font-label-caps text-label-caps text-text-muted">Inventory Management</p>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full bg-primary text-on-primary font-label-caps text-label-caps py-2 rounded mb-lg shadow-sm hover:opacity-90 transition-opacity flex justify-center items-center gap-xs">
+<span class="material-symbols-outlined text-sm">add</span>
+            Add New SKU
+        </button>
+<!-- Main Nav -->
+<ul class="flex flex-col gap-xs flex-1">
+<li>
+<a class="flex items-center gap-sm p-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm p-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                    Inventory Assets
+                </a>
+</li>
+<!-- Active Tab: Production Control -> relates closely to BOMs -->
+<li>
+<a class="flex items-center gap-sm p-2 bg-primary-fixed dark:bg-primary-container text-on-primary-fixed dark:text-on-primary-container font-semibold rounded-lg scale-[0.98] transition-transform duration-200 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+                    Production Control
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm p-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+                    Purchasing
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm p-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                    Supply Chain Reports
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm p-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    System Settings
+                </a>
+</li>
+</ul>
+<!-- Footer Nav -->
+<ul class="flex flex-col gap-xs mt-auto pt-md border-t border-border-subtle">
+<li>
+<a class="flex items-center gap-sm p-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">help</span>
+                    Help Center
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm p-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">logout</span>
+                    Log Out
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-sidebar-expanded flex flex-col min-h-screen">
+<!-- TopAppBar Component -->
+<header class="flex items-center justify-between px-lg h-header-height w-full bg-surface dark:bg-on-surface border-b border-border-subtle dark:border-outline-variant sticky top-0 z-30">
+<!-- Left Side: Brand (Optional here since sidebar has it, but following JSON) / Empty space filler if needed -->
+<div class="flex items-center gap-lg">
+<!-- Search could go here based on JSON 'search_bar: on_left' -->
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-2 text-text-muted text-sm">search</span>
+<input class="pl-8 pr-4 py-1.5 border border-border-subtle rounded bg-surface-bright text-body-sm font-body-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all w-64" placeholder="Search Master Data..." type="text"/>
+</div>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-sm">
+<button class="p-2 text-text-muted hover:bg-surface-container-low rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-text-muted hover:bg-surface-container-low rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="p-2 text-text-muted hover:bg-surface-container-low rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container ml-sm border border-border-subtle overflow-hidden">
+<img alt="User profile menu" class="w-full h-full object-cover" data-alt="A highly detailed close-up portrait of a professional supply chain manager in a brightly lit modern office setting. Crisp focus on the face, minimalist corporate background, neutral tones with soft, natural daylight illuminating the subject uniformly." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7bJh2gcYqVk4nAGFPWcfM2Xu0dm4c-ysUpaOUm1Q5RvIx-URtowupI9b3X3agTKKF0u1tV8chq4CL326fHZ3Q8tVgxC-wurBpk-b9RGFmIb6OXHOKTpuLMpJZ9Wg8usOIsdpergijweKpFTgJU3nFeTYSB6n8kB-tkqoF2yQkmeu-9BIVJPf1KeLldcFBhTvFs_intaQn8nlPOBzul7CpD1mEtfNAbGrmjM3Jy82Qw4au-5OXkR90DA"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-lg max-w-[1440px] w-full mx-auto">
+<!-- Breadcrumbs -->
+<nav class="flex items-center text-text-muted font-body-sm text-body-sm mb-lg">
+<a class="hover:text-primary transition-colors" href="#">Master Data</a>
+<span class="material-symbols-outlined text-[16px] mx-xs">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">BOM</a>
+<span class="material-symbols-outlined text-[16px] mx-xs">chevron_right</span>
+<span class="text-on-surface font-semibold">Editor</span>
+</nav>
+<!-- Page Header -->
+<div class="flex justify-between items-center mb-xl">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">BOM Editor</h1>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">Manage components for SKU-A900-Frame</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="px-md py-2 border border-border-subtle bg-surface text-on-surface font-label-caps text-label-caps rounded uppercase hover:bg-surface-container-low transition-colors">
+                        Discard Changes
+                    </button>
+<button class="px-md py-2 bg-primary text-on-primary font-label-caps text-label-caps rounded uppercase hover:opacity-90 transition-opacity">
+                        Save BOM
+                    </button>
+</div>
+</div>
+<!-- Two Column Layout -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-lg items-start">
+<!-- Main List Area (Span 8) -->
+<div class="xl:col-span-8 bg-surface border border-border-subtle rounded shadow-sm">
+<!-- Section Header -->
+<div class="px-md py-sm border-b border-border-subtle bg-surface-container-low flex justify-between items-center rounded-t">
+<h2 class="font-label-caps text-label-caps text-text-muted uppercase">Ingredients List</h2>
+<button class="flex items-center gap-xs text-primary font-label-caps text-label-caps uppercase hover:text-primary-fixed-variant transition-colors">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                            Add Material
+                        </button>
+</div>
+<!-- Table Header -->
+<div class="grid grid-cols-12 gap-sm px-md py-sm border-b border-border-subtle bg-surface-bright font-label-caps text-label-caps text-text-muted uppercase items-center">
+<div class="col-span-1 text-center"></div> <!-- Drag Handle Col -->
+<div class="col-span-6">Material</div>
+<div class="col-span-3 text-right">Qty per Unit</div>
+<div class="col-span-2 pl-sm">Unit</div>
+</div>
+<!-- Draggable List (Simulated) -->
+<div class="divide-y divide-border-subtle">
+<!-- Row 1 -->
+<div class="grid grid-cols-12 gap-sm px-md py-3 items-center hover:bg-surface-container-lowest transition-colors bg-surface group">
+<div class="col-span-1 flex justify-center cursor-move text-outline-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="col-span-6">
+<div class="font-table-data text-table-data text-on-surface font-medium">RM-Alum-Sheet-01</div>
+<div class="font-body-sm text-[11px] text-text-muted">High-grade aluminum sheeting</div>
+</div>
+<div class="col-span-3 text-right">
+<input class="w-20 text-right px-2 py-1 border border-border-subtle rounded font-table-data text-table-data focus:border-primary focus:ring-1 focus:ring-primary outline-none shadow-sm" type="text" value="2.500"/>
+</div>
+<div class="col-span-2 pl-sm font-table-data text-table-data text-text-muted flex items-center justify-between">
+                                sq m
+                                <button class="opacity-0 group-hover:opacity-100 text-danger hover:bg-error-container p-1 rounded transition-all">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-12 gap-sm px-md py-3 items-center hover:bg-surface-container-lowest transition-colors bg-surface group">
+<div class="col-span-1 flex justify-center cursor-move text-outline-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="col-span-6">
+<div class="font-table-data text-table-data text-on-surface font-medium">HW-Bolt-M8x20</div>
+<div class="font-body-sm text-[11px] text-text-muted">Hex cap screw steel zinc</div>
+</div>
+<div class="col-span-3 text-right">
+<input class="w-20 text-right px-2 py-1 border border-border-subtle rounded font-table-data text-table-data focus:border-primary focus:ring-1 focus:ring-primary outline-none shadow-sm" type="text" value="12.000"/>
+</div>
+<div class="col-span-2 pl-sm font-table-data text-table-data text-text-muted flex items-center justify-between">
+                                ea
+                                <button class="opacity-0 group-hover:opacity-100 text-danger hover:bg-error-container p-1 rounded transition-all">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="grid grid-cols-12 gap-sm px-md py-3 items-center hover:bg-surface-container-lowest transition-colors bg-surface group">
+<div class="col-span-1 flex justify-center cursor-move text-outline-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+<div class="col-span-6">
+<div class="font-table-data text-table-data text-on-surface font-medium">PC-Black-Matte-04</div>
+<div class="font-body-sm text-[11px] text-text-muted">Powder coating industrial finish</div>
+</div>
+<div class="col-span-3 text-right">
+<input class="w-20 text-right px-2 py-1 border border-border-subtle rounded font-table-data text-table-data focus:border-primary focus:ring-1 focus:ring-primary outline-none shadow-sm" type="text" value="0.150"/>
+</div>
+<div class="col-span-2 pl-sm font-table-data text-table-data text-text-muted flex items-center justify-between">
+                                kg
+                                <button class="opacity-0 group-hover:opacity-100 text-danger hover:bg-error-container p-1 rounded transition-all">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Empty State Drop Zone Indicator -->
+<div class="px-md py-lg flex flex-col items-center justify-center text-outline-variant border-2 border-dashed border-border-subtle m-md rounded bg-surface-bright">
+<span class="material-symbols-outlined text-[24px] mb-2">playlist_add</span>
+<p class="font-body-sm text-body-sm text-text-muted">Drag and drop materials here to add them to the BOM.</p>
+</div>
+</div>
+</div>
+<!-- Side Summary Panel (Span 4) -->
+<div class="xl:col-span-4 flex flex-col gap-lg">
+<!-- Summary Card -->
+<div class="bg-surface border border-border-subtle rounded shadow-sm">
+<div class="px-md py-sm border-b border-border-subtle bg-surface-container-low rounded-t">
+<h2 class="font-label-caps text-label-caps text-text-muted uppercase">BOM Summary</h2>
+</div>
+<div class="p-md flex flex-col gap-sm">
+<div class="flex justify-between items-center py-1 border-b border-border-subtle border-dashed">
+<span class="font-body-sm text-body-sm text-text-muted">Status</span>
+<span class="px-2 py-0.5 bg-warning/10 text-warning border border-warning/20 font-label-caps text-[10px] rounded uppercase font-bold tracking-wider">Draft</span>
+</div>
+<div class="flex justify-between items-center py-1 border-b border-border-subtle border-dashed">
+<span class="font-body-sm text-body-sm text-text-muted">Total Ingredients</span>
+<span class="font-table-data text-table-data text-on-surface font-semibold">3 Items</span>
+</div>
+<div class="flex justify-between items-center py-1 border-b border-border-subtle border-dashed">
+<span class="font-body-sm text-body-sm text-text-muted">Last Modified</span>
+<span class="font-table-data text-table-data text-on-surface text-right">Today, 09:41 AM<br/><span class="text-[11px] text-text-muted font-normal">by J. Doe</span></span>
+</div>
+<div class="flex justify-between items-center py-1 border-b border-border-subtle border-dashed">
+<span class="font-body-sm text-body-sm text-text-muted">Version</span>
+<span class="font-table-data text-table-data text-on-surface font-medium">v1.2 (Pending)</span>
+</div>
+</div>
+</div>
+<!-- Validation Card -->
+<div class="bg-surface border border-border-subtle rounded shadow-sm">
+<div class="px-md py-sm border-b border-border-subtle bg-surface-container-low rounded-t flex items-center gap-xs text-success">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<h2 class="font-label-caps text-label-caps text-text-main uppercase">Validation Passed</h2>
+</div>
+<div class="p-md">
+<p class="font-body-sm text-body-sm text-text-muted leading-relaxed">
+                                All specified materials are active in inventory and unit types match master records. Ready for production release upon approval.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

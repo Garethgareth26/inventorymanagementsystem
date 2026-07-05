@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CV Akuna - Safety Stock Simulation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "class-c": "#FFFFFF",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1d",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "text-main": "#111827",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "secondary-fixed-dim": "#c0c7d6",
+                        "error-container": "#ffdad6",
+                        "success": "#10B981",
+                        "surface-bright": "#f8f9fa",
+                        "secondary-fixed": "#dce2f3",
+                        "tertiary-fixed": "#ffdbcf",
+                        "surface-tint": "#0c56d0",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "on-primary-fixed": "#001848",
+                        "on-surface-variant": "#434654",
+                        "on-secondary-fixed-variant": "#404754",
+                        "on-tertiary-container": "#ffc6b2",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container-highest": "#e1e3e4",
+                        "inverse-surface": "#2e3132",
+                        "on-primary-container": "#c4d2ff",
+                        "surface-dim": "#d9dadb",
+                        "on-secondary-container": "#5e6572",
+                        "border-subtle": "#E5E7EB",
+                        "on-surface": "#191c1d",
+                        "secondary": "#585f6c",
+                        "on-tertiary-fixed": "#380d00",
+                        "surface-container-high": "#e7e8e9",
+                        "primary": "#003d9b",
+                        "text-muted": "#4B5563",
+                        "surface-container-low": "#f3f4f5",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "on-primary": "#ffffff",
+                        "danger": "#EF4444",
+                        "outline": "#737685",
+                        "background": "#f8f9fa",
+                        "outline-variant": "#c3c6d6",
+                        "primary-fixed": "#dae2ff",
+                        "class-a": "#E0E7FF",
+                        "on-secondary-fixed": "#151c27",
+                        "on-error": "#ffffff",
+                        "class-b": "#F3F4F6",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#b2c5ff",
+                        "surface-variant": "#e1e3e4",
+                        "surface": "#f8f9fa",
+                        "primary-container": "#0052cc",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "tertiary": "#7b2600",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "tertiary-container": "#a33500",
+                        "warning": "#F59E0B",
+                        "secondary-container": "#dce2f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "header-height": "64px",
+                        "sm": "8px",
+                        "sidebar-expanded": "240px",
+                        "sidebar-collapsed": "64px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-kpi": ["Inter"],
+                        "table-data": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["18px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-kpi": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "table-data": ["13px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-full flex flex-col md:flex-row antialiased">
+<!-- TopAppBar (Mobile Only) -->
+<header class="md:hidden flex items-center justify-between px-lg h-header-height w-full bg-surface dark:bg-on-surface border-b border-border-subtle dark:border-outline-variant z-50 sticky top-0">
+<div class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed">CV Akuna</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 text-primary dark:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-secondary-fixed-variant transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="p-2 text-primary dark:text-primary-fixed-dim hover:bg-surface-container-low dark:hover:bg-secondary-fixed-variant transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 h-full w-sidebar-expanded z-40 p-md bg-surface-container-lowest dark:bg-inverse-surface border-r border-border-subtle dark:border-outline-variant">
+<div class="mb-xl">
+<div class="flex items-center gap-sm mb-sm">
+<div class="w-8 h-8 rounded-md bg-primary flex items-center justify-center text-on-primary font-bold">A</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-black text-primary dark:text-primary-fixed">CV Akuna</h1>
+<p class="font-label-caps text-label-caps text-secondary dark:text-surface-variant">Inventory Management</p>
+</div>
+</div>
+<button class="w-full mt-md bg-primary hover:bg-primary-container text-on-primary font-body-md py-2 px-4 rounded-lg flex items-center justify-center gap-sm transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Add New SKU
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto space-y-xs">
+<a class="flex items-center gap-sm px-3 py-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-3 py-2 bg-primary-fixed dark:bg-primary-container text-on-primary-fixed dark:text-on-primary-container font-semibold rounded-lg scale-[0.98] transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-label-caps text-label-caps">Inventory Assets</span>
+</a>
+<a class="flex items-center gap-sm px-3 py-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
+<span class="font-label-caps text-label-caps">Production Control</span>
+</a>
+<a class="flex items-center gap-sm px-3 py-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label-caps text-label-caps">Purchasing</span>
+</a>
+<a class="flex items-center gap-sm px-3 py-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-caps text-label-caps">Supply Chain Reports</span>
+</a>
+<a class="flex items-center gap-sm px-3 py-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps">System Settings</span>
+</a>
+</div>
+<div class="mt-auto pt-md border-t border-border-subtle dark:border-outline-variant space-y-xs">
+<a class="flex items-center gap-sm px-3 py-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-caps text-label-caps">Help Center</span>
+</a>
+<a class="flex items-center gap-sm px-3 py-2 text-secondary dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-secondary-fixed-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-caps text-label-caps">Log Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-sidebar-expanded p-md md:p-xl w-full max-w-[1440px] mx-auto min-h-screen">
+<!-- Page Header -->
+<div class="mb-lg flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<a class="text-text-muted hover:text-primary transition-colors font-body-sm text-body-sm" href="#">Inventory</a>
+<span class="material-symbols-outlined text-text-muted text-[16px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-body-sm text-body-sm font-medium">Safety Stock Simulation</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Safety Stock Simulator</h2>
+<p class="font-body-md text-body-md text-text-muted mt-1">Model scenarios to optimize buffer inventory levels based on service level targets and lead time variability.</p>
+</div>
+<div class="flex gap-sm">
+<button class="bg-class-c border border-border-subtle text-text-main font-body-md py-2 px-4 rounded-DEFAULT hover:bg-surface-container-low transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="download">download</span> Export
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg items-start">
+<!-- Left Panel: Input Parameters -->
+<div class="lg:col-span-4 bg-class-c border border-border-subtle rounded-DEFAULT p-md flex flex-col gap-lg">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface border-b border-border-subtle pb-2 mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="tune">tune</span>
+                        Simulation Parameters
+                    </h3>
+</div>
+<!-- Input Group: Target Service Level (Z-Factor) -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-text-muted flex items-center justify-between">
+                        Target Service Level
+                        <span class="material-symbols-outlined text-secondary text-[16px] cursor-help" data-icon="info">info</span>
+</label>
+<div class="flex items-center gap-sm">
+<input class="flex-1 accent-primary" max="99.9" min="80" step="0.1" type="range" value="95"/>
+<div class="w-16 px-2 py-1 bg-surface border border-border-subtle rounded font-body-md text-body-md text-center tabular-nums">95.0%</div>
+</div>
+<div class="flex justify-between text-[11px] text-text-muted mt-1">
+<span>Low (80%)</span>
+<span>Implied Z-Score: <strong class="text-on-surface">1.645</strong></span>
+<span>High (99.9%)</span>
+</div>
+</div>
+<!-- Input Group: Historical Data Window -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-text-muted">Historical Data Window (Days)</label>
+<select class="bg-class-c border border-border-subtle rounded-DEFAULT px-3 py-2 font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
+<option value="30">Last 30 Days</option>
+<option selected="" value="90">Last 90 Days</option>
+<option value="180">Last 180 Days</option>
+<option value="365">Last 365 Days</option>
+</select>
+</div>
+<!-- Input Group: Lead Time -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-text-muted">Avg. Supplier Lead Time (Days)</label>
+<div class="relative">
+<input class="w-full bg-class-c border border-border-subtle rounded-DEFAULT pl-3 pr-10 py-2 font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-mono tabular-nums" type="number" value="14"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted text-sm">days</span>
+</div>
+</div>
+<!-- Input Group: Lead Time Variability -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-caps text-label-caps text-text-muted flex items-center justify-between">
+                        Lead Time Variance
+                        <span class="material-symbols-outlined text-secondary text-[16px] cursor-help" data-icon="info">info</span>
+</label>
+<div class="relative">
+<input class="w-full bg-class-c border border-border-subtle rounded-DEFAULT pl-3 pr-10 py-2 font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-mono tabular-nums" step="0.1" type="number" value="2.5"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted text-sm">±days</span>
+</div>
+</div>
+<div class="pt-4 mt-2 border-t border-border-subtle flex gap-md">
+<button class="flex-1 bg-surface-container hover:bg-surface-container-high text-on-surface font-body-md py-2 px-4 rounded-DEFAULT transition-colors">Reset</button>
+<button class="flex-1 bg-primary hover:bg-primary-container text-on-primary font-body-md py-2 px-4 rounded-DEFAULT transition-colors font-medium">Run Simulation</button>
+</div>
+<!-- Formula Transparency -->
+<div class="bg-surface-bright rounded p-3 mt-4 border border-border-subtle">
+<p class="font-label-caps text-label-caps text-text-muted mb-2">Calculation Methodology</p>
+<div class="font-mono text-[12px] bg-surface-container-lowest p-2 rounded border border-border-subtle text-center text-text-main mb-2">
+                         SS = Z × σ<sub>d</sub> × √LT
+                     </div>
+<p class="text-[11px] text-secondary leading-tight">Where Z = Z-Score, σ<sub>d</sub> = Standard Deviation of Daily Demand, LT = Lead Time in Days.</p>
+</div>
+</div>
+<!-- Right Panel: Results & Comparison -->
+<div class="lg:col-span-8 flex flex-col gap-lg">
+<!-- KPI Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="bg-class-c border border-border-subtle rounded-DEFAULT p-md">
+<h4 class="font-label-caps text-label-caps text-text-muted mb-2">Current Total SS Value</h4>
+<div class="font-display-kpi text-display-kpi text-on-surface">$124,500</div>
+<div class="flex items-center gap-1 mt-2 text-body-sm font-body-sm text-text-muted">
+                            Across 42 Active SKUs
+                        </div>
+</div>
+<div class="bg-class-c border border-border-subtle rounded-DEFAULT p-md relative overflow-hidden">
+<div class="absolute inset-0 bg-primary opacity-5"></div>
+<h4 class="font-label-caps text-label-caps text-text-muted mb-2 relative z-10">Simulated SS Value</h4>
+<div class="font-display-kpi text-display-kpi text-primary relative z-10">$142,850</div>
+<div class="flex items-center gap-1 mt-2 text-body-sm font-body-sm text-warning relative z-10 font-medium">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+                            +$18,350 (+14.7%)
+                        </div>
+</div>
+<div class="bg-class-c border border-border-subtle rounded-DEFAULT p-md">
+<h4 class="font-label-caps text-label-caps text-text-muted mb-2">Projected Stockout Risk</h4>
+<div class="font-display-kpi text-display-kpi text-on-surface">5.0%</div>
+<div class="flex items-center gap-1 mt-2 text-body-sm font-body-sm text-success">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_down">trending_down</span>
+                            -2.4% vs Current
+                        </div>
+</div>
+</div>
+<!-- Comparison Table -->
+<div class="bg-class-c border border-border-subtle rounded-DEFAULT overflow-hidden flex flex-col">
+<div class="p-md border-b border-border-subtle flex justify-between items-center bg-surface-bright">
+<h3 class="font-headline-md text-headline-md text-on-surface">SKU Impact Analysis</h3>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-text-muted text-[18px]" data-icon="search">search</span>
+<input class="bg-class-c border border-border-subtle rounded pl-8 pr-3 py-1 font-body-sm text-body-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-48" placeholder="Filter SKUs..." type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-border-subtle">
+<th class="font-label-caps text-label-caps text-text-muted py-3 px-4 w-1/4">SKU / Item</th>
+<th class="font-label-caps text-label-caps text-text-muted py-3 px-4 text-right">Daily Demand (σ)</th>
+<th class="font-label-caps text-label-caps text-text-muted py-3 px-4 text-right">Current SS</th>
+<th class="font-label-caps text-label-caps text-primary py-3 px-4 text-right bg-primary-fixed/20">Simulated SS</th>
+<th class="font-label-caps text-label-caps text-text-muted py-3 px-4 text-right">Delta</th>
+</tr>
+</thead>
+<tbody class="font-table-data text-table-data text-on-surface">
+<tr class="border-b border-border-subtle hover:bg-surface-container-lowest/50 transition-colors">
+<td class="py-3 px-4">
+<div class="font-mono text-primary font-medium">SKU-A109</div>
+<div class="text-text-muted text-[11px] truncate w-40">Industrial Bearings 40mm</div>
+</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums">42 (±8.4)</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums">150</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums font-bold text-primary bg-primary-fixed/10">185</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums text-warning">+35 <span class="text-[10px]">↑</span></td>
+</tr>
+<tr class="border-b border-border-subtle hover:bg-surface-container-lowest/50 transition-colors">
+<td class="py-3 px-4">
+<div class="font-mono text-primary font-medium">SKU-B442</div>
+<div class="text-text-muted text-[11px] truncate w-40">Synthetic Lubricant 5G</div>
+</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums">12 (±2.1)</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums">60</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums font-bold text-primary bg-primary-fixed/10">55</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums text-success">-5 <span class="text-[10px]">↓</span></td>
+</tr>
+<tr class="border-b border-border-subtle hover:bg-surface-container-lowest/50 transition-colors bg-warning/5">
+<td class="py-3 px-4">
+<div class="font-mono text-primary font-medium">SKU-C901</div>
+<div class="text-text-muted text-[11px] truncate w-40">Replacement Filter Element</div>
+</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums">85 (±22.5)</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums">200</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums font-bold text-primary bg-primary-fixed/10">340</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums text-danger font-semibold">+140 <span class="text-[10px]">↑↑</span></td>
+</tr>
+<tr class="border-b border-border-subtle hover:bg-surface-container-lowest/50 transition-colors">
+<td class="py-3 px-4">
+<div class="font-mono text-primary font-medium">SKU-D211</div>
+<div class="text-text-muted text-[11px] truncate w-40">Standard Gasket Set</div>
+</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums">150 (±15.0)</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums">400</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums font-bold text-primary bg-primary-fixed/10">420</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums text-warning">+20 <span class="text-[10px]">↑</span></td>
+</tr>
+<tr class="hover:bg-surface-container-lowest/50 transition-colors">
+<td class="py-3 px-4">
+<div class="font-mono text-primary font-medium">SKU-E774</div>
+<div class="text-text-muted text-[11px] truncate w-40">Control Valve Assembly</div>
+</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums">4 (±1.8)</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums">25</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums font-bold text-primary bg-primary-fixed/10">32</td>
+<td class="py-3 px-4 text-right font-mono tabular-nums text-warning">+7 <span class="text-[10px]">↑</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-3 border-t border-border-subtle bg-surface-bright flex justify-center">
+<button class="text-primary font-body-sm text-body-sm font-medium hover:underline">View All 42 SKUs</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
