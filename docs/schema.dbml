@@ -1,0 +1,129 @@
+// Sistem Inventori CV Akuna — BOM & Production Module
+// dbdiagram.io compatible DBML
+// Tables marked "(assumed)" reconstruct pre-existing entities not fully
+// re-specified by the BOM/Production addendum — verify against SAD v1.0 /
+// Domain Analysis Report v1.0 before treating as final.
+
+Table users {
+  id bigint [pk, increment]
+  name varchar(150) [not null]
+  email varchar(150) [not null, unique]
+  password varchar(255) [not null]
+  role varchar(20) [not null, note: 'karyawan | owner (assumed)']
+  created_at timestamp
+  updated_at timestamp
+
+  Note: '(assumed, pre-existing)'
+}
+
+Table suppliers {
+  id bigint [pk, increment]
+  kode varchar(30) [not null, unique]
+  nama varchar(150) [not null]
+  alamat text
+  kontak varchar(100)
+  created_at timestamp
+  updated_at timestamp
+
+  Note: '(assumed, pre-existing)'
+}
+
+Table bahan_baku {
+  id bigint [pk, increment]
+  kode varchar(30) [not null, unique]
+  nama varchar(150) [not null]
+  satuan varchar(20) [not null]
+  stok_saat_ini decimal(15,2) [not null, default: 0, note: 'running balance, >= 0']
+  supplier_id bigint [ref: > suppliers.id]
+  harga_satuan decimal(15,2)
+  lead_time_hari int
+  created_at timestamp
+  updated_at timestamp
+
+  Note: '(assumed, pre-existing). EOQ/D/SD/SS/ROP params assumed to live elsewhere per ADR-004'
+}
+
+Table pesanan_pembelian {
+  id bigint [pk, increment]
+  kode_po varchar(30) [not null]
+  bahan_baku_id bigint [not null, ref: > bahan_baku.id]
+  supplier_id bigint [not null, ref: > suppliers.id]
+  jumlah decimal(15,2) [not null, note: '> 0']
+  status varchar(20) [not null, default: 'Draft', note: 'Draft|Dipesan|Diterima|Dibatalkan (assumed enum, confirm)']
+  tanggal_pesan date [not null]
+  tanggal_terima date
+  dicatat_oleh bigint [not null, ref: > users.id]
+  created_at timestamp
+  updated_at timestamp
+
+  Note: '(assumed, pre-existing) flat/header-less per Domain Analysis Report 3.4'
+}
+
+Table finished_goods {
+  id bigint [pk, increment]
+  kode varchar(30) [not null, unique]
+  nama varchar(150) [not null]
+  satuan varchar(20) [not null]
+  stok_saat_ini decimal(15,2) [not null, default: 0, note: 'running balance, >= 0']
+  created_at timestamp
+  updated_at timestamp
+
+  Note: 'NEW — fully specified by addendum'
+}
+
+Table bom {
+  id bigint [pk, increment]
+  finished_goods_id bigint [not null, ref: > finished_goods.id]
+  bahan_baku_id bigint [not null, ref: > bahan_baku.id]
+  qty_per_unit decimal(15,4) [not null, note: '> 0, per 1 unit finished good']
+  satuan varchar(20) [not null]
+  created_at timestamp
+  updated_at timestamp
+
+  indexes {
+    (finished_goods_id, bahan_baku_id) [unique]
+  }
+
+  Note: 'NEW — single active BOM per finished good (no versioning, Decision 2)'
+}
+
+Table production_entries {
+  id bigint [pk, increment]
+  finished_goods_id bigint [not null, ref: > finished_goods.id]
+  jumlah_diproduksi decimal(15,2) [not null, note: '> 0']
+  tanggal_produksi date [not null]
+  dicatat_oleh bigint [not null, ref: > users.id, note: 'karyawan only (RBAC production.record)']
+  created_at timestamp
+  updated_at timestamp
+
+  Note: 'NEW — source document for 2 linked mutasi_stok rows, written atomically'
+}
+
+Table mutasi_stok {
+  id bigint [pk, increment]
+  bahan_baku_id bigint [ref: > bahan_baku.id, note: 'nullable — exactly one of bahan_baku_id/finished_goods_id set']
+  finished_goods_id bigint [ref: > finished_goods.id, note: 'nullable']
+  jenis_mutasi varchar(10) [not null, note: 'masuk | keluar']
+  jumlah decimal(15,2) [not null, note: '> 0']
+  tanggal date [not null]
+  sumber varchar(20) [not null, note: 'manual | po_penerimaan | produksi (NEW column)']
+  po_id bigint [ref: > pesanan_pembelian.id, note: 'nullable, NEW column — set only when sumber=po_penerimaan']
+  production_entry_id bigint [ref: > production_entries.id, note: 'nullable, NEW column — set only when sumber=produksi']
+  dicatat_oleh bigint [not null, ref: > users.id]
+  keterangan text
+  created_at timestamp
+  updated_at timestamp
+
+  indexes {
+    (bahan_baku_id, tanggal) [name: 'idx_mutasi_bahan_baku_tanggal']
+    (finished_goods_id, tanggal) [name: 'idx_mutasi_finished_goods_tanggal']
+    (jenis_mutasi, sumber) [name: 'idx_mutasi_jenis_sumber']
+  }
+
+  Note: '''
+    REVISED existing table.
+    DB-level CHECK constraints (add via raw SQL migration, not expressible in DBML):
+    - num_nonnulls(bahan_baku_id, finished_goods_id) = 1
+    - sumber/po_id/production_entry_id consistency (see Database Design Document Section 4.8)
+  '''
+}
