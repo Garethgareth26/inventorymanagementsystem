@@ -1,3 +1,108 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ─── Base ──────────────────────────────────────────────────────────── */
+@layer base {
+    /* Force Inter across the entire application */
+    html {
+        font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    /* Tabular numbers required on all numeric/monetary data (DESIGN.md §Typography) */
+    .numeric, table td.numeric, [data-numeric] {
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+/* ─── Custom Scrollbar (Stitch-matched) ─────────────────────────────── */
+@layer base {
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #c3c6d6;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #737685;
+    }
+}
+
+/* ─── Material Symbols ───────────────────────────────────────────────── */
+@layer base {
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        /* Prevent font from causing layout shifts */
+        display: inline-flex;
+        vertical-align: middle;
+        font-style: normal;
+        line-height: 1;
+        user-select: none;
+    }
+    .icon-fill {
+        font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+}
+
+/* ─── Components ─────────────────────────────────────────────────────── */
+@layer components {
+    /* Input glow on focus — used on all form inputs */
+    .input-glow:focus {
+        box-shadow: 0 0 0 2px rgba(0, 61, 155, 0.20);
+        outline: none;
+        border-color: #003d9b;
+    }
+
+    /* KPI Card hover lift */
+    .kpi-card {
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .kpi-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    /* Sidebar nav item — inactive */
+    .nav-item {
+        @apply flex items-center gap-3 px-3 py-2 rounded-lg text-secondary transition-all duration-150 cursor-pointer;
+    }
+    .nav-item:hover {
+        @apply bg-surface-container-high;
+    }
+
+    /* Sidebar nav item — active */
+    .nav-item-active {
+        @apply flex items-center gap-3 px-3 py-2 rounded-lg bg-primary-fixed text-on-primary-fixed font-semibold;
+    }
+
+    /* Status badges */
+    .badge-critical {
+        @apply inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-error-container text-on-error-container;
+    }
+    .badge-warning {
+        @apply inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-warning/20 text-warning;
+    }
+    .badge-ok {
+        @apply inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-success/20 text-success;
+    }
+
+    /* Primary button */
+    .btn-primary {
+        @apply inline-flex items-center gap-2 px-4 py-2 bg-primary text-on-primary text-body-md font-medium rounded hover:opacity-90 transition-opacity;
+    }
+
+    /* Secondary / ghost button */
+    .btn-secondary {
+        @apply inline-flex items-center gap-2 px-4 py-2 bg-surface-container-lowest border border-border-subtle text-text-main text-body-md font-medium rounded hover:bg-surface-container-low transition-colors;
+    }
+
+    /* Danger button */
+    .btn-danger {
+        @apply inline-flex items-center gap-2 px-4 py-2 bg-error text-on-error text-body-md font-medium rounded hover:opacity-90 transition-opacity;
+    }
+}
