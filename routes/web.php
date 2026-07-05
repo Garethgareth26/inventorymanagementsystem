@@ -83,6 +83,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Administration (Owner only — capability enforced in real controllers later)
     Route::get('/user-management', $placeholder('User Management'))->name('user_management.index');
     Route::get('/settings', $placeholder('Settings'))->name('settings.index');
+
+    // Design System Showcase
+    Route::get('/design-system', function () {
+        return view('design-system');
+    })->name('design-system');
 });
 
 require __DIR__.'/auth.php';
+
