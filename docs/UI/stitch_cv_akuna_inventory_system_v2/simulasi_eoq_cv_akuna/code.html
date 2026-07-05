@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EOQ Simulation - CV Akuna</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#476551",
+                        "on-primary-container": "#b1d3ba",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1c1c18",
+                        "text-primary": "#2A2A26",
+                        "on-tertiary-fixed": "#291800",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#032111",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#3e4943",
+                        "tertiary-fixed-dim": "#f0be7c",
+                        "tertiary-container": "#724e17",
+                        "secondary": "#56615a",
+                        "surface-container-highest": "#e5e2db",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f6f3ec",
+                        "surface-container-high": "#ebe8e1",
+                        "primary-container": "#3e5c48",
+                        "inverse-primary": "#adcfb5",
+                        "primary-fixed": "#c9ebd1",
+                        "primary-fixed-dim": "#adcfb5",
+                        "page-bg": "#EDEAE3",
+                        "on-surface-variant": "#424843",
+                        "on-tertiary-fixed-variant": "#614008",
+                        "background": "#fcf9f2",
+                        "on-secondary-container": "#5c6760",
+                        "inverse-on-surface": "#f4f0e9",
+                        "tertiary-fixed": "#ffddb4",
+                        "negative-bg": "#F7DEE2",
+                        "on-tertiary": "#ffffff",
+                        "card-surface": "#FFFFFF",
+                        "surface-dim": "#dddad3",
+                        "on-secondary-fixed": "#131e18",
+                        "secondary-fixed": "#d9e5dc",
+                        "secondary-fixed-dim": "#bdc9c1",
+                        "on-background": "#1c1c18",
+                        "inverse-surface": "#31312c",
+                        "outline": "#727972",
+                        "outline-variant": "#c2c8c1",
+                        "on-primary-fixed-variant": "#2f4d3a",
+                        "negative-rose": "#C9697A",
+                        "accent-tan-light": "#F3E4C9",
+                        "surface": "#fcf9f2",
+                        "danger-red": "#B3413F",
+                        "secondary-container": "#d9e5dc",
+                        "surface-container-lowest": "#ffffff",
+                        "warning-amber": "#C98A3B",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#f1eee7",
+                        "tertiary": "#573701",
+                        "surface-bright": "#fcf9f2",
+                        "on-primary": "#ffffff",
+                        "text-secondary": "#8B8880",
+                        "surface-variant": "#e5e2db",
+                        "on-tertiary-container": "#f4c280",
+                        "primary": "#274432",
+                        "border-divider": "#E7E4DC"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "lg": "24px",
+                        "margin": "32px",
+                        "md": "16px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "tabular-nums": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "display-kpi": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "tabular-nums": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-kpi": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #EDEAE3;
+            color: #2A2A26;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Hide scrollbar for cleaner look in side rail */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Ambient blur for floating elements */
+        .ambient-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md min-h-screen overflow-x-hidden relative">
+<!-- Shared Components: SideNavBar -->
+<nav class="hidden md:flex bg-surface-container-lowest dark:bg-surface-container-lowest text-on-surface dark:text-on-surface fixed left-4 top-4 bottom-4 w-16 rounded-full flex-col items-center py-6 shadow-sm dark:shadow-none ambient-shadow z-50">
+<!-- Brand Logo (Hidden per style_brand_logo) -->
+<div class="hidden">
+<span class="font-headline-md text-headline-md font-bold">CV Akuna</span>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex flex-col items-center gap-6 mt-8 flex-1 w-full px-2">
+<a aria-label="Dashboard" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all w-10 h-10 flex items-center justify-center group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">grid_view</span>
+</a>
+<a aria-label="Inventory" class="bg-on-background text-on-primary rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</a>
+<a aria-label="Analytics" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all w-10 h-10 flex items-center justify-center group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">bar_chart</span>
+</a>
+<a aria-label="Orders" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all w-10 h-10 flex items-center justify-center group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">shopping_cart</span>
+</a>
+<a aria-label="Suppliers" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all w-10 h-10 flex items-center justify-center group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">group</span>
+</a>
+<a aria-label="Reports" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all w-10 h-10 flex items-center justify-center group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">assignment</span>
+</a>
+</div>
+<!-- Footer Tabs -->
+<div class="flex flex-col items-center gap-6 w-full px-2 mt-auto">
+<a aria-label="Settings" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all w-10 h-10 flex items-center justify-center group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">settings</span>
+</a>
+<a aria-label="Logout" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all w-10 h-10 flex items-center justify-center group" href="#">
+<span class="material-symbols-outlined group-active:scale-90 transition-transform">logout</span>
+</a>
+<!-- User Avatar -->
+<div class="mt-4">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container">
+<img alt="CV Akuna Logo" class="w-full h-full object-cover" data-alt="A small, professional portrait photo of an Asian woman in her late 30s with short black hair, wearing a dark green blazer against a clean white background. High key lighting, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBknwWIM-B-IGgiYlzhDc3D8fn_xPpR6EXp1v7deftfyqc235z5dyGdvAz8WTmwZMHok0OFTUX_ln8X6EynU-Yndo3xYP-z-Z0KxYw8MWXR-fwoA8rCf0vFxkd3bisDa6x5s6ri3pW2hZ4T_XfNMZrvZG_ZVF5-MzPCEJl3uUh8qGPcyclOd4oS7crd3DHTDgIbcZtZJJa7D6LYu4R4IoPurCUY_fJ203seLBB5TBAEHdrjC3bbQAWpYg"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="md:ml-[104px] pt-8 px-4 md:px-8 pb-12 w-full max-w-[1400px]">
+<!-- Shared Components: TopNavBar (Adapted for Canvas) -->
+<header class="flex justify-between items-center w-full mb-12">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+<path d="M20 0L23.2355 12.395L35.2587 4.74133L27.605 16.7645L40 20L27.605 23.2355L35.2587 35.2587L23.2355 27.605L20 40L16.7645 27.605L4.74133 35.2587L12.395 23.2355L0 20L12.395 16.7645L4.74133 4.74133L16.7645 12.395L20 0Z" fill="currentColor"></path>
+</svg>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-background">EOQ Simulation</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Analyze optimal order quantities and costs</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search Bar -->
+<div class="relative hidden sm:block">
+<input class="bg-card-surface border border-outline-variant rounded-full py-2 pl-4 pr-10 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-64 text-body-md placeholder:text-on-surface-variant transition-colors" placeholder="Search parameters..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+</div>
+<!-- Actions -->
+<div class="flex gap-3">
+<button class="w-10 h-10 rounded-full bg-card-surface flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-card-surface flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Simulation Workspace -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Input Form (Pill-shaped style) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Parameter Card -->
+<div class="bg-card-surface rounded-[2rem] p-xl flex flex-col gap-6">
+<div>
+<h2 class="font-headline-md text-headline-md text-text-primary">Simulation Parameters</h2>
+<p class="font-body-md text-body-md text-text-secondary mt-1">Adjust variables to forecast Economic Order Quantity.</p>
+</div>
+<form class="flex flex-col gap-5">
+<!-- Input Group -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Annual Demand (D)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-border-divider rounded-full py-3 px-5 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container text-body-md text-text-primary transition-colors" placeholder="Units per year" type="number" value="12000"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary font-label-sm">Units</span>
+</div>
+</div>
+<!-- Input Group -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Ordering Cost (S)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">$</span>
+<input class="w-full bg-surface-container-lowest border border-border-divider rounded-full py-3 pl-8 pr-5 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container text-body-md text-text-primary transition-colors" placeholder="Cost per order" type="number" value="50"/>
+</div>
+</div>
+<!-- Input Group -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Holding Cost per Unit (H)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">$</span>
+<input class="w-full bg-surface-container-lowest border border-border-divider rounded-full py-3 pl-8 pr-5 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container text-body-md text-text-primary transition-colors" placeholder="Cost per unit/year" step="0.01" type="number" value="2.50"/>
+</div>
+</div>
+<div class="mt-4 pt-6 border-t border-border-divider flex justify-between items-center">
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-text-primary transition-colors uppercase tracking-wider" type="button">
+                                Reset
+                            </button>
+<button class="bg-primary-container text-on-primary rounded-full py-3 px-8 font-label-sm text-label-sm uppercase tracking-wider hover:bg-surface-tint transition-colors active:scale-95" type="button">
+                                Run Simulation
+                            </button>
+</div>
+</form>
+</div>
+<!-- Info Card -->
+<div class="bg-surface-container-high rounded-[2rem] p-lg flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-accent-tan-light flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-tertiary">info</span>
+</div>
+<div>
+<h3 class="font-label-sm text-label-sm text-on-background uppercase tracking-wider">EOQ Formula</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">EOQ = √((2 * D * S) / H)</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 text-sm">Where D is Demand, S is Setup/Order cost, and H is Holding cost.</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Results & Comparison -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Hero Metric -->
+<div class="bg-primary-container rounded-[2rem] p-lg flex flex-col justify-between relative overflow-hidden h-40">
+<div class="z-10">
+<p class="font-label-sm text-label-sm text-on-primary-container uppercase tracking-wider mb-1">Simulated EOQ</p>
+<p class="font-display-kpi text-display-kpi text-on-primary">693</p>
+<p class="font-body-md text-body-md text-on-primary-container mt-1">Units per order</p>
+</div>
+<!-- Sparkline graphic placeholder -->
+<div class="absolute bottom-0 left-0 right-0 h-16 opacity-30">
+<svg class="w-full h-full fill-none stroke-on-primary stroke-2" preserveaspectratio="none" viewbox="0 0 100 40">
+<path d="M0 30 Q 15 10, 30 25 T 60 15 T 100 20"></path>
+</svg>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-card-surface rounded-[2rem] p-lg flex flex-col justify-between h-40">
+<div>
+<div class="flex justify-between items-start mb-1">
+<p class="font-label-sm text-label-sm text-text-secondary uppercase tracking-wider">Total Annual Cost</p>
+<span class="material-symbols-outlined text-text-secondary text-sm">payments</span>
+</div>
+<p class="font-display-kpi text-display-kpi text-text-primary">$1,732</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-medium">
+                                -14.5% vs Current
+                            </span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-card-surface rounded-[2rem] p-lg flex flex-col justify-between h-40">
+<div>
+<div class="flex justify-between items-start mb-1">
+<p class="font-label-sm text-label-sm text-text-secondary uppercase tracking-wider">Orders Per Year</p>
+<span class="material-symbols-outlined text-text-secondary text-sm">local_shipping</span>
+</div>
+<p class="font-display-kpi text-display-kpi text-text-primary">17.3</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs text-on-surface-variant font-medium">Approx. every 21 days</span>
+</div>
+</div>
+</div>
+<!-- Comparison Table Card -->
+<div class="bg-card-surface rounded-[2rem] p-xl flex-1">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-text-primary">Scenario Comparison</h2>
+<button class="font-label-sm text-label-sm text-primary hover:text-surface-tint uppercase tracking-wider transition-colors">
+                            Export PDF
+                        </button>
+</div>
+<div class="overflow-x-auto no-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-divider">
+<th class="py-4 font-label-sm text-label-sm text-text-secondary uppercase tracking-wider font-semibold">Metric</th>
+<th class="py-4 font-label-sm text-label-sm text-text-secondary uppercase tracking-wider font-semibold text-right">Current Policy</th>
+<th class="py-4 font-label-sm text-label-sm text-text-secondary uppercase tracking-wider font-semibold text-right">Simulated (EOQ)</th>
+<th class="py-4 font-label-sm text-label-sm text-text-secondary uppercase tracking-wider font-semibold text-right">Variance</th>
+</tr>
+</thead>
+<tbody class="font-tabular-nums text-tabular-nums text-text-primary">
+<tr class="border-b border-border-divider hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 font-body-md text-body-md text-text-primary">Order Quantity</td>
+<td class="py-4 text-right">500</td>
+<td class="py-4 text-right font-medium text-primary">693</td>
+<td class="py-4 text-right text-text-secondary">+38.6%</td>
+</tr>
+<tr class="border-b border-border-divider hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 font-body-md text-body-md text-text-primary">Total Ordering Cost</td>
+<td class="py-4 text-right">$1,200</td>
+<td class="py-4 text-right font-medium text-primary">$866</td>
+<td class="py-4 text-right text-secondary-fixed-variant">-$334</td>
+</tr>
+<tr class="border-b border-border-divider hover:bg-surface-container-lowest transition-colors">
+<td class="py-4 font-body-md text-body-md text-text-primary">Total Holding Cost</td>
+<td class="py-4 text-right">$625</td>
+<td class="py-4 text-right font-medium text-primary">$866</td>
+<td class="py-4 text-right text-danger-red">+$241</td>
+</tr>
+<tr class="bg-surface-container-low rounded-xl">
+<td class="py-4 px-2 font-body-md text-body-md font-semibold text-text-primary rounded-l-xl">Total Annual Cost</td>
+<td class="py-4 px-2 text-right font-semibold">$1,825</td>
+<td class="py-4 px-2 text-right font-bold text-primary-container">$1,732</td>
+<td class="py-4 px-2 text-right font-semibold text-secondary-fixed-variant rounded-r-xl">-$93 (Savings)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-8 flex justify-end">
+<button class="bg-outline text-on-surface rounded-full py-3 px-8 font-label-sm text-label-sm uppercase tracking-wider opacity-50 cursor-not-allowed" disabled="">
+                            Apply Policy (Owner Only)
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

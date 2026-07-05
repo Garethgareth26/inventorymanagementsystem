@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventory Management - PDF Preview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#3e4943",
+                        "surface-container-low": "#f6f3ec",
+                        "page-bg": "#EDEAE3",
+                        "surface-bright": "#fcf9f2",
+                        "on-secondary": "#ffffff",
+                        "border-divider": "#E7E4DC",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#f0be7c",
+                        "on-secondary-fixed": "#131e18",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#476551",
+                        "on-primary-container": "#b1d3ba",
+                        "surface-container-high": "#ebe8e1",
+                        "on-surface": "#1c1c18",
+                        "on-secondary-container": "#5c6760",
+                        "secondary-fixed": "#d9e5dc",
+                        "on-primary-fixed": "#032111",
+                        "danger-red": "#B3413F",
+                        "surface-container-highest": "#e5e2db",
+                        "warning-amber": "#C98A3B",
+                        "accent-tan-light": "#F3E4C9",
+                        "inverse-on-surface": "#f4f0e9",
+                        "primary": "#274432",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e5e2db",
+                        "primary-fixed": "#c9ebd1",
+                        "inverse-primary": "#adcfb5",
+                        "secondary-fixed-dim": "#bdc9c1",
+                        "on-error": "#ffffff",
+                        "tertiary": "#573701",
+                        "secondary-container": "#d9e5dc",
+                        "negative-bg": "#F7DEE2",
+                        "outline": "#727972",
+                        "background": "#fcf9f2",
+                        "tertiary-container": "#724e17",
+                        "card-surface": "#FFFFFF",
+                        "on-primary-fixed-variant": "#2f4d3a",
+                        "primary-container": "#3e5c48",
+                        "surface-container": "#f1eee7",
+                        "secondary": "#56615a",
+                        "on-tertiary-container": "#f4c280",
+                        "negative-rose": "#C9697A",
+                        "surface-dim": "#dddad3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#614008",
+                        "text-primary": "#2A2A26",
+                        "primary-fixed-dim": "#adcfb5",
+                        "outline-variant": "#c2c8c1",
+                        "text-secondary": "#8B8880",
+                        "tertiary-fixed": "#ffddb4",
+                        "on-surface-variant": "#424843",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#291800",
+                        "surface": "#fcf9f2",
+                        "inverse-surface": "#31312c",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1c1c18"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin": "32px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "tabular-nums": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-kpi": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "tabular-nums": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-kpi": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.page-bg'); }
+        .ambient-shadow { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+        .glass-panel { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(16px); }
+    </style>
+</head>
+<body class="font-body-md text-text-primary antialiased h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col items-center justify-between py-xl space-y-md bg-card-surface dark:bg-surface-container-low shadow-md fixed top-lg left-lg h-[calc(100vh-48px)] w-20 rounded-full z-50">
+<div class="flex flex-col items-center space-y-8 w-full">
+<div class="text-primary dark:text-primary-fixed mb-4">
+<span class="material-symbols-outlined text-[32px]">inventory_2</span>
+</div>
+<div class="flex flex-col items-center space-y-4 w-full">
+<!-- Dashboard -->
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all group flex justify-center w-full" href="#">
+<span class="material-symbols-outlined group-hover:scale-90 duration-200">grid_view</span>
+</a>
+<!-- Analytics -->
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all group flex justify-center w-full" href="#">
+<span class="material-symbols-outlined group-hover:scale-90 duration-200">analytics</span>
+</a>
+<!-- Inventory -->
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all group flex justify-center w-full" href="#">
+<span class="material-symbols-outlined group-hover:scale-90 duration-200">inventory_2</span>
+</a>
+<!-- Schedule -->
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all group flex justify-center w-full" href="#">
+<span class="material-symbols-outlined group-hover:scale-90 duration-200">calendar_today</span>
+</a>
+<!-- Customers -->
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all group flex justify-center w-full" href="#">
+<span class="material-symbols-outlined group-hover:scale-90 duration-200">group</span>
+</a>
+<!-- Reports (Active) -->
+<a class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container rounded-full p-3 group flex justify-center w-full" href="#">
+<span class="material-symbols-outlined scale-90 duration-200">description</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col items-center space-y-4 w-full">
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all group flex justify-center w-full" href="#">
+<span class="material-symbols-outlined group-hover:scale-90 duration-200">settings</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all group flex justify-center w-full" href="#">
+<span class="material-symbols-outlined group-hover:scale-90 duration-200">logout</span>
+</a>
+<div class="mt-4">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A small circular avatar placeholder image showing a serene, professional workspace with natural lighting and soft focus, maintaining the inventory management brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkIfvco_ODpnBXzFtUfrmk1uGSJuYOwA2woZLbBdN4f54P2C3CWU9MGSzIsIGBXglvTmAXh-4NMyXicLcRV-yqzls2V67PZ6hbl6su98ylUUE9-Fj6Md78pvtLDo1tX9lWArKp8NX7SUvOa7ZKmV2oLDI7oyKA_mc4NnndMmFyO0WInv07dXVKDYc1MG3BcNMDbcLqRXnljCa13n3DtKDKNXKZT-iNjbGqImtmIr4Zbx5-jzMbFTe3Bw"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col pl-28 pr-lg py-lg h-full overflow-hidden">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-xl py-lg bg-transparent full-width top-0 mb-6 z-40">
+<div>
+<h1 class="text-headline-lg font-headline-lg font-bold text-on-surface dark:text-on-surface-variant">Inventory Management</h1>
+<p class="text-body-md font-body-md text-text-secondary">Monthly Report Preview</p>
+</div>
+<div class="flex items-center space-x-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-12 pr-4 py-2 bg-card-surface border border-border-divider rounded-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md w-64" placeholder="Search..." type="text"/>
+</div>
+<button class="w-10 h-10 rounded-full bg-card-surface flex items-center justify-center text-primary dark:text-primary-fixed hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors hover:scale-95 duration-150 transition-all shadow-sm">
+<span class="material-symbols-outlined">chat</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-card-surface flex items-center justify-center text-primary dark:text-primary-fixed hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors hover:scale-95 duration-150 transition-all shadow-sm relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-danger-red rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- Document Viewer Layout -->
+<div class="flex-1 flex flex-col md:flex-row gap-lg overflow-hidden relative">
+<!-- PDF Viewer Container (Glassmorphism & Depth) -->
+<div class="flex-1 bg-surface-container-high/50 rounded-xl overflow-hidden flex flex-col relative shadow-inner border border-surface-variant/50">
+<!-- Viewer Toolbar -->
+<div class="h-16 glass-panel border-b border-border-divider flex items-center justify-between px-xl z-10 sticky top-0">
+<div class="flex items-center space-x-4">
+<span class="font-headline-md text-headline-md text-primary">Monthly_Inventory_Report_Oct.pdf</span>
+<span class="px-3 py-1 bg-accent-tan-light text-tertiary-container rounded-full text-label-sm font-label-sm">4 Pages</span>
+</div>
+<div class="flex items-center space-x-3">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors flex items-center justify-center" title="Zoom Out">
+<span class="material-symbols-outlined">zoom_out</span>
+</button>
+<span class="text-tabular-nums font-tabular-nums text-on-surface-variant">100%</span>
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors flex items-center justify-center" title="Zoom In">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<div class="w-px h-6 bg-border-divider mx-2"></div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors flex items-center justify-center" title="Print">
+<span class="material-symbols-outlined">print</span>
+</button>
+<button class="flex items-center space-x-2 bg-primary-container text-on-primary px-6 py-2 rounded-full hover:bg-primary transition-colors ambient-shadow">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span class="font-label-sm text-label-sm">Download PDF</span>
+</button>
+</div>
+</div>
+<!-- PDF Document Scroll Area -->
+<div class="flex-1 overflow-y-auto p-lg flex flex-col items-center bg-surface-container-low/30 backdrop-blur-sm custom-scrollbar">
+<!-- PDF Page Render (Letterhead Style) -->
+<div class="bg-card-surface w-full max-w-[800px] min-h-[1056px] ambient-shadow rounded-sm p-[48px] flex flex-col mb-lg border border-border-divider relative group">
+<!-- Floating Page Number -->
+<div class="absolute -right-12 top-1/2 -translate-y-1/2 text-outline font-tabular-nums opacity-0 group-hover:opacity-100 transition-opacity">Pg 1</div>
+<!-- Letterhead Header -->
+<div class="flex justify-between items-start border-b-2 border-primary-container pb-6 mb-8">
+<div>
+<h2 class="text-display-kpi font-display-kpi text-primary mb-2">Inventory Report</h2>
+<p class="text-body-lg font-body-lg text-secondary">Period: October 1 - October 31, 2023</p>
+</div>
+<div class="text-right">
+<div class="text-primary font-bold text-headline-lg flex items-center justify-end mb-1">
+<span class="material-symbols-outlined mr-2">inventory_2</span>
+                                    LogisticsPro
+                                </div>
+<p class="text-body-md font-body-md text-secondary">Generated on Nov 2, 2023</p>
+<p class="text-body-md font-body-md text-secondary">Prepared by: Carlic Bolomboy</p>
+</div>
+</div>
+<!-- Executive Summary (Bento-ish Grid inside PDF) -->
+<div class="grid grid-cols-3 gap-6 mb-10">
+<div class="bg-surface-bright p-6 rounded-lg border border-border-divider">
+<p class="text-label-sm font-label-sm text-secondary uppercase mb-2">Total Value</p>
+<p class="text-headline-lg font-headline-lg text-primary">$452,890</p>
+<p class="text-body-md text-surface-tint mt-1 flex items-center"><span class="material-symbols-outlined text-[16px] mr-1">trending_up</span> +2.4% vs last mo</p>
+</div>
+<div class="bg-surface-bright p-6 rounded-lg border border-border-divider">
+<p class="text-label-sm font-label-sm text-secondary uppercase mb-2">Items in Stock</p>
+<p class="text-headline-lg font-headline-lg text-primary">12,450</p>
+<p class="text-body-md text-surface-tint mt-1 flex items-center"><span class="material-symbols-outlined text-[16px] mr-1">check_circle</span> 98% capacity</p>
+</div>
+<div class="bg-negative-bg p-6 rounded-lg border border-negative-rose/20">
+<p class="text-label-sm font-label-sm text-danger-red uppercase mb-2">Low Stock Alerts</p>
+<p class="text-headline-lg font-headline-lg text-danger-red">14</p>
+<p class="text-body-md text-danger-red mt-1 flex items-center"><span class="material-symbols-outlined text-[16px] mr-1">warning</span> Action required</p>
+</div>
+</div>
+<!-- Data Table Section -->
+<h3 class="text-headline-md font-headline-md text-primary mb-4">Top Moving Items</h3>
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-divider text-label-sm font-label-sm text-secondary">
+<th class="py-3 px-2 font-semibold">SKU</th>
+<th class="py-3 px-2 font-semibold">Product Name</th>
+<th class="py-3 px-2 font-semibold text-right">Qty Sold</th>
+<th class="py-3 px-2 font-semibold text-right">Revenue</th>
+<th class="py-3 px-2 font-semibold text-center">Status</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md">
+<tr class="border-b border-border-divider/50 hover:bg-surface-bright">
+<td class="py-3 px-2 text-tabular-nums text-secondary">PRD-001</td>
+<td class="py-3 px-2 font-medium">Ergonomic Office Chair</td>
+<td class="py-3 px-2 text-right text-tabular-nums">420</td>
+<td class="py-3 px-2 text-right text-tabular-nums">$84,000</td>
+<td class="py-3 px-2 text-center">
+<span class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-[11px] font-bold tracking-wider">IN STOCK</span>
+</td>
+</tr>
+<tr class="border-b border-border-divider/50 hover:bg-surface-bright">
+<td class="py-3 px-2 text-tabular-nums text-secondary">PRD-045</td>
+<td class="py-3 px-2 font-medium">Standing Desk Frame</td>
+<td class="py-3 px-2 text-right text-tabular-nums">315</td>
+<td class="py-3 px-2 text-right text-tabular-nums">$63,000</td>
+<td class="py-3 px-2 text-center">
+<span class="inline-block px-3 py-1 bg-warning-amber/20 text-tertiary-container rounded-full text-[11px] font-bold tracking-wider">LOW STOCK</span>
+</td>
+</tr>
+<tr class="border-b border-border-divider/50 hover:bg-surface-bright">
+<td class="py-3 px-2 text-tabular-nums text-secondary">PRD-112</td>
+<td class="py-3 px-2 font-medium">Monitor Arm Dual</td>
+<td class="py-3 px-2 text-right text-tabular-nums">280</td>
+<td class="py-3 px-2 text-right text-tabular-nums">$25,200</td>
+<td class="py-3 px-2 text-center">
+<span class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-[11px] font-bold tracking-wider">IN STOCK</span>
+</td>
+</tr>
+<tr class="border-b border-border-divider/50 hover:bg-surface-bright">
+<td class="py-3 px-2 text-tabular-nums text-secondary">PRD-089</td>
+<td class="py-3 px-2 font-medium">Cable Management Tray</td>
+<td class="py-3 px-2 text-right text-tabular-nums">650</td>
+<td class="py-3 px-2 text-right text-tabular-nums">$19,500</td>
+<td class="py-3 px-2 text-center">
+<span class="inline-block px-3 py-1 bg-negative-rose/20 text-danger-red rounded-full text-[11px] font-bold tracking-wider">REORDER</span>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="mt-auto pt-8 border-t border-border-divider text-center text-label-sm text-secondary">
+                            Page 1 of 4 • LogisticsPro Confidential
+                        </div>
+</div>
+</div>
+</div>
+<!-- Metadata Side Panel (Hidden on mobile) -->
+<div class="hidden xl:flex w-80 bg-card-surface rounded-xl p-6 flex-col ambient-shadow">
+<h3 class="text-headline-md font-headline-md text-primary mb-6 flex items-center"><span class="material-symbols-outlined mr-2">info</span> Document Info</h3>
+<div class="space-y-6">
+<div>
+<p class="text-label-sm font-label-sm text-secondary mb-1">Generated By</p>
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded-full bg-accent-tan-light flex items-center justify-center text-tertiary-container font-bold">CB</div>
+<span class="text-body-md font-medium">Carlic Bolomboy</span>
+</div>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-secondary mb-1">Creation Date</p>
+<p class="text-body-md font-body-md">Nov 2, 2023 at 14:32 PM</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-secondary mb-1">File Size</p>
+<p class="text-body-md font-body-md font-tabular-nums">2.4 MB</p>
+</div>
+<div class="pt-6 border-t border-border-divider">
+<p class="text-label-sm font-label-sm text-secondary mb-3">Quick Actions</p>
+<button class="w-full mb-3 flex items-center justify-center space-x-2 border border-primary text-primary px-4 py-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span class="font-label-sm">Share Link</span>
+</button>
+<button class="w-full flex items-center justify-center space-x-2 border border-border-divider text-secondary px-4 py-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span class="font-label-sm">Version History</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<style>
+        /* Custom scrollbar for a cleaner look within the PDF viewer area */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: theme('colors.outline-variant');
+            border-radius: 20px;
+        }
+    </style>
+</body></html>

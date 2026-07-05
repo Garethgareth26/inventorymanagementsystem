@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Production Detail - Inventory Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#3e4943",
+                        "surface-container-low": "#f6f3ec",
+                        "page-bg": "#EDEAE3",
+                        "surface-bright": "#fcf9f2",
+                        "on-secondary": "#ffffff",
+                        "border-divider": "#E7E4DC",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#f0be7c",
+                        "on-secondary-fixed": "#131e18",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#476551",
+                        "on-primary-container": "#b1d3ba",
+                        "surface-container-high": "#ebe8e1",
+                        "on-surface": "#1c1c18",
+                        "on-secondary-container": "#5c6760",
+                        "secondary-fixed": "#d9e5dc",
+                        "on-primary-fixed": "#032111",
+                        "danger-red": "#B3413F",
+                        "surface-container-highest": "#e5e2db",
+                        "warning-amber": "#C98A3B",
+                        "accent-tan-light": "#F3E4C9",
+                        "inverse-on-surface": "#f4f0e9",
+                        "primary": "#274432",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e5e2db",
+                        "primary-fixed": "#c9ebd1",
+                        "inverse-primary": "#adcfb5",
+                        "secondary-fixed-dim": "#bdc9c1",
+                        "on-error": "#ffffff",
+                        "tertiary": "#573701",
+                        "secondary-container": "#d9e5dc",
+                        "negative-bg": "#F7DEE2",
+                        "outline": "#727972",
+                        "background": "#fcf9f2",
+                        "tertiary-container": "#724e17",
+                        "card-surface": "#FFFFFF",
+                        "on-primary-fixed-variant": "#2f4d3a",
+                        "primary-container": "#3e5c48",
+                        "surface-container": "#f1eee7",
+                        "secondary": "#56615a",
+                        "on-tertiary-container": "#f4c280",
+                        "negative-rose": "#C9697A",
+                        "surface-dim": "#dddad3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#614008",
+                        "text-primary": "#2A2A26",
+                        "primary-fixed-dim": "#adcfb5",
+                        "outline-variant": "#c2c8c1",
+                        "text-secondary": "#8B8880",
+                        "tertiary-fixed": "#ffddb4",
+                        "on-surface-variant": "#424843",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#291800",
+                        "surface": "#fcf9f2",
+                        "inverse-surface": "#31312c",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1c1c18"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin": "32px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "tabular-nums": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-kpi": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "tabular-nums": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-kpi": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        
+        /* Ambient blur shadow for cards */
+        .shadow-ambient {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Custom scrollbar for raw materials list */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E7E4DC;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="bg-page-bg text-text-primary min-h-screen flex antialiased">
+<!-- Floating Sidebar (Shared Component) -->
+<nav class="hidden md:flex flex-col items-center justify-between py-xl space-y-md bg-card-surface shadow-md fixed top-lg left-lg h-[calc(100vh-48px)] w-20 rounded-full z-50">
+<div class="flex flex-col items-center space-y-8 w-full">
+<!-- Brand Logo -->
+<div class="text-primary cursor-pointer mt-2">
+<span class="material-symbols-outlined text-display-kpi icon-fill">all_inclusive</span>
+</div>
+<!-- Nav Tabs -->
+<div class="flex flex-col items-center space-y-4 w-full px-2">
+<a aria-label="Dashboard" class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all group relative flex justify-center w-full" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+</a>
+<a aria-label="Analytics" class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all group relative flex justify-center w-full" href="#">
+<span class="material-symbols-outlined">analytics</span>
+</a>
+<a aria-label="Inventory" class="bg-primary text-on-primary rounded-full p-3 hover:bg-surface-container-high transition-all scale-90 duration-200 group relative flex justify-center w-full shadow-ambient" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+</a>
+<a aria-label="Schedule" class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all group relative flex justify-center w-full" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+</a>
+<a aria-label="Customers" class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all group relative flex justify-center w-full" href="#">
+<span class="material-symbols-outlined">group</span>
+</a>
+<a aria-label="Reports" class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all group relative flex justify-center w-full" href="#">
+<span class="material-symbols-outlined">description</span>
+</a>
+</div>
+</div>
+<!-- Footer Tabs -->
+<div class="flex flex-col items-center space-y-4 w-full px-2 pb-4">
+<a aria-label="Settings" class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all flex justify-center w-full" href="#">
+<span class="material-symbols-outlined">settings</span>
+</a>
+<a aria-label="Logout" class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all flex justify-center w-full" href="#">
+<span class="material-symbols-outlined">logout</span>
+</a>
+<div class="mt-4">
+<img alt="App Logo" class="w-10 h-10 rounded-full object-cover border-2 border-surface-variant" data-alt="A small, stylized profile portrait of a modern professional, well-lit against a neutral background, high-quality rendering, minimal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLr4aa6Pef-AmzK46ETgZ9MEuKbCgrmJX_Ag6ySGpZmly4KPwGnT8qJ0S777Gr49JOsMttw_hgVqMCBLEzsXlQCmu3Txkld4woNy_LTERPuPxObNVkaUctv23i-usXd3MQw9-c6jLw1bJSFXSYaw8GXPM2fKgiRDxCTG8ZzXNeEFzcjzQxQckhHE6PABdj3iycbFhbK7mjUbpQxWiU-iawAsATthfDmFP6MevZ0qpFJ3PqkKsCVOsnCg"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-[120px] w-full min-h-screen flex flex-col relative">
+<!-- TopAppBar (Shared Component) -->
+<header class="bg-transparent full-width top-0 flex justify-between items-center w-full px-xl py-lg z-40">
+<div class="flex flex-col">
+<div class="flex items-center space-x-2">
+<a class="text-text-secondary hover:text-text-primary transition-colors flex items-center" href="#">
+<span class="material-symbols-outlined text-[20px] mr-1">arrow_back</span>
+<span class="font-label-sm text-label-sm">Back to Inventory</span>
+</a>
+</div>
+<h1 class="text-headline-lg font-headline-lg font-bold text-text-primary mt-2 flex items-center">
+                    Production Batch #B-8492
+                    <span class="ml-4 px-3 py-1 rounded-full bg-accent-tan-light text-primary font-label-sm text-label-sm flex items-center shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary mr-2"></span>
+                        Completed
+                    </span>
+</h1>
+<p class="text-body-md font-body-md text-text-secondary mt-1">Manufactured on Oct 24, 2023 • Facility A</p>
+</div>
+<div class="flex items-center space-x-md">
+<div class="relative hidden sm:block">
+<input class="w-64 rounded-full border border-border-divider bg-card-surface py-2 pl-4 pr-10 text-body-md focus:border-surface-tint focus:ring-0 transition-colors shadow-sm placeholder:text-text-secondary" placeholder="Search..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-text-secondary pointer-events-none text-[20px]">search</span>
+</div>
+<button class="w-10 h-10 rounded-full bg-card-surface border border-border-divider flex items-center justify-center text-text-primary hover:bg-surface-container-highest transition-colors shadow-sm">
+<span class="material-symbols-outlined">chat</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-card-surface border border-border-divider flex items-center justify-center text-text-primary hover:bg-surface-container-highest transition-colors shadow-sm relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2.5 h-2.5 bg-danger-red rounded-full border-2 border-card-surface"></span>
+</button>
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined">print</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Content Container -->
+<div class="flex-1 px-xl pb-xl">
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left Column (Finished Goods & Specs) -->
+<div class="lg:col-span-8 flex flex-col space-y-lg">
+<!-- Hero Metric: Finished Good Produced -->
+<div class="bg-primary-container rounded-[24px] p-xl flex flex-col relative overflow-hidden text-on-primary shadow-ambient h-64 justify-between group cursor-pointer">
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at top right, #ffffff 0%, transparent 60%);"></div>
+<div class="relative z-10 flex justify-between items-start">
+<div>
+<p class="text-on-primary-container font-label-sm text-label-sm uppercase tracking-wider mb-2">Finished Product Yield</p>
+<h2 class="text-display-kpi font-display-kpi">Botanical Serum V2</h2>
+<p class="text-inverse-primary font-body-md text-body-md mt-1">SKU: BS-V2-50ML</p>
+</div>
+<div class="w-14 h-14 rounded-full bg-surface-tint flex items-center justify-center bg-opacity-40 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[28px] text-on-primary">science</span>
+</div>
+</div>
+<div class="relative z-10 flex items-end justify-between mt-auto">
+<div>
+<div class="flex items-baseline space-x-2">
+<span class="text-[48px] font-bold leading-none tabular-nums font-display-kpi">2,450</span>
+<span class="text-on-primary-container font-body-lg text-body-lg">Units</span>
+</div>
+<div class="flex items-center text-inverse-primary mt-2 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] mr-1">check_circle</span>
+                                    Quality check passed 100%
+                                </div>
+</div>
+<!-- Minimal sparkline representation -->
+<div class="w-32 h-16 flex items-end space-x-1 opacity-80">
+<div class="w-full bg-inverse-primary rounded-t-sm h-[40%]"></div>
+<div class="w-full bg-inverse-primary rounded-t-sm h-[60%]"></div>
+<div class="w-full bg-inverse-primary rounded-t-sm h-[45%]"></div>
+<div class="w-full bg-inverse-primary rounded-t-sm h-[80%]"></div>
+<div class="w-full bg-on-primary rounded-t-sm h-[100%] shadow-[0_0_8px_rgba(255,255,255,0.4)]"></div>
+</div>
+</div>
+</div>
+<!-- Batch Details & Timeline -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Manufacturing Specs -->
+<div class="bg-card-surface rounded-[24px] p-xl flex flex-col shadow-sm border border-border-divider transition-all hover:shadow-ambient">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-headline-md font-headline-md text-text-primary">Batch Specifications</h3>
+<button class="text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="space-y-4 font-body-md text-body-md">
+<div class="flex justify-between items-center py-2 border-b border-border-divider">
+<span class="text-text-secondary">Formula ID</span>
+<span class="text-text-primary font-medium">FRM-992-B</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-border-divider">
+<span class="text-text-secondary">Supervisor</span>
+<div class="flex items-center">
+<img alt="Supervisor" class="w-6 h-6 rounded-full mr-2 object-cover" data-alt="A tiny profile thumbnail of a professional manufacturing supervisor with a neutral expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq9fXhpKAthjWyUvMi5va4eGpiyI7lNnxE0mQCshh7YuoHswLqaQUGezhkWsKS7YBhcmrMvo295TAaNeT7SnbBDBDS01AM-v7WGVyv-mwrFfo_AUzbpSTu4sWXbWA5Q_qyQ9WHrZl0liKUWvwXlNMWSogZO0ON6rshjpCqJr9nkNk9bMi0mbUKlBBVzq57yZjpvfBn8SrBhLeupmxFfM0kzCU62rgevLVk08VkLmVJH2H-EkdFTQr6LA"/>
+<span class="text-text-primary font-medium">Sarah Jenkins</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-border-divider">
+<span class="text-text-secondary">Production Line</span>
+<span class="text-text-primary font-medium">Line 04 (Automated)</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="text-text-secondary">Total Duration</span>
+<span class="text-text-primary font-medium">6h 45m</span>
+</div>
+</div>
+</div>
+<!-- Quality & Yield Metrics -->
+<div class="bg-card-surface rounded-[24px] p-xl flex flex-col shadow-sm border border-border-divider transition-all hover:shadow-ambient">
+<h3 class="text-headline-md font-headline-md text-text-primary mb-6">Performance</h3>
+<div class="grid grid-cols-2 gap-4 h-full">
+<div class="bg-surface-container-low rounded-xl p-4 flex flex-col justify-center border border-border-divider">
+<span class="text-text-secondary font-label-sm text-label-sm mb-1">Target Yield</span>
+<span class="text-headline-lg font-headline-lg text-text-primary">98.5%</span>
+<span class="text-primary font-label-sm text-label-sm mt-1 flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_up</span> +1.2%
+                                    </span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-4 flex flex-col justify-center border border-border-divider">
+<span class="text-text-secondary font-label-sm text-label-sm mb-1">Scrap Rate</span>
+<span class="text-headline-lg font-headline-lg text-text-primary">1.5%</span>
+<span class="text-primary font-label-sm text-label-sm mt-1 flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">trending_down</span> -0.3%
+                                    </span>
+</div>
+<div class="col-span-2 bg-accent-tan-light bg-opacity-30 rounded-xl p-4 flex items-center border border-accent-tan-light border-opacity-50 mt-2">
+<div class="w-10 h-10 rounded-full bg-accent-tan-light flex items-center justify-center mr-4">
+<span class="material-symbols-outlined text-warning-amber">verified</span>
+</div>
+<div>
+<h4 class="text-text-primary font-body-md font-medium text-body-md">Quality Assured</h4>
+<p class="text-text-secondary font-label-sm text-label-sm mt-0.5">Tested by QA Team at 14:30</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Raw Materials / BOM) -->
+<div class="lg:col-span-4 flex flex-col h-full">
+<div class="bg-card-surface rounded-[24px] p-0 flex flex-col shadow-sm border border-border-divider h-full max-h-[800px] overflow-hidden">
+<!-- Header -->
+<div class="p-6 border-b border-border-divider flex justify-between items-center bg-surface-bright rounded-t-[24px]">
+<div>
+<h3 class="text-headline-md font-headline-md text-text-primary">Raw Materials Used</h3>
+<p class="text-body-md font-body-md text-text-secondary mt-1">Deducted from Inventory</p>
+</div>
+<div class="bg-secondary-fixed rounded-full px-3 py-1 text-on-secondary-fixed font-label-sm text-label-sm">
+                                BOM: A-11
+                            </div>
+</div>
+<!-- List Area -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-2">
+<!-- Material Item 1 -->
+<div class="group flex items-center justify-between p-4 hover:bg-surface-container-low rounded-xl transition-colors cursor-default border-b border-transparent hover:border-border-divider mb-1">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary">water_drop</span>
+</div>
+<div>
+<h4 class="text-body-md font-body-md font-medium text-text-primary">Distilled Water</h4>
+<p class="text-label-sm font-label-sm text-text-secondary mt-0.5">Lot: L-4092</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-body-lg font-tabular-nums text-text-primary">-120 L</div>
+<div class="text-label-sm font-label-sm text-primary flex items-center justify-end mt-1">
+<span class="material-symbols-outlined text-[14px] mr-1">check</span> Deducted
+                                    </div>
+</div>
+</div>
+<!-- Material Item 2 -->
+<div class="group flex items-center justify-between p-4 hover:bg-surface-container-low rounded-xl transition-colors cursor-default border-b border-transparent hover:border-border-divider mb-1">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary">eco</span>
+</div>
+<div>
+<h4 class="text-body-md font-body-md font-medium text-text-primary">Aloe Vera Extract</h4>
+<p class="text-label-sm font-label-sm text-text-secondary mt-0.5">Lot: L-8810</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-body-lg font-tabular-nums text-text-primary">-45 kg</div>
+<div class="text-label-sm font-label-sm text-primary flex items-center justify-end mt-1">
+<span class="material-symbols-outlined text-[14px] mr-1">check</span> Deducted
+                                    </div>
+</div>
+</div>
+<!-- Material Item 3 -->
+<div class="group flex items-center justify-between p-4 hover:bg-surface-container-low rounded-xl transition-colors cursor-default border-b border-transparent hover:border-border-divider mb-1">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary">medication_liquid</span>
+</div>
+<div>
+<h4 class="text-body-md font-body-md font-medium text-text-primary">Glycerin (USP)</h4>
+<p class="text-label-sm font-label-sm text-text-secondary mt-0.5">Lot: L-3321</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-body-lg font-tabular-nums text-text-primary">-15 kg</div>
+<div class="text-label-sm font-label-sm text-primary flex items-center justify-end mt-1">
+<span class="material-symbols-outlined text-[14px] mr-1">check</span> Deducted
+                                    </div>
+</div>
+</div>
+<!-- Material Item 4 -->
+<div class="group flex items-center justify-between p-4 hover:bg-surface-container-low rounded-xl transition-colors cursor-default border-b border-transparent hover:border-border-divider mb-1">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary">local_florist</span>
+</div>
+<div>
+<h4 class="text-body-md font-body-md font-medium text-text-primary">Rosehip Oil</h4>
+<p class="text-label-sm font-label-sm text-text-secondary mt-0.5">Lot: L-9011</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-body-lg font-tabular-nums text-text-primary">-8.5 kg</div>
+<div class="text-label-sm font-label-sm text-primary flex items-center justify-end mt-1">
+<span class="material-symbols-outlined text-[14px] mr-1">check</span> Deducted
+                                    </div>
+</div>
+</div>
+<!-- Material Item 5 -->
+<div class="group flex items-center justify-between p-4 hover:bg-surface-container-low rounded-xl transition-colors cursor-default mb-1">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary">science</span>
+</div>
+<div>
+<h4 class="text-body-md font-body-md font-medium text-text-primary">Preservative Blend</h4>
+<p class="text-label-sm font-label-sm text-text-secondary mt-0.5">Lot: L-1102</p>
+</div>
+</div>
+<div class="text-right">
+<div class="text-body-lg font-tabular-nums text-text-primary">-2.2 kg</div>
+<div class="text-label-sm font-label-sm text-primary flex items-center justify-end mt-1">
+<span class="material-symbols-outlined text-[14px] mr-1">check</span> Deducted
+                                    </div>
+</div>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="p-6 border-t border-border-divider bg-surface-bright rounded-b-[24px]">
+<button class="w-full py-3 rounded-full border border-border-divider bg-card-surface text-text-primary font-label-sm text-label-sm hover:bg-surface-container-low transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] mr-2">receipt_long</span>
+                                View Full Inventory Log
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Owner Dashboard - CV Akuna</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#476551",
+                    "on-primary-container": "#b1d3ba",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#1c1c18",
+                    "text-primary": "#2A2A26",
+                    "on-tertiary-fixed": "#291800",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#032111",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#3e4943",
+                    "tertiary-fixed-dim": "#f0be7c",
+                    "tertiary-container": "#724e17",
+                    "secondary": "#56615a",
+                    "surface-container-highest": "#e5e2db",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f6f3ec",
+                    "surface-container-high": "#ebe8e1",
+                    "primary-container": "#3e5c48",
+                    "inverse-primary": "#adcfb5",
+                    "primary-fixed": "#c9ebd1",
+                    "primary-fixed-dim": "#adcfb5",
+                    "page-bg": "#EDEAE3",
+                    "on-surface-variant": "#424843",
+                    "on-tertiary-fixed-variant": "#614008",
+                    "background": "#fcf9f2",
+                    "on-secondary-container": "#5c6760",
+                    "inverse-on-surface": "#f4f0e9",
+                    "tertiary-fixed": "#ffddb4",
+                    "negative-bg": "#F7DEE2",
+                    "on-tertiary": "#ffffff",
+                    "card-surface": "#FFFFFF",
+                    "surface-dim": "#dddad3",
+                    "on-secondary-fixed": "#131e18",
+                    "secondary-fixed": "#d9e5dc",
+                    "secondary-fixed-dim": "#bdc9c1",
+                    "on-background": "#1c1c18",
+                    "inverse-surface": "#31312c",
+                    "outline": "#727972",
+                    "outline-variant": "#c2c8c1",
+                    "on-primary-fixed-variant": "#2f4d3a",
+                    "negative-rose": "#C9697A",
+                    "accent-tan-light": "#F3E4C9",
+                    "surface": "#fcf9f2",
+                    "danger-red": "#B3413F",
+                    "secondary-container": "#d9e5dc",
+                    "surface-container-lowest": "#ffffff",
+                    "warning-amber": "#C98A3B",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#f1eee7",
+                    "tertiary": "#573701",
+                    "surface-bright": "#fcf9f2",
+                    "on-primary": "#ffffff",
+                    "text-secondary": "#8B8880",
+                    "surface-variant": "#e5e2db",
+                    "on-tertiary-container": "#f4c280",
+                    "primary": "#274432",
+                    "border-divider": "#E7E4DC"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "lg": "24px",
+                    "margin": "32px",
+                    "md": "16px",
+                    "base": "4px",
+                    "xs": "4px",
+                    "gutter": "24px",
+                    "xl": "32px",
+                    "header-height": "88px"
+            },
+            "fontFamily": {
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "tabular-nums": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "display-kpi": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "tabular-nums": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-kpi": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .spline-path { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: dash 2s ease-out forwards; }
+        @keyframes dash { to { stroke-dashoffset: 0; } }
+        .counter { display: inline-block; }
+    </style>
+</head>
+<body class="bg-page-bg text-text-primary h-full font-body-md antialiased overflow-hidden">
+<!-- TopNavBar -->
+<nav class="bg-transparent fixed top-0 right-0 left-24 h-header-height z-40 flex justify-between items-center px-8 w-[calc(100%-6rem)] max-w-full">
+<div class="flex flex-col">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-background">Hello, Carlic!</h1>
+<p class="font-body-md text-body-md text-text-secondary">Explore information and activity about your property</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center bg-card-surface rounded-full shadow-sm px-4 py-2 w-64 h-12">
+<input class="bg-transparent border-none outline-none text-body-md font-body-md w-full focus:ring-0 placeholder:text-text-secondary text-text-primary" placeholder="Search..." type="text"/>
+<div class="bg-primary-container text-on-primary rounded-full w-8 h-8 flex items-center justify-center ml-2 cursor-pointer flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</div>
+</div>
+<button class="bg-card-surface text-text-primary rounded-full w-12 h-12 flex items-center justify-center shadow-sm hover:bg-surface-container-low transition-colors relative">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="absolute top-3 right-3 w-2 h-2 bg-danger-red rounded-full"></span>
+</button>
+<button class="bg-card-surface text-text-primary rounded-full w-12 h-12 flex items-center justify-center shadow-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="bg-surface-container-lowest dark:bg-surface-container-lowest fixed left-4 top-4 bottom-4 w-16 rounded-full flex flex-col items-center py-6 shadow-sm z-50 justify-between">
+<div class="flex flex-col items-center gap-6 w-full">
+<div class="w-10 h-10 mb-4 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary-container p-0.5">
+<img alt="CV Akuna Logo" class="w-full h-full object-cover rounded-full" data-alt="A minimalist logo for CV Akuna consisting of abstract geometric shapes in sage green and deep charcoal, creating a modern, clean, and organic brand identity perfect for an industrial wellness aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQD541vVmdjjrifmaywQrKoluw1U3A314l-M1rEb6-EvIZ8MkEl7y1hx7er5XDK8HnAwhmCuQjlwMFCrs0tkUJG2SvhjlqCcFiXODv87L968qSOJ3rUt5KnY8tKqymGVJdz_Q3uA9kAVQ3KIUpshsAIcFh4Xvt_LlcCd4tMIwhPw10l77xtZFKFEii1qHz80rDXOnfKUA_7d3E0HTM3NG0ALXtV8NjkJR9Mr_UIvSdXmxi4V5fd7oczQ"/>
+</div>
+<nav class="flex flex-col items-center gap-6 w-full">
+<!-- Dashboard (Active) -->
+<a class="bg-on-background text-on-primary rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#" title="Dashboard">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+</a>
+<!-- Inventory -->
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#" title="Inventory">
+<span class="material-symbols-outlined">inventory_2</span>
+</a>
+<!-- Analytics -->
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#" title="Analytics">
+<span class="material-symbols-outlined">bar_chart</span>
+</a>
+<!-- Orders -->
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#" title="Orders">
+<span class="material-symbols-outlined">shopping_cart</span>
+</a>
+<!-- Suppliers -->
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#" title="Suppliers">
+<span class="material-symbols-outlined">group</span>
+</a>
+<!-- Reports -->
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#" title="Reports">
+<span class="material-symbols-outlined">assignment</span>
+</a>
+</nav>
+</div>
+<div class="flex flex-col items-center gap-6 w-full">
+<!-- Settings -->
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#" title="Settings">
+<span class="material-symbols-outlined">settings</span>
+</a>
+<!-- Logout -->
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#" title="Logout">
+<span class="material-symbols-outlined">logout</span>
+</a>
+<div class="w-10 h-10 mt-2 rounded-full overflow-hidden flex-shrink-0 cursor-pointer">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of an individual in a minimalist, well-lit modern office space. Soft natural light highlights their features, wearing a simple, high-quality organic cotton shirt. The mood is calm and approachable, fitting a high-end wellness-industrial brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiHLwiZDz2bZ5xaRByU2Jvdysrv9p1krM_M35GWlWfmO9SOzu7kAXw53RYOpeaouxd7Gr7f1szauUYT1fy_zL46Sf_pfXNdB8pC7qf6t3dLtNrB014Zb4WQDcoMzUhVzR3OJ0ia3fvTETknsUjY0zKeyIw8mMm7CPK-QPrTLLmYB7cCGb-Ch5c02XNTYauXjEsrovl-QHCkZnjF7KgZDZnP17ERT4bf4ejfOO1onoqxh-y3kNebfNRCg"/>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-24 pt-[104px] px-8 pb-8 h-full overflow-y-auto">
+<div class="max-w-[1440px] mx-auto grid grid-cols-12 gap-lg">
+<!-- KPIs Row -->
+<div class="col-span-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg mb-lg">
+<!-- KPI 1 -->
+<div class="bg-card-surface rounded-DEFAULT p-md flex items-center justify-between shadow-sm">
+<div>
+<p class="font-label-sm text-label-sm text-text-secondary uppercase mb-1">Spent this month</p>
+<p class="font-display-kpi text-display-kpi text-text-primary">$<span class="counter" data-target="682.5">0</span></p>
+</div>
+<div class="w-12 h-12 flex items-end justify-between gap-1">
+<div class="w-2 bg-primary-container rounded-full h-4"></div>
+<div class="w-2 bg-primary-container rounded-full h-8"></div>
+<div class="w-2 bg-primary-container rounded-full h-6"></div>
+<div class="w-2 bg-primary-container rounded-full h-10"></div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-card-surface rounded-DEFAULT p-md flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="flex items-center gap-3 mb-2 z-10">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-primary-container flex-shrink-0">
+<span class="material-symbols-outlined">group</span>
+</div>
+<p class="font-label-sm text-label-sm text-text-secondary uppercase">New clients</p>
+</div>
+<p class="font-display-kpi text-display-kpi text-text-primary z-10"><span class="counter" data-target="321">0</span></p>
+<svg class="absolute bottom-0 right-0 w-2/3 h-1/2 opacity-30 group-hover:opacity-100 transition-opacity" preserveaspectratio="none" viewbox="0 0 100 50">
+<path class="spline-path" d="M0,40 C20,30 30,50 50,20 C70,-10 80,40 100,10" fill="none" stroke="#476551" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+<!-- KPI 3 -->
+<div class="bg-card-surface rounded-DEFAULT p-md flex items-center gap-4 shadow-sm">
+<div class="w-12 h-12 rounded-full bg-accent-tan-light flex items-center justify-center text-tertiary-container flex-shrink-0">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-text-secondary uppercase mb-1">Earnings</p>
+<p class="font-display-kpi text-display-kpi text-text-primary">$<span class="counter" data-target="350.40">0</span></p>
+</div>
+</div>
+<!-- Hero KPI -->
+<div class="bg-primary-container text-on-primary rounded-DEFAULT p-md flex flex-col justify-between shadow-sm relative overflow-hidden">
+<div class="z-10 relative">
+<p class="font-label-sm text-label-sm text-on-primary-container uppercase mb-1">Activity</p>
+<p class="font-display-kpi text-display-kpi text-on-primary">$<span class="counter" data-target="540.50">0</span></p>
+</div>
+<svg class="absolute bottom-4 right-4 w-1/2 h-1/2" preserveaspectratio="none" viewbox="0 0 100 50">
+<path class="spline-path" d="M0,30 C20,10 40,40 60,20 C80,0 90,30 100,10" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-width="2.5"></path>
+</svg>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-lg">
+<!-- Large Chart Card -->
+<div class="bg-card-surface rounded-DEFAULT p-xl shadow-sm flex flex-col h-[340px]">
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-md text-headline-md text-text-primary">Balance</h2>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-0.5 rounded-full font-label-sm text-[10px] uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> On track
+                            </span>
+</div>
+<select class="bg-transparent border-none text-text-secondary font-label-sm text-label-sm focus:ring-0 cursor-pointer pr-8">
+<option>Monthly</option>
+<option>Weekly</option>
+</select>
+</div>
+<div class="flex gap-12 mb-8">
+<div>
+<p class="font-label-sm text-label-sm text-text-secondary uppercase mb-1">Saves</p>
+<div class="flex items-baseline gap-2">
+<p class="font-headline-lg text-headline-lg text-text-primary">43.50%</p>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-1.5 py-0.5 rounded-full font-label-sm text-[10px]">+2.45%</span>
+</div>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-text-secondary uppercase mb-1">Balance</p>
+<div class="flex items-baseline gap-2">
+<p class="font-headline-lg text-headline-lg text-text-primary">$52,422</p>
+<span class="bg-negative-bg text-negative-rose px-1.5 py-0.5 rounded-full font-label-sm text-[10px]">-4.75%</span>
+</div>
+</div>
+</div>
+<div class="flex-grow w-full relative">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 150">
+<defs>
+<lineargradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#476551" stop-opacity="0.1"></stop>
+<stop offset="100%" stop-color="#476551" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path class="spline-path" d="M0,130 C100,120 150,140 200,100 C250,60 300,130 350,110 C400,90 450,40 500,50 C550,60 600,120 650,100 C700,80 750,110 800,100 C850,90 900,120 1000,110" fill="url(#chartGradient)" stroke="#476551" stroke-width="2"></path>
+<!-- subtle grid lines -->
+<line stroke="#E7E4DC" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="1000" y1="50" y2="50"></line>
+<line stroke="#E7E4DC" stroke-dasharray="4,4" stroke-width="1" x1="0" x2="1000" y1="100" y2="100"></line>
+</svg>
+</div>
+</div>
+<!-- Available Credit Card -->
+<div class="bg-card-surface rounded-DEFAULT p-xl shadow-sm flex flex-col md:flex-row gap-8 items-center h-[280px]">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-text-primary mb-4 leading-tight">Available Credit<br/>Card in Wallet</h3>
+<p class="font-body-md text-body-md text-text-secondary mb-6 max-w-sm">Lorem ipsum dolor sit amet consectetur. Facilisis tincidunt purus id hendrerit cras massa sollicitudin adipiscing.</p>
+<button class="bg-primary-container text-on-primary px-6 py-2 rounded-full font-label-sm text-label-sm shadow-sm hover:bg-surface-tint transition-colors">
+                            Add New Card +
+                        </button>
+</div>
+<div class="flex-1 relative h-full w-full flex items-center justify-center">
+<!-- Isometric Card Stack Simulation -->
+<div class="relative w-64 h-40 transform -rotate-[25deg] rotate-x-[45deg] scale-110">
+<!-- Bottom Card -->
+<div class="absolute inset-0 bg-on-background rounded-DEFAULT shadow-xl border border-[#333] transform translate-y-4 translate-x-4"></div>
+<!-- Middle Card -->
+<div class="absolute inset-0 bg-secondary rounded-DEFAULT shadow-lg border border-[#666] transform translate-y-2 translate-x-2"></div>
+<!-- Top Card -->
+<div class="absolute inset-0 bg-[#A6BBAE] bg-opacity-80 backdrop-blur-md rounded-DEFAULT shadow-md border border-white/20 p-4 flex flex-col justify-between overflow-hidden">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+<div class="flex justify-between items-start">
+<span class="text-white/80 font-label-sm text-[8px] uppercase tracking-wider">Master Card</span>
+<div class="flex gap-1">
+<div class="w-4 h-4 rounded-full bg-red-500/80 mix-blend-multiply"></div>
+<div class="w-4 h-4 rounded-full bg-yellow-500/80 mix-blend-multiply -ml-2"></div>
+</div>
+</div>
+<div class="font-tabular-nums text-white text-lg tracking-widest mt-4">
+                                    1234 1234 1234 1234
+                                </div>
+<div class="flex justify-between mt-2">
+<span class="text-white/60 font-label-sm text-[6px] uppercase">Lana Steiner</span>
+<span class="text-white/60 font-label-sm text-[6px]">06/28</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-lg">
+<!-- Earnings Donut -->
+<div class="bg-card-surface rounded-DEFAULT p-xl shadow-sm flex flex-col h-[340px]">
+<h3 class="font-headline-md text-headline-md text-text-primary mb-1">Earnings</h3>
+<p class="font-label-sm text-label-sm text-text-secondary uppercase mb-4">Total Expense</p>
+<p class="font-display-kpi text-display-kpi text-text-primary mb-2">$<span class="counter" data-target="6078.76">0</span></p>
+<p class="font-body-md text-body-md text-text-secondary mb-6">Profit is 34% More than last Month</p>
+<div class="flex-grow flex items-center justify-center relative">
+<svg class="w-32 h-32 transform -rotate-90" viewbox="0 0 100 100">
+<!-- Background Arc -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#E7E4DC" stroke-dasharray="251.2" stroke-dashoffset="62.8" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Foreground Arc -->
+<circle class="transition-all duration-1000 ease-out" cx="50" cy="50" fill="transparent" r="40" stroke="#476551" stroke-dasharray="251.2" stroke-dashoffset="113.04" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center mt-2">
+<span class="font-headline-lg text-headline-lg text-text-primary">80%</span>
+</div>
+</div>
+</div>
+<!-- Your Transfers (List) -->
+<div class="bg-card-surface rounded-DEFAULT p-xl shadow-sm flex flex-col h-[280px]">
+<h3 class="font-headline-md text-headline-md text-text-primary mb-6">Your Transfers</h3>
+<div class="flex flex-col gap-4 overflow-y-auto pr-2">
+<!-- Transfer 1 -->
+<div class="flex justify-between items-center pl-3 border-l-2 border-primary-container relative">
+<div class="absolute left-[-2px] top-1/2 transform -translate-y-1/2 w-1 h-0 bg-primary-container transition-all group-hover:h-full"></div>
+<div>
+<p class="font-tabular-nums text-tabular-nums text-text-primary">From Anna Jones</p>
+<p class="font-label-sm text-label-sm text-text-secondary font-normal">Today, 14:34</p>
+</div>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-1 rounded-full font-label-sm text-[10px]">+2.45%</span>
+</div>
+<!-- Transfer 2 -->
+<div class="flex justify-between items-center pl-3 border-l-2 border-danger-red relative">
+<div>
+<p class="font-tabular-nums text-tabular-nums text-text-primary">To Carlos Brown III</p>
+<p class="font-label-sm text-label-sm text-text-secondary font-normal">Today, 15:23</p>
+</div>
+<span class="bg-negative-bg text-negative-rose px-2 py-1 rounded-full font-label-sm text-[10px]">-4.75%</span>
+</div>
+<!-- Transfer 3 -->
+<div class="flex justify-between items-center pl-3 border-l-2 border-primary-container relative">
+<div>
+<p class="font-tabular-nums text-tabular-nums text-text-primary">From Joel Cannan</p>
+<p class="font-label-sm text-label-sm text-text-secondary font-normal">Today, 17:54</p>
+</div>
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-2 py-1 rounded-full font-label-sm text-[10px]">+2.45%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Right Stats & Security (spans below Transfers) -->
+<div class="col-span-12 lg:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-lg lg:-mt-[280px] lg:col-start-9 lg:row-start-2 lg:h-[280px]">
+<!-- Profile Summary -->
+<div class="bg-card-surface rounded-DEFAULT p-md shadow-sm flex flex-col items-center justify-center text-center">
+<div class="w-16 h-16 rounded-full overflow-hidden mb-3 bg-surface-container-high border-2 border-border-divider">
+<img alt="Carlic Bolomboy Avatar" class="w-full h-full object-cover" data-alt="A clean 3D memoji-style avatar of a professional looking individual smiling warmly. The background is a soft beige tone, matching a calm and inviting dashboard interface aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA46nuZND35QJ6neik2cwShmuBIrWhX4z1aXxmIuKejdiI0e0Dnt2QKVwIY3fu5_yU6p3He3bT8cM82p7tPZ-j0rVP8V3k0J1EShl5WCTUHhzaH6GzTcL59Myzh3U6QzaD0AylrUBYMQiCY-G620CZR4sFLYKJzc2HqMQpE3Uk7_MPaQ-LslaUPxUDT6r9rNjHiARba26kn7v5z6DwAEBRilCVBcbWbCqkTOq7ubEXBMNrEjvoOQ4DcuQ"/>
+</div>
+<h4 class="font-tabular-nums text-tabular-nums text-text-primary mb-0.5">Carlic Bolomboy</h4>
+<p class="font-label-sm text-[10px] text-text-secondary mb-4 font-normal">carlic@gmai.com</p>
+<div class="flex justify-between w-full px-2">
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-[10px] text-text-secondary uppercase mb-1">Projects</span>
+<span class="font-headline-md text-headline-md text-text-primary">26</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-[10px] text-text-secondary uppercase mb-1">Followers</span>
+<span class="font-headline-md text-headline-md text-text-primary">356</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-[10px] text-text-secondary uppercase mb-1">Following</span>
+<span class="font-headline-md text-headline-md text-text-primary">68</span>
+</div>
+</div>
+</div>
+<!-- Security Card -->
+<div class="bg-card-surface rounded-DEFAULT p-md shadow-sm flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-[48px] text-primary-container mb-2" style="font-variation-settings: 'wght' 200;">fingerprint</span>
+<h4 class="font-tabular-nums text-tabular-nums text-text-primary mb-1">Keep you safe!</h4>
+<p class="font-label-sm text-[10px] text-text-secondary mb-4 font-normal max-w-[120px]">Update your security password</p>
+<button class="bg-primary-container text-on-primary px-4 py-1.5 rounded-full font-label-sm text-[10px] shadow-sm hover:bg-surface-tint transition-colors">
+                        Update Your Security
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple counter animation
+        document.addEventListener("DOMContentLoaded", () => {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = parseFloat(counter.getAttribute('data-target'));
+                    const count = parseFloat(counter.innerText);
+                    const speed = 20; // Lower is faster
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        // Check if it's a decimal number
+                        if(target % 1 !== 0) {
+                             counter.innerText = (count + inc).toFixed(2);
+                        } else {
+                             counter.innerText = Math.ceil(count + inc);
+                        }
+                        setTimeout(updateCount, 50);
+                    } else {
+                        counter.innerText = target % 1 !== 0 ? target.toFixed(2) : target;
+                    }
+                };
+                updateCount();
+            });
+        });
+    </script>
+</body></html>

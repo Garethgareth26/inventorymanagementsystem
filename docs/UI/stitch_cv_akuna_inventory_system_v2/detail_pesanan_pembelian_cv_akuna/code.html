@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Purchase Order Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#3e4943",
+                        "surface-container-low": "#f6f3ec",
+                        "page-bg": "#EDEAE3",
+                        "surface-bright": "#fcf9f2",
+                        "on-secondary": "#ffffff",
+                        "border-divider": "#E7E4DC",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#f0be7c",
+                        "on-secondary-fixed": "#131e18",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#476551",
+                        "on-primary-container": "#b1d3ba",
+                        "surface-container-high": "#ebe8e1",
+                        "on-surface": "#1c1c18",
+                        "on-secondary-container": "#5c6760",
+                        "secondary-fixed": "#d9e5dc",
+                        "on-primary-fixed": "#032111",
+                        "danger-red": "#B3413F",
+                        "surface-container-highest": "#e5e2db",
+                        "warning-amber": "#C98A3B",
+                        "accent-tan-light": "#F3E4C9",
+                        "inverse-on-surface": "#f4f0e9",
+                        "primary": "#274432",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e5e2db",
+                        "primary-fixed": "#c9ebd1",
+                        "inverse-primary": "#adcfb5",
+                        "secondary-fixed-dim": "#bdc9c1",
+                        "on-error": "#ffffff",
+                        "tertiary": "#573701",
+                        "secondary-container": "#d9e5dc",
+                        "negative-bg": "#F7DEE2",
+                        "outline": "#727972",
+                        "background": "#fcf9f2",
+                        "tertiary-container": "#724e17",
+                        "card-surface": "#FFFFFF",
+                        "on-primary-fixed-variant": "#2f4d3a",
+                        "primary-container": "#3e5c48",
+                        "surface-container": "#f1eee7",
+                        "secondary": "#56615a",
+                        "on-tertiary-container": "#f4c280",
+                        "negative-rose": "#C9697A",
+                        "surface-dim": "#dddad3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#614008",
+                        "text-primary": "#2A2A26",
+                        "primary-fixed-dim": "#adcfb5",
+                        "outline-variant": "#c2c8c1",
+                        "text-secondary": "#8B8880",
+                        "tertiary-fixed": "#ffddb4",
+                        "on-surface-variant": "#424843",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#291800",
+                        "surface": "#fcf9f2",
+                        "inverse-surface": "#31312c",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1c1c18"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin": "32px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "tabular-nums": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-kpi": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "tabular-nums": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-kpi": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-page-bg text-text-primary min-h-screen flex flex-col md:flex-row overflow-x-hidden font-body-md">
+<!-- Floating Sidebar (Desktop) -->
+<nav class="hidden md:flex flex-col items-center justify-between py-xl space-y-md fixed top-lg left-lg h-[calc(100vh-48px)] w-20 rounded-full bg-card-surface dark:bg-surface-container-low shadow-sm shadow-md z-50">
+<div class="flex flex-col items-center gap-6 w-full">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden mb-4">
+<span class="material-symbols-outlined text-primary" data-weight="fill">inventory_2</span>
+</div>
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all flex items-center justify-center group" href="#" title="Dashboard">
+<span class="material-symbols-outlined transition-transform duration-200 group-active:scale-90">grid_view</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all flex items-center justify-center group" href="#" title="Analytics">
+<span class="material-symbols-outlined transition-transform duration-200 group-active:scale-90">analytics</span>
+</a>
+<a class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container rounded-full p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all flex items-center justify-center group relative shadow-[0_4px_12px_rgba(0,0,0,0.08)]" href="#" title="Inventory">
+<span class="material-symbols-outlined transition-transform duration-200 group-active:scale-90">inventory_2</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all flex items-center justify-center group" href="#" title="Schedule">
+<span class="material-symbols-outlined transition-transform duration-200 group-active:scale-90">calendar_today</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all flex items-center justify-center group" href="#" title="Customers">
+<span class="material-symbols-outlined transition-transform duration-200 group-active:scale-90">group</span>
+</a>
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all flex items-center justify-center group" href="#" title="Reports">
+<span class="material-symbols-outlined transition-transform duration-200 group-active:scale-90">description</span>
+</a>
+</div>
+<div class="flex flex-col items-center gap-4 w-full">
+<a class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all flex items-center justify-center group" href="#" title="Settings">
+<span class="material-symbols-outlined transition-transform duration-200 group-active:scale-90">settings</span>
+</a>
+<div class="w-10 h-10 rounded-full mt-2 cursor-pointer border-2 border-transparent hover:border-primary transition-colors overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A small circular avatar placeholder image showing a smiling professional in a brightly lit modern office setting with a pale neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa13BcjT-YZcWGesW2GZzgXQKHC5o75CG6HxyTqaRUn334wOwsUv_iNb1SezXJGPGmpL-wcNI7GvTfz6-q0HZIk7-5-FgOxGaSjuicBJqdKWiDaUjNMz_XiUckshhFXn9QM0itxD-I9xBaQ454OScY8EBnKOi9EZPQNKZ6-A42fCh62bzXcpeAmUTdZmGxIfCI753XhEQZSQYlx2OZTgwuaTlJmISo6uoNJsU1h_iNVgb9-g-i2i1OAA"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-[104px] p-lg md:p-xl flex flex-col gap-lg min-h-screen relative z-10">
+<!-- Header Section -->
+<header class="flex justify-between items-center w-full bg-transparent px-xl py-lg top-0 relative">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full bg-card-surface flex items-center justify-center text-text-secondary hover:text-primary transition-colors hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-headline-lg font-headline-lg text-primary dark:text-primary-fixed font-bold">PO-2023-089</h1>
+<span class="px-4 py-1.5 rounded-full bg-[#FFF4E5] text-[#B86D12] text-label-sm font-label-sm flex items-center gap-1.5 border border-[#FFE0B2]">
+<span class="material-symbols-outlined text-[14px]">pending_actions</span>
+                        Dalam Proses
+                    </span>
+</div>
+<div class="flex items-center gap-6 text-body-md font-body-md text-text-secondary ml-14">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">storefront</span> PT. Bina Sejahtera Alam</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">calendar_month</span> 24 Oct 2023</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">search</span>
+<input class="pl-12 pr-4 py-2.5 rounded-full bg-card-surface border-border-divider focus:border-primary outline-none focus:ring-0 w-64 transition-colors" placeholder="Search..." type="text"/>
+</div>
+<button class="w-12 h-12 rounded-full bg-card-surface flex items-center justify-center text-text-secondary hover:bg-surface-container-highest transition-colors relative">
+<span class="material-symbols-outlined">chat</span>
+<span class="absolute top-3 right-3 w-2 h-2 bg-danger-red rounded-full"></span>
+</button>
+<button class="w-12 h-12 rounded-full bg-card-surface flex items-center justify-center text-text-secondary hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Timeline Visualization -->
+<section class="bg-card-surface rounded-[24px] p-xl flex flex-col gap-6 relative overflow-hidden">
+<h2 class="text-headline-md font-headline-md text-text-primary">Status Pesanan</h2>
+<div class="relative flex justify-between items-center w-full px-8 mt-4 mb-4">
+<!-- Connecting Line -->
+<div class="absolute left-12 right-12 h-1 bg-surface-container-highest top-1/2 -translate-y-1/2 z-0 rounded-full"></div>
+<!-- Progress Line -->
+<div class="absolute left-12 right-1/2 h-1 bg-primary top-1/2 -translate-y-1/2 z-0 rounded-full origin-left"></div>
+<!-- Nodes -->
+<div class="flex flex-col items-center gap-3 relative z-10">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-[0_4px_12px_rgba(39,68,50,0.2)]">
+<span class="material-symbols-outlined" data-weight="fill">check</span>
+</div>
+<span class="text-label-sm font-label-sm text-text-primary">Menunggu</span>
+</div>
+<div class="flex flex-col items-center gap-3 relative z-10">
+<div class="w-12 h-12 rounded-full bg-accent-tan-light text-warning-amber border-2 border-white flex items-center justify-center ring-4 ring-card-surface">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<span class="text-label-sm font-label-sm text-primary font-bold">Dalam Proses</span>
+</div>
+<div class="flex flex-col items-center gap-3 relative z-10">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-text-secondary border-2 border-white flex items-center justify-center">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<span class="text-label-sm font-label-sm text-text-secondary">Diterima</span>
+</div>
+</div>
+</section>
+<!-- Main Content Area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Ordered Items Table -->
+<section class="lg:col-span-2 bg-card-surface rounded-[24px] p-xl flex flex-col gap-6">
+<div class="flex justify-between items-center">
+<h2 class="text-headline-md font-headline-md text-text-primary">Daftar Barang</h2>
+<span class="text-label-sm font-label-sm text-text-secondary bg-surface-container px-3 py-1 rounded-full">3 Items</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-divider text-label-sm font-label-sm text-text-secondary">
+<th class="pb-4 font-semibold pl-4">Barang</th>
+<th class="pb-4 font-semibold">SKU</th>
+<th class="pb-4 font-semibold text-right">Qty</th>
+<th class="pb-4 font-semibold text-right">Harga Satuan</th>
+<th class="pb-4 font-semibold text-right pr-4">Total</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md">
+<tr class="border-b border-border-divider hover:bg-surface-bright transition-colors">
+<td class="py-4 pl-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A small product image of an organic cotton tote bag in a muted sage green color, softly lit against a white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUHK9U130A2aIhXpCji6MR-J2JnPIdyVLppcw6nbHrxoANO94v8b_JYuj3XqdG3klQ1iKSaqlUFq9xY9QXC0DDsL4Wdv4GJXQFp5gIlq_a3Bv6wLDEISnE5H63rMQgCz193f3ESFEGVIj8nd0-aOhshIReBmuRRwoGY1B4dJ58seuz38lyKVwdwfD4xK2_rPbF8u5DzO7fNufVb0lwyCcfep3TctqNbP3O1N5VewxOu9XTxXkOZl91cg"/>
+</div>
+<span class="font-medium text-text-primary">Organic Cotton Tote</span>
+</td>
+<td class="py-4 text-text-secondary">TB-ORG-01</td>
+<td class="py-4 text-right font-tabular-nums text-tabular-nums">150</td>
+<td class="py-4 text-right font-tabular-nums text-tabular-nums">Rp 45.000</td>
+<td class="py-4 text-right font-tabular-nums text-tabular-nums font-medium pr-4">Rp 6.750.000</td>
+</tr>
+<tr class="border-b border-border-divider hover:bg-surface-bright transition-colors">
+<td class="py-4 pl-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A small product image of a ceramic coffee mug in a natural greige color with a matte finish, studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvQtsF3q3So9smVFypqJK0GPhSX1GS-s-zFUiD-8_DzsxN_O3Fu7XLrqVu98yjRmt5QTJ2t5j9EXfXu4dMbQgYZ0uabSdUhYcTvJr4Ti1EV64KjmKPpOAauJnbT39fVTmdEFtLYvQotCiZxcao8R3YeHBlhC5QAsa1O8JX_j6gN2ZSDGxsLDUMlFDAxTueWKuqcZ7vEwTIJaUbzjSyn_OC3g81DDmBF4o4dgh5R5hshKls3pxtGrrG7Q"/>
+</div>
+<span class="font-medium text-text-primary">Ceramic Mug Matte</span>
+</td>
+<td class="py-4 text-text-secondary">CM-MAT-G</td>
+<td class="py-4 text-right font-tabular-nums text-tabular-nums">200</td>
+<td class="py-4 text-right font-tabular-nums text-tabular-nums">Rp 32.000</td>
+<td class="py-4 text-right font-tabular-nums text-tabular-nums font-medium pr-4">Rp 6.400.000</td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="py-4 pl-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A small product image of a glass water bottle with a bamboo lid, softly lit on a neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrNJOoduJRIfX8zsM2BnGkAtwQFWtcaeG0QqCMOzea3m7aZAnjtOuB94YtKMXK_6mbxFK3vMUgi0XK8epj-T2h1qJchBqmZNWgO2yYH9E002WNCDqkU9m9z40EB4yPuzqozf0Q1YiDkKmDng_zHE0a6r5UXPGvqiGcq3fB61YsbG_oHDV40Jr3na2RZ6GSgvKasl6kLvpGzWNQpQC_3n39sVwKEMM8GGq8SZbNEEdRbT9RNB1H8KKGyQ"/>
+</div>
+<span class="font-medium text-text-primary">Glass Bottle Bamboo</span>
+</td>
+<td class="py-4 text-text-secondary">GB-BAM-02</td>
+<td class="py-4 text-right font-tabular-nums text-tabular-nums">100</td>
+<td class="py-4 text-right font-tabular-nums text-tabular-nums">Rp 85.000</td>
+<td class="py-4 text-right font-tabular-nums text-tabular-nums font-medium pr-4">Rp 8.500.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Summary & Actions -->
+<div class="flex flex-col gap-lg">
+<!-- Summary Card -->
+<section class="bg-card-surface rounded-[24px] p-xl flex flex-col gap-6">
+<h2 class="text-headline-md font-headline-md text-text-primary">Ringkasan Biaya</h2>
+<div class="flex flex-col gap-4 text-body-md font-body-md">
+<div class="flex justify-between items-center">
+<span class="text-text-secondary">Subtotal</span>
+<span class="font-tabular-nums text-tabular-nums font-medium">Rp 21.650.000</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-secondary">Pajak (11%)</span>
+<span class="font-tabular-nums text-tabular-nums font-medium">Rp 2.381.500</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-secondary">Pengiriman</span>
+<span class="font-tabular-nums text-tabular-nums font-medium">Rp 150.000</span>
+</div>
+<div class="h-px bg-border-divider my-2 w-full"></div>
+<div class="flex justify-between items-center">
+<span class="text-headline-md font-headline-md text-primary font-bold">Total</span>
+<span class="text-headline-md font-headline-md text-primary font-bold font-tabular-nums">Rp 24.181.500</span>
+</div>
+</div>
+</section>
+<!-- Action Card -->
+<section class="bg-primary-container rounded-[24px] p-xl flex flex-col gap-6 shadow-[0_8px_24px_rgba(62,92,72,0.15)] relative overflow-hidden text-on-primary">
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<div>
+<h3 class="text-body-lg font-body-lg font-semibold mb-1">Barang Siap Diterima?</h3>
+<p class="text-body-md font-body-md text-on-primary/80">Proses penerimaan barang ke gudang untuk memperbarui stok inventory.</p>
+</div>
+</div>
+<button class="w-full bg-on-primary text-primary-container py-3 px-6 rounded-full font-label-sm text-label-sm font-bold hover:bg-surface-bright transition-colors flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">download_done</span>
+                        Terima Barang
+                    </button>
+<button class="w-full border border-on-primary/30 text-on-primary py-3 px-6 rounded-full font-label-sm text-label-sm font-bold hover:bg-white/10 transition-colors">
+                        Laporkan Masalah
+                    </button>
+</section>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CV Akuna - Report Generator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#bdc9c1",
+                    "warning-amber": "#C98A3B",
+                    "on-background": "#1c1c18",
+                    "on-tertiary-container": "#f4c280",
+                    "danger-red": "#B3413F",
+                    "inverse-on-surface": "#f4f0e9",
+                    "on-secondary": "#ffffff",
+                    "page-bg": "#EDEAE3",
+                    "on-primary-fixed-variant": "#2f4d3a",
+                    "primary-fixed-dim": "#adcfb5",
+                    "tertiary-container": "#724e17",
+                    "secondary-container": "#d9e5dc",
+                    "on-primary-fixed": "#032111",
+                    "surface-bright": "#fcf9f2",
+                    "on-surface": "#1c1c18",
+                    "surface": "#fcf9f2",
+                    "surface-container": "#f1eee7",
+                    "tertiary-fixed": "#ffddb4",
+                    "on-secondary-container": "#5c6760",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#ebe8e1",
+                    "accent-tan-light": "#F3E4C9",
+                    "on-secondary-fixed-variant": "#3e4943",
+                    "surface-container-highest": "#e5e2db",
+                    "surface-variant": "#e5e2db",
+                    "error-container": "#ffdad6",
+                    "outline": "#727972",
+                    "background": "#fcf9f2",
+                    "text-secondary": "#8B8880",
+                    "secondary": "#56615a",
+                    "text-primary": "#2A2A26",
+                    "on-secondary-fixed": "#131e18",
+                    "primary-container": "#3e5c48",
+                    "inverse-primary": "#adcfb5",
+                    "primary-fixed": "#c9ebd1",
+                    "on-primary-container": "#b1d3ba",
+                    "surface-dim": "#dddad3",
+                    "negative-rose": "#C9697A",
+                    "tertiary": "#573701",
+                    "primary": "#274432",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#476551",
+                    "surface-container-low": "#f6f3ec",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#424843",
+                    "outline-variant": "#c2c8c1",
+                    "card-surface": "#FFFFFF",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#291800",
+                    "inverse-surface": "#31312c",
+                    "negative-bg": "#F7DEE2",
+                    "border-divider": "#E7E4DC",
+                    "tertiary-fixed-dim": "#f0be7c",
+                    "secondary-fixed": "#d9e5dc",
+                    "on-tertiary-fixed-variant": "#614008",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "gutter": "24px",
+                    "margin": "32px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "base": "4px",
+                    "header-height": "88px"
+            },
+            "fontFamily": {
+                    "display-kpi": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "headline-md": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "headline-lg": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "headline-lg-mobile": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "tabular-nums": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "label-sm": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-md": [
+                            "Plus Jakarta Sans"
+                    ]
+            },
+            "fontSize": {
+                    "display-kpi": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "tabular-nums": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .ambient-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    </style>
+</head>
+<body class="bg-page-bg min-h-screen text-text-primary antialiased">
+<!-- TopNavBar -->
+<header class="bg-transparent text-primary font-headline-md text-headline-md. Body: font-body-md text-body-md fixed top-0 right-0 left-24 h-header-height z-40 bg-transparent flex justify-between items-center px-8 w-full max-w-[calc(100%-6rem)]">
+<div class="flex items-center gap-4">
+<div class="font-headline-lg text-headline-lg font-bold text-on-background">
+<svg class="text-primary-container inline-block mr-2" fill="none" height="32" viewbox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2L14 8H20L15 12L17 18L12 14L7 18L9 12L4 8H10L12 2Z" fill="currentColor"></path>
+</svg>
+                 CV Akuna
+             </div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:block">
+<input class="pl-12 pr-4 py-3 rounded-full border-border-divider bg-card-surface w-72 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container text-body-md" placeholder="Search..." type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary" data-icon="search">search</span>
+</div>
+<button class="bg-card-surface p-3 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-text-secondary" data-icon="notifications">notifications</span>
+</button>
+<button class="bg-card-surface p-3 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-text-secondary" data-icon="chat_bubble">chat_bubble</span>
+</button>
+<button class="bg-primary-container text-on-primary px-6 py-3 rounded-full font-body-md hover:bg-opacity-90 transition-opacity">Add Entry</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border-2 border-card-surface">
+<img alt="Carlic Bolomboy" class="w-full h-full object-cover" data-alt="A small circular avatar of a professional user in a light UI setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5WvEldLsahYVwTjP0YVIPxpauKAv62esJq1otAe1c3de6ThtE1gGJXlAxV_Y5eWVt85jvFhmH30wvYGRqPzw9ccQhBf9dSlRnIWjZkDEkUa1AhBXLURP8bMaJQ3ytwD0s5Vr5AyIJVyNIAzqT0-diuiXES82MAy73t8NNtRtlz-e1JlOsx5qZGP5DvDxwgtTrP5ekOKMsf7ldp63lD792EknkCOpj2nwBhi_oLAmAWlUYw2uJkzLdHg"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-lowest text-on-surface dark:text-on-surface Labels: font-label-caps text-label-caps fixed left-4 top-4 bottom-4 w-16 rounded-full flex flex-col items-center py-6 shadow-sm dark:shadow-none flex flex-col items-center gap-6 z-50">
+<div class="flex-1 flex flex-col gap-6 w-full px-3">
+<a class="w-10 h-10 rounded-full flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform" href="#" title="Dashboard">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</a>
+<a class="w-10 h-10 rounded-full flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform" href="#" title="Inventory">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+</a>
+<a class="w-10 h-10 rounded-full flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform" href="#" title="Analytics">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+</a>
+<a class="w-10 h-10 rounded-full flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform" href="#" title="Orders">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</a>
+<a class="w-10 h-10 rounded-full flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform" href="#" title="Suppliers">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</a>
+<a class="bg-on-background text-on-primary rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#" title="Reports">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-6 w-full px-3 pt-6 border-t border-surface-variant">
+<a class="w-10 h-10 rounded-full flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform" href="#" title="Settings">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</a>
+<a class="w-10 h-10 rounded-full flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform" href="#" title="Logout">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</a>
+<div class="w-10 h-10 rounded-full overflow-hidden mt-2">
+<img alt="CV Akuna Logo" class="w-full h-full object-cover" data-alt="A small logo of CV Akuna used as a bottom anchor in a navigation rail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH2etCsFu3_cWI90xEfMcEfMCYhhDZ2ZcJ17f-EZbdqvmvxGIw51Rm_YRi2FMcc1EtB5fd_EBPKFODzGt6BF8O7zXHs9d6PeywNJHjICSiA0QPkqwInAm_4FhU-pKOfyM2PKoghMFMwpngGnqsxQB_uNiyG5AP20p4HPnuCiiuijAXuWWXvyTocOcQaNaWk6lLeYWqJ8zgDYN6rtXEFpFmmm1QKDdAxHA1oChcY0cXFdaKQz8BpuAB1g"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-24 pt-header-height px-8 pb-12 w-[calc(100%-6rem)]">
+<div class="mb-12">
+<h1 class="font-headline-lg text-headline-lg text-text-primary mb-2">Report Generator</h1>
+<p class="font-body-md text-body-md text-text-secondary">Select a report type and configure parameters to generate insights.</p>
+</div>
+<!-- Report Types Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<!-- Card 1 -->
+<button class="group bg-card-surface p-xl rounded-lg text-left transition-all hover:-translate-y-1 hover:ambient-shadow border border-transparent focus:outline-none focus:ring-2 focus:ring-primary-container relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-accent-tan-light rounded-bl-full opacity-50 -z-10 group-hover:scale-110 transition-transform"></div>
+<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary-container" data-icon="warehouse">warehouse</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-3">Warehouse Asset Valuation</h3>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">Comprehensive breakdown of current asset values across all storage locations.</p>
+</button>
+<!-- Card 2 -->
+<button class="group bg-card-surface p-xl rounded-lg text-left transition-all hover:-translate-y-1 hover:ambient-shadow border-2 border-primary-container relative overflow-hidden">
+<div class="absolute top-4 right-4">
+<span class="material-symbols-outlined text-primary-container" data-icon="check_circle" data-weight="fill">check_circle</span>
+</div>
+<div class="absolute bottom-0 right-0 w-32 h-32 bg-primary-fixed-dim rounded-tl-full opacity-30 -z-10 group-hover:scale-110 transition-transform"></div>
+<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary-container" data-icon="handshake">handshake</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-3">Supplier Performance</h3>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">Analyze delivery times, defect rates, and overall reliability metrics per vendor.</p>
+</button>
+<!-- Card 3 -->
+<button class="group bg-card-surface p-xl rounded-lg text-left transition-all hover:-translate-y-1 hover:ambient-shadow border border-transparent focus:outline-none focus:ring-2 focus:ring-primary-container relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-surface-variant rounded-bl-full opacity-50 -z-10 group-hover:scale-110 transition-transform"></div>
+<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary-container" data-icon="sync_alt">sync_alt</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-3">Monthly Movement</h3>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed">Track inbound and outbound inventory flow to identify seasonal trends.</p>
+</button>
+</div>
+<!-- Configuration Section -->
+<div class="bg-card-surface rounded-lg p-xl flex flex-col md:flex-row items-end justify-between gap-8">
+<div class="flex-1 w-full">
+<h4 class="font-headline-md text-headline-md text-text-primary mb-6">Date Range</h4>
+<div class="flex flex-col sm:flex-row gap-4 w-full">
+<div class="flex-1 relative">
+<label class="block font-label-sm text-label-sm text-text-secondary mb-2 uppercase tracking-wider">Start Date</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-border-divider rounded-full px-6 py-4 font-body-md text-body-md text-text-primary focus:outline-none focus:ring-2 focus:ring-primary-container appearance-none" type="date"/>
+</div>
+</div>
+<div class="flex-1 relative">
+<label class="block font-label-sm text-label-sm text-text-secondary mb-2 uppercase tracking-wider">End Date</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-border-divider rounded-full px-6 py-4 font-body-md text-body-md text-text-primary focus:outline-none focus:ring-2 focus:ring-primary-container appearance-none" type="date"/>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full md:w-auto shrink-0">
+<button class="w-full md:w-auto bg-primary-container text-on-primary font-headline-md text-headline-md px-10 py-5 rounded-full hover:bg-opacity-90 transition-opacity flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" data-icon="magic_button">magic_button</span>
+                    Generate Report
+                </button>
+</div>
+</div>
+</main>
+</body></html>

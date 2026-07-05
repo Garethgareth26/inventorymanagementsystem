@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CV Akuna - Safety Stock Simulator</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config from Style Guidance -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#bdc9c1",
+                      "warning-amber": "#C98A3B",
+                      "on-background": "#1c1c18",
+                      "on-tertiary-container": "#f4c280",
+                      "danger-red": "#B3413F",
+                      "inverse-on-surface": "#f4f0e9",
+                      "on-secondary": "#ffffff",
+                      "page-bg": "#EDEAE3",
+                      "on-primary-fixed-variant": "#2f4d3a",
+                      "primary-fixed-dim": "#adcfb5",
+                      "tertiary-container": "#724e17",
+                      "secondary-container": "#d9e5dc",
+                      "on-primary-fixed": "#032111",
+                      "surface-bright": "#fcf9f2",
+                      "on-surface": "#1c1c18",
+                      "surface": "#fcf9f2",
+                      "surface-container": "#f1eee7",
+                      "tertiary-fixed": "#ffddb4",
+                      "on-secondary-container": "#5c6760",
+                      "error": "#ba1a1a",
+                      "surface-container-high": "#ebe8e1",
+                      "accent-tan-light": "#F3E4C9",
+                      "on-secondary-fixed-variant": "#3e4943",
+                      "surface-container-highest": "#e5e2db",
+                      "surface-variant": "#e5e2db",
+                      "error-container": "#ffdad6",
+                      "outline": "#727972",
+                      "background": "#fcf9f2",
+                      "text-secondary": "#8B8880",
+                      "secondary": "#56615a",
+                      "text-primary": "#2A2A26",
+                      "on-secondary-fixed": "#131e18",
+                      "primary-container": "#3e5c48",
+                      "inverse-primary": "#adcfb5",
+                      "primary-fixed": "#c9ebd1",
+                      "on-primary-container": "#b1d3ba",
+                      "surface-dim": "#dddad3",
+                      "negative-rose": "#C9697A",
+                      "tertiary": "#573701",
+                      "primary": "#274432",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-tint": "#476551",
+                      "surface-container-low": "#f6f3ec",
+                      "on-error": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-surface-variant": "#424843",
+                      "outline-variant": "#c2c8c1",
+                      "card-surface": "#FFFFFF",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed": "#291800",
+                      "inverse-surface": "#31312c",
+                      "negative-bg": "#F7DEE2",
+                      "border-divider": "#E7E4DC",
+                      "tertiary-fixed-dim": "#f0be7c",
+                      "secondary-fixed": "#d9e5dc",
+                      "on-tertiary-fixed-variant": "#614008",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "gutter": "24px",
+                      "margin": "32px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "md": "16px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "display-kpi": ["Plus Jakarta Sans"],
+                      "body-lg": ["Plus Jakarta Sans"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "headline-lg-mobile": ["Plus Jakarta Sans"],
+                      "tabular-nums": ["Plus Jakarta Sans"],
+                      "label-sm": ["Plus Jakarta Sans"],
+                      "body-md": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "display-kpi": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                      "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                      "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                      "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                      "tabular-nums": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                      "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                      "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.page-bg'); }
+        .ambient-shadow { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+        .spline-line { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 2s ease-out forwards; }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+        /* Custom Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: theme('colors.primary-container');
+            cursor: pointer;
+            margin-top: -10px;
+            border: 2px solid theme('colors.card-surface');
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: theme('colors.secondary-container');
+            border-radius: 9999px;
+        }
+        input[type=range]:focus::-webkit-slider-runnable-track {
+            background: theme('colors.primary-fixed-dim');
+        }
+    </style>
+</head>
+<body class="font-body-md text-text-primary antialiased min-h-screen overflow-x-hidden">
+<!-- TopNavBar (Shared Component) -->
+<nav class="hidden md:flex justify-between items-center px-8 w-full max-w-full bg-transparent fixed top-0 right-0 left-24 h-[80px] z-40 flat no shadows">
+<div class="flex items-center gap-4">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-background">CV Akuna</h1>
+<span class="text-text-secondary">/</span>
+<h2 class="font-headline-md text-headline-md text-on-surface-variant">Safety Stock Simulator</h2>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search Bar -->
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary" style="font-variation-settings: 'FILL' 0;">search</span>
+<input class="w-full pl-10 pr-4 py-2 rounded-full border border-border-divider bg-card-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container text-body-md font-body-md placeholder:text-text-secondary transition-colors" placeholder="Search..." type="text"/>
+</div>
+<!-- Actions -->
+<button class="bg-primary-container text-on-primary rounded-full px-6 py-2 font-body-md text-body-md hover:opacity-90 transition-opacity">
+                Add Entry
+            </button>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">chat_bubble</span>
+</button>
+</div>
+<!-- Profile -->
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-card-surface shadow-sm cursor-pointer">
+<img alt="Carlic Bolomboy" class="w-full h-full object-cover" data-alt="A professional headshot of an inventory manager in a clean, brightly lit modern office setting. The person is smiling gently, exuding confidence and approachability. The lighting is soft and natural, highlighting a sophisticated, minimalist environment with subtle warm tones. The overall aesthetic aligns with a premium, light-mode corporate identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh-lvbekOqa3BbuNgMpAk-DNBXprYN_1hFRhqLHwsub05aOqkMXCn5qVDOd-Pjub0P_Fjhz7_JpusrDZkd_a62HMtF_yFzDCC07iRDlaDyoCbWoXLELP2lx3Ssp3HGRtOXrMrQPul5qVbOmjoXbMeHfgacoTD2rjJQ9fA7B5NMCAqnIl1aqg91j9RutPSSz0aRfdP3VEtK1QZGp2bzr38ON44zanxDEq2jNTuzyFSJW4GoRP3mpoeq0Q"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col items-center py-6 bg-surface-container-lowest dark:bg-surface-container-lowest text-on-surface dark:text-on-surface fixed left-4 top-4 bottom-4 w-16 rounded-full shadow-sm dark:shadow-none z-50 justify-between">
+<div class="flex flex-col items-center gap-6 w-full">
+<!-- Brand Logo (Hidden per JSON) -->
+<div class="hidden">
+<img data-alt="CV Akuna Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXkopSHY0OLgH3CNOcFk-Q92D34x_bjfHsyWM4ZCQQtYGHCMsqnGV4eHJxe62AZORq1NBNIDpfDIlwQgyFBhR7ZGTfKOxC7NGdRTdJwCxvH5U_5P260UGPY8e6xFtBelNWAsxhquCeLMoevfHnoVXcMDglwN-9Ewhk8BHcHQI0EfhWh0KrJdXryDB0hmG2MD3Z3VdU7n-pn_OnIX6eCebwhjWS4U0-gmvTPA4Si4mBduSjGpGbQf7cFg"/>
+</div>
+<!-- Tabs -->
+<div class="flex flex-col items-center gap-4 w-full px-2">
+<a class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all duration-200 scale-95 active:scale-90" href="#" title="Dashboard">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">grid_view</span>
+</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all duration-200 scale-95 active:scale-90" href="#" title="Inventory">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
+</a>
+<!-- Active Tab: Analytics (Safety Stock Simulator falls under this intent) -->
+<a class="w-10 h-10 flex items-center justify-center rounded-full bg-on-background text-on-primary scale-95 active:scale-90 transition-transform shadow-sm" href="#" title="Analytics">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all duration-200 scale-95 active:scale-90" href="#" title="Orders">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_cart</span>
+</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all duration-200 scale-95 active:scale-90" href="#" title="Suppliers">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">group</span>
+</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all duration-200 scale-95 active:scale-90" href="#" title="Reports">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">assignment</span>
+</a>
+</div>
+</div>
+<!-- Footer Tabs -->
+<div class="flex flex-col items-center gap-4 w-full px-2">
+<a class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all duration-200 scale-95 active:scale-90" href="#" title="Settings">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</a>
+<a class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-all duration-200 scale-95 active:scale-90" href="#" title="Logout">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-0 md:ml-[104px] pt-[100px] px-4 md:px-8 pb-12 min-h-screen">
+<div class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Panel: Simulation Parameters -->
+<div class="lg:col-span-4 bg-card-surface rounded-xl p-margin ambient-shadow flex flex-col gap-8 h-fit sticky top-[100px]">
+<div>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-2">Simulation Parameters</h3>
+<p class="font-body-md text-body-md text-text-secondary">Adjust variables to forecast required safety stock levels.</p>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Parameter 1: Target Service Level -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-label-sm text-text-primary uppercase tracking-wider">Target Service Level</label>
+<span class="font-tabular-nums text-tabular-nums text-primary-container bg-primary-fixed px-2 py-1 rounded-full">95%</span>
+</div>
+<input class="w-full" max="99" min="80" type="range" value="95"/>
+<div class="flex justify-between text-xs text-text-secondary mt-1">
+<span>80%</span>
+<span>99%</span>
+</div>
+</div>
+<hr class="border-border-divider"/>
+<!-- Parameter 2: Historical Window -->
+<div class="flex flex-col gap-3">
+<label class="font-label-sm text-label-sm text-text-primary uppercase tracking-wider">Historical Data Window</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="py-2 px-3 rounded-full border border-border-divider text-text-secondary font-body-md text-body-md hover:border-primary-container transition-colors">30 Days</button>
+<button class="py-2 px-3 rounded-full bg-primary-container text-on-primary font-body-md text-body-md shadow-sm">90 Days</button>
+<button class="py-2 px-3 rounded-full border border-border-divider text-text-secondary font-body-md text-body-md hover:border-primary-container transition-colors">1 Year</button>
+</div>
+</div>
+<hr class="border-border-divider"/>
+<!-- Parameter 3 & 4: Lead Times -->
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-text-primary uppercase tracking-wider">Avg Lead Time</label>
+<div class="relative">
+<input class="w-full rounded-full border border-border-divider py-2 pl-4 pr-10 bg-surface-bright focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container font-tabular-nums text-tabular-nums" type="number" value="14"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary font-body-md text-body-md">days</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-text-primary uppercase tracking-wider">Variance</label>
+<div class="relative">
+<input class="w-full rounded-full border border-border-divider py-2 pl-4 pr-10 bg-surface-bright focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container font-tabular-nums text-tabular-nums" step="0.1" type="number" value="3.5"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary font-body-md text-body-md">days</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4">
+<button class="w-full py-3 rounded-full bg-primary-container text-on-primary font-headline-md text-headline-md hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                        Run Simulation
+                    </button>
+</div>
+</div>
+<!-- Right Panel: Results & Analysis -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Top Results Cards (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Current State -->
+<div class="bg-card-surface rounded-xl p-margin ambient-shadow flex flex-col justify-between">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">inventory</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-text-primary">Current Total SS</h4>
+</div>
+<div>
+<div class="font-display-kpi text-display-kpi text-text-primary mb-2">$124,500</div>
+<div class="flex items-center gap-2 font-body-md text-body-md">
+<span class="text-text-secondary">Service Level:</span>
+<span class="font-medium text-text-primary">88.2%</span>
+<span class="text-warning-amber ml-2 text-xs px-2 py-0.5 rounded-full bg-warning-amber/10">Suboptimal</span>
+</div>
+</div>
+<!-- Simple Trend Line -->
+<div class="mt-8 h-16 w-full">
+<svg class="w-full h-full preserve-aspect-ratio-none" viewbox="0 0 200 50">
+<path class="spline-line" d="M0,40 Q20,35 40,40 T80,30 T120,35 T160,20 T200,25" fill="none" stroke="theme('colors.secondary-fixed-dim')" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<!-- Simulated State (Hero Metric) -->
+<div class="bg-primary-container rounded-xl p-margin shadow-sm flex flex-col justify-between relative overflow-hidden">
+<!-- Decorative background element -->
+<div class="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-primary/20 blur-2xl"></div>
+<div class="flex items-center gap-3 mb-6 relative z-10">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-primary">Simulated Total SS</h4>
+</div>
+<div class="relative z-10">
+<div class="font-display-kpi text-display-kpi text-on-primary mb-2">$142,850</div>
+<div class="flex items-center gap-2 font-body-md text-body-md">
+<span class="text-on-primary-container">Projected Change:</span>
+<span class="font-medium text-on-primary flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-1">arrow_upward</span>
+                                    +$18,350 (14.7%)
+                                </span>
+</div>
+</div>
+<!-- Spline Sparkline -->
+<div class="mt-8 h-16 w-full relative z-10">
+<svg class="w-full h-full preserve-aspect-ratio-none" viewbox="0 0 200 50">
+<path class="spline-line" d="M0,40 C30,40 40,25 70,25 C100,25 110,35 140,20 C170,5 180,10 200,10" fill="none" stroke="theme('colors.primary-fixed')" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="200" cy="10" fill="theme('colors.primary-fixed')" r="4"></circle>
+</svg>
+</div>
+</div>
+</div>
+<!-- Risk Analysis Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-card-surface rounded-xl p-6 ambient-shadow flex items-center justify-between col-span-1 md:col-span-2">
+<div>
+<h4 class="font-label-sm text-label-sm text-text-secondary uppercase tracking-wider mb-1">Projected Stockout Risk</h4>
+<div class="flex items-baseline gap-2">
+<span class="font-display-kpi text-display-kpi text-text-primary">2.4%</span>
+<span class="font-body-md text-body-md text-primary-container bg-primary-fixed px-2 py-0.5 rounded-full">Optimal</span>
+</div>
+</div>
+<!-- Donut Chart abstraction -->
+<div class="relative w-20 h-20">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="4"></path>
+<path class="text-primary-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="90, 100" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+</div>
+</div>
+</div>
+<div class="bg-accent-tan-light rounded-xl p-6 shadow-sm flex flex-col justify-center">
+<h4 class="font-label-sm text-label-sm text-tertiary uppercase tracking-wider mb-2">Capital Efficiency</h4>
+<p class="font-body-md text-body-md text-tertiary-container">The increase in safety stock ties up capital, but mitigates a projected <strong class="text-tertiary">$45k</strong> in lost sales due to stockouts.</p>
+</div>
+</div>
+<!-- SKU Impact Analysis Table -->
+<div class="bg-card-surface rounded-xl p-margin ambient-shadow overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-lg text-headline-lg text-text-primary">Top SKU Impact Analysis</h3>
+<button class="text-primary-container font-body-md text-body-md hover:underline flex items-center gap-1">
+                            Export Data
+                            <span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-divider">
+<th class="py-3 px-4 font-label-sm text-label-sm text-text-secondary uppercase tracking-wider font-semibold">SKU / Item</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-text-secondary uppercase tracking-wider font-semibold">Current SS</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-text-secondary uppercase tracking-wider font-semibold">Simulated SS</th>
+<th class="py-3 px-4 font-label-sm text-label-sm text-text-secondary uppercase tracking-wider font-semibold text-right">Delta ($)</th>
+</tr>
+</thead>
+<tbody class="font-tabular-nums text-tabular-nums text-text-primary">
+<tr class="border-b border-border-divider hover:bg-surface-bright transition-colors">
+<td class="py-4 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container text-xs">A1</div>
+<div class="flex flex-col">
+<span class="font-medium">Widget Alpha</span>
+<span class="text-xs text-text-secondary font-body-md">High Variability</span>
+</div>
+</td>
+<td class="py-4 px-4">450 units</td>
+<td class="py-4 px-4 font-medium">620 units</td>
+<td class="py-4 px-4 text-right text-warning-amber">+$4,250</td>
+</tr>
+<tr class="border-b border-border-divider hover:bg-surface-bright transition-colors">
+<td class="py-4 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container text-xs">B2</div>
+<div class="flex flex-col">
+<span class="font-medium">Component Beta</span>
+<span class="text-xs text-text-secondary font-body-md">Stable</span>
+</div>
+</td>
+<td class="py-4 px-4">1,200 units</td>
+<td class="py-4 px-4 font-medium">1,250 units</td>
+<td class="py-4 px-4 text-right text-primary-container">+$850</td>
+</tr>
+<tr class="border-b border-border-divider hover:bg-surface-bright transition-colors">
+<td class="py-4 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container text-xs">C3</div>
+<div class="flex flex-col">
+<span class="font-medium">Assembly Gamma</span>
+<span class="text-xs text-text-secondary font-body-md">Long Lead Time</span>
+</div>
+</td>
+<td class="py-4 px-4">85 units</td>
+<td class="py-4 px-4 font-medium">140 units</td>
+<td class="py-4 px-4 text-right text-warning-amber">+$8,900</td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors">
+<td class="py-4 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container text-xs">D4</div>
+<div class="flex flex-col">
+<span class="font-medium">Part Delta</span>
+<span class="text-xs text-text-secondary font-body-md">Seasonal</span>
+</div>
+</td>
+<td class="py-4 px-4">300 units</td>
+<td class="py-4 px-4 font-medium">280 units</td>
+<td class="py-4 px-4 text-right text-primary-container bg-primary-fixed/30 rounded-r-lg">- $1,200</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Low Stock Alerts - Inventory Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed-variant": "#3e4943",
+                        "surface-container-low": "#f6f3ec",
+                        "page-bg": "#EDEAE3",
+                        "surface-bright": "#fcf9f2",
+                        "on-secondary": "#ffffff",
+                        "border-divider": "#E7E4DC",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#f0be7c",
+                        "on-secondary-fixed": "#131e18",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#476551",
+                        "on-primary-container": "#b1d3ba",
+                        "surface-container-high": "#ebe8e1",
+                        "on-surface": "#1c1c18",
+                        "on-secondary-container": "#5c6760",
+                        "secondary-fixed": "#d9e5dc",
+                        "on-primary-fixed": "#032111",
+                        "danger-red": "#B3413F",
+                        "surface-container-highest": "#e5e2db",
+                        "warning-amber": "#C98A3B",
+                        "accent-tan-light": "#F3E4C9",
+                        "inverse-on-surface": "#f4f0e9",
+                        "primary": "#274432",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e5e2db",
+                        "primary-fixed": "#c9ebd1",
+                        "inverse-primary": "#adcfb5",
+                        "secondary-fixed-dim": "#bdc9c1",
+                        "on-error": "#ffffff",
+                        "tertiary": "#573701",
+                        "secondary-container": "#d9e5dc",
+                        "negative-bg": "#F7DEE2",
+                        "outline": "#727972",
+                        "background": "#fcf9f2",
+                        "tertiary-container": "#724e17",
+                        "card-surface": "#FFFFFF",
+                        "on-primary-fixed-variant": "#2f4d3a",
+                        "primary-container": "#3e5c48",
+                        "surface-container": "#f1eee7",
+                        "secondary": "#56615a",
+                        "on-tertiary-container": "#f4c280",
+                        "negative-rose": "#C9697A",
+                        "surface-dim": "#dddad3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#614008",
+                        "text-primary": "#2A2A26",
+                        "primary-fixed-dim": "#adcfb5",
+                        "outline-variant": "#c2c8c1",
+                        "text-secondary": "#8B8880",
+                        "tertiary-fixed": "#ffddb4",
+                        "on-surface-variant": "#424843",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#291800",
+                        "surface": "#fcf9f2",
+                        "inverse-surface": "#31312c",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1c1c18"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "xl": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin": "32px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "md": "16px"
+                    },
+                    fontFamily: {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "tabular-nums": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-kpi": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "headline-lg-mobile": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "headline-lg": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "tabular-nums": ["14px", { lineHeight: "20px", fontWeight: "500" }],
+                        "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                        "display-kpi": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-page-bg text-text-primary font-body-md min-h-screen flex antialiased">
+<!-- SideNavBar (Floating Rail) -->
+<nav class="hidden md:flex fixed top-lg left-lg h-[calc(100vh-48px)] w-20 rounded-full bg-card-surface shadow-md flex-col items-center justify-between py-xl space-y-md z-50">
+<!-- Top Section -->
+<div class="flex flex-col items-center space-y-md">
+<div class="w-12 h-12 rounded-full overflow-hidden mb-lg">
+<img alt="App Logo" class="w-full h-full object-cover" data-alt="Abstract geometric logo mark featuring organic curves and overlapping circles in shades of sage green and greige, set against a pristine white background. High contrast, clean lines, minimalist corporate identity design, professional and serene mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnihMoarOq3ki7-0Zt0Z2zo9wVt6SIMGeqUDcy71ZjqF3JEB2U0dKX9LuMQT7aRlOzVi2p0MHRnfD6TaFmIfc3WdVwL-qxIHAI6mz5agijbX_TYm03BkSBNvCkMqWCmjs19FTpF9Av8oGxh6d_RZJ_P1YunqtpIJuhBppsFa_WD3CWpUmwBQtTdVdoJhbCsNHlhq9UGqpHZK-glT_9O4FSxAbCRrtCkBDIIwzj2cmYMJG2X2kegBy96w"/>
+</div>
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all" href="#" title="Dashboard">
+<span class="material-symbols-outlined">grid_view</span>
+</a>
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all" href="#" title="Analytics">
+<span class="material-symbols-outlined">analytics</span>
+</a>
+<!-- Active State -->
+<a class="bg-primary text-on-primary rounded-full p-3 scale-90 duration-200" href="#" title="Inventory">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</a>
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all" href="#" title="Schedule">
+<span class="material-symbols-outlined">calendar_today</span>
+</a>
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all" href="#" title="Customers">
+<span class="material-symbols-outlined">group</span>
+</a>
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all" href="#" title="Reports">
+<span class="material-symbols-outlined">description</span>
+</a>
+</div>
+<!-- Bottom Section -->
+<div class="flex flex-col items-center space-y-md">
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all" href="#" title="Settings">
+<span class="material-symbols-outlined">settings</span>
+</a>
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all" href="#" title="Logout">
+<span class="material-symbols-outlined">logout</span>
+</a>
+<div class="w-10 h-10 rounded-full overflow-hidden mt-md">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Portrait of a smiling professional in a brightly lit modern office. Soft natural light, high-key photography, neutral tones. The individual is wearing a crisp white shirt, exuding approachability and confidence. Professional corporate headshot style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbpEsQ_5d2P5zK6_R_VyRInbCtQwP_0TKN-CCk6r56JIAAWmkgWHgvTpR4nVqkI9y7aAXm0cmn-NIoZIEU_p5wddxB7vTwEBUP4BpCKtYSnJ1LVIsarbZxhSMvwLiDOp5rNOOtX4rDxWXMIL4YbLgW5-GW3xMLCoOkS9hgiTmL3W3B2wDzLhXoMIX_1KGg60wC-8U5hAjmP_Xva-xXduhsGKvBbaGTtW9i2qVd9u7Vxna1DECbp1kDCQ"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-[120px] p-lg md:p-xl flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full bg-transparent mb-xl">
+<div>
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg font-bold text-on-surface tracking-tight">Low Stock Alerts</h1>
+<p class="text-body-md font-body-md text-text-secondary mt-xs">Review items below Reorder Point (ROP)</p>
+</div>
+<div class="flex items-center space-x-md">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-card-surface border border-border-divider rounded-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-body-md transition-all shadow-sm w-64" placeholder="Search inventory..." type="text"/>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">chat</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-2 w-2 h-2 bg-danger-red rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- KPI Summary Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl">
+<!-- Critical Items Card -->
+<div class="bg-card-surface rounded-xl p-xl shadow-sm border border-transparent hover:border-border-divider transition-all flex flex-col justify-between">
+<div class="flex justify-between items-start mb-md">
+<div>
+<p class="text-label-sm font-label-sm text-text-secondary uppercase">Critical Deficits</p>
+<h2 class="text-display-kpi font-display-kpi text-danger-red mt-sm">12</h2>
+</div>
+<div class="w-12 h-12 rounded-full bg-negative-bg flex items-center justify-center">
+<span class="material-symbols-outlined text-danger-red">warning</span>
+</div>
+</div>
+<p class="text-body-md font-body-md text-text-secondary"><span class="text-danger-red font-medium">Requires immediate action</span></p>
+</div>
+<!-- Moderate Risk Card -->
+<div class="bg-card-surface rounded-xl p-xl shadow-sm border border-transparent hover:border-border-divider transition-all flex flex-col justify-between">
+<div class="flex justify-between items-start mb-md">
+<div>
+<p class="text-label-sm font-label-sm text-text-secondary uppercase">Approaching ROP</p>
+<h2 class="text-display-kpi font-display-kpi text-warning-amber mt-sm">45</h2>
+</div>
+<div class="w-12 h-12 rounded-full bg-accent-tan-light flex items-center justify-center">
+<span class="material-symbols-outlined text-warning-amber">trending_down</span>
+</div>
+</div>
+<p class="text-body-md font-body-md text-text-secondary">Monitor closely this week</p>
+</div>
+<!-- Total Value at Risk -->
+<div class="bg-primary text-on-primary rounded-xl p-xl shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -right-8 -top-8 opacity-10">
+<span class="material-symbols-outlined text-[120px]">account_balance_wallet</span>
+</div>
+<div class="relative z-10 flex justify-between items-start mb-md">
+<div>
+<p class="text-label-sm font-label-sm text-on-primary-container uppercase">Potential Lost Sales Value</p>
+<h2 class="text-display-kpi font-display-kpi mt-sm">$14,250</h2>
+</div>
+</div>
+<div class="relative z-10 flex items-center justify-between mt-auto">
+<p class="text-body-md font-body-md text-on-primary-container">Based on current deficits</p>
+<button class="bg-on-primary text-primary px-4 py-2 rounded-full text-label-sm font-label-sm hover:bg-surface-bright transition-colors shadow-sm">Review Value</button>
+</div>
+</div>
+</div>
+<!-- Detail Data Table / Canvas -->
+<div class="bg-card-surface rounded-xl shadow-sm flex-1 flex flex-col overflow-hidden border border-border-divider">
+<!-- Table Controls -->
+<div class="p-md md:p-lg border-b border-border-divider flex flex-col sm:flex-row justify-between items-center gap-md bg-surface-bright/50">
+<div class="flex space-x-sm w-full sm:w-auto overflow-x-auto pb-2 sm:pb-0 hide-scrollbar">
+<button class="px-4 py-2 rounded-full bg-surface-variant text-text-primary text-label-sm font-label-sm whitespace-nowrap">All Alerts</button>
+<button class="px-4 py-2 rounded-full border border-border-divider text-text-secondary text-label-sm font-label-sm hover:bg-surface-variant transition-colors whitespace-nowrap">Critical Only</button>
+<button class="px-4 py-2 rounded-full border border-border-divider text-text-secondary text-label-sm font-label-sm hover:bg-surface-variant transition-colors whitespace-nowrap">By Category</button>
+</div>
+<div class="flex items-center space-x-md w-full sm:w-auto justify-end">
+<button class="flex items-center space-x-xs text-text-secondary hover:text-text-primary transition-colors text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+<span>Filter</span>
+</button>
+<button class="bg-primary text-on-primary px-5 py-2.5 rounded-full text-label-sm font-label-sm hover:bg-primary-container transition-colors shadow-sm flex items-center space-x-xs">
+<span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+<span>Bulk PO</span>
+</button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="border-b border-border-divider bg-surface-container-low/30">
+<th class="py-3 px-lg text-label-sm font-label-sm text-text-secondary uppercase">SKU</th>
+<th class="py-3 px-md text-label-sm font-label-sm text-text-secondary uppercase">Item Name</th>
+<th class="py-3 px-md text-label-sm font-label-sm text-text-secondary uppercase text-right">Stock Level</th>
+<th class="py-3 px-md text-label-sm font-label-sm text-text-secondary uppercase text-right">ROP</th>
+<th class="py-3 px-md text-label-sm font-label-sm text-text-secondary uppercase text-right">Deficit</th>
+<th class="py-3 px-md text-label-sm font-label-sm text-text-secondary uppercase text-center">Status</th>
+<th class="py-3 px-lg text-label-sm font-label-sm text-text-secondary uppercase text-right">Action</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md">
+<!-- Row 1 (Critical) -->
+<tr class="border-b border-border-divider hover:bg-surface-bright transition-colors group">
+<td class="py-3 px-lg text-tabular-nums font-tabular-nums text-text-secondary">PRD-8921</td>
+<td class="py-3 px-md">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary text-[16px]">coffee_maker</span>
+</div>
+<span class="font-medium text-text-primary">Ceramic Pour-Over Dripper</span>
+</div>
+</td>
+<td class="py-3 px-md text-right font-tabular-nums font-medium text-text-primary">14</td>
+<td class="py-3 px-md text-right text-tabular-nums font-tabular-nums text-text-secondary">50</td>
+<td class="py-3 px-md text-right text-tabular-nums font-tabular-nums text-danger-red font-semibold">-36</td>
+<td class="py-3 px-md text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-negative-bg text-danger-red">
+                                    Critical
+                                </span>
+</td>
+<td class="py-3 px-lg text-right">
+<button class="text-primary hover:text-primary-container text-label-sm font-label-sm font-semibold transition-colors opacity-0 group-hover:opacity-100 flex items-center justify-end w-full space-x-1">
+<span>Create PO</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 (Warning) -->
+<tr class="border-b border-border-divider hover:bg-surface-bright transition-colors group">
+<td class="py-3 px-lg text-tabular-nums font-tabular-nums text-text-secondary">PRD-4432</td>
+<td class="py-3 px-md">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary text-[16px]">chair</span>
+</div>
+<span class="font-medium text-text-primary">Ergonomic Office Chair - Sage</span>
+</div>
+</td>
+<td class="py-3 px-md text-right font-tabular-nums font-medium text-text-primary">12</td>
+<td class="py-3 px-md text-right text-tabular-nums font-tabular-nums text-text-secondary">15</td>
+<td class="py-3 px-md text-right text-tabular-nums font-tabular-nums text-warning-amber font-semibold">-3</td>
+<td class="py-3 px-md text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-accent-tan-light text-warning-amber">
+                                    Low
+                                </span>
+</td>
+<td class="py-3 px-lg text-right">
+<button class="text-primary hover:text-primary-container text-label-sm font-label-sm font-semibold transition-colors opacity-0 group-hover:opacity-100 flex items-center justify-end w-full space-x-1">
+<span>Create PO</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 (Warning) -->
+<tr class="border-b border-border-divider hover:bg-surface-bright transition-colors group">
+<td class="py-3 px-lg text-tabular-nums font-tabular-nums text-text-secondary">PRD-1029</td>
+<td class="py-3 px-md">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary text-[16px]">headphones</span>
+</div>
+<span class="font-medium text-text-primary">Noise-Cancelling Headphones</span>
+</div>
+</td>
+<td class="py-3 px-md text-right font-tabular-nums font-medium text-text-primary">85</td>
+<td class="py-3 px-md text-right text-tabular-nums font-tabular-nums text-text-secondary">100</td>
+<td class="py-3 px-md text-right text-tabular-nums font-tabular-nums text-warning-amber font-semibold">-15</td>
+<td class="py-3 px-md text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-accent-tan-light text-warning-amber">
+                                    Low
+                                </span>
+</td>
+<td class="py-3 px-lg text-right">
+<button class="text-primary hover:text-primary-container text-label-sm font-label-sm font-semibold transition-colors opacity-0 group-hover:opacity-100 flex items-center justify-end w-full space-x-1">
+<span>Create PO</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 (Critical) -->
+<tr class="border-b border-border-divider hover:bg-surface-bright transition-colors group">
+<td class="py-3 px-lg text-tabular-nums font-tabular-nums text-text-secondary">PRD-7731</td>
+<td class="py-3 px-md">
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-text-secondary text-[16px]">monitor</span>
+</div>
+<span class="font-medium text-text-primary">Ultra-Wide Monitor 34"</span>
+</div>
+</td>
+<td class="py-3 px-md text-right font-tabular-nums font-medium text-text-primary">2</td>
+<td class="py-3 px-md text-right text-tabular-nums font-tabular-nums text-text-secondary">20</td>
+<td class="py-3 px-md text-right text-tabular-nums font-tabular-nums text-danger-red font-semibold">-18</td>
+<td class="py-3 px-md text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-negative-bg text-danger-red">
+                                    Critical
+                                </span>
+</td>
+<td class="py-3 px-lg text-right">
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-full text-[11px] font-semibold hover:bg-primary-container transition-colors shadow-sm inline-flex items-center space-x-1">
+<span class="material-symbols-outlined text-[14px]">local_shipping</span>
+<span>Emergency PO</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="p-md border-t border-border-divider bg-surface-bright flex justify-between items-center text-body-md font-body-md text-text-secondary">
+<span>Showing 1-4 of 57 alerts</span>
+<div class="flex space-x-2">
+<button class="p-1 rounded hover:bg-surface-container transition-colors disabled:opacity-50"><span class="material-symbols-outlined text-[20px]">chevron_left</span></button>
+<button class="p-1 rounded hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-card-surface border-t border-border-divider flex justify-around items-center py-3 px-2 z-50 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] pb-safe">
+<a class="flex flex-col items-center p-2 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-[10px] mt-1 font-semibold">Dashboard</span>
+</a>
+<a class="flex flex-col items-center p-2 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] mt-1 font-semibold">Analytics</span>
+</a>
+<a class="flex flex-col items-center p-2 text-primary" href="#">
+<div class="bg-primary-container/20 p-1.5 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</div>
+<span class="text-[10px] mt-1 font-semibold">Inventory</span>
+</a>
+<a class="flex flex-col items-center p-2 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px] mt-1 font-semibold">Reports</span>
+</a>
+</nav>
+</body></html>

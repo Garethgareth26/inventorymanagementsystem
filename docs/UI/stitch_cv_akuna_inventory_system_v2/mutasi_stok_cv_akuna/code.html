@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inventory Movements - CV Akuna</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#476551",
+                        "on-primary-container": "#b1d3ba",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1c1c18",
+                        "text-primary": "#2A2A26",
+                        "on-tertiary-fixed": "#291800",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#032111",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#3e4943",
+                        "tertiary-fixed-dim": "#f0be7c",
+                        "tertiary-container": "#724e17",
+                        "secondary": "#56615a",
+                        "surface-container-highest": "#e5e2db",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f6f3ec",
+                        "surface-container-high": "#ebe8e1",
+                        "primary-container": "#3e5c48",
+                        "inverse-primary": "#adcfb5",
+                        "primary-fixed": "#c9ebd1",
+                        "primary-fixed-dim": "#adcfb5",
+                        "page-bg": "#EDEAE3",
+                        "on-surface-variant": "#424843",
+                        "on-tertiary-fixed-variant": "#614008",
+                        "background": "#fcf9f2",
+                        "on-secondary-container": "#5c6760",
+                        "inverse-on-surface": "#f4f0e9",
+                        "tertiary-fixed": "#ffddb4",
+                        "negative-bg": "#F7DEE2",
+                        "on-tertiary": "#ffffff",
+                        "card-surface": "#FFFFFF",
+                        "surface-dim": "#dddad3",
+                        "on-secondary-fixed": "#131e18",
+                        "secondary-fixed": "#d9e5dc",
+                        "secondary-fixed-dim": "#bdc9c1",
+                        "on-background": "#1c1c18",
+                        "inverse-surface": "#31312c",
+                        "outline": "#727972",
+                        "outline-variant": "#c2c8c1",
+                        "on-primary-fixed-variant": "#2f4d3a",
+                        "negative-rose": "#C9697A",
+                        "accent-tan-light": "#F3E4C9",
+                        "surface": "#fcf9f2",
+                        "danger-red": "#B3413F",
+                        "secondary-container": "#d9e5dc",
+                        "surface-container-lowest": "#ffffff",
+                        "warning-amber": "#C98A3B",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#f1eee7",
+                        "tertiary": "#573701",
+                        "surface-bright": "#fcf9f2",
+                        "on-primary": "#ffffff",
+                        "text-secondary": "#8B8880",
+                        "surface-variant": "#e5e2db",
+                        "on-tertiary-container": "#f4c280",
+                        "primary": "#274432",
+                        "border-divider": "#E7E4DC"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "lg": "24px",
+                        "margin": "32px",
+                        "md": "16px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "xl": "32px",
+                        "header-height": "80px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "tabular-nums": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "display-kpi": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "tabular-nums": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-kpi": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.page-bg'); }
+        .ambient-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    </style>
+</head>
+<body class="font-body-md text-on-surface antialiased min-h-screen">
+<!-- TopNavBar -->
+<nav aria-label="Top Navigation" class="bg-transparent text-primary hidden md:flex justify-between items-center px-8 w-full max-w-full fixed top-0 right-0 left-24 h-header-height z-40 bg-transparent flat no shadows">
+<div class="flex items-center gap-4">
+<span class="font-headline-lg text-headline-lg font-bold text-on-background">CV Akuna</span>
+<div class="ml-8 text-on-surface-variant font-headline-md text-headline-md">Inventory Movements</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="pl-12 pr-4 py-2 bg-card-surface border border-border-divider rounded-full w-64 focus:outline-none focus:border-surface-tint focus:ring-1 focus:ring-surface-tint font-body-md text-body-md transition-all" placeholder="Search..." type="text"/>
+</div>
+<button class="bg-primary-container text-on-primary rounded-full px-6 py-2 font-label-sm text-label-sm hover:opacity-90 transition-opacity">
+                Add Entry
+            </button>
+<div class="flex items-center gap-2">
+<button aria-label="Notifications" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="Messages" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chat_bubble">chat_bubble</span>
+</button>
+</div>
+<button class="w-10 h-10 rounded-full overflow-hidden border border-border-divider">
+<img alt="Carlic Bolomboy" class="w-full h-full object-cover" data-alt="A professional headshot of an individual, well-lit, neutral background, suitable for a corporate profile picture in a light modern UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJwd5ZNPuc5dqQwJOdLmJiPs7ghjGDvXTD8CmtQZli3ulOSw0cRifv_dN82VjdJPS0LNSsLmJB1B8LfXd717y2nfN75dy_7Hd3k31Ko0h1r-s3HrlCr-DJJq8cXI_oIb4x_35QHk3qxiGlGTrvdoyQHaPBn01T3VqyQOBEFbongogw9rylc4FG_6EfoDJnEe5Q4zTTqCJvfVAB9ngWgk52kRGj_G5cicMZhdpAHYxGiNrmH3NWDoTVqQ"/>
+</button>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside aria-label="Sidebar Navigation" class="bg-surface-container-lowest dark:bg-surface-container-lowest text-on-surface dark:text-on-surface font-label-caps text-label-caps hidden md:flex flex-col items-center py-6 fixed left-4 top-4 bottom-4 w-16 rounded-full shadow-sm dark:shadow-none shadow-sm z-50 ambient-shadow">
+<div class="hidden">
+<img alt="CV Akuna Logo" class="w-8 h-8 rounded-full" data-alt="A sleek, modern geometric logo for a company named CV Akuna, using sage green and deep charcoal colors on a clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1w3TN5nHofCPrhfvgaa4jMfnJSwjLfBBq_YFJ7AkL2mBWXhLrEy4BWUEGykbOgDgS-jPXFfV8U3yhE6SJbfQz-ICemfYR_ZvgsY22FXrOaBIDPWczJbR6Kx8R7nrPcBRTptZlOMQGecmfVAkrJNLkRzyDhjnuZCtMWlvvV4ajLYGdlkVwt69cnHpugfC_Kji8y9caMoZuK1jgdQC2AJBzKJ7pIAx6-Bo7qRjqGUE4Ptuc2hQpmbczPQ"/>
+</div>
+<div class="flex flex-col items-center gap-6 mt-8 flex-1">
+<a aria-label="Dashboard" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform w-10 h-10 flex items-center justify-center" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</a>
+<a aria-label="Inventory" class="bg-on-background text-on-primary rounded-full w-10 h-10 flex items-center justify-center hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+</a>
+<a aria-label="Analytics" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform w-10 h-10 flex items-center justify-center" href="#">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+</a>
+<a aria-label="Orders" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform w-10 h-10 flex items-center justify-center" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</a>
+<a aria-label="Suppliers" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform w-10 h-10 flex items-center justify-center" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</a>
+<a aria-label="Reports" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform w-10 h-10 flex items-center justify-center" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+</a>
+</div>
+<div class="flex flex-col items-center gap-6 mt-auto">
+<a aria-label="Settings" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform w-10 h-10 flex items-center justify-center" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</a>
+<a aria-label="Logout" class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 transition-transform w-10 h-10 flex items-center justify-center" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:pl-28 pt-24 px-4 md:pr-8 pb-8 min-h-screen flex flex-col gap-6">
+<!-- Mobile Header (Visible only on md:hidden) -->
+<header class="md:hidden flex justify-between items-center mb-4">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold">Inventory Movements</h1>
+<button class="bg-primary-container text-on-primary rounded-full px-4 py-2 font-label-sm text-label-sm">
+                Add Entry
+            </button>
+</header>
+<!-- Filters Section -->
+<section aria-label="Data Filters" class="flex flex-wrap gap-3 items-center">
+<button class="px-4 py-2 rounded-full border border-surface-tint text-surface-tint font-label-sm text-label-sm bg-transparent hover:bg-surface-container-low transition-colors flex items-center gap-2">
+                Item Type <span class="material-symbols-outlined text-[16px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+<button class="px-4 py-2 rounded-full border border-surface-tint text-surface-tint font-label-sm text-label-sm bg-transparent hover:bg-surface-container-low transition-colors flex items-center gap-2">
+                Mutation <span class="material-symbols-outlined text-[16px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+<button class="px-4 py-2 rounded-full border border-surface-tint text-surface-tint font-label-sm text-label-sm bg-transparent hover:bg-surface-container-low transition-colors flex items-center gap-2">
+                Source <span class="material-symbols-outlined text-[16px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+<div class="ml-auto flex items-center gap-2 bg-card-surface rounded-full px-4 py-2 border border-border-divider">
+<span class="material-symbols-outlined text-text-secondary text-[18px]" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Last 30 Days</span>
+</div>
+</section>
+<!-- Ledger Card -->
+<section class="bg-card-surface rounded-xl p-xl flex-1 overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-divider">
+<th class="py-4 px-4 font-label-sm text-label-sm text-text-secondary font-semibold">Date</th>
+<th class="py-4 px-4 font-label-sm text-label-sm text-text-secondary font-semibold">Item</th>
+<th class="py-4 px-4 font-label-sm text-label-sm text-text-secondary font-semibold">Type</th>
+<th class="py-4 px-4 font-label-sm text-label-sm text-text-secondary font-semibold text-right">Amount</th>
+<th class="py-4 px-4 font-label-sm text-label-sm text-text-secondary font-semibold">Source</th>
+<th class="py-4 px-4 font-label-sm text-label-sm text-text-secondary font-semibold">Reference</th>
+<th class="py-4 px-4 font-label-sm text-label-sm text-text-secondary font-semibold">User</th>
+</tr>
+</thead>
+<tbody class="font-tabular-nums text-tabular-nums">
+<tr class="border-b border-border-divider hover:bg-surface-container-lowest transition-colors group">
+<td class="py-3 px-4 text-on-surface-variant">2023-10-27 14:30</td>
+<td class="py-3 px-4 font-medium text-text-primary">Steel Brackets A1</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-[10px]">IN</span>
+</td>
+<td class="py-3 px-4 text-right text-surface-tint">+500</td>
+<td class="py-3 px-4 text-on-surface-variant">Purchase Order</td>
+<td class="py-3 px-4"><a class="text-surface-tint hover:underline flex items-center gap-1" href="#">PO-9921 <span class="material-symbols-outlined text-[14px]" data-icon="open_in_new">open_in_new</span></a></td>
+<td class="py-3 px-4 text-text-secondary">System</td>
+</tr>
+<tr class="border-b border-border-divider hover:bg-surface-container-lowest transition-colors group">
+<td class="py-3 px-4 text-on-surface-variant">2023-10-27 10:15</td>
+<td class="py-3 px-4 font-medium text-text-primary">Aluminium Sheets 2mm</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-negative-bg text-negative-rose font-label-sm text-[10px]">OUT</span>
+</td>
+<td class="py-3 px-4 text-right text-negative-rose">-150</td>
+<td class="py-3 px-4 text-on-surface-variant">Production</td>
+<td class="py-3 px-4"><a class="text-surface-tint hover:underline flex items-center gap-1" href="#">PRD-401 <span class="material-symbols-outlined text-[14px]" data-icon="open_in_new">open_in_new</span></a></td>
+<td class="py-3 px-4 text-text-secondary">J. Doe</td>
+</tr>
+<tr class="border-b border-border-divider hover:bg-surface-container-lowest transition-colors group">
+<td class="py-3 px-4 text-on-surface-variant">2023-10-26 16:45</td>
+<td class="py-3 px-4 font-medium text-text-primary">Copper Wire Spool 50m</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[10px]">ADJ</span>
+</td>
+<td class="py-3 px-4 text-right text-text-primary">-2</td>
+<td class="py-3 px-4 text-on-surface-variant">Manual</td>
+<td class="py-3 px-4"><a class="text-surface-tint hover:underline flex items-center gap-1" href="#">AUD-002 <span class="material-symbols-outlined text-[14px]" data-icon="open_in_new">open_in_new</span></a></td>
+<td class="py-3 px-4 text-text-secondary">A. Smith</td>
+</tr>
+<tr class="border-b border-border-divider hover:bg-surface-container-lowest transition-colors group">
+<td class="py-3 px-4 text-on-surface-variant">2023-10-26 09:00</td>
+<td class="py-3 px-4 font-medium text-text-primary">Titanium Fasteners M8</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-[10px]">IN</span>
+</td>
+<td class="py-3 px-4 text-right text-surface-tint">+1200</td>
+<td class="py-3 px-4 text-on-surface-variant">Purchase Order</td>
+<td class="py-3 px-4"><a class="text-surface-tint hover:underline flex items-center gap-1" href="#">PO-9918 <span class="material-symbols-outlined text-[14px]" data-icon="open_in_new">open_in_new</span></a></td>
+<td class="py-3 px-4 text-text-secondary">System</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-auto pt-6 flex justify-between items-center text-on-surface-variant">
+<span class="font-body-md text-body-md">Showing 1 to 4 of 128 entries</span>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-full border border-border-divider hover:bg-surface-container-low disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-surface-tint text-on-primary font-label-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full border border-border-divider hover:bg-surface-container-low font-label-sm">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full border border-border-divider hover:bg-surface-container-low font-label-sm">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full border border-border-divider hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+</body></html>

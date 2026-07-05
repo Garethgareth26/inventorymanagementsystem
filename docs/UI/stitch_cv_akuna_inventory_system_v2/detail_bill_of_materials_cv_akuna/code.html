@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BOM Detail - Inventory Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#3e4943",
+                        "surface-container-low": "#f6f3ec",
+                        "page-bg": "#EDEAE3",
+                        "surface-bright": "#fcf9f2",
+                        "on-secondary": "#ffffff",
+                        "border-divider": "#E7E4DC",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#f0be7c",
+                        "on-secondary-fixed": "#131e18",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#476551",
+                        "on-primary-container": "#b1d3ba",
+                        "surface-container-high": "#ebe8e1",
+                        "on-surface": "#1c1c18",
+                        "on-secondary-container": "#5c6760",
+                        "secondary-fixed": "#d9e5dc",
+                        "on-primary-fixed": "#032111",
+                        "danger-red": "#B3413F",
+                        "surface-container-highest": "#e5e2db",
+                        "warning-amber": "#C98A3B",
+                        "accent-tan-light": "#F3E4C9",
+                        "inverse-on-surface": "#f4f0e9",
+                        "primary": "#274432",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e5e2db",
+                        "primary-fixed": "#c9ebd1",
+                        "inverse-primary": "#adcfb5",
+                        "secondary-fixed-dim": "#bdc9c1",
+                        "on-error": "#ffffff",
+                        "tertiary": "#573701",
+                        "secondary-container": "#d9e5dc",
+                        "negative-bg": "#F7DEE2",
+                        "outline": "#727972",
+                        "background": "#fcf9f2",
+                        "tertiary-container": "#724e17",
+                        "card-surface": "#FFFFFF",
+                        "on-primary-fixed-variant": "#2f4d3a",
+                        "primary-container": "#3e5c48",
+                        "surface-container": "#f1eee7",
+                        "secondary": "#56615a",
+                        "on-tertiary-container": "#f4c280",
+                        "negative-rose": "#C9697A",
+                        "surface-dim": "#dddad3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#614008",
+                        "text-primary": "#2A2A26",
+                        "primary-fixed-dim": "#adcfb5",
+                        "outline-variant": "#c2c8c1",
+                        "text-secondary": "#8B8880",
+                        "tertiary-fixed": "#ffddb4",
+                        "on-surface-variant": "#424843",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#291800",
+                        "surface": "#fcf9f2",
+                        "inverse-surface": "#31312c",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1c1c18"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin": "32px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "tabular-nums": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-kpi": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "tabular-nums": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-kpi": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #EDEAE3; } /* page-bg */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface antialiased min-h-screen flex relative selection:bg-primary-container selection:text-on-primary-container">
+<!-- Floating Sidebar (SideNavBar JSON) -->
+<nav class="fixed top-lg left-lg h-[calc(100vh-48px)] w-20 rounded-full bg-card-surface shadow-sm z-50 flex flex-col items-center justify-between py-xl space-y-md hidden md:flex">
+<!-- Brand / Header -->
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">widgets</span>
+</div>
+</div>
+<!-- Main Nav Links -->
+<div class="flex flex-col gap-2 w-full px-2">
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all flex justify-center group" href="#" title="Dashboard">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">grid_view</span>
+</a>
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all flex justify-center group" href="#" title="Analytics">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">analytics</span>
+</a>
+<a class="bg-primary text-on-primary rounded-full p-3 flex justify-center group shadow-sm scale-90 duration-200" href="#" title="Inventory">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">inventory_2</span>
+</a>
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all flex justify-center group" href="#" title="Schedule">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">calendar_today</span>
+</a>
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all flex justify-center group" href="#" title="Customers">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">group</span>
+</a>
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all flex justify-center group" href="#" title="Reports">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">description</span>
+</a>
+</div>
+<!-- Footer Links -->
+<div class="flex flex-col gap-2 w-full px-2">
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all flex justify-center group" href="#" title="Settings">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">settings</span>
+</a>
+<a class="text-on-surface-variant p-3 hover:bg-surface-container-high rounded-full transition-all flex justify-center group" href="#" title="Logout">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">logout</span>
+</a>
+<div class="mt-4 w-10 h-10 rounded-full overflow-hidden border-2 border-surface-container-high">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A small circular avatar of a professional user in a light modern inventory management app setting. The person is smiling, wearing a casual business outfit, lit by soft natural light. High quality, clear, minimalist background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwDGUf840AfqGOdgZuwh_79NFCX3YnWNGKjh5XM2j89rMyG03I34Toafsq1ucwbbgByZILp47hpeiH-I7vB5ubvWARW7tERvCwIfeeru5EBg3LSe8GPszcMWgwSNDfiF8uxyl2iUmPbGyxNFj1aoTwEXLSlG6BC2Ly-ARMDNcbHTalm71HSRHPHeGKejkGivR4L_CusrJ6wlg-k9OdRaKZMUeTAr0jQ2GSRXs7qSw9Rteb6mNR-uTg7A"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-[120px] px-lg md:px-xl py-lg flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-transparent flex justify-between items-center w-full py-md mb-lg sticky top-0 z-40 glass-panel md:glass-none rounded-2xl px-md md:px-0 md:rounded-none md:backdrop-filter-none">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface-variant p-2 hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div>
+<h1 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg font-bold text-on-surface">Artisan Ceramic Mug</h1>
+<p class="text-body-md font-body-md text-text-secondary mt-1">Bill of Materials - FG-1024</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Search (on_right as per JSON, but adapted for context if needed, usually global search) -->
+<div class="hidden md:flex items-center bg-card-surface rounded-full px-4 py-2 border border-border-divider focus-within:border-primary-container focus-within:ring-1 focus-within:ring-primary-container transition-all">
+<span class="material-symbols-outlined text-outline mr-2 text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md text-text-primary w-48 placeholder:text-outline-variant outline-none" placeholder="Search components..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:bg-surface-container-highest transition-colors p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">chat</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest transition-colors p-2 rounded-full flex items-center justify-center relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-danger-red rounded-full"></span>
+</button>
+</div>
+<button class="bg-primary-container text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-full hover:bg-surface-tint transition-colors flex items-center gap-2 shadow-sm hidden sm:flex">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                    Edit BOM
+                </button>
+</div>
+</header>
+<!-- BOM Details Content -->
+<div class="flex-1 flex flex-col gap-lg max-w-6xl w-full mx-auto">
+<!-- Summary KPI Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-lg">
+<div class="bg-card-surface rounded-lg p-xl flex items-center gap-4 transition-transform hover:-translate-y-1 duration-300">
+<div class="w-12 h-12 rounded-full bg-accent-tan-light flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined">layers</span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-text-secondary uppercase tracking-wider">Total Components</p>
+<p class="text-display-kpi font-display-kpi text-text-primary mt-1">4</p>
+</div>
+</div>
+<div class="bg-card-surface rounded-lg p-xl flex items-center gap-4 transition-transform hover:-translate-y-1 duration-300">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">attach_money</span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-text-secondary uppercase tracking-wider">Est. Unit Cost</p>
+<p class="text-display-kpi font-display-kpi text-text-primary mt-1">$4.25</p>
+</div>
+</div>
+<div class="bg-card-surface rounded-lg p-xl flex items-center gap-4 transition-transform hover:-translate-y-1 duration-300">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">update</span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-text-secondary uppercase tracking-wider">Last Updated</p>
+<p class="text-headline-md font-headline-md text-text-primary mt-1">Oct 24, 2023</p>
+</div>
+</div>
+</div>
+<!-- Recipe Table Card -->
+<div class="bg-card-surface rounded-xl flex-1 flex flex-col overflow-hidden">
+<div class="p-xl border-b border-border-divider flex justify-between items-center">
+<h2 class="text-headline-md font-headline-md text-text-primary">Recipe / Components</h2>
+<button class="sm:hidden bg-primary-container text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-full hover:bg-surface-tint transition-colors flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+                        Edit
+                    </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-bright border-b border-border-divider">
+<th class="py-4 px-xl text-label-sm font-label-sm text-text-secondary uppercase tracking-wider font-semibold">Material Code</th>
+<th class="py-4 px-xl text-label-sm font-label-sm text-text-secondary uppercase tracking-wider font-semibold">Description</th>
+<th class="py-4 px-xl text-label-sm font-label-sm text-text-secondary uppercase tracking-wider font-semibold text-right">Qty per Unit</th>
+<th class="py-4 px-xl text-label-sm font-label-sm text-text-secondary uppercase tracking-wider font-semibold">Unit</th>
+<th class="py-4 px-xl text-label-sm font-label-sm text-text-secondary uppercase tracking-wider font-semibold">Status</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md text-text-primary divide-y divide-border-divider">
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-md px-xl font-tabular-nums text-text-secondary group-hover:text-primary-container transition-colors">RM-CLAY-01</td>
+<td class="py-md px-xl flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[16px]">category</span>
+</div>
+                                    Premium White Clay
+                                </td>
+<td class="py-md px-xl text-right font-tabular-nums">450.00</td>
+<td class="py-md px-xl text-text-secondary">g</td>
+<td class="py-md px-xl">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-label-sm font-label-sm bg-primary-fixed text-on-primary-fixed">In Stock</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-md px-xl font-tabular-nums text-text-secondary group-hover:text-primary-container transition-colors">RM-GLZ-CLR</td>
+<td class="py-md px-xl flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[16px]">format_paint</span>
+</div>
+                                    Clear Gloss Glaze
+                                </td>
+<td class="py-md px-xl text-right font-tabular-nums">25.50</td>
+<td class="py-md px-xl text-text-secondary">ml</td>
+<td class="py-md px-xl">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-label-sm font-label-sm bg-primary-fixed text-on-primary-fixed">In Stock</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-md px-xl font-tabular-nums text-text-secondary group-hover:text-primary-container transition-colors">PKG-BOX-MUG</td>
+<td class="py-md px-xl flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[16px]">inventory_2</span>
+</div>
+                                    Kraft Box - Single Mug
+                                </td>
+<td class="py-md px-xl text-right font-tabular-nums">1.00</td>
+<td class="py-md px-xl text-text-secondary">ea</td>
+<td class="py-md px-xl">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-label-sm font-label-sm bg-accent-tan-light text-tertiary-container">Low Stock</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-md px-xl font-tabular-nums text-text-secondary group-hover:text-primary-container transition-colors">LBL-BRND-01</td>
+<td class="py-md px-xl flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[16px]">label</span>
+</div>
+                                    Brand Sticker Label
+                                </td>
+<td class="py-md px-xl text-right font-tabular-nums">1.00</td>
+<td class="py-md px-xl text-text-secondary">ea</td>
+<td class="py-md px-xl">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-label-sm font-label-sm bg-primary-fixed text-on-primary-fixed">In Stock</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-xl bg-surface-bright border-t border-border-divider text-right text-body-md font-body-md text-text-secondary">
+                    Showing 4 of 4 materials
+                </div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Detail - Administration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#3e4943",
+                        "surface-container-low": "#f6f3ec",
+                        "page-bg": "#EDEAE3",
+                        "surface-bright": "#fcf9f2",
+                        "on-secondary": "#ffffff",
+                        "border-divider": "#E7E4DC",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#f0be7c",
+                        "on-secondary-fixed": "#131e18",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#476551",
+                        "on-primary-container": "#b1d3ba",
+                        "surface-container-high": "#ebe8e1",
+                        "on-surface": "#1c1c18",
+                        "on-secondary-container": "#5c6760",
+                        "secondary-fixed": "#d9e5dc",
+                        "on-primary-fixed": "#032111",
+                        "danger-red": "#B3413F",
+                        "surface-container-highest": "#e5e2db",
+                        "warning-amber": "#C98A3B",
+                        "accent-tan-light": "#F3E4C9",
+                        "inverse-on-surface": "#f4f0e9",
+                        "primary": "#274432",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e5e2db",
+                        "primary-fixed": "#c9ebd1",
+                        "inverse-primary": "#adcfb5",
+                        "secondary-fixed-dim": "#bdc9c1",
+                        "on-error": "#ffffff",
+                        "tertiary": "#573701",
+                        "secondary-container": "#d9e5dc",
+                        "negative-bg": "#F7DEE2",
+                        "outline": "#727972",
+                        "background": "#fcf9f2",
+                        "tertiary-container": "#724e17",
+                        "card-surface": "#FFFFFF",
+                        "on-primary-fixed-variant": "#2f4d3a",
+                        "primary-container": "#3e5c48",
+                        "surface-container": "#f1eee7",
+                        "secondary": "#56615a",
+                        "on-tertiary-container": "#f4c280",
+                        "negative-rose": "#C9697A",
+                        "surface-dim": "#dddad3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#614008",
+                        "text-primary": "#2A2A26",
+                        "primary-fixed-dim": "#adcfb5",
+                        "outline-variant": "#c2c8c1",
+                        "text-secondary": "#8B8880",
+                        "tertiary-fixed": "#ffddb4",
+                        "on-surface-variant": "#424843",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#291800",
+                        "surface": "#fcf9f2",
+                        "inverse-surface": "#31312c",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1c1c18"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin": "32px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "tabular-nums": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-kpi": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "tabular-nums": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-kpi": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        
+        /* Custom scrollbar for tables if needed */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E7E4DC; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #d9e5dc; }
+    </style>
+</head>
+<body class="bg-page-bg text-on-surface font-body-md min-h-screen flex antialiased">
+<!-- Floating SideNavBar -->
+<nav class="hidden md:flex fixed top-lg left-lg h-[calc(100vh-48px)] w-20 rounded-full bg-card-surface dark:bg-surface-container-low shadow-md flex-col items-center justify-between py-xl space-y-md z-50">
+<!-- Top Section -->
+<div class="flex flex-col items-center gap-lg">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-headline-md">
+                S
+            </div>
+<div class="flex flex-col gap-sm w-full px-2">
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all" href="#" title="Dashboard">
+<span class="material-symbols-outlined">grid_view</span>
+</a>
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all" href="#" title="Analytics">
+<span class="material-symbols-outlined">analytics</span>
+</a>
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all" href="#" title="Inventory">
+<span class="material-symbols-outlined">inventory_2</span>
+</a>
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all" href="#" title="Schedule">
+<span class="material-symbols-outlined">calendar_today</span>
+</a>
+<!-- Active Tab: Customers -->
+<a class="flex items-center justify-center bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container rounded-full p-3 scale-90 duration-200 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.08)]" href="#" title="Customers">
+<span class="material-symbols-outlined icon-fill">group</span>
+</a>
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all" href="#" title="Reports">
+<span class="material-symbols-outlined">description</span>
+</a>
+</div>
+</div>
+<!-- Bottom Section -->
+<div class="flex flex-col items-center gap-sm w-full px-2">
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all" href="#" title="Settings">
+<span class="material-symbols-outlined">settings</span>
+</a>
+<a class="flex items-center justify-center text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all" href="#" title="Logout">
+<span class="material-symbols-outlined">logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Layout -->
+<main class="ml-0 md:ml-[104px] w-full md:w-[calc(100%-104px)] flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-xl py-lg bg-transparent z-40 sticky top-0">
+<div class="flex items-center">
+<!-- Mobile menu button, hidden on desktop -->
+<button class="md:hidden mr-md text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="text-headline-lg font-headline-lg font-bold text-on-surface dark:text-on-surface-variant hidden sm:block tracking-tight">Inventory Management</h1>
+</div>
+<div class="flex items-center gap-md">
+<!-- Search Bar styling -->
+<div class="hidden lg:flex items-center bg-card-surface rounded-full px-4 py-2 shadow-[0_4px_12px_rgba(0,0,0,0.04)] w-64 border border-border-divider focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-text-secondary mr-2 text-[20px]">search</span>
+<input class="bg-transparent border-none outline-none text-body-md font-body-md w-full placeholder:text-text-secondary" placeholder="Search..." type="text"/>
+</div>
+<button class="w-10 h-10 rounded-full bg-card-surface flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest transition-colors shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+<span class="material-symbols-outlined">chat</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-card-surface flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest transition-colors shadow-[0_2px_8px_rgba(0,0,0,0.04)] relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-danger-red rounded-full"></span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden border border-border-divider ml-sm cursor-pointer">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A detailed headshot portrait of a professional system administrator in a well-lit modern office setting. The lighting is soft and neutral, emphasizing a clean, approachable, and competent demeanor. The background is slightly blurred with subtle geometric interior design elements in pale sage and greige tones, aligning with a calm, sophisticated industrial workspace aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAVXGYbSo1LCKY7pTTdDfCVAreCzAwLkIvOvz6BT8XYTndNL-Nw-z1op0d4gRwu81oJ3NxFqtLqTgKP4qjQlAffFLqBf1T7mhc22n3BtRrL9gz_Tds9Fc92UD1Pttdu_K2p-NArIIswUzODYcl58R_lzyk4s8gZNBwrNnaFVvX3uB2hObULk_X6WKE8_SyyCYKFwMFZPDXEDyz92WvRm4uK0QUM8li0JWbS0oB_Os7j8dMCSywGeMheQ"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="px-md md:px-xl pb-xl flex-grow flex flex-col gap-lg w-full max-w-[1400px] mx-auto">
+<!-- Page Header -->
+<div class="flex items-center justify-between mb-sm">
+<div class="flex items-center gap-sm">
+<a class="w-10 h-10 rounded-full flex items-center justify-center text-text-secondary hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<div>
+<h2 class="text-headline-lg font-headline-lg text-text-primary">User Details</h2>
+<p class="text-body-md font-body-md text-text-secondary">Manage profile information and system access</p>
+</div>
+</div>
+<div class="hidden sm:flex gap-sm">
+<button class="px-6 py-2 rounded-full border border-primary text-primary font-label-sm hover:bg-surface-container-high transition-colors">
+                        Reset Password
+                    </button>
+<button class="px-6 py-2 rounded-full bg-primary text-on-primary font-label-sm hover:opacity-90 transition-opacity">
+                        Save Changes
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Summary Card (Left/Top) -->
+<div class="lg:col-span-4 bg-card-surface rounded-xl p-xl flex flex-col items-center text-center gap-md relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-24 bg-accent-tan-light opacity-50"></div>
+<div class="w-24 h-24 rounded-full bg-surface-container border-4 border-card-surface shadow-sm overflow-hidden z-10 mt-4">
+<img alt="Profile Picture" class="w-full h-full object-cover" data-alt="A close-up profile portrait of a female logistics manager. She has a confident expression, wearing modern business casual attire. The lighting is studio-quality, casting soft, flattering shadows. The background is a clean, minimal gradient of pale warm greige, perfectly matching a professional, serene enterprise software environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrgcyImQKIKXm3JzdZ24Csj4P2k46GNTaQukUtDqNNzJtW84dL87dR89Jch8DNBCPXrmGqdQQVUKFVu3YFgnaRazufo53Th5qv_k_8Pm62Wi1iIDDhjVDbw6Ch70q8YvR1hvhdaDUNAdm7vhduPK96fHT9xIouBxwId03cswJQxneds5U0fFSRBJ0jiyVKx2WStH8sdINcLx93g7jXz8lP9ZQJRXiDi7AYH14fCZFA2OsjO4-mpcXV_g"/>
+</div>
+<div class="z-10 mt-2">
+<h3 class="text-headline-md font-headline-md text-text-primary">Sarah Jenkins</h3>
+<p class="text-body-md font-body-md text-text-secondary mt-1">sarah.jenkins@company.com</p>
+<span class="inline-block mt-3 px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-label-sm font-label-sm">Operations Lead</span>
+</div>
+<div class="w-full h-[1px] bg-border-divider my-2 z-10"></div>
+<div class="w-full grid grid-cols-2 gap-4 z-10 text-left">
+<div>
+<p class="text-label-sm font-label-sm text-text-secondary mb-1">Last Login</p>
+<p class="text-body-md font-body-md text-text-primary font-medium">Today, 08:42 AM</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-text-secondary mb-1">Total Actions</p>
+<p class="text-body-md font-body-md text-text-primary font-medium">1,204</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-text-secondary mb-1">Department</p>
+<p class="text-body-md font-body-md text-text-primary font-medium">Fulfillment</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-text-secondary mb-1">Joined</p>
+<p class="text-body-md font-body-md text-text-primary font-medium">Oct 12, 2022</p>
+</div>
+</div>
+</div>
+<!-- Edit Form Card (Right) -->
+<div class="lg:col-span-8 bg-card-surface rounded-xl p-xl flex flex-col gap-lg">
+<h3 class="text-headline-md font-headline-md text-text-primary border-b border-border-divider pb-4">Profile Information</h3>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-x-lg gap-y-md">
+<div class="flex flex-col gap-2">
+<label class="text-label-sm font-label-sm text-text-primary ml-2">Full Name</label>
+<input class="w-full bg-transparent border border-border-divider rounded-full px-5 py-3 text-body-md font-body-md text-text-primary focus:border-surface-tint focus:ring-1 focus:ring-surface-tint outline-none transition-colors" type="text" value="Sarah Jenkins"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-label-sm font-label-sm text-text-primary ml-2">Email Address</label>
+<input class="w-full bg-transparent border border-border-divider rounded-full px-5 py-3 text-body-md font-body-md text-text-primary focus:border-surface-tint focus:ring-1 focus:ring-surface-tint outline-none transition-colors" type="email" value="sarah.jenkins@company.com"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-label-sm font-label-sm text-text-primary ml-2">System Role</label>
+<div class="relative">
+<select class="w-full bg-transparent border border-border-divider rounded-full px-5 py-3 text-body-md font-body-md text-text-primary focus:border-surface-tint focus:ring-1 focus:ring-surface-tint outline-none transition-colors appearance-none cursor-pointer">
+<option value="admin">Administrator</option>
+<option selected="" value="ops_lead">Operations Lead</option>
+<option value="viewer">Viewer Only</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-label-sm font-label-sm text-text-primary ml-2">Location/Site</label>
+<div class="relative">
+<select class="w-full bg-transparent border border-border-divider rounded-full px-5 py-3 text-body-md font-body-md text-text-primary focus:border-surface-tint focus:ring-1 focus:ring-surface-tint outline-none transition-colors appearance-none cursor-pointer">
+<option selected="" value="ny">New York Facility (HQ)</option>
+<option value="chi">Chicago Hub</option>
+<option value="la">Los Angeles Depot</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Status Toggle spanning full width in its row context -->
+<div class="md:col-span-2 flex items-center justify-between bg-surface-container-low rounded-xl p-4 mt-2 border border-border-divider">
+<div>
+<p class="text-body-md font-body-md font-medium text-text-primary">Account Status</p>
+<p class="text-label-sm font-label-sm text-text-secondary mt-1">Enable or disable user access to the system.</p>
+</div>
+<!-- Toggle Switch (Active State) -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-6 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<span class="ml-3 text-label-sm font-label-sm text-text-primary">Active</span>
+</label>
+</div>
+</form>
+</div>
+<!-- Activity Log Table (Full Width) -->
+<div class="lg:col-span-12 bg-card-surface rounded-xl p-xl flex flex-col gap-md overflow-hidden">
+<div class="flex justify-between items-center border-b border-border-divider pb-4">
+<h3 class="text-headline-md font-headline-md text-text-primary">Recent Activity Log</h3>
+<button class="text-primary font-label-sm hover:underline flex items-center gap-1">
+                            View All <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-label-sm font-label-sm text-text-secondary">
+<th class="py-3 px-4 font-semibold border-b border-border-divider">Date &amp; Time</th>
+<th class="py-3 px-4 font-semibold border-b border-border-divider">Action</th>
+<th class="py-3 px-4 font-semibold border-b border-border-divider">Module</th>
+<th class="py-3 px-4 font-semibold border-b border-border-divider">Details</th>
+<th class="py-3 px-4 font-semibold border-b border-border-divider text-right">Status</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md text-text-primary">
+<tr class="hover:bg-surface-container-lowest transition-colors border-b border-border-divider last:border-0">
+<td class="py-4 px-4 font-tabular-nums text-text-secondary whitespace-nowrap">Today, 10:24 AM</td>
+<td class="py-4 px-4">Updated Stock Level</td>
+<td class="py-4 px-4">Inventory</td>
+<td class="py-4 px-4 text-text-secondary">Item SKU: #84920 (+50 units)</td>
+<td class="py-4 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-[11px] font-semibold tracking-wider uppercase">Success</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors border-b border-border-divider last:border-0">
+<td class="py-4 px-4 font-tabular-nums text-text-secondary whitespace-nowrap">Today, 09:15 AM</td>
+<td class="py-4 px-4">Approved Requisition</td>
+<td class="py-4 px-4">Orders</td>
+<td class="py-4 px-4 text-text-secondary">Order REQ-1042</td>
+<td class="py-4 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-[11px] font-semibold tracking-wider uppercase">Success</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors border-b border-border-divider last:border-0">
+<td class="py-4 px-4 font-tabular-nums text-text-secondary whitespace-nowrap">Yesterday, 16:45 PM</td>
+<td class="py-4 px-4">Failed Login Attempt</td>
+<td class="py-4 px-4">System</td>
+<td class="py-4 px-4 text-text-secondary">Invalid password provided</td>
+<td class="py-4 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-negative-bg text-negative-rose rounded-full text-[11px] font-semibold tracking-wider uppercase">Warning</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors border-b border-border-divider last:border-0">
+<td class="py-4 px-4 font-tabular-nums text-text-secondary whitespace-nowrap">Yesterday, 14:30 PM</td>
+<td class="py-4 px-4">Generated Report</td>
+<td class="py-4 px-4">Analytics</td>
+<td class="py-4 px-4 text-text-secondary">Weekly Fulfillment Summary</td>
+<td class="py-4 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-[11px] font-semibold tracking-wider uppercase">Success</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Mobile Action Bar (Sticky Bottom for small screens, hidden on desktop) -->
+<div class="sm:hidden fixed bottom-0 left-0 w-full bg-card-surface border-t border-border-divider p-4 z-50 flex gap-4 shadow-[0_-4px_16px_rgba(0,0,0,0.05)]">
+<button class="flex-1 py-3 rounded-full border border-primary text-primary font-label-sm">
+                    Reset
+                </button>
+<button class="flex-1 py-3 rounded-full bg-primary text-on-primary font-label-sm shadow-sm">
+                    Save
+                </button>
+</div>
+</div>
+</main>
+</body></html>

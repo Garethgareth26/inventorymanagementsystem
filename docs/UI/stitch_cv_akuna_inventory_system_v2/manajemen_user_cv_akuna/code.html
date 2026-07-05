@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Management - CV Akuna</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "secondary-fixed-dim": "#bdc9c1",
+                            "warning-amber": "#C98A3B",
+                            "on-background": "#1c1c18",
+                            "on-tertiary-container": "#f4c280",
+                            "danger-red": "#B3413F",
+                            "inverse-on-surface": "#f4f0e9",
+                            "on-secondary": "#ffffff",
+                            "page-bg": "#EDEAE3",
+                            "on-primary-fixed-variant": "#2f4d3a",
+                            "primary-fixed-dim": "#adcfb5",
+                            "tertiary-container": "#724e17",
+                            "secondary-container": "#d9e5dc",
+                            "on-primary-fixed": "#032111",
+                            "surface-bright": "#fcf9f2",
+                            "on-surface": "#1c1c18",
+                            "surface": "#fcf9f2",
+                            "surface-container": "#f1eee7",
+                            "tertiary-fixed": "#ffddb4",
+                            "on-secondary-container": "#5c6760",
+                            "error": "#ba1a1a",
+                            "surface-container-high": "#ebe8e1",
+                            "accent-tan-light": "#F3E4C9",
+                            "on-secondary-fixed-variant": "#3e4943",
+                            "surface-container-highest": "#e5e2db",
+                            "surface-variant": "#e5e2db",
+                            "error-container": "#ffdad6",
+                            "outline": "#727972",
+                            "background": "#fcf9f2",
+                            "text-secondary": "#8B8880",
+                            "secondary": "#56615a",
+                            "text-primary": "#2A2A26",
+                            "on-secondary-fixed": "#131e18",
+                            "primary-container": "#3e5c48",
+                            "inverse-primary": "#adcfb5",
+                            "primary-fixed": "#c9ebd1",
+                            "on-primary-container": "#b1d3ba",
+                            "surface-dim": "#dddad3",
+                            "negative-rose": "#C9697A",
+                            "tertiary": "#573701",
+                            "primary": "#274432",
+                            "surface-container-lowest": "#ffffff",
+                            "surface-tint": "#476551",
+                            "surface-container-low": "#f6f3ec",
+                            "on-error": "#ffffff",
+                            "on-tertiary": "#ffffff",
+                            "on-surface-variant": "#424843",
+                            "outline-variant": "#c2c8c1",
+                            "card-surface": "#FFFFFF",
+                            "on-primary": "#ffffff",
+                            "on-tertiary-fixed": "#291800",
+                            "inverse-surface": "#31312c",
+                            "negative-bg": "#F7DEE2",
+                            "border-divider": "#E7E4DC",
+                            "tertiary-fixed-dim": "#f0be7c",
+                            "secondary-fixed": "#d9e5dc",
+                            "on-tertiary-fixed-variant": "#614008",
+                            "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "1rem",
+                            "lg": "2rem",
+                            "xl": "3rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "sm": "8px",
+                            "gutter": "24px",
+                            "margin": "32px",
+                            "xs": "4px",
+                            "lg": "24px",
+                            "xl": "32px",
+                            "md": "16px",
+                            "base": "4px"
+                    },
+                    "fontFamily": {
+                            "display-kpi": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "body-lg": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "headline-md": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "headline-lg": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "headline-lg-mobile": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "tabular-nums": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "label-sm": [
+                                    "Plus Jakarta Sans"
+                            ],
+                            "body-md": [
+                                    "Plus Jakarta Sans"
+                            ]
+                    },
+                    "fontSize": {
+                            "display-kpi": [
+                                    "32px",
+                                    {
+                                            "lineHeight": "40px",
+                                            "letterSpacing": "-0.02em",
+                                            "fontWeight": "700"
+                                    }
+                            ],
+                            "body-lg": [
+                                    "16px",
+                                    {
+                                            "lineHeight": "24px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "headline-md": [
+                                    "20px",
+                                    {
+                                            "lineHeight": "28px",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "headline-lg": [
+                                    "24px",
+                                    {
+                                            "lineHeight": "32px",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "headline-lg-mobile": [
+                                    "20px",
+                                    {
+                                            "lineHeight": "28px",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "tabular-nums": [
+                                    "14px",
+                                    {
+                                            "lineHeight": "20px",
+                                            "fontWeight": "500"
+                                    }
+                            ],
+                            "label-sm": [
+                                    "12px",
+                                    {
+                                            "lineHeight": "16px",
+                                            "letterSpacing": "0.05em",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "body-md": [
+                                    "14px",
+                                    {
+                                            "lineHeight": "20px",
+                                            "fontWeight": "400"
+                                    }
+                            ]
+                    }
+            },
+                },
+            }
+    </script>
+<style>
+        body { background-color: theme('colors.page-bg'); }
+        .ambient-shadow { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+        .spline-path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+</head>
+<body class="text-on-background font-body-md overflow-x-hidden min-h-screen">
+<!-- TopNavBar -->
+<nav class="bg-transparent fixed top-0 right-0 left-24 h-[80px] z-40 flex justify-between items-center px-8 w-full max-w-full">
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-background">Hello, Admin!</h1>
+<p class="font-body-md text-body-md text-text-secondary">Manage system users and access levels</p>
+</div>
+<div class="flex items-center gap-gutter">
+<!-- Search Bar -->
+<div class="relative flex items-center bg-surface-container-lowest rounded-full px-lg py-sm w-96">
+<span class="material-symbols-outlined text-text-secondary mr-sm" style="font-variation-settings: 'FILL' 0;">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-text-primary w-full outline-none font-body-md placeholder-text-secondary" placeholder="Search users..." type="text"/>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-text-secondary hover:bg-surface-container-low transition-colors duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">chat_bubble</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center text-text-secondary hover:bg-surface-container-low transition-colors duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="bg-surface-container-lowest shadow-sm fixed left-4 top-4 bottom-4 w-16 rounded-full flex flex-col items-center py-6 z-50">
+<div class="flex flex-col items-center gap-6 mt-md w-full">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">grid_view</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">bar_chart</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">shopping_cart</span>
+</a>
+<a class="bg-on-background text-on-primary rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">assignment</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col items-center gap-6 w-full">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full w-10 h-10 flex items-center justify-center scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">logout</span>
+</a>
+<div class="w-10 h-10 rounded-full overflow-hidden mt-sm cursor-pointer">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A small circular avatar placeholder image for a user profile in a light UI setting. The image features a stylized, minimalist portrait illustration or generic professional headshot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQgnqJwP-uH0Bq7lQ_51gXLn8YPurEPXr4hxF4D3GCymrHmXlPc0N6HpuQgXL9abWHW7y0obbQuexsxhLunyaYOOfT5cRfzI5bB1jB37RaBqmAdlKRf5VQ7GLdfFzB5d0_81nXmoJV0sQtZUcieLzWstIF3ynlBS3EAxilb9gWTIldk82IRDUBXI_n9rei5A4i9514aT9GZEQBgUPBRAP_3uFHNhOYa9xEO0Vq8ZpwEsCEThsd0tEYBA"/>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[104px] pt-[100px] pr-8 pb-8 min-h-screen">
+<!-- User Management Card -->
+<div class="bg-card-surface rounded-xl p-xl shadow-sm h-[calc(100vh-140px)] flex flex-col">
+<!-- Toolbar -->
+<div class="flex justify-between items-center mb-lg">
+<h2 class="font-headline-md text-headline-md text-text-primary">System Users</h2>
+<button class="bg-primary-container text-on-primary px-lg py-sm rounded-full font-label-sm flex items-center gap-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Add User
+                </button>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto flex-grow">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-divider text-text-secondary font-label-sm">
+<th class="py-md font-semibold px-sm w-1/4">Nama</th>
+<th class="py-md font-semibold px-sm w-1/4">Email</th>
+<th class="py-md font-semibold px-sm w-1/6">Role</th>
+<th class="py-md font-semibold px-sm w-1/6">Status</th>
+<th class="py-md font-semibold px-sm w-1/6">Last Login</th>
+<th class="py-md font-semibold px-sm w-12"></th>
+</tr>
+</thead>
+<tbody class="font-body-md text-text-primary">
+<!-- Row 1 -->
+<tr class="border-b border-border-divider hover:bg-surface-container-lowest transition-colors group">
+<td class="py-md px-sm">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-accent-tan-light flex items-center justify-center text-tertiary-container font-semibold">CB</div>
+<span class="font-medium">Carlic Bolomboy</span>
+</div>
+</td>
+<td class="py-md px-sm text-text-secondary">carlic@gmail.com</td>
+<td class="py-md px-sm">
+<span class="bg-primary-fixed text-on-primary-fixed px-sm py-xs rounded-full font-label-sm text-[11px]">Owner</span>
+</td>
+<td class="py-md px-sm">
+<span class="bg-accent-tan-light text-tertiary-container px-sm py-xs rounded-full font-label-sm text-[11px] flex items-center gap-xs w-max">
+<span class="w-2 h-2 rounded-full bg-warning-amber"></span>
+                                    Aktif
+                                </span>
+</td>
+<td class="py-md px-sm text-text-secondary font-tabular-nums text-tabular-nums">Today, 10:23 AM</td>
+<td class="py-md px-sm text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-border-divider hover:bg-surface-container-lowest transition-colors group">
+<td class="py-md px-sm">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-semibold">AJ</div>
+<span class="font-medium">Anna Jones</span>
+</div>
+</td>
+<td class="py-md px-sm text-text-secondary">anna.j@cvakuna.com</td>
+<td class="py-md px-sm">
+<span class="bg-surface-container-highest text-on-surface-variant px-sm py-xs rounded-full font-label-sm text-[11px]">Manager</span>
+</td>
+<td class="py-md px-sm">
+<span class="bg-accent-tan-light text-tertiary-container px-sm py-xs rounded-full font-label-sm text-[11px] flex items-center gap-xs w-max">
+<span class="w-2 h-2 rounded-full bg-warning-amber"></span>
+                                    Aktif
+                                </span>
+</td>
+<td class="py-md px-sm text-text-secondary font-tabular-nums text-tabular-nums">Yesterday, 14:45 PM</td>
+<td class="py-md px-sm text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-border-divider hover:bg-surface-container-lowest transition-colors group">
+<td class="py-md px-sm">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-semibold">JC</div>
+<span class="font-medium">Joel Cannan</span>
+</div>
+</td>
+<td class="py-md px-sm text-text-secondary">joel.c@cvakuna.com</td>
+<td class="py-md px-sm">
+<span class="bg-surface-container-highest text-on-surface-variant px-sm py-xs rounded-full font-label-sm text-[11px]">Staff</span>
+</td>
+<td class="py-md px-sm">
+<span class="bg-error-container text-on-error-container px-sm py-xs rounded-full font-label-sm text-[11px] flex items-center gap-xs w-max">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                                    Nonaktif
+                                </span>
+</td>
+<td class="py-md px-sm text-text-secondary font-tabular-nums text-tabular-nums">Oct 12, 09:12 AM</td>
+<td class="py-md px-sm text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="border-b border-border-divider hover:bg-surface-container-lowest transition-colors group">
+<td class="py-md px-sm">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-semibold">LS</div>
+<span class="font-medium">Lana Steiner</span>
+</div>
+</td>
+<td class="py-md px-sm text-text-secondary">lana.s@cvakuna.com</td>
+<td class="py-md px-sm">
+<span class="bg-surface-container-highest text-on-surface-variant px-sm py-xs rounded-full font-label-sm text-[11px]">Staff</span>
+</td>
+<td class="py-md px-sm">
+<span class="bg-accent-tan-light text-tertiary-container px-sm py-xs rounded-full font-label-sm text-[11px] flex items-center gap-xs w-max">
+<span class="w-2 h-2 rounded-full bg-warning-amber"></span>
+                                    Aktif
+                                </span>
+</td>
+<td class="py-md px-sm text-text-secondary font-tabular-nums text-tabular-nums">Oct 15, 11:30 AM</td>
+<td class="py-md px-sm text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="mt-lg pt-md border-t border-border-divider flex justify-between items-center text-text-secondary font-body-md">
+<span>Showing 1 to 4 of 24 entries</span>
+<div class="flex gap-sm">
+<button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-low transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-medium">1</button>
+<button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-low transition-colors font-medium">2</button>
+<button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-low transition-colors font-medium">3</button>
+<span class="flex items-center justify-center">...</span>
+<button class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

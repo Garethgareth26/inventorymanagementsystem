@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Supplier Detail - Inventory Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed-variant": "#3e4943",
+                        "surface-container-low": "#f6f3ec",
+                        "page-bg": "#EDEAE3",
+                        "surface-bright": "#fcf9f2",
+                        "on-secondary": "#ffffff",
+                        "border-divider": "#E7E4DC",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#f0be7c",
+                        "on-secondary-fixed": "#131e18",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#476551",
+                        "on-primary-container": "#b1d3ba",
+                        "surface-container-high": "#ebe8e1",
+                        "on-surface": "#1c1c18",
+                        "on-secondary-container": "#5c6760",
+                        "secondary-fixed": "#d9e5dc",
+                        "on-primary-fixed": "#032111",
+                        "danger-red": "#B3413F",
+                        "surface-container-highest": "#e5e2db",
+                        "warning-amber": "#C98A3B",
+                        "accent-tan-light": "#F3E4C9",
+                        "inverse-on-surface": "#f4f0e9",
+                        "primary": "#274432",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e5e2db",
+                        "primary-fixed": "#c9ebd1",
+                        "inverse-primary": "#adcfb5",
+                        "secondary-fixed-dim": "#bdc9c1",
+                        "on-error": "#ffffff",
+                        "tertiary": "#573701",
+                        "secondary-container": "#d9e5dc",
+                        "negative-bg": "#F7DEE2",
+                        "outline": "#727972",
+                        "background": "#fcf9f2",
+                        "tertiary-container": "#724e17",
+                        "card-surface": "#FFFFFF",
+                        "on-primary-fixed-variant": "#2f4d3a",
+                        "primary-container": "#3e5c48",
+                        "surface-container": "#f1eee7",
+                        "secondary": "#56615a",
+                        "on-tertiary-container": "#f4c280",
+                        "negative-rose": "#C9697A",
+                        "surface-dim": "#dddad3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#614008",
+                        "text-primary": "#2A2A26",
+                        "primary-fixed-dim": "#adcfb5",
+                        "outline-variant": "#c2c8c1",
+                        "text-secondary": "#8B8880",
+                        "tertiary-fixed": "#ffddb4",
+                        "on-surface-variant": "#424843",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#291800",
+                        "surface": "#fcf9f2",
+                        "inverse-surface": "#31312c",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1c1c18"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "xl": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin": "32px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "md": "16px"
+                    },
+                    fontFamily: {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "tabular-nums": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-kpi": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "headline-lg-mobile": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "headline-lg": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "tabular-nums": ["14px", { lineHeight: "20px", fontWeight: "500" }],
+                        "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                        "display-kpi": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #EDEAE3; /* page-bg */ }
+    </style>
+</head>
+<body class="min-h-screen text-text-primary font-body-md overflow-x-hidden flex">
+<!-- SideNavBar -->
+<nav class="fixed top-lg left-lg h-[calc(100vh-48px)] w-20 rounded-full bg-card-surface dark:bg-surface-container-low shadow-sm shadow-md flex flex-col items-center justify-between py-xl space-y-md z-50">
+<div class="flex flex-col items-center gap-md">
+<!-- Brand Logo -->
+<div class="text-primary dark:text-primary-fixed mb-md">
+<span class="material-symbols-outlined" style="font-size: 32px; font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<!-- Navigation Links -->
+<a aria-label="Dashboard" class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all group relative flex justify-center items-center" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+</a>
+<a aria-label="Analytics" class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all group relative flex justify-center items-center" href="#">
+<span class="material-symbols-outlined">analytics</span>
+</a>
+<a aria-label="Inventory" class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all group relative flex justify-center items-center" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+</a>
+<a aria-label="Schedule" class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all group relative flex justify-center items-center" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+</a>
+<a aria-label="Customers" class="bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container rounded-full p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all scale-90 duration-200 group relative flex justify-center items-center" href="#">
+<span class="material-symbols-outlined">group</span>
+</a>
+<a aria-label="Reports" class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all group relative flex justify-center items-center" href="#">
+<span class="material-symbols-outlined">description</span>
+</a>
+</div>
+<div class="flex flex-col items-center gap-md mt-auto">
+<a aria-label="Settings" class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all flex justify-center items-center" href="#">
+<span class="material-symbols-outlined">settings</span>
+</a>
+<a aria-label="Logout" class="text-on-surface-variant dark:text-outline p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-full transition-all flex justify-center items-center" href="#">
+<span class="material-symbols-outlined">logout</span>
+</a>
+<div class="mt-sm">
+<img alt="App Logo" class="w-10 h-10 rounded-full border border-border-divider object-cover" data-alt="A small, circular avatar portrait of a professional woman with dark hair in a sleek, modern inventory management software interface. The portrait is high-quality, softly lit, and conveys competence. The background is a calm, neutral sage color." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3iR_Fr5PKlB9gUme7BhHsJnFtcQmZf385NVUHdj6m4v2jiE0dY9or7lcW3w1SAomUqPBMpqZ1Snp5qJhj2VCb1yzskyJ_DzDIwYVc43dZyOt5mtVstxkW6gFMpClpKJ3dtEE_0kMp32BxT2uIon7aMDyU0bH7IOHI_0YsxrnSIsdcKZ3a9Bk8IZKY-sLxrh7R9lJUkVJPI9ELR9_oS499HuGzWOJ27xxnTJ2qNl76RhG5xlyH9Qq1hQ"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-[128px] flex-1 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-transparent full-width top-0 flat no shadows flex justify-between items-center w-full px-xl py-lg z-40 sticky">
+<div class="flex items-center gap-sm">
+<div class="text-headline-lg font-headline-lg font-bold text-on-surface dark:text-on-surface-variant">Inventory Management</div>
+</div>
+<div class="flex items-center gap-lg">
+<!-- Search -->
+<div class="relative hidden md:block">
+<input class="w-64 h-12 pl-xl pr-sm rounded-full bg-card-surface border border-border-divider focus:border-surface-tint focus:ring-0 text-body-md font-body-md shadow-[0_4px_12px_rgba(0,0,0,0.08)]" placeholder="Search..." type="text"/>
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-text-secondary pl-2">search</span>
+</div>
+<div class="flex gap-sm">
+<button class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors hover:text-primary">
+<span class="material-symbols-outlined">chat</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-card-surface text-text-primary flex items-center justify-center hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="px-xl pb-xl flex-1 flex flex-col gap-lg">
+<!-- Header Row -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-md">
+<div>
+<!-- Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="flex text-label-sm font-label-sm text-text-secondary mb-sm">
+<ol class="inline-flex items-center space-x-1 md:space-x-3">
+<li class="inline-flex items-center">
+<a class="hover:text-primary transition-colors" href="#">Master Data</a>
+</li>
+<li>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Suppliers</a>
+</div>
+</li>
+<li aria-current="page">
+<div class="flex items-center">
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<span class="text-text-primary">EcoMaterials Inc.</span>
+</div>
+</li>
+</ol>
+</nav>
+<h1 class="text-headline-lg font-headline-lg text-text-primary">Supplier Details</h1>
+</div>
+<button class="px-lg py-sm bg-primary-container text-on-primary rounded-full hover:bg-primary transition-colors text-label-sm font-label-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                    Edit Supplier
+                </button>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left Col: Supplier Info Card -->
+<div class="lg:col-span-2 flex flex-col gap-lg">
+<div class="bg-card-surface rounded-xl p-xl shadow-none relative overflow-hidden group">
+<!-- Top section of card -->
+<div class="flex justify-between items-start mb-lg">
+<div class="flex items-center gap-md">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-size: 32px;">factory</span>
+</div>
+<div>
+<h2 class="text-headline-md font-headline-md text-text-primary mb-xs">EcoMaterials Inc.</h2>
+<p class="text-body-md font-body-md text-text-secondary">Code: SUP-2049</p>
+</div>
+</div>
+<span class="px-sm py-xs bg-primary-fixed text-on-primary-fixed-variant rounded-full text-label-sm font-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Active
+                            </span>
+</div>
+<!-- Details Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md pt-md border-t border-border-divider">
+<div>
+<p class="text-label-sm font-label-sm text-text-secondary mb-xs">Primary Contact</p>
+<p class="text-body-lg font-body-lg text-text-primary">Sarah Jenkins</p>
+<p class="text-body-md font-body-md text-text-secondary">Director of Sales</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-text-secondary mb-xs">Contact Information</p>
+<div class="flex items-center gap-xs text-body-md font-body-md text-text-primary mb-xs">
+<span class="material-symbols-outlined text-[16px] text-text-secondary">mail</span>
+                                    s.jenkins@ecomaterials.com
+                                </div>
+<div class="flex items-center gap-xs text-body-md font-body-md text-text-primary">
+<span class="material-symbols-outlined text-[16px] text-text-secondary">phone</span>
+                                    +1 (555) 019-2834
+                                </div>
+</div>
+<div class="md:col-span-2 mt-sm">
+<p class="text-label-sm font-label-sm text-text-secondary mb-xs">Address</p>
+<p class="text-body-md font-body-md text-text-primary flex items-start gap-xs">
+<span class="material-symbols-outlined text-[16px] text-text-secondary mt-[2px]">location_on</span>
+                                    1240 Green Way Blvd, Suite 400<br/>Portland, OR 97204, USA
+                                </p>
+</div>
+</div>
+<!-- Decorative element -->
+<div class="absolute -right-12 -bottom-12 w-48 h-48 bg-surface-container-low rounded-full opacity-50 pointer-events-none group-hover:scale-110 transition-transform duration-700"></div>
+</div>
+<!-- Notes / Description -->
+<div class="bg-card-surface rounded-xl p-xl shadow-none">
+<h3 class="text-headline-md font-headline-md text-text-primary mb-md">Operational Notes</h3>
+<p class="text-body-md font-body-md text-text-secondary leading-relaxed">
+                            Preferred supplier for sustainable packaging materials. Reliable delivery times with an average lead time of 4 days. Note: Minimum order quantity increased to 500 units for corrugated boxes as of Q3.
+                        </p>
+</div>
+</div>
+<!-- Right Col: Supplied Materials -->
+<div class="lg:col-span-1 bg-card-surface rounded-xl p-xl shadow-none flex flex-col h-full">
+<div class="flex justify-between items-center mb-md">
+<h3 class="text-headline-md font-headline-md text-text-primary">Supplied Materials</h3>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-text-secondary hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+<!-- Table-like list -->
+<div class="flex-1 overflow-y-auto pr-sm custom-scrollbar">
+<div class="flex flex-col gap-sm">
+<!-- Item 1 -->
+<div class="p-sm rounded-lg hover:bg-surface-container-lowest transition-colors border border-border-divider">
+<div class="flex justify-between items-start mb-xs">
+<p class="text-body-lg font-body-lg text-text-primary font-medium">Recycled Kraft Paper</p>
+<span class="text-tabular-nums font-tabular-nums text-text-primary">$0.45/m</span>
+</div>
+<div class="flex justify-between items-center">
+<p class="text-label-sm font-label-sm text-text-secondary">SKU: KFT-001</p>
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-sm rounded-lg hover:bg-surface-container-lowest transition-colors border border-border-divider">
+<div class="flex justify-between items-start mb-xs">
+<p class="text-body-lg font-body-lg text-text-primary font-medium">Corrugated Box (M)</p>
+<span class="text-tabular-nums font-tabular-nums text-text-primary">$1.20/ea</span>
+</div>
+<div class="flex justify-between items-center">
+<p class="text-label-sm font-label-sm text-text-secondary">SKU: BOX-M22</p>
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-sm rounded-lg hover:bg-surface-container-lowest transition-colors border border-border-divider">
+<div class="flex justify-between items-start mb-xs">
+<p class="text-body-lg font-body-lg text-text-primary font-medium">Eco-Tape</p>
+<span class="text-tabular-nums font-tabular-nums text-text-primary">$3.50/rl</span>
+</div>
+<div class="flex justify-between items-center">
+<p class="text-label-sm font-label-sm text-text-secondary">SKU: TPE-ECO</p>
+<span class="w-2 h-2 rounded-full bg-warning-amber"></span>
+</div>
+</div>
+</div>
+</div>
+<button class="mt-md w-full py-sm rounded-full border border-primary-container text-primary-container hover:bg-surface-container transition-colors text-label-sm font-label-sm">
+                        View Full Catalog
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #E7E4DC;
+            border-radius: 999px;
+        }
+    </style>
+</body></html>

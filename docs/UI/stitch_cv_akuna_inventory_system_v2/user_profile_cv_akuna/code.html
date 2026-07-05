@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Profile - Inventory Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#3e4943",
+                        "surface-container-low": "#f6f3ec",
+                        "page-bg": "#EDEAE3",
+                        "surface-bright": "#fcf9f2",
+                        "on-secondary": "#ffffff",
+                        "border-divider": "#E7E4DC",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#f0be7c",
+                        "on-secondary-fixed": "#131e18",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#476551",
+                        "on-primary-container": "#b1d3ba",
+                        "surface-container-high": "#ebe8e1",
+                        "on-surface": "#1c1c18",
+                        "on-secondary-container": "#5c6760",
+                        "secondary-fixed": "#d9e5dc",
+                        "on-primary-fixed": "#032111",
+                        "danger-red": "#B3413F",
+                        "surface-container-highest": "#e5e2db",
+                        "warning-amber": "#C98A3B",
+                        "accent-tan-light": "#F3E4C9",
+                        "inverse-on-surface": "#f4f0e9",
+                        "primary": "#274432",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e5e2db",
+                        "primary-fixed": "#c9ebd1",
+                        "inverse-primary": "#adcfb5",
+                        "secondary-fixed-dim": "#bdc9c1",
+                        "on-error": "#ffffff",
+                        "tertiary": "#573701",
+                        "secondary-container": "#d9e5dc",
+                        "negative-bg": "#F7DEE2",
+                        "outline": "#727972",
+                        "background": "#fcf9f2",
+                        "tertiary-container": "#724e17",
+                        "card-surface": "#FFFFFF",
+                        "on-primary-fixed-variant": "#2f4d3a",
+                        "primary-container": "#3e5c48",
+                        "surface-container": "#f1eee7",
+                        "secondary": "#56615a",
+                        "on-tertiary-container": "#f4c280",
+                        "negative-rose": "#C9697A",
+                        "surface-dim": "#dddad3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#614008",
+                        "text-primary": "#2A2A26",
+                        "primary-fixed-dim": "#adcfb5",
+                        "outline-variant": "#c2c8c1",
+                        "text-secondary": "#8B8880",
+                        "tertiary-fixed": "#ffddb4",
+                        "on-surface-variant": "#424843",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#291800",
+                        "surface": "#fcf9f2",
+                        "inverse-surface": "#31312c",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1c1c18"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "margin": "32px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "tabular-nums": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-kpi": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "tabular-nums": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-kpi": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-page-bg text-text-primary min-h-screen flex font-body-md">
+<!-- SideNavBar (Floating Rail) -->
+<nav class="hidden md:flex flex-col items-center justify-between py-xl space-y-md fixed top-lg left-lg h-[calc(100vh-48px)] w-20 rounded-full bg-card-surface shadow-md z-50">
+<div class="flex flex-col items-center space-y-lg w-full">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div class="flex flex-col space-y-md w-full px-xs">
+<a class="text-on-surface-variant p-3 flex justify-center hover:bg-surface-container-high rounded-full transition-all group" href="#" title="Dashboard">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">grid_view</span>
+</a>
+<a class="text-on-surface-variant p-3 flex justify-center hover:bg-surface-container-high rounded-full transition-all group" href="#" title="Analytics">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">analytics</span>
+</a>
+<a class="text-on-surface-variant p-3 flex justify-center hover:bg-surface-container-high rounded-full transition-all group" href="#" title="Inventory">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">inventory_2</span>
+</a>
+<a class="text-on-surface-variant p-3 flex justify-center hover:bg-surface-container-high rounded-full transition-all group" href="#" title="Schedule">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">calendar_today</span>
+</a>
+<a class="text-on-surface-variant p-3 flex justify-center hover:bg-surface-container-high rounded-full transition-all group" href="#" title="Customers">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">group</span>
+</a>
+<a class="text-on-surface-variant p-3 flex justify-center hover:bg-surface-container-high rounded-full transition-all group" href="#" title="Reports">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">description</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col space-y-md w-full px-xs">
+<a class="bg-primary text-on-primary rounded-full p-3 flex justify-center hover:bg-surface-container-high hover:text-on-surface-variant transition-all group active" href="#" title="Settings">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">settings</span>
+</a>
+<a class="text-on-surface-variant p-3 flex justify-center hover:bg-surface-container-high rounded-full transition-all group" href="#" title="Logout">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">logout</span>
+</a>
+<div class="mt-4 pt-4 border-t border-border-divider flex justify-center">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A small circular avatar placeholder showing a friendly professional in a well-lit office setting. Warm natural light, shallow depth of field, high-quality portrait photography fitting a sophisticated UI theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2jqBa96XaXomnOs5IZb6FexSBpEiF_t2mqCM_dP90pE5hruoFFpLPDPomXfSbELEcj21iM0lWlXJHMNm3vYfUA69h6nlk6cK6z4ivnl_3ipkoa-QNXkW1Kk1VRfp9GeDiNcQZTad5XXeBEEf2H4gbgg1tDqVEci0EFA8xedWewbKaA0U0PYcWp5hbVoEBRKr7vT6zGn99pm-gEBsTdrqP0qC-8DGP4JBS76egJxykqyVWtp2DDIODUw"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-[112px] p-lg md:p-xl md:pr-[48px] max-w-[1400px]">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full pb-xl bg-transparent">
+<div>
+<h1 class="text-headline-lg font-headline-lg font-bold text-on-surface">Profile Settings</h1>
+<p class="text-text-secondary font-body-md mt-1">Manage your personal information and security preferences.</p>
+</div>
+<div class="flex items-center space-x-md">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary text-sm">search</span>
+<input class="pl-10 pr-4 py-2 rounded-full border border-border-divider bg-card-surface text-body-md focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container w-64 transition-all" placeholder="Search..." type="text"/>
+</div>
+<button class="w-10 h-10 rounded-full bg-card-surface flex items-center justify-center text-text-secondary hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">chat</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-card-surface flex items-center justify-center text-text-secondary hover:bg-surface-container-highest transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-danger-red rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- Profile Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left Column: Personal Info -->
+<div class="lg:col-span-2 space-y-lg">
+<!-- Personal Information Card -->
+<section class="bg-card-surface rounded-xl p-xl shadow-sm border border-border-divider/50 hover:shadow-md transition-shadow">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-lg">
+<h2 class="text-headline-md font-headline-md text-text-primary">Personal Information</h2>
+<button class="mt-4 sm:mt-0 px-6 py-2 rounded-full bg-primary-container text-white font-label-sm text-label-sm hover:bg-primary transition-colors">
+                            Save Changes
+                        </button>
+</div>
+<div class="flex flex-col sm:flex-row gap-xl items-start">
+<!-- Avatar Upload -->
+<div class="flex flex-col items-center space-y-4 shrink-0">
+<div class="relative group cursor-pointer">
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-surface-container-low shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A close-up portrait of a professional individual in a bright, modern minimalist workspace. The lighting is soft and airy, fitting a sophisticated, calm UI design system. High resolution, organic feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKjPIksTxTXwZja6flAHxxCb0RDmE2enqjPPmldtfn4jsVHczexLEN6mTNK-RdY_gqs-Td_fsSBw5Q2EN1-u7axySAzrugx4fuOLM1a45bbNxMdEhaVZucN8lL7ljfhYp1JTTk7cYFRwVCFqCMARfwc3SRStql_GwlIirsdWxDRHcZJVDmNUddCsmgb_YpDz4OLJAjz_R0vt29L00MQxVf6PMPip5N2Q0mOT-HPWArz2kqjFsDCcZDsg"/>
+</div>
+<div class="absolute inset-0 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<span class="material-symbols-outlined text-white text-3xl">photo_camera</span>
+</div>
+</div>
+<p class="text-label-sm font-label-sm text-text-secondary">Click to upload new</p>
+</div>
+<!-- Form Fields -->
+<div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-md w-full">
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-text-secondary uppercase tracking-wider block">First Name</label>
+<input class="w-full px-4 py-3 rounded-full border border-border-divider bg-transparent text-body-md focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" type="text" value="Carlic"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-text-secondary uppercase tracking-wider block">Last Name</label>
+<input class="w-full px-4 py-3 rounded-full border border-border-divider bg-transparent text-body-md focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" type="text" value="Bolomboy"/>
+</div>
+<div class="space-y-2 md:col-span-2">
+<label class="text-label-sm font-label-sm text-text-secondary uppercase tracking-wider block">Email Address</label>
+<input class="w-full px-4 py-3 rounded-full border border-border-divider bg-transparent text-body-md focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" type="email" value="carlic@gmail.com"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-text-secondary uppercase tracking-wider block">Role / Title</label>
+<input class="w-full px-4 py-3 rounded-full border border-border-divider bg-transparent text-body-md focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" readonly="" type="text" value="Inventory Manager"/>
+</div>
+<div class="space-y-2">
+<label class="text-label-sm font-label-sm text-text-secondary uppercase tracking-wider block">Department</label>
+<div class="relative">
+<select class="w-full px-4 py-3 rounded-full border border-border-divider bg-transparent text-body-md focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all appearance-none">
+<option>Logistics</option>
+<option>Operations</option>
+<option>Management</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 transform -translate-y-1/2 text-text-secondary pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Preferences (Bento Style Sub-cards) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="bg-card-surface rounded-xl p-lg shadow-sm border border-border-divider/50">
+<div class="flex items-center space-x-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-accent-tan-light flex items-center justify-center text-tertiary-container">
+<span class="material-symbols-outlined">language</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary">Regional</h3>
+</div>
+<div class="space-y-4">
+<div>
+<label class="text-label-sm font-label-sm text-text-secondary uppercase tracking-wider block mb-1">Timezone</label>
+<select class="w-full px-4 py-2 rounded-full border border-border-divider bg-transparent text-body-md focus:outline-none focus:border-primary-container">
+<option>(GMT-08:00) Pacific Time</option>
+</select>
+</div>
+<div>
+<label class="text-label-sm font-label-sm text-text-secondary uppercase tracking-wider block mb-1">Language</label>
+<select class="w-full px-4 py-2 rounded-full border border-border-divider bg-transparent text-body-md focus:outline-none focus:border-primary-container">
+<option>English (US)</option>
+</select>
+</div>
+</div>
+</div>
+<div class="bg-card-surface rounded-xl p-lg shadow-sm border border-border-divider/50">
+<div class="flex items-center space-x-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary">Notifications</h3>
+</div>
+<div class="space-y-4">
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="text-body-md font-body-md text-text-primary group-hover:text-primary transition-colors">Email Alerts</span>
+<div class="relative">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="text-body-md font-body-md text-text-primary group-hover:text-primary transition-colors">Inventory Warnings</span>
+<div class="relative">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="text-body-md font-body-md text-text-primary group-hover:text-primary transition-colors">System Updates</span>
+<div class="relative">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Security & Stats -->
+<div class="space-y-lg">
+<!-- Profile Stats Summary Card -->
+<div class="bg-card-surface rounded-xl p-lg shadow-sm border border-border-divider/50 flex flex-col items-center text-center">
+<img class="w-20 h-20 rounded-full mb-4 object-cover border-2 border-surface-container-highest" data-alt="A stylized 3D avatar of a professional looking individual wearing glasses, slightly smiling. Soft, bright lighting against a clean, off-white background, matching a premium, calm design system aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj1ay0pItQvMOi8Fm-gknZ4oRHoJgdpmvlKKAkhSnZEkOQhCm5Nzcsfua-Ontdzz8UGN9OGFu0MYGDlV4asqBTOgO3-dOHreMooYtOux4zf0cxRmFepnGpRQIQc5zbTWEl1wxNLHnnDeMuPxZSuGm7Y_fm_rNYSZRS0dLhsMjWFuGh0tsHpRxDpTBcZ_kW_j9Q9_Z_o_wXtsc4ZxZX-vDK7bF6ZBwuP1_C8_v0Ikvp143-shDUBCWsjg"/>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-1">Carlic Bolomboy</h3>
+<p class="text-body-md font-body-md text-text-secondary mb-6">Inventory Manager</p>
+<div class="flex justify-between w-full px-4 pt-4 border-t border-border-divider">
+<div class="flex flex-col items-center">
+<span class="text-label-sm font-label-sm text-text-secondary uppercase">Projects</span>
+<span class="font-display-kpi text-display-kpi text-text-primary">26</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-label-sm font-label-sm text-text-secondary uppercase">Followers</span>
+<span class="font-display-kpi text-display-kpi text-text-primary">356</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-label-sm font-label-sm text-text-secondary uppercase">Following</span>
+<span class="font-display-kpi text-display-kpi text-text-primary">68</span>
+</div>
+</div>
+</div>
+<!-- Security / Password Change -->
+<div class="bg-card-surface rounded-xl p-lg shadow-sm border border-border-divider/50 flex flex-col items-center text-center relative overflow-hidden">
+<!-- Subtle background decoration -->
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-primary-fixed/20 rounded-full blur-2xl pointer-events-none"></div>
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center text-primary-container mb-4">
+<span class="material-symbols-outlined text-3xl">fingerprint</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary mb-2">Keep you safe!</h3>
+<p class="text-body-md font-body-md text-text-secondary mb-6">Update your security password regularly to prevent unauthorized access.</p>
+<form class="w-full space-y-4 mb-6">
+<div class="relative">
+<input class="w-full px-4 py-3 rounded-full border border-border-divider bg-transparent text-body-md focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all pr-10" placeholder="Current Password" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 transform -translate-y-1/2 text-text-secondary text-sm cursor-pointer hover:text-primary">visibility_off</span>
+</div>
+<div class="relative">
+<input class="w-full px-4 py-3 rounded-full border border-border-divider bg-transparent text-body-md focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all pr-10" placeholder="New Password" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 transform -translate-y-1/2 text-text-secondary text-sm cursor-pointer hover:text-primary">visibility_off</span>
+</div>
+<div class="relative">
+<input class="w-full px-4 py-3 rounded-full border border-border-divider bg-transparent text-body-md focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all pr-10" placeholder="Confirm Password" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 transform -translate-y-1/2 text-text-secondary text-sm cursor-pointer hover:text-primary">visibility_off</span>
+</div>
+</form>
+<button class="w-full py-3 rounded-full bg-primary-container text-white font-label-sm text-label-sm hover:bg-primary transition-colors flex items-center justify-center space-x-2">
+<span class="material-symbols-outlined text-sm">lock_reset</span>
+<span>Update Your Security</span>
+</button>
+</div>
+<!-- Recent Activity Mini List -->
+<div class="bg-card-surface rounded-xl p-lg shadow-sm border border-border-divider/50">
+<h3 class="font-headline-md text-headline-md text-text-primary mb-4">Recent Sessions</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between py-2 border-b border-border-divider/50 last:border-0">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-text-secondary text-sm">desktop_windows</span>
+<div>
+<p class="text-body-md font-body-md text-text-primary">MacBook Pro 16"</p>
+<p class="text-label-sm font-label-sm text-text-secondary font-normal">San Francisco, CA</p>
+</div>
+</div>
+<span class="text-label-sm font-label-sm text-primary bg-primary-fixed px-2 py-1 rounded-full">Active now</span>
+</div>
+<div class="flex items-center justify-between py-2 border-b border-border-divider/50 last:border-0">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-text-secondary text-sm">smartphone</span>
+<div>
+<p class="text-body-md font-body-md text-text-primary">iPhone 13 Pro</p>
+<p class="text-label-sm font-label-sm text-text-secondary font-normal">Yesterday, 14:32</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

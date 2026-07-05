@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CV Akuna - System Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "secondary-fixed-dim": "#bdc9c1",
+                            "warning-amber": "#C98A3B",
+                            "on-background": "#1c1c18",
+                            "on-tertiary-container": "#f4c280",
+                            "danger-red": "#B3413F",
+                            "inverse-on-surface": "#f4f0e9",
+                            "on-secondary": "#ffffff",
+                            "page-bg": "#EDEAE3",
+                            "on-primary-fixed-variant": "#2f4d3a",
+                            "primary-fixed-dim": "#adcfb5",
+                            "tertiary-container": "#724e17",
+                            "secondary-container": "#d9e5dc",
+                            "on-primary-fixed": "#032111",
+                            "surface-bright": "#fcf9f2",
+                            "on-surface": "#1c1c18",
+                            "surface": "#fcf9f2",
+                            "surface-container": "#f1eee7",
+                            "tertiary-fixed": "#ffddb4",
+                            "on-secondary-container": "#5c6760",
+                            "error": "#ba1a1a",
+                            "surface-container-high": "#ebe8e1",
+                            "accent-tan-light": "#F3E4C9",
+                            "on-secondary-fixed-variant": "#3e4943",
+                            "surface-container-highest": "#e5e2db",
+                            "surface-variant": "#e5e2db",
+                            "error-container": "#ffdad6",
+                            "outline": "#727972",
+                            "background": "#fcf9f2",
+                            "text-secondary": "#8B8880",
+                            "secondary": "#56615a",
+                            "text-primary": "#2A2A26",
+                            "on-secondary-fixed": "#131e18",
+                            "primary-container": "#3e5c48",
+                            "inverse-primary": "#adcfb5",
+                            "primary-fixed": "#c9ebd1",
+                            "on-primary-container": "#b1d3ba",
+                            "surface-dim": "#dddad3",
+                            "negative-rose": "#C9697A",
+                            "tertiary": "#573701",
+                            "primary": "#274432",
+                            "surface-container-lowest": "#ffffff",
+                            "surface-tint": "#476551",
+                            "surface-container-low": "#f6f3ec",
+                            "on-error": "#ffffff",
+                            "on-tertiary": "#ffffff",
+                            "on-surface-variant": "#424843",
+                            "outline-variant": "#c2c8c1",
+                            "card-surface": "#FFFFFF",
+                            "on-primary": "#ffffff",
+                            "on-tertiary-fixed": "#291800",
+                            "inverse-surface": "#31312c",
+                            "negative-bg": "#F7DEE2",
+                            "border-divider": "#E7E4DC",
+                            "tertiary-fixed-dim": "#f0be7c",
+                            "secondary-fixed": "#d9e5dc",
+                            "on-tertiary-fixed-variant": "#614008",
+                            "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "1rem",
+                            "lg": "2rem",
+                            "xl": "3rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "sm": "8px",
+                            "gutter": "24px",
+                            "margin": "32px",
+                            "xs": "4px",
+                            "lg": "24px",
+                            "xl": "32px",
+                            "md": "16px",
+                            "base": "4px"
+                    },
+                    "fontFamily": {
+                            "display-kpi": ["Plus Jakarta Sans"],
+                            "body-lg": ["Plus Jakarta Sans"],
+                            "headline-md": ["Plus Jakarta Sans"],
+                            "headline-lg": ["Plus Jakarta Sans"],
+                            "headline-lg-mobile": ["Plus Jakarta Sans"],
+                            "tabular-nums": ["Plus Jakarta Sans"],
+                            "label-sm": ["Plus Jakarta Sans"],
+                            "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                            "display-kpi": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                            "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                            "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                            "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                            "tabular-nums": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                            "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #EDEAE3; }
+        .ambient-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.fill { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-page-bg text-on-surface font-body-md antialiased min-h-screen relative overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-transparent text-primary font-headline-md text-headline-md fixed top-0 right-0 left-24 h-24 z-40 bg-transparent flat no shadows flex justify-between items-center px-8 w-full max-w-full hidden md:flex">
+<div class="flex items-center gap-4 w-1/3">
+<div class="font-headline-lg text-headline-lg font-bold text-on-background">CV Akuna</div>
+<p class="font-body-md text-text-secondary">System Settings</p>
+</div>
+<div class="flex-1 flex justify-center">
+<div class="relative w-full max-w-md">
+<input class="w-full bg-card-surface border border-border-divider rounded-full py-3 px-6 pl-12 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Search parameters..." type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">search</span>
+</div>
+</div>
+<div class="flex items-center gap-6 w-1/3 justify-end">
+<div class="flex items-center gap-2 bg-card-surface rounded-full p-1 ambient-shadow">
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+</div>
+<button class="bg-primary-container text-on-primary rounded-full px-6 py-3 font-label-sm hover:bg-surface-tint transition-all">
+                Save Changes
+            </button>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-lowest text-on-surface dark:text-on-surface font-label-caps text-label-caps hidden fixed left-4 top-4 bottom-4 w-16 rounded-full flex-col items-center py-6 shadow-sm dark:shadow-none shadow-sm flex flex-col items-center gap-6 z-50 md:flex">
+<div class="w-10 h-10 rounded-full bg-accent-tan-light flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary-container">domain</span>
+</div>
+<div class="flex flex-col gap-4 flex-1">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 p-2 flex items-center justify-center w-10 h-10 group relative" href="#" title="Dashboard">
+<span class="material-symbols-outlined">grid_view</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 p-2 flex items-center justify-center w-10 h-10 group relative" href="#" title="Inventory">
+<span class="material-symbols-outlined">inventory_2</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 p-2 flex items-center justify-center w-10 h-10 group relative" href="#" title="Analytics">
+<span class="material-symbols-outlined">bar_chart</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 p-2 flex items-center justify-center w-10 h-10 group relative" href="#" title="Orders">
+<span class="material-symbols-outlined">shopping_cart</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 p-2 flex items-center justify-center w-10 h-10 group relative" href="#" title="Suppliers">
+<span class="material-symbols-outlined">group</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 p-2 flex items-center justify-center w-10 h-10 group relative" href="#" title="Reports">
+<span class="material-symbols-outlined">assignment</span>
+</a>
+</div>
+<div class="flex flex-col gap-4 mt-auto">
+<a class="bg-on-background text-on-primary rounded-full w-10 h-10 flex items-center justify-center hover:bg-surface-container-high transition-all scale-95 active:scale-90 group relative" href="#" title="Settings">
+<span class="material-symbols-outlined">settings</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200 hover:bg-surface-container-high rounded-full transition-all scale-95 active:scale-90 p-2 flex items-center justify-center w-10 h-10 group relative" href="#" title="Logout">
+<span class="material-symbols-outlined">logout</span>
+</a>
+<div class="mt-4">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-white" data-alt="A small circular avatar of Carlic Bolomboy, professional headshot in warm lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJsXJ5iV7cmK-zxfNG6npVAr0TtVV7kI1GXWqy7M0TVW9aTNwActGpy9U7KzEb3wDIvh4L_7FjLKJvhIGxq7eb7ngSK0d47y1cBW0PSDUCNYQwRr407tlCKVS7uIDf5EFIloZeYlzDdyNYedjY7gAIzs2tp7t55mm0_lRlKavHE8WZuN4a-y93QLM27WjbKtntHEapXuJXnhfOEEyHnRdK-AVDEbXwZnPHU4ON06cTedy9UA7Cw-dRhQ"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="md:ml-24 pt-28 px-4 md:px-8 pb-12 w-full max-w-7xl mx-auto">
+<!-- Settings Tabs -->
+<div class="flex gap-2 mb-8 bg-card-surface p-1 rounded-full w-max ambient-shadow">
+<button class="px-6 py-2 rounded-full font-label-sm text-text-secondary hover:bg-surface-container-low transition-colors">Company Profile</button>
+<button class="px-6 py-2 rounded-full font-label-sm bg-primary-container text-white">Calculation Parameters</button>
+<button class="px-6 py-2 rounded-full font-label-sm text-text-secondary hover:bg-surface-container-low transition-colors">Notifications</button>
+</div>
+<!-- Bento Grid for Settings -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Safety Stock Configuration -->
+<div class="bg-card-surface rounded-xl p-xl col-span-1 md:col-span-2 lg:col-span-2 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-accent-tan-light flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary-container">security</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-background">Safety Stock Configuration</h2>
+</div>
+<p class="font-body-md text-text-secondary mb-8">Define baseline parameters for automated safety stock calculations across all SKUs.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant block">Target Service Level (Z-Factor)</label>
+<div class="relative">
+<input class="w-full bg-surface border border-border-divider rounded-full py-3 px-4 focus:outline-none focus:border-primary-container transition-all" step="0.01" type="number" value="1.65"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary font-label-sm">95%</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant block">Default Lead Time Variability (Days)</label>
+<input class="w-full bg-surface border border-border-divider rounded-full py-3 px-4 focus:outline-none focus:border-primary-container transition-all" type="number" value="3"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant block">Demand Forecast Horizon (Months)</label>
+<input class="w-full bg-surface border border-border-divider rounded-full py-3 px-4 focus:outline-none focus:border-primary-container transition-all" type="number" value="6"/>
+</div>
+<div class="flex items-end">
+<label class="flex items-center gap-3 cursor-pointer">
+<input checked="" class="form-checkbox h-5 w-5 text-primary-container rounded border-border-divider focus:ring-primary-container" type="checkbox"/>
+<span class="font-body-md text-on-surface">Auto-adjust seasonality</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Cost Defaults -->
+<div class="bg-card-surface rounded-xl p-xl hover:-translate-y-1 transition-transform duration-300">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">payments</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-background">Cost Defaults</h2>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant block">Default Ordering Cost</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary material-symbols-outlined">attach_money</span>
+<input class="w-full bg-surface border border-border-divider rounded-full py-3 px-4 pl-12 focus:outline-none focus:border-primary-container transition-all" type="number" value="45.00"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant block">Holding Cost Percentage</label>
+<div class="relative">
+<input class="w-full bg-surface border border-border-divider rounded-full py-3 px-4 focus:outline-none focus:border-primary-container transition-all" type="number" value="20"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary">%</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-on-surface-variant block">Base Currency</label>
+<select class="w-full bg-surface border border-border-divider rounded-full py-3 px-4 focus:outline-none focus:border-primary-container transition-all appearance-none">
+<option>USD ($)</option>
+<option>EUR (€)</option>
+<option>GBP (£)</option>
+</select>
+</div>
+</div>
+</div>
+<!-- ABC Analysis Thresholds -->
+<div class="bg-card-surface rounded-xl p-xl col-span-1 md:col-span-2 lg:col-span-3 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white">tune</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-background">ABC Analysis Thresholds</h2>
+</div>
+<button class="text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Class A -->
+<div class="p-6 border border-border-divider rounded-[24px] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary-container opacity-5 rounded-bl-[100px]"></div>
+<h3 class="font-headline-md text-primary-container mb-2">Class A</h3>
+<p class="font-label-sm text-text-secondary mb-4">High Value Items</p>
+<div class="space-y-4">
+<div>
+<label class="font-label-sm text-on-surface-variant block mb-1">Cumulative Value %</label>
+<input class="w-full bg-surface border border-border-divider rounded-full py-2 px-4 focus:outline-none focus:border-primary-container transition-all" type="number" value="80"/>
+</div>
+<div>
+<label class="font-label-sm text-on-surface-variant block mb-1">Review Frequency</label>
+<select class="w-full bg-surface border border-border-divider rounded-full py-2 px-4 focus:outline-none focus:border-primary-container transition-all text-sm">
+<option>Weekly</option>
+<option>Bi-weekly</option>
+<option>Monthly</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Class B -->
+<div class="p-6 border border-border-divider rounded-[24px] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-accent-tan-light opacity-30 rounded-bl-[100px]"></div>
+<h3 class="font-headline-md text-tertiary-container mb-2">Class B</h3>
+<p class="font-label-sm text-text-secondary mb-4">Moderate Value Items</p>
+<div class="space-y-4">
+<div>
+<label class="font-label-sm text-on-surface-variant block mb-1">Cumulative Value %</label>
+<input class="w-full bg-surface border border-border-divider rounded-full py-2 px-4 focus:outline-none focus:border-primary-container transition-all" type="number" value="15"/>
+</div>
+<div>
+<label class="font-label-sm text-on-surface-variant block mb-1">Review Frequency</label>
+<select class="w-full bg-surface border border-border-divider rounded-full py-2 px-4 focus:outline-none focus:border-primary-container transition-all text-sm">
+<option>Monthly</option>
+<option>Quarterly</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Class C -->
+<div class="p-6 border border-border-divider rounded-[24px] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-surface-variant opacity-50 rounded-bl-[100px]"></div>
+<h3 class="font-headline-md text-on-surface-variant mb-2">Class C</h3>
+<p class="font-label-sm text-text-secondary mb-4">Low Value Items</p>
+<div class="space-y-4">
+<div>
+<label class="font-label-sm text-on-surface-variant block mb-1">Cumulative Value %</label>
+<input class="w-full bg-surface border border-border-divider rounded-full py-2 px-4 focus:outline-none focus:border-primary-container transition-all" type="number" value="5"/>
+</div>
+<div>
+<label class="font-label-sm text-on-surface-variant block mb-1">Review Frequency</label>
+<select class="w-full bg-surface border border-border-divider rounded-full py-2 px-4 focus:outline-none focus:border-primary-container transition-all text-sm">
+<option>Annually</option>
+<option>Semi-annually</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6 flex items-center justify-between bg-surface-container-low p-4 rounded-full">
+<span class="font-body-md text-text-secondary">Total Value must equal 100%</span>
+<span class="font-headline-md text-primary-container">100%</span>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CV Akuna - Employee Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#EFEFEA',
+                        onBackground: '#1C1C1E',
+                        surface: '#FFFFFF',
+                        onSurface: '#1C1C1E',
+                        surfaceVariant: '#F5F5F5',
+                        onSurfaceVariant: '#6B6B6B',
+                        primary: '#688874',
+                        onPrimary: '#FFFFFF',
+                        primaryContainer: '#D1E6DA',
+                        onPrimaryContainer: '#203429',
+                        secondary: '#F2DFCB',
+                        onSecondary: '#3E2E1E',
+                        error: '#BA1A1A',
+                        onError: '#FFFFFF',
+                        outline: '#E0E0E0'
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Public Sans", "sans-serif"],
+                        display: ["Public Sans", "sans-serif"],
+                        body: ["Public Sans", "sans-serif"],
+                        label: ["Public Sans", "sans-serif"]
+                    },
+                    spacing: {
+                        'header-height': '80px'
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.onBackground'); font-family: theme('fontFamily.body'); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); }
+    </style>
+</head>
+<body class="antialiased min-h-screen overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 right-0 left-24 h-header-height z-40 bg-transparent flex justify-between items-center px-8 w-full max-w-[calc(100%-6rem)]">
+<div class="flex items-center gap-4">
+<div class="font-headline font-bold text-2xl text-onBackground">Hello, Carlic!</div>
+<p class="text-onSurfaceVariant text-sm hidden md:block">Explore information and activity about your property</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block w-64">
+<input class="w-full bg-surface text-sm rounded-full pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-primary border-none shadow-sm" placeholder="Search..." type="text"/>
+<button class="absolute right-1 top-1 w-8 h-8 bg-onBackground text-surface rounded-full flex items-center justify-center hover:bg-opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</button>
+</div>
+<button class="w-10 h-10 bg-surface rounded-full flex items-center justify-center text-onSurfaceVariant hover:bg-surfaceVariant transition-colors shadow-sm relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="w-10 h-10 bg-surface rounded-full flex items-center justify-center text-onSurfaceVariant hover:bg-surfaceVariant transition-colors shadow-sm">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-4 top-4 bottom-4 w-16 bg-surface rounded-full flex flex-col items-center py-6 shadow-sm z-50">
+<div class="mb-8">
+<span class="material-symbols-outlined text-3xl text-primary" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div class="flex flex-col items-center gap-6 flex-1 w-full">
+<button class="bg-onBackground text-onPrimary rounded-full w-10 h-10 flex items-center justify-center group relative shadow-md">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="absolute left-14 bg-onBackground text-surface text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Dashboard</span>
+</button>
+<button class="text-onSurfaceVariant hover:text-primary transition-colors duration-200 hover:bg-surfaceVariant rounded-full w-10 h-10 flex items-center justify-center group relative">
+<span class="material-symbols-outlined">inventory_2</span>
+</button>
+<button class="text-onSurfaceVariant hover:text-primary transition-colors duration-200 hover:bg-surfaceVariant rounded-full w-10 h-10 flex items-center justify-center group relative">
+<span class="material-symbols-outlined">bar_chart</span>
+</button>
+<button class="text-onSurfaceVariant hover:text-primary transition-colors duration-200 hover:bg-surfaceVariant rounded-full w-10 h-10 flex items-center justify-center group relative">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+<button class="text-onSurfaceVariant hover:text-primary transition-colors duration-200 hover:bg-surfaceVariant rounded-full w-10 h-10 flex items-center justify-center group relative">
+<span class="material-symbols-outlined">group</span>
+</button>
+<button class="text-onSurfaceVariant hover:text-primary transition-colors duration-200 hover:bg-surfaceVariant rounded-full w-10 h-10 flex items-center justify-center group relative">
+<span class="material-symbols-outlined">assignment</span>
+</button>
+</div>
+<div class="flex flex-col items-center gap-6 mt-auto">
+<button class="text-onSurfaceVariant hover:text-primary transition-colors duration-200 hover:bg-surfaceVariant rounded-full w-10 h-10 flex items-center justify-center group relative">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-onSurfaceVariant hover:text-primary transition-colors duration-200 hover:bg-surfaceVariant rounded-full w-10 h-10 flex items-center justify-center group relative">
+<span class="material-symbols-outlined">logout</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-surface shadow-sm mt-2">
+<img class="w-full h-full object-cover" data-alt="Close up professional portrait of a young man with dark hair, warm neutral studio lighting, light mode aesthetic, crisp focus, soft shadows, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlLbkk_cwE1jujgyMxayEBYO6omCxLJKkRtg9CHjeMXIoVxP-PsELKOtfoN08rI3mS-lJTSH0oLYp3P7itNptoRAorvl4N6PDw2rQ44TmFsiFA519SJ_FtuDXtAUWmkqXblPjTxm7EFqwbQb0LTxJrIrlXaAWLngQ0BFScey1Ol38BZeb03ICGevFkg1ny75kAb32f9Lcx2BaxU2rd1k44QijcyED8vghDIj0A0z_YpRX_DT1kzXTo8A"/>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-24 pt-24 pr-8 pb-8 flex flex-col gap-6">
+<!-- KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Hero KPI -->
+<div class="bg-primary text-onPrimary rounded-2xl p-6 shadow-md flex justify-between items-center relative overflow-hidden group hover:scale-[1.02] transition-transform">
+<div class="absolute -right-4 -top-4 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors"></div>
+<div class="relative z-10">
+<h3 class="text-sm font-medium opacity-90 mb-1">Critical Items</h3>
+<p class="text-4xl font-bold">12</p>
+</div>
+<div class="w-24 h-12 relative z-10">
+<svg class="w-full h-full stroke-current fill-none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewbox="0 0 100 40">
+<path d="M 0 30 Q 10 20, 20 25 T 40 15 T 60 20 T 80 5 T 100 10"></path>
+</svg>
+</div>
+</div>
+<!-- Standard KPI 1 -->
+<div class="bg-surface rounded-2xl p-6 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
+<div>
+<h3 class="text-sm text-onSurfaceVariant mb-1">Items Processed</h3>
+<p class="text-2xl font-bold text-onBackground">1,432</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-onSecondary">
+<span class="material-symbols-outlined">inventory</span>
+</div>
+</div>
+<!-- Standard KPI 2 -->
+<div class="bg-surface rounded-2xl p-6 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
+<div>
+<h3 class="text-sm text-onSurfaceVariant mb-1">Pending Orders</h3>
+<p class="text-2xl font-bold text-onBackground">28</p>
+</div>
+<div class="w-12 h-12 rounded-full bg-surfaceVariant flex items-center justify-center text-onSurfaceVariant">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+</div>
+</div>
+<!-- Quick Actions -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<button class="bg-surface rounded-full py-4 px-6 shadow-sm flex items-center justify-center gap-3 hover:bg-primaryContainer hover:text-onPrimaryContainer transition-colors group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">add_shopping_cart</span>
+<span class="font-medium">New PO</span>
+</button>
+<button class="bg-surface rounded-full py-4 px-6 shadow-sm flex items-center justify-center gap-3 hover:bg-primaryContainer hover:text-onPrimaryContainer transition-colors group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">precision_manufacturing</span>
+<span class="font-medium">Record Production</span>
+</button>
+<button class="bg-surface rounded-full py-4 px-6 shadow-sm flex items-center justify-center gap-3 hover:bg-primaryContainer hover:text-onPrimaryContainer transition-colors group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">sync_alt</span>
+<span class="font-medium">Adjust Stock</span>
+</button>
+</div>
+<!-- Lower Section Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Table Section -->
+<div class="lg:col-span-2 bg-surface rounded-2xl shadow-sm p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-lg font-bold text-onBackground">Critical Stock</h2>
+<button class="text-sm font-medium text-primary hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline text-sm text-onSurfaceVariant">
+<th class="pb-3 font-medium">Item Name</th>
+<th class="pb-3 font-medium">SKU</th>
+<th class="pb-3 font-medium">Current Lvl</th>
+<th class="pb-3 font-medium text-right">Action</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-outline/50 hover:bg-surfaceVariant/50 transition-colors">
+<td class="py-4 font-medium text-onBackground">Organic Cotton Yarn</td>
+<td class="py-4 text-onSurfaceVariant">YRN-ORG-001</td>
+<td class="py-4"><span class="text-error font-bold">12 kg</span></td>
+<td class="py-4 text-right">
+<button class="bg-error/10 text-error px-4 py-1.5 rounded-full font-medium text-xs hover:bg-error hover:text-onError transition-colors inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                        Emergency PO
+                                    </button>
+</td>
+</tr>
+<tr class="border-b border-outline/50 hover:bg-surfaceVariant/50 transition-colors">
+<td class="py-4 font-medium text-onBackground">Recycled Poly Blend</td>
+<td class="py-4 text-onSurfaceVariant">PLB-REC-045</td>
+<td class="py-4"><span class="text-error font-bold">5 rolls</span></td>
+<td class="py-4 text-right">
+<button class="bg-error/10 text-error px-4 py-1.5 rounded-full font-medium text-xs hover:bg-error hover:text-onError transition-colors inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                        Emergency PO
+                                    </button>
+</td>
+</tr>
+<tr class="hover:bg-surfaceVariant/50 transition-colors">
+<td class="py-4 font-medium text-onBackground">Natural Dye - Indigo</td>
+<td class="py-4 text-onSurfaceVariant">DYE-IND-09</td>
+<td class="py-4"><span class="text-orange-500 font-bold">8 L</span></td>
+<td class="py-4 text-right">
+<button class="bg-surfaceVariant text-onSurfaceVariant px-4 py-1.5 rounded-full font-medium text-xs hover:bg-primary hover:text-onPrimary transition-colors inline-flex items-center gap-1 border border-outline">
+<span class="material-symbols-outlined text-[14px]">add</span>
+                                        Standard PO
+                                    </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Feed Section -->
+<div class="bg-surface rounded-2xl shadow-sm p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-lg font-bold text-onBackground">Your Activity</h2>
+<span class="material-symbols-outlined text-onSurfaceVariant">history</span>
+</div>
+<div class="relative pl-4 border-l-2 border-surfaceVariant space-y-6 flex-1 overflow-y-auto pr-2">
+<!-- Feed Item 1 -->
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-4 h-4 rounded-full bg-primaryContainer border-2 border-surface"></div>
+<p class="text-xs text-onSurfaceVariant mb-1">Today, 10:45 AM</p>
+<p class="text-sm font-medium text-onBackground">Recorded Production</p>
+<p class="text-xs text-onSurfaceVariant mt-1">Completed batch #4092 (50 units)</p>
+</div>
+<!-- Feed Item 2 -->
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-4 h-4 rounded-full bg-secondary border-2 border-surface"></div>
+<p class="text-xs text-onSurfaceVariant mb-1">Today, 09:12 AM</p>
+<p class="text-sm font-medium text-onBackground">Stock Adjustment</p>
+<p class="text-xs text-onSurfaceVariant mt-1">Decreased 'Linen Fabric' by 10m</p>
+</div>
+<!-- Feed Item 3 -->
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-4 h-4 rounded-full bg-surfaceVariant border-2 border-surface"></div>
+<p class="text-xs text-onSurfaceVariant mb-1">Yesterday, 04:30 PM</p>
+<p class="text-sm font-medium text-onBackground">Created PO #1024</p>
+<p class="text-xs text-onSurfaceVariant mt-1">Ordered 500 boxes from Supplier A</p>
+</div>
+<!-- Feed Item 4 -->
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-4 h-4 rounded-full bg-surfaceVariant border-2 border-surface"></div>
+<p class="text-xs text-onSurfaceVariant mb-1">Yesterday, 01:15 PM</p>
+<p class="text-sm font-medium text-onBackground">Quality Check Passed</p>
+<p class="text-xs text-onSurfaceVariant mt-1">Batch #4091 approved for shipping.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
