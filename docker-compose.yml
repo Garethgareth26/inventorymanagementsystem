@@ -1,0 +1,127 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# docker-compose.yml — Local Development
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Usage:
+#   docker compose up -d          # Start all services
+#   docker compose down -v        # Stop and remove volumes
+#   docker compose exec app php artisan migrate:fresh --seed
+#
+# Services:
+#   app     — Laravel (PHP-FPM 8.4 + Nginx) running on http://localhost:8080
+#   db      — PostgreSQL 16 (mirrors Supabase on production)
+#   redis   — Redis 7 (mirrors Upstash on production)
+#   mailpit — Local SMTP + web UI for email testing on http://localhost:8025
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  # ── Laravel Application ─────────────────────────────────────────────────────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production       # Use the production stage even locally so the
+                               # image is identical to what Cloud Run runs.
+    ports:
+      - "8080:8080"            # Browse at http://localhost:8080
+    environment:
+      APP_NAME: "CV Akuna Inventory"
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_KEY: "${APP_KEY}"    # Set in your local .env or pass via shell
+      APP_URL: "http://localhost:8080"
+
+      # Database — points to the local Postgres service below
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: akuna_inventory
+      DB_USERNAME: akuna
+      DB_PASSWORD: akuna_secret
+
+      # Session / Cache / Queue — all backed by local Redis
+      SESSION_DRIVER: redis
+      CACHE_STORE: redis
+      QUEUE_CONNECTION: redis
+
+      # Redis — points to the local Redis service below
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ""
+
+      # Mail — forwarded to Mailpit (SMTP trap)
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailpit
+      MAIL_PORT: 1025
+      MAIL_FROM_ADDRESS: "noreply@cvakuna.local"
+      MAIL_FROM_NAME: "CV Akuna"
+
+      FILESYSTEM_DISK: local
+      LOG_CHANNEL: stderr       # Surface logs directly to docker compose logs
+      LOG_LEVEL: debug
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      # Mount storage so generated files persist across container restarts
+      - app_storage:/var/www/html/storage
+    networks:
+      - akuna-net
+    restart: unless-stopped
+
+  # ── PostgreSQL 16 (mirrors Supabase) ─────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: akuna_inventory
+      POSTGRES_USER: akuna
+      POSTGRES_PASSWORD: akuna_secret
+    ports:
+      - "5433:5432"            # Exposed on 5433 to avoid conflict with a
+                               # local Postgres installation on 5432.
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U akuna -d akuna_inventory"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - akuna-net
+    restart: unless-stopped
+
+  # ── Redis 7 (mirrors Upstash) ────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+    networks:
+      - akuna-net
+    restart: unless-stopped
+
+  # ── Mailpit — Local SMTP trap ────────────────────────────────────────────
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025"            # Web UI: http://localhost:8025
+      - "1025:1025"            # SMTP port (consumed by the app service)
+    networks:
+      - akuna-net
+    restart: unless-stopped
+
+# ─────────────────────────────────────────────────────────────────────────────
+volumes:
+  db_data:
+  app_storage:
+
+networks:
+  akuna-net:
+    driver: bridge
