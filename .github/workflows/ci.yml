@@ -125,6 +125,18 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build Vite assets
+        run: npm run build
+        
       - name: Copy .env for testing
         run: cp .env.example .env
 
