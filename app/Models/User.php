@@ -6,6 +6,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -61,6 +62,56 @@ class User extends Authenticatable implements MustVerifyEmail
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Purchase orders recorded by this user.
+     *
+     * @return HasMany<PesananPembelian, $this>
+     */
+    public function pesananPembelian(): HasMany
+    {
+        return $this->hasMany(PesananPembelian::class, 'dicatat_oleh');
+    }
+
+    /**
+     * Production entries recorded by this user (Karyawan only).
+     *
+     * @return HasMany<ProductionEntry, $this>
+     */
+    public function productionEntries(): HasMany
+    {
+        return $this->hasMany(ProductionEntry::class, 'dicatat_oleh');
+    }
+
+    /**
+     * Stock mutation legs recorded by this user.
+     *
+     * @return HasMany<MutasiStok, $this>
+     */
+    public function mutasiStok(): HasMany
+    {
+        return $this->hasMany(MutasiStok::class, 'dicatat_oleh');
+    }
+
+    /**
+     * Inventory parameter sets this user last applied (EOQ/SS/ROP simulations).
+     *
+     * @return HasMany<InventoryParameter, $this>
+     */
+    public function appliedInventoryParameters(): HasMany
+    {
+        return $this->hasMany(InventoryParameter::class, 'last_applied_by');
+    }
+
+    /**
+     * Audit log rows where this user is the actor.
+     *
+     * @return HasMany<AuditLog, $this>
+     */
+    public function auditLogs(): HasMany
+    {
+        return $this->hasMany(AuditLog::class);
     }
 
     // ─── RBAC helpers ─────────────────────────────────────────────────────────
