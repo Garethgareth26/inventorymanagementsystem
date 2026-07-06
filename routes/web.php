@@ -44,45 +44,66 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    /*
-    |--------------------------------------------------------------------------
-    | Module Route Stubs — Sprint 2+ (these make sidebar links resolvable)
-    |
-    | Each stub returns a minimal placeholder view until the real controller
-    | is implemented. This prevents route() calls in the sidebar from throwing
-    | exceptions during Sprint 1.
-    |--------------------------------------------------------------------------
-    */
-    $placeholder = fn (string $title) => function () use ($title) {
-        return view('placeholder', ['title' => $title]);
-    };
-
     // Master Data
-    Route::get('/suppliers', $placeholder('Suppliers'))->name('suppliers.index');
-    Route::get('/suppliers/create', $placeholder('Add Supplier'))->name('suppliers.create');
-    Route::get('/bahan-baku', $placeholder('Raw Materials'))->name('bahan_baku.index');
-    Route::get('/bahan-baku/create', $placeholder('Add Raw Material'))->name('bahan_baku.create');
-    Route::get('/barang-jadi', $placeholder('Finished Goods'))->name('barang_jadi.index');
-    Route::get('/barang-jadi/create', $placeholder('Add Finished Good'))->name('barang_jadi.create');
-    Route::get('/bom', $placeholder('Bill of Materials'))->name('bom.index');
+    Route::get('/suppliers', function () {
+        return view('suppliers.index');
+    })->name('suppliers.index');
+    Route::get('/suppliers/create', function () {
+        return view('suppliers.create');
+    })->name('suppliers.create');
+    Route::get('/bahan-baku', function () {
+        return view('bahan_baku.index');
+    })->name('bahan_baku.index');
+    Route::get('/bahan-baku/create', function () {
+        return view('bahan_baku.create');
+    })->name('bahan_baku.create');
+    Route::get('/barang-jadi', function () {
+        return view('barang_jadi.index');
+    })->name('barang_jadi.index');
+    Route::get('/barang-jadi/create', function () {
+        return view('barang_jadi.create');
+    })->name('barang_jadi.create');
+    Route::get('/bom', function () {
+        return view('bom.index');
+    })->name('bom.index');
 
     // Operations
-    Route::get('/pesanan-pembelian', $placeholder('Purchase Orders'))->name('pesanan_pembelian.index');
-    Route::get('/production', $placeholder('Production'))->name('production.index');
-    Route::get('/mutasi-stok', $placeholder('Inventory Assets'))->name('mutasi_stok.index');
+    Route::get('/pesanan-pembelian', function () {
+        return view('pesanan_pembelian.index');
+    })->name('pesanan_pembelian.index');
+    Route::get('/production', function () {
+        return view('production.index');
+    })->name('production.index');
+    Route::get('/mutasi-stok', function () {
+        return view('mutasi_stok.index');
+    })->name('mutasi_stok.index');
 
     // Optimization
-    Route::get('/eoq', $placeholder('EOQ Analysis'))->name('eoq.index');
-    Route::get('/safety-stock', $placeholder('Safety Stock'))->name('safety_stock.index');
-    Route::get('/reorder-point', $placeholder('Reorder Point'))->name('reorder_point.index');
-    Route::get('/abc-analysis', $placeholder('ABC Analysis'))->name('abc_analysis.index');
+    Route::get('/eoq', function () {
+        return view('eoq.index');
+    })->name('eoq.index');
+    Route::get('/safety-stock', function () {
+        return view('safety_stock.index');
+    })->name('safety_stock.index');
+    Route::get('/reorder-point', function () {
+        return view('reorder_point.index');
+    })->name('reorder_point.index');
+    Route::get('/abc-analysis', function () {
+        return view('abc_analysis.index');
+    })->name('abc_analysis.index');
 
     // Reports
-    Route::get('/reports', $placeholder('Reports'))->name('reports.index');
+    Route::get('/reports', function () {
+        return view('reports.index');
+    })->name('reports.index');
 
     // Administration (Owner only — capability enforced in real controllers later)
-    Route::get('/user-management', $placeholder('User Management'))->name('user_management.index');
-    Route::get('/settings', $placeholder('Settings'))->name('settings.index');
+    Route::get('/user-management', function () {
+        return view('user_management.index');
+    })->name('user_management.index');
+    Route::get('/settings', function () {
+        return view('settings.index');
+    })->name('settings.index');
 
     // Design System Showcase
     Route::get('/design-system', function () {

@@ -1,29 +1,24 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
+{{--
+    Profile Edit — Skeleton (Sprint 2.1.5)
+    ───────────────────────────────────────
+--}}
+<x-layout.app
+    pageTitle="User Profile"
+    pageSubtitle="Kelola detail akun personal Anda"
+>
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-md items-start">
+        <!-- Profile Info -->
+        <x-ui.analytics-card title="Informasi Profil" subtitle="Perbarui informasi profil akun dan alamat email Anda.">
+            <div class="mt-4">
+                @include('profile.partials.update-profile-information-form')
             </div>
+        </x-ui.analytics-card>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
+        <!-- Change Password -->
+        <x-ui.analytics-card title="Ubah Kata Sandi" subtitle="Pastikan akun Anda menggunakan kata sandi acak yang panjang untuk menjaga keamanan.">
+            <div class="mt-4">
+                @include('profile.partials.update-password-form')
             </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
-        </div>
+        </x-ui.analytics-card>
     </div>
-</x-app-layout>
+</x-layout.app>
