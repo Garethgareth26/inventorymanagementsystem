@@ -2,7 +2,7 @@
     'title' => 'Dashboard',
     'subtitle' => null,
     'showSearch' => false,
-    'showNotifications' => false,
+    'showNotifications' => true,
     'showChat' => false,
 ])
 
@@ -34,9 +34,9 @@
             <x-navigation.chat-badge :active="true" />
         @endif
 
-        <!-- Reusable Notification Bell -->
+        <!-- Dynamic Livewire Notification Bell for Critical Stock -->
         @if($showNotifications)
-            <x-navigation.notification-bell :unreadCount="1" />
+            @livewire('navigation.notification-bell')
         @endif
     </div>
 </nav>
