@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Dashboard\EmployeeDashboard;
 use App\Livewire\Dashboard\OwnerDashboard;
+use App\Livewire\MasterData\BahanBaku;
 use App\Livewire\MasterData\Suppliers;
 use Illuminate\Support\Facades\Route;
 
@@ -45,12 +46,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Master Data
     Route::get('/suppliers', Suppliers::class)->name('suppliers.index');
-    Route::get('/bahan-baku', function () {
-        return view('bahan_baku.index');
-    })->name('bahan_baku.index');
-    Route::get('/bahan-baku/create', function () {
-        return view('bahan_baku.create');
-    })->name('bahan_baku.create');
+    Route::get('/bahan-baku', BahanBaku::class)->name('bahan_baku.index');
     Route::get('/barang-jadi', function () {
         return view('barang_jadi.index');
     })->name('barang_jadi.index');

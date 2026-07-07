@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * `stok_saat_ini` is a running balance maintained exclusively by
  * StockMutationService (M-2.9) — never written to directly outside
  * an atomic mutasi_stok transaction.
+ *
+ * @property string|null $abc_class
  */
 class BahanBaku extends Model
 {
