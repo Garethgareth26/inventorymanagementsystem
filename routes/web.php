@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Dashboard\EmployeeDashboard;
+use App\Livewire\Dashboard\OwnerDashboard;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,14 +32,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     // ── Owner Dashboard ─────────────────────────────────────────────────
-    Route::get('/owner/dashboard', function () {
-        return view('dashboard.owner');
-    })->name('owner.dashboard');
+    Route::get('/owner/dashboard', OwnerDashboard::class)->name('owner.dashboard');
 
     // ── Employee Dashboard ──────────────────────────────────────────────
-    Route::get('/employee/dashboard', function () {
-        return view('dashboard.employee');
-    })->name('employee.dashboard');
+    Route::get('/employee/dashboard', EmployeeDashboard::class)->name('employee.dashboard');
 
     // ── Profile ─────────────────────────────────────────────────────────
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
