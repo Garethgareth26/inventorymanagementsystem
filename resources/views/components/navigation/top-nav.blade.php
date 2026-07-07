@@ -1,9 +1,9 @@
 @props([
     'title' => 'Dashboard',
     'subtitle' => null,
-    'showSearch' => true,
-    'showNotifications' => true,
-    'showChat' => true,
+    'showSearch' => false,
+    'showNotifications' => false,
+    'showChat' => false,
 ])
 
 <!-- TopNavBar (Stitch v2 style) -->
