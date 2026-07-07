@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\BahanBaku;
 use App\Models\FinishedGood;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -50,9 +51,11 @@ final class BomService
 
             // Insert new lines
             foreach ($ingredients as $item) {
+                $material = BahanBaku::findOrFail($item['bahan_baku_id']);
                 $fg->bomLines()->create([
                     'bahan_baku_id' => $item['bahan_baku_id'],
                     'qty_per_unit' => (float) $item['qty_per_unit'],
+                    'satuan' => $material->satuan,
                 ]);
             }
 
