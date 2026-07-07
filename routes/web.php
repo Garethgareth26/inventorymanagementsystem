@@ -22,6 +22,7 @@ use App\Livewire\Production\ProductionList;
 use App\Livewire\Purchasing\CreatePurchaseOrder;
 use App\Livewire\Purchasing\PurchaseOrderDetail;
 use App\Livewire\Purchasing\PurchaseOrders;
+use App\Livewire\Reports\ReportGenerator;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -89,9 +90,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/abc-analysis', AbcAnalysis::class)->name('abc_analysis.index');
 
     // Reports
-    Route::get('/reports', function () {
-        return view('reports.index');
-    })->name('reports.index');
+    Route::get('/reports', ReportGenerator::class)->name('reports.index');
 
     // Administration (Owner only — capability enforced in real controllers later)
     Route::get('/user-management', UserManagement::class)->name('user_management.index');
