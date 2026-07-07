@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Navigation;
 
-use App\Models\MasterData\BahanBaku;
+use App\Models\BahanBaku;
 use Livewire\Component;
 
 class NotificationBell extends Component
