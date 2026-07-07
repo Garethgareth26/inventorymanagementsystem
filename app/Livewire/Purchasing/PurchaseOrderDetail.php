@@ -8,6 +8,7 @@ use App\Services\DashboardQueryService;
 use App\Services\StockMutationService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 /**
@@ -39,7 +40,8 @@ class PurchaseOrderDetail extends Component
     /**
      * Computed property to resolve the PO model.
      */
-    public function getPoProperty(): PesananPembelian
+    #[Computed]
+    public function po(): PesananPembelian
     {
         return PesananPembelian::with(['bahanBaku', 'supplier', 'dicatatOleh'])->findOrFail($this->poId);
     }
@@ -191,15 +193,13 @@ class PurchaseOrderDetail extends Component
     public function render()
     {
         $po = $this->po;
-        // Load associated stock mutation for reference
-        $mutation = $po->mutasiStok()->first();
 
         return view('livewire.purchasing.purchase-order-detail', [
             'po' => $po,
-            'mutation' => $mutation,
+            'mutation' => $po->status === 'Diterima' ? $po->mutasiMasuk : null,
         ])->layout('components.layout.app', [
             'pageTitle' => 'Detail Purchase Order',
-            'pageSubtitle' => 'Informasi lengkap PO #'.$po->kode_po,
+            'pageSubtitle' => 'Informasi lengkap dan status pesanan pembelian',
         ]);
     }
 }

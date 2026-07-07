@@ -6,6 +6,7 @@ use App\Models\FinishedGood;
 use App\Models\ProductionEntry;
 use App\Services\ProductionService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 /**
@@ -40,7 +41,8 @@ class CreateProduction extends Component
      *
      * @return array<int, array{id: int, kode: string, nama: string, satuan: string, required: float, available: float, rop: float, is_insufficient: bool, is_near_rop: bool}>
      */
-    public function getIngredientsPreviewProperty(): array
+    #[Computed]
+    public function ingredientsPreview(): array
     {
         if (! $this->finished_goods_id || $this->jumlah_diproduksi <= 0) {
             return [];
