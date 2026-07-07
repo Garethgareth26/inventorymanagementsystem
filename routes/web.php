@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Administration\UserManagement;
 use App\Livewire\Dashboard\EmployeeDashboard;
 use App\Livewire\Dashboard\OwnerDashboard;
 use App\Livewire\Inventory\InventoryMovements;
@@ -93,9 +94,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('reports.index');
 
     // Administration (Owner only — capability enforced in real controllers later)
-    Route::get('/user-management', function () {
-        return view('user_management.index');
-    })->name('user_management.index');
+    Route::get('/user-management', UserManagement::class)->name('user_management.index');
     Route::get('/settings', function () {
         return view('settings.index');
     })->name('settings.index');
