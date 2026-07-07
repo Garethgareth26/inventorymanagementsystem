@@ -27,9 +27,9 @@ class CreatePurchaseOrder extends Component
 
     public ?int $supplier_id = null;
 
-    public float $jumlah = 0.0;
+    public ?float $jumlah = 0.0;
 
-    public float $harga_satuan = 0.0;
+    public ?float $harga_satuan = 0.0;
 
     public string $tanggal_pesan = '';
 
@@ -178,6 +178,16 @@ class CreatePurchaseOrder extends Component
         $validated['estimasi_tiba'] = Carbon::parse($this->tanggal_pesan)
             ->addDays($bb->lead_time_hari)
             ->toDateString();
+
+        $validated['jumlah'] = (float) $this->jumlah;
+        $validated['harga_satuan'] = (float) $this->harga_satuan;
+
+        // Apply emergency logic
+        if ($this->jenis === PesananPembelian::JENIS_DARURAT) {
+            $surchargeSetting = SystemSetting::where('key', 'emergency_surcharge_percent')->first();
+            $surcharge = $surchargeSetting ? (float) $surchargeSetting->value : 20.0;
+            $validated['harga_satuan'] = $validated['harga_satuan'] * (1 + ($surcharge / 100));
+        }
 
         $validated['status'] = PesananPembelian::STATUS_MENUNGGU;
         $validated['dicatat_oleh'] = auth()->id();

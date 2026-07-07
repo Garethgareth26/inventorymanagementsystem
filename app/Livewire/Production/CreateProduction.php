@@ -18,7 +18,7 @@ class CreateProduction extends Component
 
     public ?int $finished_goods_id = null;
 
-    public float $jumlah_diproduksi = 1.0;
+    public ?float $jumlah_diproduksi = 1.0;
 
     public string $tanggal_produksi = '';
 
@@ -44,7 +44,7 @@ class CreateProduction extends Component
     #[Computed]
     public function ingredientsPreview(): array
     {
-        if (! $this->finished_goods_id || $this->jumlah_diproduksi <= 0) {
+        if (! $this->finished_goods_id || (float) $this->jumlah_diproduksi <= 0) {
             return [];
         }
 
@@ -115,8 +115,9 @@ class CreateProduction extends Component
         }
 
         // Server-side check for sufficient stock (additional verification)
+        $jumlah = (float) $this->jumlah_diproduksi;
         foreach ($fg->bomLines as $line) {
-            $required = (float) $line->qty_per_unit * $this->jumlah_diproduksi;
+            $required = (float) $line->qty_per_unit * $jumlah;
             if ($line->bahanBaku->stok_saat_ini < $required) {
                 $this->addError('jumlah_diproduksi', "Gagal: Stok untuk '{$line->bahanBaku->nama}' tidak mencukupi.");
 
@@ -127,7 +128,7 @@ class CreateProduction extends Component
         try {
             $productionService->recordProduction(
                 $fg,
-                $this->jumlah_diproduksi,
+                $jumlah,
                 auth()->user(),
                 $this->tanggal_produksi,
                 $this->keterangan
