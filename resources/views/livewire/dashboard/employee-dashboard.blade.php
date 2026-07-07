@@ -96,7 +96,7 @@
                         <td class="px-lg py-md text-body-md text-text-secondary numeric">{{ number_format($item['rop'], 2) }} {{ $item['satuan'] }}</td>
                         <td class="px-lg py-md text-body-md font-semibold text-negative-rose numeric">{{ number_format($item['defisit'], 2) }} {{ $item['satuan'] }}</td>
                         <td class="px-lg py-md">
-                            <a href="{{ route('pesanan_pembelian.index') }}?bahan_baku_id={{ $item['id'] }}&jenis=Darurat"
+                            <a href="{{ route('pesanan_pembelian.create', ['bahan_baku_id' => $item['id'], 'jenis' => 'Darurat', 'jumlah' => max(1, round($item['defisit']))]) }}"
                                class="inline-flex items-center justify-center rounded-full bg-negative-bg text-negative-rose text-xs px-3 py-1 font-semibold hover:bg-negative-bg/85 transition-all cursor-pointer">
                                 Buat PO Darurat
                             </a>
