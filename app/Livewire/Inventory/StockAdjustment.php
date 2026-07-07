@@ -84,12 +84,6 @@ class StockAdjustment extends Component
             return;
         }
 
-        // Query last 12 months mutations for average monthly calculation
-        $query = MutasiStok::query()
-            ->where('jenis_mutasi', $this->jenis_mutasi)
-            ->whereDate('tanggal', '>=', now()->subMonths(12)->toDateString());
-
-        if ($this->item_type === 'bahan_baku') {
         if ($this->item_type === 'bahan_baku') {
             $item = BahanBaku::find($this->item_id);
         } else {
