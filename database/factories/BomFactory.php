@@ -10,8 +10,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends Factory<Bom>
  *
- * Bare scaffold only — required so App\Models\Bom's HasFactory trait
- * resolves. Realistic sample data is M-2.3 scope.
+ * BOM ingredient line factory. qty_per_unit uses realistic bakery quantities.
+ * The unique constraint (finished_goods_id, bahan_baku_id) must be managed
+ * by the caller — the factory does not guarantee uniqueness by default.
  */
 class BomFactory extends Factory
 {
@@ -23,8 +24,8 @@ class BomFactory extends Factory
         return [
             'finished_goods_id' => FinishedGood::factory(),
             'bahan_baku_id' => BahanBaku::factory(),
-            'qty_per_unit' => fake()->randomFloat(4, 0.1, 100),
-            'satuan' => fake()->randomElement(['kg', 'liter', 'pcs']),
+            'qty_per_unit' => fake()->randomFloat(4, 0.05, 2.0),
+            'satuan' => fake()->randomElement(['kg', 'liter', 'gram']),
         ];
     }
 }

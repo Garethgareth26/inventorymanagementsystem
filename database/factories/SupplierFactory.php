@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends Factory<Supplier>
  *
- * Bare scaffold only — required so App\Models\Supplier's HasFactory trait
- * resolves. Realistic, internally-consistent sample data is M-2.3 scope
- * (Domain Seeders & Factories), not M-2.2.
+ * Realistic Indonesian supplier data for CV Akuna's domain.
+ * Generates plausible company names, addresses, and contacts.
  */
 class SupplierFactory extends Factory
 {
@@ -19,12 +18,45 @@ class SupplierFactory extends Factory
      */
     public function definition(): array
     {
+        static $supplierNames = [
+            'PT Sumber Alam Lestari',
+            'CV Maju Bersama',
+            'PT Agro Nusantara',
+            'UD Berkah Jaya',
+            'PT Prima Bahan',
+            'CV Rizky Makmur',
+            'PT Bahan Kimia Utama',
+            'UD Sari Tani',
+            'PT Indo Supplier',
+            'CV Karya Mandiri',
+            'PT Bumi Subur',
+            'UD Aneka Bahan',
+        ];
+
+        static $cities = [
+            'Surabaya', 'Jakarta', 'Bandung', 'Semarang',
+            'Yogyakarta', 'Malang', 'Makassar', 'Medan',
+        ];
+
+        $name = fake()->unique()->randomElement($supplierNames);
+        $city = fake()->randomElement($cities);
+
         return [
-            'kode' => fake()->unique()->bothify('SUP-###'),
-            'nama' => fake()->company(),
-            'alamat' => fake()->address(),
-            'kontak' => fake()->phoneNumber(),
+            'kode' => 'SUP-'.str_pad((string) fake()->unique()->numberBetween(1, 999), 3, '0', STR_PAD_LEFT),
+            'nama' => $name,
+            'alamat' => 'Jl. '.fake()->streetName().' No. '.fake()->numberBetween(1, 200).', '.$city,
+            'kontak' => '08'.fake()->numerify('##########'),
             'is_active' => true,
         ];
+    }
+
+    /**
+     * State for inactive supplier.
+     *
+     * @return Factory<Supplier>
+     */
+    public function inactive(): static
+    {
+        return $this->state(['is_active' => false]);
     }
 }
