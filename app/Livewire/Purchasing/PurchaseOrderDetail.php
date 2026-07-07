@@ -131,6 +131,7 @@ class PurchaseOrderDetail extends Component
         $this->resetErrorBag();
         $this->tanggal_terima = now()->toDateString();
         $this->isReceiveModalOpen = true;
+        $this->dispatch('open-modal', 'po-receive-modal');
     }
 
     /**
@@ -184,6 +185,7 @@ class PurchaseOrderDetail extends Component
         });
 
         $this->isReceiveModalOpen = false;
+        $this->dispatch('close-modal', 'po-receive-modal');
         $this->dispatch('notify', message: 'Purchase Order berhasil diterima dan stok terupdate.', type: 'success');
     }
 
