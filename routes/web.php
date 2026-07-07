@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Livewire\Dashboard\EmployeeDashboard;
 use App\Livewire\Dashboard\OwnerDashboard;
 use App\Livewire\MasterData\BahanBaku;
+use App\Livewire\MasterData\BomEditor;
 use App\Livewire\MasterData\FinishedGoods;
 use App\Livewire\MasterData\Suppliers;
 use Illuminate\Support\Facades\Route;
@@ -50,8 +51,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/bahan-baku', BahanBaku::class)->name('bahan_baku.index');
     Route::get('/barang-jadi', FinishedGoods::class)->name('barang_jadi.index');
     Route::get('/bom', function () {
-        return view('bom.index');
+        return redirect()->route('barang_jadi.index');
     })->name('bom.index');
+    Route::get('/bom/{finishedGood}', BomEditor::class)->name('bom.edit');
 
     // Operations
     Route::get('/pesanan-pembelian', function () {
