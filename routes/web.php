@@ -9,6 +9,13 @@ use App\Livewire\MasterData\BahanBaku;
 use App\Livewire\MasterData\BomEditor;
 use App\Livewire\MasterData\FinishedGoods;
 use App\Livewire\MasterData\Suppliers;
+use App\Livewire\Optimization\AbcAnalysis;
+use App\Livewire\Optimization\EoqOverview;
+use App\Livewire\Optimization\EoqSimulation;
+use App\Livewire\Optimization\ReorderPointOverview;
+use App\Livewire\Optimization\ReorderPointSimulation;
+use App\Livewire\Optimization\SafetyStockOverview;
+use App\Livewire\Optimization\SafetyStockSimulation;
 use App\Livewire\Production\CreateProduction;
 use App\Livewire\Production\ProductionList;
 use App\Livewire\Purchasing\CreatePurchaseOrder;
@@ -72,18 +79,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mutasi-stok', InventoryMovements::class)->name('mutasi_stok.index');
 
     // Optimization
-    Route::get('/eoq', function () {
-        return view('eoq.index');
-    })->name('eoq.index');
-    Route::get('/safety-stock', function () {
-        return view('safety_stock.index');
-    })->name('safety_stock.index');
-    Route::get('/reorder-point', function () {
-        return view('reorder_point.index');
-    })->name('reorder_point.index');
-    Route::get('/abc-analysis', function () {
-        return view('abc_analysis.index');
-    })->name('abc_analysis.index');
+    Route::get('/eoq', EoqOverview::class)->name('eoq.index');
+    Route::get('/eoq/{bahanBaku}', EoqSimulation::class)->name('eoq.show');
+    Route::get('/safety-stock', SafetyStockOverview::class)->name('safety_stock.index');
+    Route::get('/safety-stock/{bahanBaku}', SafetyStockSimulation::class)->name('safety_stock.show');
+    Route::get('/reorder-point', ReorderPointOverview::class)->name('reorder_point.index');
+    Route::get('/reorder-point/{bahanBaku}', ReorderPointSimulation::class)->name('reorder_point.show');
+    Route::get('/abc-analysis', AbcAnalysis::class)->name('abc_analysis.index');
 
     // Reports
     Route::get('/reports', function () {

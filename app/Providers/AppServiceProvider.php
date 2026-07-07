@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\InventoryParameter;
 use App\Models\MutasiStok;
 use App\Models\PesananPembelian;
 use App\Models\ProductionEntry;
+use App\Policies\ParameterPolicy;
 use App\Policies\ProcurementPolicy;
 use App\Policies\ProductionPolicy;
 use App\Policies\StockMutationPolicy;
@@ -29,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(PesananPembelian::class, ProcurementPolicy::class);
         Gate::policy(ProductionEntry::class, ProductionPolicy::class);
         Gate::policy(MutasiStok::class, StockMutationPolicy::class);
+        Gate::policy(InventoryParameter::class, ParameterPolicy::class);
     }
 }
