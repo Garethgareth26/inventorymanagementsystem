@@ -2,6 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\MutasiStok;
+use App\Models\PesananPembelian;
+use App\Models\ProductionEntry;
+use App\Policies\ProcurementPolicy;
+use App\Policies\ProductionPolicy;
+use App\Policies\StockMutationPolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::policy(PesananPembelian::class, ProcurementPolicy::class);
+        Gate::policy(ProductionEntry::class, ProductionPolicy::class);
+        Gate::policy(MutasiStok::class, StockMutationPolicy::class);
     }
 }
