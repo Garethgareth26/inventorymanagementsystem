@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Administration\SystemSettingsManager;
 use App\Livewire\Administration\UserManagement;
 use App\Livewire\Dashboard\EmployeeDashboard;
 use App\Livewire\Dashboard\OwnerDashboard;
@@ -94,9 +95,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Administration (Owner only — capability enforced in real controllers later)
     Route::get('/user-management', UserManagement::class)->name('user_management.index');
-    Route::get('/settings', function () {
-        return view('settings.index');
-    })->name('settings.index');
+    Route::get('/settings', SystemSettingsManager::class)->name('settings.index');
 
     // Design System Showcase
     Route::get('/design-system', function () {

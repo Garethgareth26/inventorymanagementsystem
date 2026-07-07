@@ -170,18 +170,17 @@ final class StockMutationService
             // Lock all required bahan_baku rows in ascending ID order
             $bahanBakuIds = $bomLines->pluck('bahan_baku_id')->sort()->values()->toArray();
 
-            /** @var array<int, BahanBaku> $lockedItems */
+            /** @var \Illuminate\Database\Eloquent\Collection<int, BahanBaku> $lockedItems */
             $lockedItems = BahanBaku::whereIn('id', $bahanBakuIds)
                 ->orderBy('id')
                 ->lockForUpdate()
                 ->get()
-                ->keyBy('id')
-                ->toArray();
+                ->keyBy('id');
 
             // Validate sufficient stock for every BOM line before writing anything
             foreach ($bomLines as $line) {
                 $required = (float) $line->qty_per_unit * $jumlahDiproduksi;
-                $bb = BahanBaku::find($line->bahan_baku_id);
+                $bb = $lockedItems->get($line->bahan_baku_id);
                 if ($bb === null) {
                     throw new RuntimeException("Bahan baku ID {$line->bahan_baku_id} tidak ditemukan.");
                 }
@@ -205,7 +204,7 @@ final class StockMutationService
             // Deduct each BOM ingredient (keluar mutations)
             foreach ($bomLines as $line) {
                 $required = (float) $line->qty_per_unit * $jumlahDiproduksi;
-                $bb = BahanBaku::find($line->bahan_baku_id);
+                $bb = $lockedItems->get($line->bahan_baku_id);
 
                 if ($bb === null) {
                     continue;

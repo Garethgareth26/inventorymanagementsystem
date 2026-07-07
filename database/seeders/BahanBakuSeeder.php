@@ -19,16 +19,16 @@ class BahanBakuSeeder extends Seeder
     {
         $materials = [
             // [kode, nama, satuan, harga_satuan, lead_time_hari, supplier_kode]
-            ['BB-001', 'Tepung Terigu',    'kg',    9500,   5,  'SUP-001'],
+            ['BB-001', 'Tepung Terigu',    'kg',    9500,   2,  'SUP-001'],
             ['BB-002', 'Gula Pasir',       'kg',   14000,   3,  'SUP-002'],
             ['BB-003', 'Minyak Goreng',    'liter', 15500,   5,  'SUP-003'],
-            ['BB-004', 'Susu Bubuk',       'kg',   65000,  10,  'SUP-004'],
-            ['BB-005', 'Coklat Bubuk',     'kg',   58000,  10,  'SUP-005'],
-            ['BB-006', 'Mentega',          'kg',   32000,   5,  'SUP-006'],
-            ['BB-007', 'Baking Powder',    'kg',   28000,   7,  'SUP-007'],
-            ['BB-008', 'Vanilla Essence',  'liter', 95000,  10,  'SUP-008'],
-            ['BB-009', 'Perisa Stroberi',  'liter', 85000,  10,  'SUP-009'],
-            ['BB-010', 'Keju Parut',       'kg',   75000,   7,  'SUP-010'],
+            ['BB-004', 'Susu Bubuk',       'kg',   65000,   5,  'SUP-004'],
+            ['BB-005', 'Coklat Bubuk',     'kg',   58000,   1,  'SUP-005'],
+            ['BB-006', 'Mentega',          'kg',   32000,   2,  'SUP-006'],
+            ['BB-007', 'Baking Powder',    'kg',   28000,   2,  'SUP-007'],
+            ['BB-008', 'Vanilla Essence',  'liter', 95000,   5,  'SUP-008'],
+            ['BB-009', 'Perisa Stroberi',  'liter', 85000,   5,  'SUP-009'],
+            ['BB-010', 'Keju Parut',       'kg',   75000,   5,  'SUP-010'],
         ];
 
         foreach ($materials as [$kode, $nama, $satuan, $harga, $leadTime, $supplierKode]) {

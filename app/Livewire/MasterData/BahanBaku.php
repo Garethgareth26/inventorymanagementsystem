@@ -220,8 +220,29 @@ class BahanBaku extends Component
         if (! $this->materialId) {
             $rules['stok_saat_ini'] = 'required|numeric|min:0';
         }
-
         $validated = $this->validate($rules);
+
+        // Custom validation for lead_time_hari based on supplier location
+        $supplier = Supplier::find($this->supplier_id);
+        if ($supplier) {
+            $alamat = strtolower($supplier->alamat ?? '');
+            if (str_contains($alamat, 'jakarta')) {
+                if ($this->lead_time_hari > 2) {
+                    $this->addError('lead_time_hari', 'Lead time untuk supplier Jakarta maksimal 2 hari.');
+                    return;
+                }
+            } elseif (str_contains($alamat, 'yogyakarta') || str_contains($alamat, 'jogja')) {
+                if ($this->lead_time_hari > 1) {
+                    $this->addError('lead_time_hari', 'Lead time untuk supplier Yogyakarta maksimal 1 hari.');
+                    return;
+                }
+            } else {
+                if ($this->lead_time_hari < 3 || $this->lead_time_hari > 5) {
+                    $this->addError('lead_time_hari', 'Lead time untuk supplier di luar Jakarta/Yogyakarta harus 3-5 hari.');
+                    return;
+                }
+            }
+        }
 
         if ($this->materialId) {
             $material = BahanBakuModel::findOrFail($this->materialId);
@@ -255,12 +276,12 @@ class BahanBaku extends Component
                 'kebutuhan_tahunan' => 0.0,
                 'standar_deviasi_harian' => 0.0,
                 'biaya_pesan' => $settings->getFloat('biaya_pesan', 75000.0),
-                'biaya_simpan_persen' => $settings->getFloat('biaya_simpan_persen', 0.20),
+                'biaya_simpan_persen' => $settings->getFloat('biaya_simpan', 20.0) / 100.0,
                 'eoq' => 0.0,
                 'safety_stock' => 0.0,
                 'reorder_point' => 0.0,
                 'z_factor' => $settings->getFloat('z_factor', 1.65),
-                'historical_window_months' => $settings->getInt('historical_window_months', 12),
+                'historical_window_months' => $settings->getInt('historical_window', 12),
             ]);
 
             // Seeding initial stock mutation if requested

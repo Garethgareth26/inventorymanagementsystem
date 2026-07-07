@@ -140,7 +140,7 @@ class MasterDataTest extends TestCase
             ->set('satuan', 'pcs')
             ->set('supplier_id', $this->supplier->id)
             ->set('harga_satuan', 5000.0)
-            ->set('lead_time_hari', 2)
+            ->set('lead_time_hari', 3)
             ->set('stok_saat_ini', 20.0) // Initial stock
             ->call('save')
             ->assertHasNoErrors()

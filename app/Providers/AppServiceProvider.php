@@ -32,5 +32,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(ProductionEntry::class, ProductionPolicy::class);
         Gate::policy(MutasiStok::class, StockMutationPolicy::class);
         Gate::policy(InventoryParameter::class, ParameterPolicy::class);
+        Gate::policy(\App\Models\BahanBaku::class, \App\Policies\BahanBakuPolicy::class);
+        Gate::policy(\App\Models\FinishedGood::class, \App\Policies\FinishedGoodPolicy::class);
+        Gate::policy(\App\Models\Supplier::class, \App\Policies\SupplierPolicy::class);
+        Gate::policy(\App\Models\Bom::class, \App\Policies\BomPolicy::class);
     }
 }
