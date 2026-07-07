@@ -90,7 +90,7 @@ class StockAdjustment extends Component
             $item = FinishedGood::find($this->item_id);
         }
 
-        if (!$item) {
+        if (! $item) {
             return;
         }
 

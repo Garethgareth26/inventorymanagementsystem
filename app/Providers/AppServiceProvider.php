@@ -2,14 +2,22 @@
 
 namespace App\Providers;
 
+use App\Models\BahanBaku;
+use App\Models\Bom;
+use App\Models\FinishedGood;
 use App\Models\InventoryParameter;
 use App\Models\MutasiStok;
 use App\Models\PesananPembelian;
 use App\Models\ProductionEntry;
+use App\Models\Supplier;
+use App\Policies\BahanBakuPolicy;
+use App\Policies\BomPolicy;
+use App\Policies\FinishedGoodPolicy;
 use App\Policies\ParameterPolicy;
 use App\Policies\ProcurementPolicy;
 use App\Policies\ProductionPolicy;
 use App\Policies\StockMutationPolicy;
+use App\Policies\SupplierPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,9 +40,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(ProductionEntry::class, ProductionPolicy::class);
         Gate::policy(MutasiStok::class, StockMutationPolicy::class);
         Gate::policy(InventoryParameter::class, ParameterPolicy::class);
-        Gate::policy(\App\Models\BahanBaku::class, \App\Policies\BahanBakuPolicy::class);
-        Gate::policy(\App\Models\FinishedGood::class, \App\Policies\FinishedGoodPolicy::class);
-        Gate::policy(\App\Models\Supplier::class, \App\Policies\SupplierPolicy::class);
-        Gate::policy(\App\Models\Bom::class, \App\Policies\BomPolicy::class);
+        Gate::policy(BahanBaku::class, BahanBakuPolicy::class);
+        Gate::policy(FinishedGood::class, FinishedGoodPolicy::class);
+        Gate::policy(Supplier::class, SupplierPolicy::class);
+        Gate::policy(Bom::class, BomPolicy::class);
     }
 }

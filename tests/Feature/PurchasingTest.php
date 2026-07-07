@@ -112,7 +112,7 @@ class PurchasingTest extends TestCase
             ->set('bahan_baku_id', $this->bahanBaku->id)
             ->set('jenis', PesananPembelian::JENIS_DARURAT)
             ->set('jumlah', 10.0)
-            ->set('harga_satuan', 12000.0) // 10000 dasar + 20%
+            ->set('harga_satuan', 10000.0) // 10000 dasar -> expected 12000 after +20%
             ->set('tanggal_pesan', now()->toDateString())
             ->call('save')
             ->assertHasNoErrors();

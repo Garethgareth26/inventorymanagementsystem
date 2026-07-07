@@ -229,9 +229,9 @@ class BahanBaku extends Component
         $supplier = Supplier::find($this->supplier_id);
         if ($supplier) {
             $alamat = strtolower($supplier->alamat ?? '');
-            
+
             $isJakarta = str_contains($alamat, 'jakarta');
-            $isJogja = str_contains($alamat, 'yogyakarta') || 
+            $isJogja = str_contains($alamat, 'yogyakarta') ||
                        str_contains($alamat, 'jogja') ||
                        str_contains($alamat, 'bantul') ||
                        str_contains($alamat, 'sleman') ||
@@ -241,16 +241,19 @@ class BahanBaku extends Component
             if ($isJakarta) {
                 if ($this->lead_time_hari > 2) {
                     $this->addError('lead_time_hari', 'Lead time untuk supplier area Jakarta maksimal 2 hari.');
+
                     return;
                 }
             } elseif ($isJogja) {
                 if ($this->lead_time_hari > 1) {
                     $this->addError('lead_time_hari', 'Lead time untuk supplier area Yogyakarta & sekitarnya maksimal 1 hari.');
+
                     return;
                 }
             } else {
                 if ($this->lead_time_hari < 3 || $this->lead_time_hari > 5) {
                     $this->addError('lead_time_hari', 'Lead time untuk supplier di luar Jakarta/Yogyakarta harus 3-5 hari.');
+
                     return;
                 }
             }

@@ -8,6 +8,7 @@ use Livewire\Component;
 class NotificationBell extends Component
 {
     public $criticalCount = 0;
+
     public $criticalItems = [];
 
     public function mount()
@@ -22,15 +23,15 @@ class NotificationBell extends Component
         // and evaluate if it's critical. To be fast, we use the DB if we have ROP stored.
         // Actually, we can just use the service or a direct query if ROP is stored.
         // In the dashboard, it is queried via ReorderPointSimulation->calculateRop().
-        // For performance in header, let's just use a simple heuristic or fetch 
+        // For performance in header, let's just use a simple heuristic or fetch
         // the top 5 critical items.
 
         // To reuse the exact logic from Dashboard:
         $materials = BahanBaku::with('inventoryParameter')->get();
-        
+
         $critical = [];
         foreach ($materials as $bb) {
-            $rop = (float) ($bb->inventoryParameter?->reorder_point ?? 0.0);
+            $rop = $bb->inventoryParameter ? (float) $bb->inventoryParameter->reorder_point : 0.0;
             if ($bb->inventoryParameter && $bb->stok_saat_ini <= $rop) {
                 $critical[] = [
                     'id' => $bb->id,

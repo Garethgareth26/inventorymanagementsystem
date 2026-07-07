@@ -198,7 +198,7 @@ class PurchaseOrderDetail extends Component
 
         return view('livewire.purchasing.purchase-order-detail', [
             'po' => $po,
-            'mutation' => $po->status === 'Diterima' ? $po->mutasiMasuk : null,
+            'mutation' => $po->status === 'Diterima' ? $po->mutasiStok()->first() : null,
         ])->layout('components.layout.app', [
             'pageTitle' => 'Detail Purchase Order',
             'pageSubtitle' => 'Informasi lengkap dan status pesanan pembelian',

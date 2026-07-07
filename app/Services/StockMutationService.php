@@ -7,6 +7,7 @@ use App\Models\FinishedGood;
 use App\Models\MutasiStok;
 use App\Models\ProductionEntry;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use RuntimeException;
@@ -170,7 +171,7 @@ final class StockMutationService
             // Lock all required bahan_baku rows in ascending ID order
             $bahanBakuIds = $bomLines->pluck('bahan_baku_id')->sort()->values()->toArray();
 
-            /** @var \Illuminate\Database\Eloquent\Collection<int, BahanBaku> $lockedItems */
+            /** @var Collection<int, BahanBaku> $lockedItems */
             $lockedItems = BahanBaku::whereIn('id', $bahanBakuIds)
                 ->orderBy('id')
                 ->lockForUpdate()
