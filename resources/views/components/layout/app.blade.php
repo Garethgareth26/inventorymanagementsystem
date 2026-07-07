@@ -30,7 +30,7 @@
     {{-- Per-page head injection --}}
     {{ $head ?? '' }}
 </head>
-<body class="bg-page-bg text-text-primary h-full font-body-md antialiased overflow-hidden">
+<body class="bg-page-bg text-text-primary h-full font-body-md antialiased overflow-hidden" x-data="{ sidebarOpen: false }">
 
     {{-- ── Side Navigation (Floating Capsule) ────────────────────────── --}}
     <x-navigation.sidebar />
@@ -42,7 +42,7 @@
     />
 
     {{-- ── Main Canvas Area ───────────────────────────────────────────── --}}
-    <main class="ml-72 pt-[104px] px-8 pb-8 h-full overflow-y-auto">
+    <main class="lg:ml-72 pt-[104px] px-4 lg:px-8 pb-8 h-full overflow-y-auto transition-all duration-300">
         <div class="max-w-[1440px] mx-auto">
             {{ $slot }}
         </div>

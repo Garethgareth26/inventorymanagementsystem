@@ -93,8 +93,20 @@
     });
 @endphp
 
+<!-- Mobile overlay -->
+<div x-show="sidebarOpen" 
+     @click="sidebarOpen = false"
+     x-transition:enter="transition-opacity ease-linear duration-300"
+     x-transition:enter-start="opacity-0"
+     x-transition:enter-end="opacity-100"
+     x-transition:leave="transition-opacity ease-linear duration-300"
+     x-transition:leave-start="opacity-100"
+     x-transition:leave-end="opacity-0"
+     class="fixed inset-0 bg-black/50 z-40 lg:hidden" style="display: none;"></div>
+
 <!-- SideNavBar -->
-<aside class="bg-surface-container-lowest fixed left-4 top-4 bottom-4 w-64 rounded-3xl flex flex-col items-stretch px-4 py-6 shadow-soft-ambient z-50 justify-between border border-border-divider">
+<aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-[120%]'"
+       class="bg-surface-container-lowest fixed left-4 top-4 bottom-4 w-64 rounded-3xl flex flex-col items-stretch px-4 py-6 shadow-soft-ambient z-50 justify-between border border-border-divider transition-transform duration-300 lg:translate-x-0">
     <div class="flex flex-col items-start gap-6 w-full">
         <!-- Logo / Brand Avatar -->
         <a href="{{ $user?->isOwner() ? route('owner.dashboard') : route('employee.dashboard') }}" 
