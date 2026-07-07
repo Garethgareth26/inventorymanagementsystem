@@ -23,18 +23,18 @@ class EoqSimulation extends Component
     public BahanBaku $bahanBaku;
 
     // ── Simulation inputs ─────────────────────────────────────────────────────
-    public float $annualDemand = 0.0;
+    public ?float $annualDemand = 0.0;
 
-    public float $biayaPesan = 75000.0;
+    public ?float $biayaPesan = 75000.0;
 
-    public float $biayaSimpanPct = 20.0;  // Displayed as % (20 = 20%), stored as 0.20 in DB
+    public ?float $biayaSimpanPct = 20.0;  // Displayed as % (20 = 20%), stored as 0.20 in DB
 
     // ── Read-only context (filled from current param / material) ──────────────
-    public float $sdHarian = 0.0;
+    public ?float $sdHarian = 0.0;
 
     public int $leadTimeHari = 1;
 
-    public float $zFactor = 1.65;
+    public ?float $zFactor = 1.65;
 
     public int $windowMonths = 12;
 

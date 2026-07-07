@@ -23,24 +23,24 @@ class ReorderPointSimulation extends Component
     public BahanBaku $bahanBaku;
 
     // ── Simulation inputs ─────────────────────────────────────────────────────
-    public float $dailyDemand = 0.0;   // D/365
+    public ?float $dailyDemand = 0.0;   // D/365
 
-    public int $leadTimeHari = 1;
+    public ?int $leadTimeHari = 1;
 
-    public float $safetyStock = 0.0;   // manual override or from param
+    public ?float $safetyStock = 0.0;   // manual override or from param
 
-    // ── Context (not editable in this screen) ────────────────────────────────
-    public float $annualDemand = 0.0;
+    // ── Context fields ────────────────────────────────────────────────────────
+    public ?float $annualDemand = 0.0;
 
-    public float $sdHarian = 0.0;
+    public ?float $sdHarian = 0.0;
 
-    public float $zFactor = 1.65;
+    public ?float $zFactor = 1.65;
 
     public int $windowMonths = 12;
 
-    public float $biayaPesan = 75000.0;
+    public ?float $biayaPesan = 75000.0;
 
-    public float $biayaSimpanPct = 20.0;
+    public ?float $biayaSimpanPct = 20.0;
 
     // ── Simulation output ─────────────────────────────────────────────────────
     public ?float $simRop = null;

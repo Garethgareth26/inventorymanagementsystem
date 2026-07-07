@@ -39,13 +39,13 @@ class BahanBaku extends Component
 
     public string $satuan = '';
 
-    public float $stok_saat_ini = 0.0;
+    public ?float $stok_saat_ini = 0.0;
 
     public ?int $supplier_id = null;
 
-    public float $harga_satuan = 0.0;
+    public ?float $harga_satuan = 0.0;
 
-    public int $lead_time_hari = 1;
+    public ?int $lead_time_hari = 1;
 
     // UI flags
     public bool $isModalOpen = false;
@@ -180,7 +180,7 @@ class BahanBaku extends Component
         $this->nama = $material->nama;
         $this->satuan = $material->satuan;
         $this->stok_saat_ini = (float) $material->stok_saat_ini;
-        $this->supplier_id = $material->supplier_id;
+        $this->supplier_id = $material->supplier_id ? (int) $material->supplier_id : null;
         $this->harga_satuan = (float) $material->harga_satuan;
         $this->lead_time_hari = (int) $material->lead_time_hari;
 

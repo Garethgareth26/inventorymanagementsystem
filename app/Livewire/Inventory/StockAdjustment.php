@@ -25,7 +25,7 @@ class StockAdjustment extends Component
 
     public string $jenis_mutasi = MutasiStok::JENIS_MASUK; // 'masuk' or 'keluar'
 
-    public float $jumlah = 0.0;
+    public ?float $jumlah = 0.0;
 
     public string $keterangan = '';
 
@@ -34,7 +34,7 @@ class StockAdjustment extends Component
 
     public bool $confirm_large_adjustment = false;
 
-    public float $avgMonthly = 0.0;
+    public ?float $avgMonthly = 0.0;
 
     /**
      * Mount component.
@@ -90,16 +90,26 @@ class StockAdjustment extends Component
             ->whereDate('tanggal', '>=', now()->subMonths(12)->toDateString());
 
         if ($this->item_type === 'bahan_baku') {
-            $query->where('bahan_baku_id', $this->item_id);
+        if ($this->item_type === 'bahan_baku') {
+            $item = BahanBaku::find($this->item_id);
         } else {
-            $query->where('finished_goods_id', $this->item_id);
+            $item = FinishedGood::find($this->item_id);
         }
 
-        $totalVal = (float) $query->sum('jumlah');
-        $this->avgMonthly = $totalVal / 12.0;
+        if (!$item) {
+            return;
+        }
 
-        // If amount > 3x average monthly (and average is greater than 0, to avoid dividing by zero warnings)
-        if ($this->avgMonthly > 0 && $this->jumlah > (3.0 * $this->avgMonthly)) {
+        // Calculate heuristic
+        $totalIssue = (float) $item->mutasiStok()
+            ->where('jenis_mutasi', MutasiStok::JENIS_KELUAR)
+            ->whereDate('tanggal', '>=', now()->subMonths(12)->toDateString())
+            ->sum('jumlah');
+
+        $this->avgMonthly = $totalIssue / 12.0;
+
+        $adjustmentAmount = (float) $this->jumlah;
+        if ($this->avgMonthly > 0 && $adjustmentAmount > ($this->avgMonthly * 1.5)) {
             $this->showAdvisoryWarning = true;
         } else {
             $this->showAdvisoryWarning = false;
@@ -130,8 +140,11 @@ class StockAdjustment extends Component
             $item = FinishedGood::findOrFail($this->item_id);
         }
 
+        $currentStock = (float) $item->stok_saat_ini;
+        $adjustmentAmount = (float) $this->jumlah;
+
         // Hard negative stock block
-        if ($this->jenis_mutasi === MutasiStok::JENIS_KELUAR && $item->stok_saat_ini < $this->jumlah) {
+        if ($this->jenis_mutasi === MutasiStok::JENIS_KELUAR && $adjustmentAmount > $currentStock) {
             $this->addError('jumlah', "Stok tidak mencukupi. Stok saat ini: {$item->stok_saat_ini} {$item->satuan}.");
 
             return;
@@ -150,7 +163,7 @@ class StockAdjustment extends Component
                     itemType: $this->item_type,
                     itemId: $item->id,
                     jenisMutasi: $this->jenis_mutasi,
-                    jumlah: $this->jumlah,
+                    jumlah: (float) $this->jumlah,
                     tanggal: now()->toDateString(),
                     actor: auth()->user(),
                     sumber: MutasiStok::SUMBER_MANUAL,

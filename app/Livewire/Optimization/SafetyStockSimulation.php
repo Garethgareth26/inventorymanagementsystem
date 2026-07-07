@@ -24,21 +24,21 @@ class SafetyStockSimulation extends Component
     public BahanBaku $bahanBaku;
 
     // ── Simulation inputs ─────────────────────────────────────────────────────
-    public float $zFactor = 1.65;
+    public ?float $zFactor = 1.65;
 
-    public int $leadTimeHari = 1;
+    public ?int $leadTimeHari = 1;
 
     public int $windowMonths = 12;
 
     // ── Context (auto-computed from history, updated when window changes) ─────
-    public float $sdHarian = 0.0;
+    public ?float $sdHarian = 0.0;
 
-    public float $annualDemand = 0.0;
+    public ?float $annualDemand = 0.0;
 
     // ── Biaya for Apply ───────────────────────────────────────────────────────
-    public float $biayaPesan = 75000.0;
+    public ?float $biayaPesan = 75000.0;
 
-    public float $biayaSimpanPct = 20.0;
+    public ?float $biayaSimpanPct = 20.0;
 
     // ── Simulation output ─────────────────────────────────────────────────────
     public ?float $simSafetyStock = null;

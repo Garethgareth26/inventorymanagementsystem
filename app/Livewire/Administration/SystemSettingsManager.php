@@ -22,7 +22,7 @@ final class SystemSettingsManager extends Component
     public string $company_address = '';
 
     // Calculation Parameters Form state
-    public float $z_factor = 1.65;
+    public ?float $z_factor = 1.65;
 
     public int $abc_threshold_a = 80;
 
@@ -30,9 +30,9 @@ final class SystemSettingsManager extends Component
 
     public int $historical_window = 12;
 
-    public float $biaya_pesan = 75000.0;
+    public ?float $biaya_pesan = 75000.0;
 
-    public float $biaya_simpan_pct = 20.0;
+    public ?float $biaya_simpan_pct = 20.0;
 
     /**
      * Initialize component and load settings.
@@ -114,12 +114,12 @@ final class SystemSettingsManager extends Component
         }
 
         $keys = [
-            'z_factor' => (string) $this->z_factor,
+            'z_factor' => (string) (float) $this->z_factor,
             'abc_threshold_a' => (string) $this->abc_threshold_a,
             'abc_threshold_b' => (string) $this->abc_threshold_b,
             'historical_window' => (string) $this->historical_window,
-            'biaya_pesan' => (string) $this->biaya_pesan,
-            'biaya_simpan' => (string) $this->biaya_simpan_pct,
+            'biaya_pesan' => (string) (float) $this->biaya_pesan,
+            'biaya_simpan' => (string) (float) $this->biaya_simpan_pct,
         ];
 
         $updatedCount = 0;

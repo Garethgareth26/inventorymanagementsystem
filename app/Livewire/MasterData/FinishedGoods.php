@@ -31,7 +31,7 @@ class FinishedGoods extends Component
 
     public string $satuan = '';
 
-    public float $stok_saat_ini = 0.0;
+    public ?float $stok_saat_ini = 0.0;
 
     // UI flags
     public bool $isModalOpen = false;
