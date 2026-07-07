@@ -3,10 +3,17 @@
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Dashboard\EmployeeDashboard;
 use App\Livewire\Dashboard\OwnerDashboard;
+use App\Livewire\Inventory\InventoryMovements;
+use App\Livewire\Inventory\StockAdjustment;
 use App\Livewire\MasterData\BahanBaku;
 use App\Livewire\MasterData\BomEditor;
 use App\Livewire\MasterData\FinishedGoods;
 use App\Livewire\MasterData\Suppliers;
+use App\Livewire\Production\CreateProduction;
+use App\Livewire\Production\ProductionList;
+use App\Livewire\Purchasing\CreatePurchaseOrder;
+use App\Livewire\Purchasing\PurchaseOrderDetail;
+use App\Livewire\Purchasing\PurchaseOrders;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,15 +63,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/bom/{finishedGood}', BomEditor::class)->name('bom.edit');
 
     // Operations
-    Route::get('/pesanan-pembelian', function () {
-        return view('pesanan_pembelian.index');
-    })->name('pesanan_pembelian.index');
-    Route::get('/production', function () {
-        return view('production.index');
-    })->name('production.index');
-    Route::get('/mutasi-stok', function () {
-        return view('mutasi_stok.index');
-    })->name('mutasi_stok.index');
+    Route::get('/pesanan-pembelian', PurchaseOrders::class)->name('pesanan_pembelian.index');
+    Route::get('/pesanan-pembelian/create', CreatePurchaseOrder::class)->name('pesanan_pembelian.create');
+    Route::get('/pesanan-pembelian/{po}', PurchaseOrderDetail::class)->name('pesanan_pembelian.show');
+    Route::get('/production', ProductionList::class)->name('production.index');
+    Route::get('/production/create', CreateProduction::class)->name('production.create');
+    Route::get('/penyesuaian-stok', StockAdjustment::class)->name('stock_adjustment.create');
+    Route::get('/mutasi-stok', InventoryMovements::class)->name('mutasi_stok.index');
 
     // Optimization
     Route::get('/eoq', function () {

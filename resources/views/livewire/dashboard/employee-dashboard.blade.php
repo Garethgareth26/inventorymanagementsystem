@@ -60,7 +60,7 @@
                     <span class="material-symbols-outlined text-[18px]">precision_manufacturing</span>
                     Catat Produksi
                 </a>
-                <a href="{{ route('mutasi_stok.index') }}"
+                <a href="{{ route('stock_adjustment.create') }}"
                    class="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full border border-primary text-primary bg-transparent font-label-sm text-label-sm px-xl py-md hover:bg-primary-fixed/40 transition-all duration-150 active:scale-[0.98] cursor-pointer">
                     <span class="material-symbols-outlined text-[18px]">tune</span>
                     Sesuaikan Stok
