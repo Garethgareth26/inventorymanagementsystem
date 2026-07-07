@@ -42,7 +42,7 @@
     />
 
     {{-- ── Main Canvas Area ───────────────────────────────────────────── --}}
-    <main class="ml-24 pt-[104px] px-8 pb-8 h-full overflow-y-auto">
+    <main class="ml-72 pt-[104px] px-8 pb-8 h-full overflow-y-auto">
         <div class="max-w-[1440px] mx-auto">
             {{ $slot }}
         </div>

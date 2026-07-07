@@ -13,49 +13,49 @@
         [
             'route' => 'bahan_baku.index',
             'icon' => 'inventory',
-            'title' => 'Raw Materials',
+            'title' => 'Bahan Baku',
             'capability' => 'material.view',
         ],
         [
             'route' => 'barang_jadi.index',
             'icon' => 'deployed_code',
-            'title' => 'Finished Goods',
+            'title' => 'Barang Jadi',
             'capability' => 'finished-good.view',
         ],
         [
             'route' => 'suppliers.index',
             'icon' => 'group',
-            'title' => 'Suppliers',
+            'title' => 'Supplier',
             'capability' => 'supplier.view',
         ],
         [
             'route' => 'bom.index',
             'icon' => 'account_tree',
-            'title' => 'Bill of Materials',
+            'title' => 'Resep (BOM)',
             'capability' => 'bom.view',
         ],
         [
             'route' => 'pesanan_pembelian.index',
             'icon' => 'shopping_cart',
-            'title' => 'Purchasing',
+            'title' => 'Pesanan Pembelian',
             'capability' => 'procurement.view',
         ],
         [
             'route' => 'production.index',
             'icon' => 'precision_manufacturing',
-            'title' => 'Production',
+            'title' => 'Produksi',
             'capability' => 'production.view',
         ],
         [
             'route' => 'mutasi_stok.index',
             'icon' => 'inventory_2',
-            'title' => 'Stock Mutation',
+            'title' => 'Mutasi Stok',
             'capability' => 'stock.view',
         ],
         [
             'route' => 'eoq.index',
             'icon' => 'calculate',
-            'title' => 'EOQ Simulation',
+            'title' => 'Simulasi EOQ',
             'capability' => 'parameter.view',
         ],
         [
@@ -73,13 +73,13 @@
         [
             'route' => 'abc_analysis.index',
             'icon' => 'analytics',
-            'title' => 'ABC Analysis',
+            'title' => 'Analisis ABC',
             'capability' => 'parameter.view',
         ],
         [
             'route' => 'reports.index',
             'icon' => 'assignment',
-            'title' => 'Reports',
+            'title' => 'Laporan',
             'capability' => 'report.view',
         ],
     ];
@@ -93,41 +93,46 @@
     });
 @endphp
 
-<!-- SideNavBar (Stitch v2 capsule style) -->
-<aside class="bg-surface-container-lowest fixed left-4 top-4 bottom-4 w-16 rounded-full flex flex-col items-center py-6 shadow-soft-ambient z-50 justify-between border border-border-divider">
-    <div class="flex flex-col items-center gap-6 w-full">
+<!-- SideNavBar -->
+<aside class="bg-surface-container-lowest fixed left-4 top-4 bottom-4 w-64 rounded-3xl flex flex-col items-stretch px-4 py-6 shadow-soft-ambient z-50 justify-between border border-border-divider">
+    <div class="flex flex-col items-start gap-6 w-full">
         <!-- Logo / Brand Avatar -->
         <a href="{{ $user?->isOwner() ? route('owner.dashboard') : route('employee.dashboard') }}" 
-           class="w-10 h-10 mb-2 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary-container p-0.5" 
+           class="flex items-center gap-3 mb-2 px-2 hover:opacity-80 transition-opacity" 
            title="CV Akuna Home">
-            <div class="w-full h-full bg-primary-container rounded-full flex items-center justify-center text-on-primary">
-                <span class="material-symbols-outlined text-[18px]">inventory_2</span>
+            <div class="w-10 h-10 rounded-full flex-shrink-0 border-2 border-primary-container p-0.5 overflow-hidden">
+                <div class="w-full h-full bg-primary-container rounded-full flex items-center justify-center text-on-primary">
+                    <span class="material-symbols-outlined text-[18px]">inventory_2</span>
+                </div>
             </div>
+            <span class="font-headline-sm font-bold text-primary">CV Akuna</span>
         </a>
 
         <!-- Nav Items Section -->
-        <nav class="flex flex-col items-center gap-4 w-full px-2 overflow-y-auto max-h-[calc(100vh-280px)] scrollbar-thin">
+        <nav class="flex flex-col items-start gap-1 w-full overflow-y-auto max-h-[calc(100vh-280px)] scrollbar-thin">
             @foreach($filteredItems as $item)
                 @php
                     $isActive = request()->routeIs($item['route']) || (request()->path() === ltrim(route($item['route'], [], false), '/'));
                 @endphp
-                <a class="{{ $isActive ? 'bg-on-background text-on-primary shadow-soft-ambient' : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-high' }} rounded-full w-10 h-10 flex items-center justify-center scale-95 hover:scale-100 active:scale-90 transition-all duration-200" 
+                <a class="{{ $isActive ? 'bg-on-background text-on-primary shadow-soft-ambient' : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-high' }} rounded-full w-full h-11 flex items-center justify-start gap-3 px-4 scale-[0.98] hover:scale-100 active:scale-95 transition-all duration-200" 
                    href="{{ route($item['route']) }}" 
                    title="{{ $item['title'] }}">
                     <span class="material-symbols-outlined {{ $isActive ? 'icon-fill' : '' }} text-[20px]">{{ $item['icon'] }}</span>
+                    <span class="font-label-md text-label-md font-semibold truncate">{{ $item['title'] }}</span>
                 </a>
             @endforeach
         </nav>
     </div>
 
     <!-- Footer actions -->
-    <div class="flex flex-col items-center gap-4 w-full px-2">
-        <!-- Settings (Only for users with settings capability or owner) -->
+    <div class="flex flex-col items-start gap-2 w-full pt-4 border-t border-border-divider">
+        <!-- Settings -->
         @if ($user?->hasCapability('settings.manage') || $user?->isOwner())
-            <a class="{{ request()->routeIs('settings.*') ? 'bg-on-background text-on-primary' : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-high' }} rounded-full w-10 h-10 flex items-center justify-center scale-95 hover:scale-100 transition-all duration-200" 
+            <a class="{{ request()->routeIs('settings.*') ? 'bg-on-background text-on-primary' : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-high' }} rounded-full w-full h-11 px-4 flex items-center justify-start gap-3 scale-[0.98] hover:scale-100 transition-all duration-200" 
                href="{{ route('settings.index') }}" 
-               title="Settings">
+               title="Pengaturan">
                 <span class="material-symbols-outlined text-[20px]">settings</span>
+                <span class="font-label-md text-label-md font-semibold">Pengaturan</span>
             </a>
         @endif
 

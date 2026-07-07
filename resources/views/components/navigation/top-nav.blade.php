@@ -7,7 +7,7 @@
 ])
 
 <!-- TopNavBar (Stitch v2 style) -->
-<nav class="bg-transparent fixed top-0 right-0 left-24 h-header-height z-40 flex justify-between items-center px-8 w-[calc(100%-6rem)] max-w-full">
+<nav class="bg-transparent fixed top-0 right-0 left-72 h-header-height z-40 flex justify-between items-center px-8 w-[calc(100%-18rem)] max-w-full">
     <!-- Left Section: Title & Subtitle or Breadcrumbs -->
     <div class="flex flex-col">
         <h1 class="font-headline-lg text-headline-lg font-bold text-on-background truncate">{{ $title }}</h1>
