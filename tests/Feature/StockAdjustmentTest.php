@@ -122,7 +122,7 @@ class StockAdjustmentTest extends TestCase
         // Seed some minor historical movement so average monthly is positive but very small
         MutasiStok::create([
             'bahan_baku_id' => $this->bahanBaku->id,
-            'jenis_mutasi' => MutasiStok::JENIS_MASUK,
+            'jenis_mutasi' => MutasiStok::JENIS_KELUAR,
             'jumlah' => 1.2, // total annual = 1.2 -> avg monthly = 0.1
             'tanggal' => now()->toDateString(),
             'sumber' => MutasiStok::SUMBER_MANUAL,
