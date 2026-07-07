@@ -7,6 +7,7 @@ use App\Models\FinishedGood;
 use App\Models\MutasiStok;
 use App\Models\PesananPembelian;
 use App\Models\Supplier;
+use Carbon\Carbon;
 
 /**
  * Service encapsulating reporting business logic and dataset compilation.
@@ -111,9 +112,9 @@ final class ReportService
             $totalLeadTimeDays = 0;
 
             foreach ($receivedPos as $po) {
-                $tglTerima = $po->tanggal_terima ? \Carbon\Carbon::parse($po->tanggal_terima) : null;
-                $tglPesan = $po->tanggal_pesan ? \Carbon\Carbon::parse($po->tanggal_pesan) : null;
-                $estTiba = $po->estimasi_tiba ? \Carbon\Carbon::parse($po->estimasi_tiba) : null;
+                $tglTerima = $po->tanggal_terima ? Carbon::parse($po->tanggal_terima) : null;
+                $tglPesan = $po->tanggal_pesan ? Carbon::parse($po->tanggal_pesan) : null;
+                $estTiba = $po->estimasi_tiba ? Carbon::parse($po->estimasi_tiba) : null;
 
                 if ($tglTerima && $estTiba) {
                     if ($tglTerima->lte($estTiba)) {
