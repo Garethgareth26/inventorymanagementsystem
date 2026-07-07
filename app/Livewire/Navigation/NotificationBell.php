@@ -30,8 +30,8 @@ class NotificationBell extends Component
         
         $critical = [];
         foreach ($materials as $bb) {
-            $rop = $bb->inventoryParameter?->rop ?? 0.0;
-            if ($bb->stok_saat_ini <= $rop) {
+            $rop = (float) ($bb->inventoryParameter?->reorder_point ?? 0.0);
+            if ($bb->inventoryParameter && $bb->stok_saat_ini <= $rop) {
                 $critical[] = [
                     'id' => $bb->id,
                     'kode' => $bb->kode,

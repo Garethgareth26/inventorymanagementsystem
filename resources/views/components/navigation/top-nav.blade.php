@@ -1,7 +1,7 @@
 @props([
     'title' => 'Dashboard',
     'subtitle' => null,
-    'showSearch' => false,
+    'showSearch' => true,
     'showNotifications' => true,
     'showChat' => false,
 ])
