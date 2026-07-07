@@ -37,7 +37,7 @@ final class BomPolicy
     /**
      * Determine if the user can update a BOM.
      */
-    public function update(User $user, Bom $bom): bool
+    public function update(User $user, Bom|string|null $bom = null): bool
     {
         return $user->hasCapability('bom.manage');
     }
@@ -45,7 +45,7 @@ final class BomPolicy
     /**
      * Determine if the user can delete a BOM.
      */
-    public function delete(User $user, Bom $bom): bool
+    public function delete(User $user, Bom|string|null $bom = null): bool
     {
         return $user->hasCapability('bom.manage');
     }
