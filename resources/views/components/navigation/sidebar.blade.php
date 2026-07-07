@@ -111,7 +111,8 @@
         <!-- Logo / Brand Avatar -->
         <a href="{{ $user?->isOwner() ? route('owner.dashboard') : route('employee.dashboard') }}" 
            class="flex items-center gap-3 mb-2 px-2 hover:opacity-80 transition-opacity" 
-           title="CV Akuna Home">
+           title="CV Akuna Home"
+           wire:navigate>
             <div class="w-10 h-10 rounded-full flex-shrink-0 border-2 border-primary-container p-0.5 overflow-hidden">
                 <div class="w-full h-full bg-primary-container rounded-full flex items-center justify-center text-on-primary">
                     <span class="material-symbols-outlined text-[18px]">inventory_2</span>
@@ -128,7 +129,8 @@
                 @endphp
                 <a class="{{ $isActive ? 'bg-on-background text-on-primary shadow-soft-ambient' : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-high' }} rounded-full w-full h-11 flex items-center justify-start gap-3 px-4 scale-[0.98] hover:scale-100 active:scale-95 transition-all duration-200" 
                    href="{{ route($item['route']) }}" 
-                   title="{{ $item['title'] }}">
+                   title="{{ $item['title'] }}"
+                   wire:navigate>
                     <span class="material-symbols-outlined {{ $isActive ? 'icon-fill' : '' }} text-[20px]">{{ $item['icon'] }}</span>
                     <span class="font-label-md text-label-md font-semibold truncate">{{ $item['title'] }}</span>
                 </a>
@@ -142,7 +144,8 @@
         @if ($user?->hasCapability('settings.manage') || $user?->isOwner())
             <a class="{{ request()->routeIs('settings.*') ? 'bg-on-background text-on-primary' : 'text-on-surface-variant hover:text-primary hover:bg-surface-container-high' }} rounded-full w-full h-11 px-4 flex items-center justify-start gap-3 scale-[0.98] hover:scale-100 transition-all duration-200" 
                href="{{ route('settings.index') }}" 
-               title="Pengaturan">
+               title="Pengaturan"
+               wire:navigate>
                 <span class="material-symbols-outlined text-[20px]">settings</span>
                 <span class="font-label-md text-label-md font-semibold">Pengaturan</span>
             </a>
