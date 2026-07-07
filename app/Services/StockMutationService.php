@@ -78,7 +78,7 @@ final class StockMutationService
                 $itemType, $itemId, $jenisMutasi, $jumlah
             );
 
-            return MutasiStok::create([
+            $mutation = MutasiStok::create([
                 'bahan_baku_id' => $bahanBakuId,
                 'finished_goods_id' => $finishedGoodsId,
                 'jenis_mutasi' => $jenisMutasi,
@@ -90,6 +90,10 @@ final class StockMutationService
                 'dicatat_oleh' => $actor->id,
                 'keterangan' => $keterangan,
             ]);
+
+            app(DashboardQueryService::class)->invalidateCache();
+
+            return $mutation;
         });
     }
 
@@ -239,6 +243,8 @@ final class StockMutationService
                 'dicatat_oleh' => $actor->id,
                 'keterangan' => $keterangan ?? "Hasil produksi: {$fg->nama} (entry #{$entry->id})",
             ]);
+
+            app(DashboardQueryService::class)->invalidateCache();
 
             return $entry;
         });
