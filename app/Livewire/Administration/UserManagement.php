@@ -94,6 +94,7 @@ class UserManagement extends Component
         $this->resetForm();
 
         $this->isFormModalOpen = true;
+        $this->dispatch('open-modal', 'user-form-modal');
     }
 
     // ─── Edit User ───────────────────────────────────────────────────────────
@@ -113,6 +114,7 @@ class UserManagement extends Component
         $this->is_active = $user->is_active;
 
         $this->isFormModalOpen = true;
+        $this->dispatch('open-modal', 'user-form-modal');
     }
 
     // ─── Reset Password Modal ────────────────────────────────────────────────
@@ -177,6 +179,7 @@ class UserManagement extends Component
             }
 
             $this->isFormModalOpen = false;
+            $this->dispatch('close-modal', 'user-form-modal');
             $this->resetForm();
         } catch (Exception $e) {
             $this->dispatch('notify', message: $e->getMessage(), type: 'danger');

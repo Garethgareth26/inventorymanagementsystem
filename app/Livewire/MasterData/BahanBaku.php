@@ -161,6 +161,7 @@ class BahanBaku extends Component
         $this->resetForm();
 
         $this->isModalOpen = true;
+        $this->dispatch('open-modal', 'material-form-modal');
     }
 
     /**
@@ -184,6 +185,7 @@ class BahanBaku extends Component
         $this->lead_time_hari = (int) $material->lead_time_hari;
 
         $this->isModalOpen = true;
+        $this->dispatch('open-modal', 'material-form-modal');
     }
 
     /**
@@ -192,6 +194,7 @@ class BahanBaku extends Component
     public function closeModal(): void
     {
         $this->isModalOpen = false;
+        $this->dispatch('close-modal', 'material-form-modal');
         $this->resetForm();
     }
 

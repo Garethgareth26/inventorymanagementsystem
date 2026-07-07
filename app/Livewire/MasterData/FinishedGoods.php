@@ -83,6 +83,7 @@ class FinishedGoods extends Component
         $this->resetForm();
 
         $this->isModalOpen = true;
+        $this->dispatch('open-modal', 'fg-form-modal');
     }
 
     /**
@@ -103,6 +104,7 @@ class FinishedGoods extends Component
         $this->stok_saat_ini = (float) $fg->stok_saat_ini;
 
         $this->isModalOpen = true;
+        $this->dispatch('open-modal', 'fg-form-modal');
     }
 
     /**
@@ -111,6 +113,7 @@ class FinishedGoods extends Component
     public function closeModal(): void
     {
         $this->isModalOpen = false;
+        $this->dispatch('close-modal', 'fg-form-modal');
         $this->resetForm();
     }
 

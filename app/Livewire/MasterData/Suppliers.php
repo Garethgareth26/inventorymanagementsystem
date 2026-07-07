@@ -82,6 +82,7 @@ class Suppliers extends Component
         $this->resetForm();
 
         $this->isModalOpen = true;
+        $this->dispatch('open-modal', 'supplier-form-modal');
     }
 
     /**
@@ -103,6 +104,7 @@ class Suppliers extends Component
         $this->is_active = $supplier->is_active;
 
         $this->isModalOpen = true;
+        $this->dispatch('open-modal', 'supplier-form-modal');
     }
 
     /**
@@ -111,6 +113,7 @@ class Suppliers extends Component
     public function closeModal(): void
     {
         $this->isModalOpen = false;
+        $this->dispatch('close-modal', 'supplier-form-modal');
         $this->resetForm();
     }
 
