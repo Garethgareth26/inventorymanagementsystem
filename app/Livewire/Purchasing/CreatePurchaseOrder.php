@@ -50,6 +50,20 @@ class CreatePurchaseOrder extends Component
         $lastPo = PesananPembelian::orderBy('id', 'desc')->first();
         $nextId = $lastPo ? $lastPo->id + 1 : 1;
         $this->kode_po = 'PO-'.str_pad((string) $nextId, 5, '0', STR_PAD_LEFT);
+
+        // Prepopulate from query string if available (e.g. from Emergency PO button)
+        if (request()->has('jenis')) {
+            $this->jenis = request()->string('jenis')->toString();
+        }
+
+        if (request()->has('bahan_baku_id')) {
+            $this->bahan_baku_id = request()->integer('bahan_baku_id');
+            $this->updatedBahanBakuId($this->bahan_baku_id);
+        }
+
+        if (request()->has('jumlah')) {
+            $this->jumlah = (float) request()->input('jumlah');
+        }
     }
 
     /**
