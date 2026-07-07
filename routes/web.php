@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Livewire\Dashboard\EmployeeDashboard;
 use App\Livewire\Dashboard\OwnerDashboard;
+use App\Livewire\MasterData\Suppliers;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,12 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Master Data
-    Route::get('/suppliers', function () {
-        return view('suppliers.index');
-    })->name('suppliers.index');
-    Route::get('/suppliers/create', function () {
-        return view('suppliers.create');
-    })->name('suppliers.create');
+    Route::get('/suppliers', Suppliers::class)->name('suppliers.index');
     Route::get('/bahan-baku', function () {
         return view('bahan_baku.index');
     })->name('bahan_baku.index');
