@@ -65,6 +65,11 @@
                     <span class="material-symbols-outlined text-[18px]">tune</span>
                     Sesuaikan Stok
                 </a>
+                <button type="button" x-data x-on:click="$dispatch('open-modal', 'import-modal')"
+                   class="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full border border-primary text-primary bg-transparent font-label-sm text-label-sm px-xl py-md hover:bg-primary-fixed/40 transition-all duration-150 active:scale-[0.98] cursor-pointer">
+                    <span class="material-symbols-outlined text-[18px]">upload_file</span>
+                    Import Data Excel
+                </button>
             </div>
         </x-ui.analytics-card>
     </div>
@@ -136,4 +141,43 @@
             </div>
         </x-ui.analytics-card>
     </div>
+
+    {{-- ── Import Modal ────────────────────────────────────────── --}}
+    <x-modal name="import-modal" maxWidth="md">
+        <form wire:submit="import" class="p-xl">
+            <h3 class="font-headline-sm text-headline-sm text-text-primary mb-xs">
+                Import Data Lengkap
+            </h3>
+            <p class="text-body-md text-text-secondary mb-lg">
+                Unggah file Excel (misal: <code>Perhitungan_Lengkap_Inventory_2025.xlsx</code>). Sistem akan otomatis membaca sheet <strong>"Master Bahan Baku"</strong>, <strong>"ABC-EOQ-SS-ROP"</strong>, dan <strong>"Data Pemesanan"</strong>.
+            </p>
+
+            <div class="flex flex-col gap-xs mb-lg">
+                <label for="importFile" class="font-label-md text-label-md text-text-primary">
+                    Pilih File Excel
+                </label>
+                <input type="file" id="importFile" wire:model="importFile" accept=".xlsx,.xls,.csv"
+                       class="block w-full text-body-md text-text-primary file:mr-md file:py-sm file:px-lg file:rounded-full file:border-0 file:text-label-md file:font-semibold file:bg-primary-fixed file:text-on-primary-fixed hover:file:bg-primary-fixed-dim cursor-pointer border border-border-outline rounded-lg focus:outline-none focus:border-primary transition-colors">
+                @error('importFile')
+                    <span class="text-body-sm text-negative-rose">{{ $message }}</span>
+                @enderror
+                
+                <div wire:loading wire:target="importFile" class="text-body-sm text-primary mt-2">
+                    Mempersiapkan file...
+                </div>
+                <div wire:loading wire:target="import" class="text-body-sm text-primary mt-2">
+                    Sedang memproses dan menyimpan data, mohon tunggu...
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-md">
+                <x-ui.secondary-button type="button" x-on:click="$dispatch('close-modal', 'import-modal')">
+                    Batal
+                </x-ui.secondary-button>
+                <x-ui.primary-button type="submit" wire:loading.attr="disabled">
+                    Mulai Import
+                </x-ui.primary-button>
+            </div>
+        </form>
+    </x-modal>
 </div>

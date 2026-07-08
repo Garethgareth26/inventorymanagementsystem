@@ -144,7 +144,7 @@ jobs:
         run: php artisan key:generate --force
 
       - name: Run Pest tests
-        run: php artisan test --parallel
+        run: php artisan test
 
   # ─────────────────────────────────────────────────────────────────────────
   # Job 4: Build & Push Docker image (only on push to main/master)
@@ -214,9 +214,10 @@ jobs:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
-      - name: Update image tag in service.yaml
+      - name: Update configurations in service.yaml
         run: |
           sed -i "s|:latest|:${{ github.sha }}|g" deploy/service.yaml
+          sed -i "s|YOUR_GCP_PROJECT_ID|${{ secrets.GCP_PROJECT_ID }}|g" deploy/service.yaml
 
       - name: Deploy to Cloud Run
         run: |

@@ -33,10 +33,12 @@
 
             <x-slot:actions>
                 @can('create', App\Models\BahanBaku::class)
-                    <x-ui.primary-button wire:click="openCreateModal" class="cursor-pointer">
-                        <span class="material-symbols-outlined text-[18px]">add</span>
-                        Tambah Bahan Baku
-                    </x-ui.primary-button>
+                    <div class="flex items-center gap-sm">
+                        <x-ui.primary-button wire:click="openCreateModal" class="cursor-pointer">
+                            <span class="material-symbols-outlined text-[18px]">add</span>
+                            Tambah Bahan Baku
+                        </x-ui.primary-button>
+                    </div>
                 @endcan
             </x-slot:actions>
         </x-forms.filter-bar>

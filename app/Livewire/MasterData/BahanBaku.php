@@ -16,6 +16,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\FullExcelImport;
+use Illuminate\Support\Facades\DB;
 
 /**
  * BahanBaku CRUD component.
@@ -354,9 +357,15 @@ class BahanBaku extends Component
 
         // Check reference constraints
         $linkedBoms = Bom::where('bahan_baku_id', $material->id)->count();
+        $linkedPos = $material->pesananPembelian()->count();
+        $linkedMutations = $material->mutasiStok()->count();
 
         if ($linkedBoms > 0) {
             $this->dispatch('notify', message: "Gagal menghapus: Bahan baku ini terhubung dengan {$linkedBoms} item BOM.", type: 'danger');
+        } elseif ($linkedPos > 0) {
+            $this->dispatch('notify', message: "Gagal menghapus: Bahan baku ini memiliki {$linkedPos} riwayat pesanan (PO).", type: 'danger');
+        } elseif ($linkedMutations > 0) {
+            $this->dispatch('notify', message: "Gagal menghapus: Bahan baku ini memiliki {$linkedMutations} riwayat mutasi stok.", type: 'danger');
         } else {
             $oldValues = $material->toArray();
 

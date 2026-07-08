@@ -6,6 +6,10 @@ use App\Models\User;
 use App\Services\DashboardQueryService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\FullExcelImport;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Full-page Livewire component for the Employee Dashboard.
@@ -15,7 +19,9 @@ use Livewire\Component;
  */
 class EmployeeDashboard extends Component
 {
-    use AuthorizesRequests;
+    use AuthorizesRequests, WithFileUploads;
+
+    public $importFile;
 
     /**
      * Render the Employee Dashboard view.
@@ -38,5 +44,27 @@ class EmployeeDashboard extends Component
             'pageTitle' => 'Dashboard',
             'pageSubtitle' => 'Selamat datang, '.auth()->user()->name,
         ]);
+    }
+
+    public function import(): void
+    {
+        $this->validate([
+            'importFile' => 'required|file|mimes:xlsx,xls,csv|max:10240', // max 10MB
+        ]);
+
+        try {
+            DB::transaction(function () {
+                Excel::import(new FullExcelImport, $this->importFile->getRealPath());
+            });
+            
+            $this->dispatch('notify', message: 'Data Master, Parameter ABC, dan Pemesanan berhasil diimport!', type: 'success');
+            
+            // Invalidate cache and reset state
+            app(DashboardQueryService::class)->invalidateCache();
+            $this->importFile = null;
+            $this->dispatch('close-modal', 'import-modal');
+        } catch (\Exception $e) {
+            $this->dispatch('notify', message: 'Gagal mengimport data: ' . $e->getMessage(), type: 'danger');
+        }
     }
 }

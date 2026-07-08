@@ -114,31 +114,17 @@ spec:
                   name: akuna-db-password
                   key: latest
 
-            # Session / Cache / Queue — Upstash Redis (SAD §7.1)
+            # Session / Cache / Queue — PostgreSQL Database
             - name: SESSION_DRIVER
-              value: "redis"
+              value: "database"
             - name: CACHE_STORE
-              value: "redis"
+              value: "database"
             - name: QUEUE_CONNECTION
-              value: "redis"
-            - name: REDIS_CLIENT
-              value: "phpredis"
-            - name: REDIS_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: akuna-redis-host
-                  key: latest
-            - name: REDIS_PORT
-              value: "6379"
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: akuna-redis-password
-                  key: latest
+              value: "database"
 
-            # Filesystem — Supabase Storage (SAD §4, ADR-006)
+            # Filesystem — Local (Supabase Storage planned for future)
             - name: FILESYSTEM_DISK
-              value: "supabase"
+              value: "local"
 
             # Logging — structured JSON to Cloud Logging
             - name: LOG_CHANNEL
