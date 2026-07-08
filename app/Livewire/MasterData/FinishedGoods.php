@@ -2,7 +2,6 @@
 
 namespace App\Livewire\MasterData;
 
-use App\Models\Bom;
 use App\Models\FinishedGood as FinishedGoodModel;
 use App\Models\MutasiStok;
 use App\Models\ProductionEntry;
@@ -207,11 +206,11 @@ class FinishedGoods extends Component
         $this->confirmingDeletionId = $id;
 
         $linkedProduction = ProductionEntry::where('finished_goods_id', $fg->id)->count();
-        
+
         if ($linkedProduction > 0) {
             $this->deleteWarningMessage = "Peringatan: Barang jadi ini pernah diproduksi sebanyak {$linkedProduction} kali. Jika dihapus, riwayat mutasi stok dan produksinya akan tetap tersimpan, namun barang ini tidak akan muncul lagi di menu. Apakah Anda yakin ingin menghapus?";
         } else {
-            $this->deleteWarningMessage = "Apakah Anda yakin ingin menghapus barang jadi ini? Tindakan ini tidak dapat dibatalkan.";
+            $this->deleteWarningMessage = 'Apakah Anda yakin ingin menghapus barang jadi ini? Tindakan ini tidak dapat dibatalkan.';
         }
 
         $this->dispatch('toggle-modal', name: 'delete-confirm', show: true);

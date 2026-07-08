@@ -348,7 +348,7 @@ class BahanBaku extends Component
         if ($linkedBoms > 0 || $linkedPos > 0 || $linkedMutations > 0) {
             $this->deleteWarningMessage = "Peringatan: Bahan baku ini terhubung dengan {$linkedBoms} BOM, {$linkedPos} PO, dan {$linkedMutations} Mutasi Stok. Jika dihapus, riwayat transaksinya akan tetap tersimpan, namun bahan baku ini tidak akan muncul lagi di menu. Apakah Anda yakin ingin menghapus?";
         } else {
-            $this->deleteWarningMessage = "Apakah Anda yakin ingin menghapus bahan baku ini? Tindakan ini tidak dapat dibatalkan.";
+            $this->deleteWarningMessage = 'Apakah Anda yakin ingin menghapus bahan baku ini? Tindakan ini tidak dapat dibatalkan.';
         }
 
         $this->dispatch('toggle-modal', name: 'delete-confirm', show: true);
