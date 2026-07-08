@@ -83,7 +83,7 @@ final class OptimizationService
         $mutations = $this->loadKeluar($bahanBaku->id, max(1, $windowMonths));
 
         $sdHarian = $this->engine->computeDailyStdDev($mutations, $windowMonths);
-        
+
         if ($sdHarian == 0.0) {
             $param = $bahanBaku->inventoryParameter;
             if ($param && $param->standar_deviasi_harian > 0) {
