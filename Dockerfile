@@ -16,6 +16,7 @@ RUN apk add --no-cache \
     libzip-dev \
     icu-dev \
     postgresql-dev \
+    sqlite-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) \
         pdo \
@@ -98,6 +99,7 @@ RUN apk add --no-cache --virtual .build-deps \
     libzip-dev \
     icu-dev \
     postgresql-dev \
+    sqlite-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install -j$(nproc) \
         pdo \
