@@ -73,7 +73,7 @@ spec:
             - name: APP_DEBUG
               value: "false"
             - name: APP_URL
-              value: "https://akuna-inventory-HASH-et.a.run.app"  # Update after first deploy
+              value: "https://akuna-inventory-370596424020.asia-southeast2.run.app"
 
             # Laravel timezone (SAD §4.1 — timezone matches WIB)
             - name: APP_TIMEZONE
