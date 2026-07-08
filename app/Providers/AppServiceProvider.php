@@ -19,6 +19,7 @@ use App\Policies\ProductionPolicy;
 use App\Policies\StockMutationPolicy;
 use App\Policies\SupplierPolicy;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Force HTTPS in production (Cloud Run behind load balancer)
         if (config('app.env') === 'production' || str_contains(config('app.url'), 'https://')) {
-            \Illuminate\Support\Facades\URL::forceScheme('https');
+            URL::forceScheme('https');
         }
 
         Gate::policy(PesananPembelian::class, ProcurementPolicy::class);
