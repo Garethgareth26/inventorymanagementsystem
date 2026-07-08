@@ -144,7 +144,8 @@ RUN cp .env.example .env 2>/dev/null || true
 # Laravel bootstrap
 RUN php artisan config:cache \
     && php artisan route:cache \
-    && php artisan view:cache
+    && php artisan view:cache \
+    && php artisan livewire:publish --assets
 
 # Fix ownership — nginx and php-fpm both run as www-data
 RUN chown -R www-data:www-data /var/www/html \
