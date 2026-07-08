@@ -50,7 +50,7 @@ class Bom extends Model
      */
     public function finishedGood(): BelongsTo
     {
-        return $this->belongsTo(FinishedGood::class, 'finished_goods_id');
+        return $this->belongsTo(FinishedGood::class, 'finished_goods_id')->withTrashed();
     }
 
     /**
@@ -58,6 +58,6 @@ class Bom extends Model
      */
     public function bahanBaku(): BelongsTo
     {
-        return $this->belongsTo(BahanBaku::class);
+        return $this->belongsTo(BahanBaku::class)->withTrashed();
     }
 }

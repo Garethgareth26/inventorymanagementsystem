@@ -236,7 +236,7 @@
         title="Hapus Bahan Baku" 
         type="danger"
     >
-        Apakah Anda yakin ingin menghapus bahan baku ini? Tindakan ini tidak dapat dibatalkan.
+        {{ $deleteWarningMessage }}
 
         <x-slot:cancel>
             <x-ui.secondary-button type="button" wire:click="$dispatch('toggle-modal', {name: 'delete-confirm', show: false})" class="cursor-pointer">
