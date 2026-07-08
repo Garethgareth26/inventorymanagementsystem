@@ -9,9 +9,9 @@ class FullExcelImport implements WithMultipleSheets
     public function sheets(): array
     {
         return [
-            'Master Bahan Baku' => new MasterBahanBakuSheetImport(),
-            'ABC-EOQ-SS-ROP' => new ParameterAbcSheetImport(),
-            'Data Pemesanan' => new DataPemesananSheetImport(),
+            'Master Bahan Baku' => new MasterBahanBakuSheetImport,
+            'ABC-EOQ-SS-ROP' => new ParameterAbcSheetImport,
+            'Data Pemesanan' => new DataPemesananSheetImport,
         ];
     }
 }

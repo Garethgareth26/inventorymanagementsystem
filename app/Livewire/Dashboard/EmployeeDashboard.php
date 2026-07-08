@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Dashboard;
 
+use App\Imports\FullExcelImport;
 use App\Models\User;
 use App\Services\DashboardQueryService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\FullExcelImport;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Full-page Livewire component for the Employee Dashboard.
@@ -56,15 +56,15 @@ class EmployeeDashboard extends Component
             DB::transaction(function () {
                 Excel::import(new FullExcelImport, $this->importFile->getRealPath());
             });
-            
+
             $this->dispatch('notify', message: 'Data Master, Parameter ABC, dan Pemesanan berhasil diimport!', type: 'success');
-            
+
             // Invalidate cache and reset state
             app(DashboardQueryService::class)->invalidateCache();
             $this->importFile = null;
             $this->dispatch('close-modal', 'import-modal');
         } catch (\Exception $e) {
-            $this->dispatch('notify', message: 'Gagal mengimport data: ' . $e->getMessage(), type: 'danger');
+            $this->dispatch('notify', message: 'Gagal mengimport data: '.$e->getMessage(), type: 'danger');
         }
     }
 }

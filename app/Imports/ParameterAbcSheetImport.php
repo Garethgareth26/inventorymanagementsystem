@@ -8,36 +8,33 @@ use App\Models\MutasiStok;
 use App\Models\User;
 use App\Services\StockMutationService;
 use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 
-class ParameterAbcSheetImport implements ToCollection, WithHeadingRow, SkipsEmptyRows
+class ParameterAbcSheetImport implements SkipsEmptyRows, ToCollection, WithHeadingRow
 {
-    /**
-     * @param Collection $rows
-     */
     public function collection(Collection $rows)
     {
         $stockMutationService = app(StockMutationService::class);
         $user = User::first(); // fallback user for system actions if no auth
 
         foreach ($rows as $row) {
-            if (!isset($row['kode'])) {
+            if (! isset($row['kode'])) {
                 continue;
             }
 
             $kode = trim($row['kode']);
             $bahanBaku = BahanBaku::where('kode', $kode)->first();
-            
-            if (!$bahanBaku) {
+
+            if (! $bahanBaku) {
                 continue;
             }
 
             // Clean numeric fields using array keys that Maatwebsite generates
             $kebutuhan = $this->parseNumber($row['kebutuhan_tahunan_d'] ?? 0);
             $biayaPesan = $this->parseNumber($row['biaya_pesans_rp'] ?? $row['biaya_pesan_s_rp'] ?? 75000);
-            
+
             // Biaya simpan might be parsed as 'biaya_simpanh_rpunitth'
             $biayaSimpan = 0;
             foreach ($row as $key => $val) {
@@ -52,7 +49,7 @@ class ParameterAbcSheetImport implements ToCollection, WithHeadingRow, SkipsEmpt
             $biayaSimpanPersen = ($harga > 0 && $biayaSimpan > 0) ? ($biayaSimpan / $harga) : 0.2;
 
             $sdHarian = $this->parseNumber($row['sd_harian'] ?? 0);
-            
+
             $zFactor = 1.65;
             foreach ($row as $key => $val) {
                 if (str_contains(strtolower($key), 'z_')) {
@@ -98,11 +95,15 @@ class ParameterAbcSheetImport implements ToCollection, WithHeadingRow, SkipsEmpt
 
     private function parseNumber($val)
     {
-        if (is_numeric($val)) return (float) $val;
-        if (is_string($val)) {
-            $val = str_replace(['Rp', ',', ' ', '%'], '', $val);
+        if (is_numeric($val)) {
             return (float) $val;
         }
+        if (is_string($val)) {
+            $val = str_replace(['Rp', ',', ' ', '%'], '', $val);
+
+            return (float) $val;
+        }
+
         return 0.0;
     }
 }

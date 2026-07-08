@@ -6,19 +6,16 @@ use App\Models\BahanBaku;
 use App\Models\Supplier;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 
-class MasterBahanBakuSheetImport implements ToCollection, WithHeadingRow, SkipsEmptyRows
+class MasterBahanBakuSheetImport implements SkipsEmptyRows, ToCollection, WithHeadingRow
 {
-    /**
-     * @param Collection $rows
-     */
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
-            if (!isset($row['kode']) || !isset($row['nama_bahan_baku'])) {
+            if (! isset($row['kode']) || ! isset($row['nama_bahan_baku'])) {
                 continue;
             }
 
@@ -30,14 +27,14 @@ class MasterBahanBakuSheetImport implements ToCollection, WithHeadingRow, SkipsE
                 // Find or create the supplier
                 $supplier = Supplier::firstOrCreate(
                     ['nama' => $supplierName],
-                    ['kode' => 'SUP-' . strtoupper(Str::random(5)), 'is_active' => true]
+                    ['kode' => 'SUP-'.strtoupper(Str::random(5)), 'is_active' => true]
                 );
                 $supplierId = $supplier->id;
             }
 
             // 2. Resolve or Create Bahan Baku
             $kode = trim($row['kode']);
-            
+
             $harga = $row['harga_rutin_rp'] ?? 0;
             // Clean up currency formatting if any
             if (is_string($harga)) {
