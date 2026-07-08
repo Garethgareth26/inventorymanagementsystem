@@ -71,7 +71,7 @@ spec:
             - name: APP_ENV
               value: "production"
             - name: APP_DEBUG
-              value: "false"
+              value: "true"
             - name: APP_URL
               value: "https://akuna-inventory-370596424020.asia-southeast2.run.app"
 
