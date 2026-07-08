@@ -16,9 +16,10 @@ mkdir -p /var/www/html/storage/logs \
          /var/www/html/storage/framework/sessions \
          /var/www/html/storage/framework/views \
          /var/www/html/storage/app/livewire-tmp \
-         /var/www/html/bootstrap/cache
+         /var/www/html/bootstrap/cache \
+         /tmp/nginx_client_body
 
-chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /tmp/nginx_client_body
 
 # ── 2. Clear cached config so Cloud Run env vars take effect ──────────────────
 echo "==> [entrypoint] Clearing config cache..."
