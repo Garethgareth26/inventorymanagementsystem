@@ -36,6 +36,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Force HTTPS in production (Cloud Run behind load balancer)
+        if (config('app.env') === 'production' || str_contains(config('app.url'), 'https://')) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         Gate::policy(PesananPembelian::class, ProcurementPolicy::class);
         Gate::policy(ProductionEntry::class, ProductionPolicy::class);
         Gate::policy(MutasiStok::class, StockMutationPolicy::class);
