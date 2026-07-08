@@ -51,7 +51,14 @@ final class OptimizationService
         $mutations = $this->loadKeluar($bahanBaku->id, $windowMonths);
 
         $annualDemand = $this->engine->computeAnnualDemand($mutations, $windowMonths);
+        if ($annualDemand == 0.0 && $param && $param->kebutuhan_tahunan > 0) {
+            $annualDemand = (float) $param->kebutuhan_tahunan;
+        }
+
         $sdHarian = $this->engine->computeDailyStdDev($mutations, $windowMonths);
+        if ($sdHarian == 0.0 && $param && $param->standar_deviasi_harian > 0) {
+            $sdHarian = (float) $param->standar_deviasi_harian;
+        }
 
         $biayaSimpanPersen = $param ? (float) $param->biaya_simpan_persen : (SystemSettings::getFloat('biaya_simpan', 20.0) / 100.0);
         $holdingCost = $this->engine->computeHoldingCost((float) $bahanBaku->harga_satuan, $biayaSimpanPersen);
@@ -75,7 +82,16 @@ final class OptimizationService
     {
         $mutations = $this->loadKeluar($bahanBaku->id, max(1, $windowMonths));
 
-        return $this->engine->computeDailyStdDev($mutations, $windowMonths);
+        $sdHarian = $this->engine->computeDailyStdDev($mutations, $windowMonths);
+        
+        if ($sdHarian == 0.0) {
+            $param = $bahanBaku->inventoryParameter;
+            if ($param && $param->standar_deviasi_harian > 0) {
+                $sdHarian = (float) $param->standar_deviasi_harian;
+            }
+        }
+
+        return $sdHarian;
     }
 
     // ─── Simulation ───────────────────────────────────────────────────────────
