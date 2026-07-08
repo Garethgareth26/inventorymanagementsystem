@@ -92,7 +92,7 @@
                     </span>
                 </td>
                 <td class="px-lg py-md text-body-md text-text-primary font-semibold numeric">
-                    {{ number_format($item->jumlah, 2) }} {{ $relatedItem->satuan ?? '' }}
+                    {{ $isBahanBaku ? number_format($item->jumlah, 2) : number_format($item->jumlah, 0, ',', '.') }} {{ $relatedItem->satuan ?? '' }}
                 </td>
                 <td class="px-lg py-md text-body-md select-none">
                     <x-feedback.status-badge status="{{ $item->sumber === 'po_penerimaan' ? 'success' : ($item->sumber === 'produksi' ? 'info' : 'warning') }}">
