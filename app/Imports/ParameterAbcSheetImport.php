@@ -6,6 +6,7 @@ use App\Models\BahanBaku;
 use App\Models\InventoryParameter;
 use App\Models\MutasiStok;
 use App\Models\User;
+use App\Services\CalculationEngine;
 use App\Services\StockMutationService;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
@@ -17,6 +18,7 @@ class ParameterAbcSheetImport implements SkipsEmptyRows, ToCollection, WithHeadi
     public function collection(Collection $rows)
     {
         $stockMutationService = app(StockMutationService::class);
+        $calculationEngine = app(CalculationEngine::class);
         $user = User::first(); // fallback user for system actions if no auth
 
         foreach ($rows as $row) {
@@ -58,6 +60,12 @@ class ParameterAbcSheetImport implements SkipsEmptyRows, ToCollection, WithHeadi
                 }
             }
 
+            // Calculate EOQ, Safety Stock, and ROP
+            $holdingCost = $calculationEngine->computeHoldingCost((float) $bahanBaku->harga_satuan, $biayaSimpanPersen);
+            $eoq = $calculationEngine->computeEoq($kebutuhan, $biayaPesan, $holdingCost);
+            $safetyStock = $calculationEngine->computeSafetyStock($zFactor, $sdHarian, (int) $bahanBaku->lead_time_hari);
+            $rop = $calculationEngine->computeRop($kebutuhan, (int) $bahanBaku->lead_time_hari, $safetyStock);
+
             InventoryParameter::updateOrCreate(
                 ['bahan_baku_id' => $bahanBaku->id],
                 [
@@ -66,6 +74,9 @@ class ParameterAbcSheetImport implements SkipsEmptyRows, ToCollection, WithHeadi
                     'biaya_pesan' => $biayaPesan,
                     'biaya_simpan_persen' => $biayaSimpanPersen,
                     'z_factor' => $zFactor,
+                    'eoq' => $eoq,
+                    'safety_stock' => $safetyStock,
+                    'reorder_point' => $rop,
                 ]
             );
 
