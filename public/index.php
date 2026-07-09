@@ -62,7 +62,18 @@ try {
     echo "<h2 style='margin-top:0;'>FATAL ERROR DETECTED!</h2>";
     echo "<strong>Error Message:</strong> " . $e->getMessage() . "<br><br>";
     echo "<strong>File:</strong> " . $e->getFile() . " on line " . $e->getLine() . "<br><br>";
-    echo "<strong>Stack Trace:</strong><br><pre style='background: #fff; padding: 10px; border: 1px solid #ccc; overflow: auto;'>" . $e->getTraceAsString() . "</pre>";
+    
+    $prev = $e->getPrevious();
+    $i = 1;
+    while ($prev) {
+        echo "<hr><h3 style='color:#c62828'>PREVIOUS EXCEPTION $i</h3>";
+        echo "<strong>Message:</strong> " . $prev->getMessage() . "<br><br>";
+        echo "<strong>File:</strong> " . $prev->getFile() . " on line " . $prev->getLine() . "<br><br>";
+        echo "<strong>Stack Trace:</strong><br><pre style='background: #fff; padding: 10px; border: 1px solid #ccc; overflow: auto;'>" . $prev->getTraceAsString() . "</pre>";
+        $prev = $prev->getPrevious();
+        $i++;
+    }
+
     echo "</div>";
     exit;
 }
