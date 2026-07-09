@@ -54,4 +54,15 @@ require __DIR__.'/../vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
-$app->handleRequest(Request::capture());
+try {
+    $app->handleRequest(Request::capture());
+} catch (Throwable $e) {
+    header('HTTP/1.1 500 Internal Server Error');
+    echo "<div style='font-family: sans-serif; padding: 20px; background: #ffebee; color: #b71c1c; border-radius: 8px;'>";
+    echo "<h2 style='margin-top:0;'>FATAL ERROR DETECTED!</h2>";
+    echo "<strong>Error Message:</strong> " . $e->getMessage() . "<br><br>";
+    echo "<strong>File:</strong> " . $e->getFile() . " on line " . $e->getLine() . "<br><br>";
+    echo "<strong>Stack Trace:</strong><br><pre style='background: #fff; padding: 10px; border: 1px solid #ccc; overflow: auto;'>" . $e->getTraceAsString() . "</pre>";
+    echo "</div>";
+    exit;
+}
