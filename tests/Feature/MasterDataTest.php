@@ -167,7 +167,7 @@ class MasterDataTest extends TestCase
     }
 
     /** @test */
-    public function can_soft_delete_bahan_baku_referenced_in_bom()
+    public function cannot_delete_bahan_baku_referenced_in_bom()
     {
         $this->actingAs($this->karyawan);
 
@@ -183,10 +183,10 @@ class MasterDataTest extends TestCase
             ->set('confirmingDeletionId', $this->bahanBaku->id)
             ->call('delete')
             ->assertDispatched('notify', function ($name, $detail) {
-                return str_contains($detail['message'], 'Bahan baku berhasil dihapus');
+                return str_contains($detail['message'], 'Gagal menghapus');
             });
 
-        $this->assertSoftDeleted('bahan_baku', ['id' => $this->bahanBaku->id]);
+        $this->assertDatabaseHas('bahan_baku', ['id' => $this->bahanBaku->id]);
     }
 
     // ─── Finished Goods CRUD Tests ────────────────────────────────────────

@@ -6,7 +6,6 @@ use Database\Factories\FinishedGoodFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Finished good master data.
@@ -18,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class FinishedGood extends Model
 {
     /** @use HasFactory<FinishedGoodFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'finished_goods';
 

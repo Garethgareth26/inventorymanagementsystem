@@ -81,7 +81,7 @@ class PesananPembelian extends Model
      */
     public function bahanBaku(): BelongsTo
     {
-        return $this->belongsTo(BahanBaku::class)->withTrashed();
+        return $this->belongsTo(BahanBaku::class);
     }
 
     /**

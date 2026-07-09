@@ -133,15 +133,17 @@
 
         {{-- Footer Action Buttons --}}
         @can('update', App\Models\Bom::class)
-            <div class="flex justify-end gap-md mt-xl border-t border-border-divider pt-lg select-none">
-                <a href="{{ route('barang_jadi.index') }}" class="inline-flex items-center gap-2 border border-border-divider text-text-secondary bg-transparent font-label-sm text-label-sm px-8 py-2.5 rounded-full hover:bg-surface-container-low transition-all active:scale-[0.98] cursor-pointer">
-                    Batal
-                </a>
-                
-                <x-ui.primary-button wire:click="save" class="cursor-pointer px-8">
-                    Simpan Resep
-                </x-ui.primary-button>
-            </div>
+            @if(count($lines) > 0)
+                <div class="flex justify-end gap-md mt-xl border-t border-border-divider pt-lg select-none">
+                    <a href="{{ route('barang_jadi.index') }}" class="inline-flex items-center gap-2 border border-border-divider text-text-secondary bg-transparent font-label-sm text-label-sm px-8 py-2.5 rounded-full hover:bg-surface-container-low transition-all active:scale-[0.98] cursor-pointer">
+                        Batal
+                    </a>
+                    
+                    <x-ui.primary-button wire:click="save" class="cursor-pointer px-8">
+                        Simpan Resep
+                    </x-ui.primary-button>
+                </div>
+            @endif
         @else
             <div class="flex justify-end gap-md mt-xl border-t border-border-divider pt-lg select-none">
                 <span class="text-body-md text-text-secondary italic">Akses Read-Only: Hanya Employee yang dapat mengedit resep BOM.</span>

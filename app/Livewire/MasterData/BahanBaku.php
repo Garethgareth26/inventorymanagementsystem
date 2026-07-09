@@ -53,8 +53,6 @@ class BahanBaku extends Component
 
     public ?int $confirmingDeletionId = null;
 
-    public ?string $deleteWarningMessage = null;
-
     /**
      * Reset pagination when search or filters update.
      */
@@ -340,22 +338,11 @@ class BahanBaku extends Component
         $this->authorize('delete', $material);
 
         $this->confirmingDeletionId = $id;
-
-        $linkedBoms = Bom::where('bahan_baku_id', $material->id)->count();
-        $linkedPos = $material->pesananPembelian()->count();
-        $linkedMutations = $material->mutasiStok()->count();
-
-        if ($linkedBoms > 0 || $linkedPos > 0 || $linkedMutations > 0) {
-            $this->deleteWarningMessage = "Peringatan: Bahan baku ini terhubung dengan {$linkedBoms} BOM, {$linkedPos} PO, dan {$linkedMutations} Mutasi Stok. Jika dihapus, riwayat transaksinya akan tetap tersimpan, namun bahan baku ini tidak akan muncul lagi di menu. Apakah Anda yakin ingin menghapus?";
-        } else {
-            $this->deleteWarningMessage = 'Apakah Anda yakin ingin menghapus bahan baku ini? Tindakan ini tidak dapat dibatalkan.';
-        }
-
         $this->dispatch('toggle-modal', name: 'delete-confirm', show: true);
     }
 
     /**
-     * Delete raw material record (Soft Delete).
+     * Delete raw material record if not referenced in any BOM.
      */
     public function delete(): void
     {
@@ -366,22 +353,35 @@ class BahanBaku extends Component
         $material = BahanBakuModel::findOrFail($this->confirmingDeletionId);
         $this->authorize('delete', $material);
 
-        $oldValues = $material->toArray();
+        // Check reference constraints
+        $linkedBoms = Bom::where('bahan_baku_id', $material->id)->count();
+        $linkedPos = $material->pesananPembelian()->count();
+        $linkedMutations = $material->mutasiStok()->count();
 
-        // Delete associated parameters first
-        $material->inventoryParameter()->delete();
-        $material->delete();
+        if ($linkedBoms > 0) {
+            $this->dispatch('notify', message: "Gagal menghapus: Bahan baku ini terhubung dengan {$linkedBoms} item BOM.", type: 'danger');
+        } elseif ($linkedPos > 0) {
+            $this->dispatch('notify', message: "Gagal menghapus: Bahan baku ini memiliki {$linkedPos} riwayat pesanan (PO).", type: 'danger');
+        } elseif ($linkedMutations > 0) {
+            $this->dispatch('notify', message: "Gagal menghapus: Bahan baku ini memiliki {$linkedMutations} riwayat mutasi stok.", type: 'danger');
+        } else {
+            $oldValues = $material->toArray();
 
-        AuditLogger::log(
-            auth()->user(),
-            'material.delete',
-            $material,
-            $oldValues,
-            null
-        );
+            // Delete associated parameters first
+            $material->inventoryParameter()->delete();
+            $material->delete();
 
-        app(DashboardQueryService::class)->invalidateCache();
-        $this->dispatch('notify', message: 'Bahan baku berhasil dihapus.', type: 'success');
+            AuditLogger::log(
+                auth()->user(),
+                'material.delete',
+                $material,
+                $oldValues,
+                null
+            );
+
+            app(DashboardQueryService::class)->invalidateCache();
+            $this->dispatch('notify', message: 'Bahan baku berhasil dihapus.', type: 'success');
+        }
 
         $this->confirmingDeletionId = null;
         $this->dispatch('toggle-modal', name: 'delete-confirm', show: false);

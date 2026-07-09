@@ -30,7 +30,7 @@
                 <td class="px-lg py-md text-body-md font-semibold text-text-primary">{{ $item->kode }}</td>
                 <td class="px-lg py-md text-body-md text-text-primary">{{ $item->nama }}</td>
                 <td class="px-lg py-md text-body-md text-text-secondary">{{ $item->satuan }}</td>
-                <td class="px-lg py-md text-body-md text-text-primary numeric">{{ number_format($item->stok_saat_ini, 0, ',', '.') }}</td>
+                <td class="px-lg py-md text-body-md text-text-primary numeric">{{ number_format($item->stok_saat_ini, 2) }}</td>
                 <td class="px-lg py-md text-body-md">
                     <div class="flex items-center gap-sm">
                         <x-feedback.status-badge status="{{ $item->bom_lines_count > 0 ? 'success' : 'warning' }}">
@@ -162,7 +162,7 @@
                     <div class="flex flex-col gap-xs">
                         <x-input-label value="Stok Saat Ini" />
                         <div class="bg-surface-container-low border border-border-divider rounded-DEFAULT p-3 text-body-md font-body-md text-text-secondary select-none">
-                            {{ number_format($stok_saat_ini, 0, ',', '.') }} {{ $satuan }}
+                            {{ number_format($stok_saat_ini, 2) }} {{ $satuan }}
                         </div>
                         <p class="text-xs text-text-secondary select-none">Perubahan stok barang jadi harus dicatat melalui pencatatan Hasil Produksi.</p>
                     </div>
@@ -188,7 +188,7 @@
         title="Hapus Barang Jadi" 
         type="danger"
     >
-        {{ $deleteWarningMessage }}
+        Apakah Anda yakin ingin menghapus barang jadi ini? Tindakan ini tidak dapat dibatalkan.
 
         <x-slot:cancel>
             <x-ui.secondary-button type="button" wire:click="$dispatch('toggle-modal', {name: 'delete-confirm', show: false})" class="cursor-pointer">

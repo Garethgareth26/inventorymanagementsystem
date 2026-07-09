@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Raw material master data.
@@ -22,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BahanBaku extends Model
 {
     /** @use HasFactory<BahanBakuFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'bahan_baku';
 

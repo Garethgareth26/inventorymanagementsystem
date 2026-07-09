@@ -37,7 +37,7 @@
                     {{ $item->finishedGood->nama }} ({{ $item->finishedGood->kode }})
                 </td>
                 <td class="px-lg py-md text-body-md text-text-primary numeric">
-                    {{ number_format($item->jumlah_diproduksi, 0, ',', '.') }} {{ $item->finishedGood->satuan }}
+                    {{ number_format($item->jumlah_diproduksi, 2) }} {{ $item->finishedGood->satuan }}
                 </td>
                 <td class="px-lg py-md text-body-md text-text-secondary">
                     {{ $item->dicatatOleh->name }}

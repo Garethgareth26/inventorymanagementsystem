@@ -28,7 +28,7 @@
                 <x-text-input 
                     id="jumlah_diproduksi" 
                     type="number" 
-                    step="1"
+                    step="0.01"
                     wire:model.live.debounce.200ms="jumlah_diproduksi" 
                     class="w-full" 
                     placeholder="Contoh: 100" 

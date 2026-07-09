@@ -52,7 +52,7 @@ class ProductionEntry extends Model
      */
     public function finishedGood(): BelongsTo
     {
-        return $this->belongsTo(FinishedGood::class, 'finished_goods_id')->withTrashed();
+        return $this->belongsTo(FinishedGood::class, 'finished_goods_id');
     }
 
     /**

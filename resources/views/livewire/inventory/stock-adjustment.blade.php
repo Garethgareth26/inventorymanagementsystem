@@ -45,7 +45,7 @@
             >
                 <option value="">Pilih item yang disesuaikan...</option>
                 @foreach($itemsList as $item)
-                    <option value="{{ $item->id }}">{{ $item->nama }} ({{ $item->kode }}) - Stok: {{ $item_type === 'finished_good' ? number_format($item->stok_saat_ini, 0, ',', '.') : number_format($item->stok_saat_ini, 2) }} {{ $item->satuan }}</option>
+                    <option value="{{ $item->id }}">{{ $item->nama }} ({{ $item->kode }}) - Stok: {{ number_format($item->stok_saat_ini, 2) }} {{ $item->satuan }}</option>
                 @endforeach
             </select>
             <x-input-error :messages="$errors->get('item_id')" />
@@ -88,7 +88,7 @@
             <x-text-input 
                 id="jumlah" 
                 type="number" 
-                step="{{ $item_type === 'finished_good' ? '1' : '0.01' }}"
+                step="0.01"
                 wire:model.live="jumlah" 
                 class="w-full" 
                 placeholder="Jumlah unit penyesuaian" 
@@ -114,7 +114,7 @@
                 <div class="flex items-center gap-md">
                     <span class="material-symbols-outlined text-[24px]">warning</span>
                     <div>
-                        <strong>Peringatan Jumlah Besar:</strong> Penyesuaian ini terdeteksi sangat besar (Rata-rata bulanan: {{ $item_type === 'finished_good' ? number_format($avgMonthly, 0, ',', '.') : number_format($avgMonthly, 2) }}, Penyesuaian: {{ $item_type === 'finished_good' ? number_format($jumlah, 0, ',', '.') : number_format($jumlah, 2) }}).
+                        <strong>Peringatan Jumlah Besar:</strong> Penyesuaian ini terdeteksi sangat besar (Rata-rata bulanan: {{ number_format($avgMonthly, 2) }}, Penyesuaian: {{ number_format($jumlah, 2) }}).
                     </div>
                 </div>
 

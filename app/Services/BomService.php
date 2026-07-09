@@ -24,7 +24,10 @@ final class BomService
      */
     public function saveBom(FinishedGood $fg, array $ingredients, User $actor): void
     {
-        // Allow empty ingredients so users can completely clear/delete a recipe
+        // Validate against empty ingredients list
+        if (empty($ingredients)) {
+            throw new InvalidArgumentException('Resep BOM tidak boleh kosong.');
+        }
 
         // Validate duplicates
         $ids = array_column($ingredients, 'bahan_baku_id');

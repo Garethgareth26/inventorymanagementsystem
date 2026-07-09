@@ -2,6 +2,7 @@
 
 namespace App\Livewire\MasterData;
 
+use App\Models\Bom;
 use App\Models\FinishedGood as FinishedGoodModel;
 use App\Models\MutasiStok;
 use App\Models\ProductionEntry;
@@ -36,8 +37,6 @@ class FinishedGoods extends Component
     public bool $isModalOpen = false;
 
     public ?int $confirmingDeletionId = null;
-
-    public ?string $deleteWarningMessage = null;
 
     /**
      * Reset pagination when search query updates.
@@ -204,20 +203,11 @@ class FinishedGoods extends Component
         $this->authorize('delete', $fg);
 
         $this->confirmingDeletionId = $id;
-
-        $linkedProduction = ProductionEntry::where('finished_goods_id', $fg->id)->count();
-
-        if ($linkedProduction > 0) {
-            $this->deleteWarningMessage = "Peringatan: Barang jadi ini pernah diproduksi sebanyak {$linkedProduction} kali. Jika dihapus, riwayat mutasi stok dan produksinya akan tetap tersimpan, namun barang ini tidak akan muncul lagi di menu. Apakah Anda yakin ingin menghapus?";
-        } else {
-            $this->deleteWarningMessage = 'Apakah Anda yakin ingin menghapus barang jadi ini? Tindakan ini tidak dapat dibatalkan.';
-        }
-
         $this->dispatch('toggle-modal', name: 'delete-confirm', show: true);
     }
 
     /**
-     * Delete finished good record (Soft Delete).
+     * Delete finished good record if not referenced in BOM or Production.
      */
     public function delete(): void
     {
@@ -228,19 +218,29 @@ class FinishedGoods extends Component
         $fg = FinishedGoodModel::findOrFail($this->confirmingDeletionId);
         $this->authorize('delete', $fg);
 
-        $oldValues = $fg->toArray();
-        $fg->delete();
+        // Check reference constraints
+        $linkedBoms = Bom::where('finished_goods_id', $fg->id)->count();
+        $linkedProduction = ProductionEntry::where('finished_goods_id', $fg->id)->count();
 
-        AuditLogger::log(
-            auth()->user(),
-            'finished-good.delete',
-            $fg,
-            $oldValues,
-            null
-        );
+        if ($linkedBoms > 0) {
+            $this->dispatch('notify', message: "Gagal menghapus: Barang jadi ini memiliki {$linkedBoms} resep BOM yang aktif.", type: 'danger');
+        } elseif ($linkedProduction > 0) {
+            $this->dispatch('notify', message: "Gagal menghapus: Barang jadi ini terhubung dengan {$linkedProduction} entri produksi.", type: 'danger');
+        } else {
+            $oldValues = $fg->toArray();
+            $fg->delete();
 
-        app(DashboardQueryService::class)->invalidateCache();
-        $this->dispatch('notify', message: 'Barang jadi berhasil dihapus.', type: 'success');
+            AuditLogger::log(
+                auth()->user(),
+                'finished-good.delete',
+                $fg,
+                $oldValues,
+                null
+            );
+
+            app(DashboardQueryService::class)->invalidateCache();
+            $this->dispatch('notify', message: 'Barang jadi berhasil dihapus.', type: 'success');
+        }
 
         $this->confirmingDeletionId = null;
         $this->dispatch('toggle-modal', name: 'delete-confirm', show: false);

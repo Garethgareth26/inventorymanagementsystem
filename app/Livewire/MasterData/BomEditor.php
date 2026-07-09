@@ -96,12 +96,14 @@ class BomEditor extends Component
 
         // Validation rules
         $rules = [
-            'lines' => 'array',
+            'lines' => 'required|array|min:1',
             'lines.*.bahan_baku_id' => 'required|integer|exists:bahan_baku,id',
             'lines.*.qty_per_unit' => 'required|numeric|gt:0',
         ];
 
         $customMessages = [
+            'lines.required' => 'Resep BOM tidak boleh kosong.',
+            'lines.min' => 'Harus ada minimal 1 bahan baku.',
             'lines.*.bahan_baku_id.required' => 'Bahan baku harus dipilih.',
             'lines.*.qty_per_unit.required' => 'Jumlah pemakaian harus diisi.',
             'lines.*.qty_per_unit.gt' => 'Jumlah pemakaian harus lebih besar dari 0.',
