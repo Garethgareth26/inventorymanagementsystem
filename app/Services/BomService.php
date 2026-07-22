@@ -15,21 +15,18 @@ final class BomService
 {
     /**
      * Atomically save the Bill of Materials recipe for a finished good.
+     * Passing an empty $ingredients array will clear all BOM lines from the DB,
+     * allowing the finished good to be deleted afterwards.
      *
      * @param  FinishedGood  $fg  Finished good model.
-     * @param  array<int, array{bahan_baku_id: int, qty_per_unit: float}>  $ingredients  List of recipe ingredients.
+     * @param  array<int, array{bahan_baku_id: int, qty_per_unit: float}>  $ingredients  Recipe ingredients (may be empty).
      * @param  User  $actor  Performing user.
      *
-     * @throws InvalidArgumentException If duplicate bahan_baku_id is found.
+     * @throws InvalidArgumentException If duplicate bahan_baku_id is found or quantity <= 0.
      */
     public function saveBom(FinishedGood $fg, array $ingredients, User $actor): void
     {
-        // Validate against empty ingredients list
-        if (empty($ingredients)) {
-            throw new InvalidArgumentException('Resep BOM tidak boleh kosong.');
-        }
-
-        // Validate duplicates
+        // Validate duplicates (only when ingredients are provided)
         $ids = array_column($ingredients, 'bahan_baku_id');
         if (count($ids) !== count(array_unique($ids))) {
             throw new InvalidArgumentException('Bahan baku duplikat tidak diperbolehkan dalam satu resep BOM.');

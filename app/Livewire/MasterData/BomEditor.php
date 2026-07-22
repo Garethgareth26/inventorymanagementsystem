@@ -78,13 +78,27 @@ class BomEditor extends Component
 
     /**
      * Remove a row.
+     * If the last line is removed, auto-save (clear all BOM from DB) and redirect.
      */
-    public function removeLine(int $index): void
+    public function removeLine(int $index, BomService $bomService): void
     {
         $this->authorize('delete', Bom::class);
 
         unset($this->lines[$index]);
         $this->lines = array_values($this->lines);
+
+        // Auto-save when all lines are removed so the BOM is cleared in the DB.
+        if (count($this->lines) === 0) {
+            try {
+                $bomService->saveBom($this->finishedGood, [], auth()->user());
+                $this->dispatch('notify', message: 'Semua resep berhasil dihapus. Barang jadi kini dapat dihapus.', type: 'success');
+            } catch (\Exception $e) {
+                $this->addError('lines', $e->getMessage());
+                return;
+            }
+
+            redirect()->route('barang_jadi.index');
+        }
     }
 
     /**
@@ -94,16 +108,14 @@ class BomEditor extends Component
     {
         $this->authorize('update', Bom::class);
 
-        // Validation rules
+        // Validation rules (lines can be empty — clearing BOM is allowed)
         $rules = [
-            'lines' => 'required|array|min:1',
+            'lines' => 'array',
             'lines.*.bahan_baku_id' => 'required|integer|exists:bahan_baku,id',
             'lines.*.qty_per_unit' => 'required|numeric|gt:0',
         ];
 
         $customMessages = [
-            'lines.required' => 'Resep BOM tidak boleh kosong.',
-            'lines.min' => 'Harus ada minimal 1 bahan baku.',
             'lines.*.bahan_baku_id.required' => 'Bahan baku harus dipilih.',
             'lines.*.qty_per_unit.required' => 'Jumlah pemakaian harus diisi.',
             'lines.*.qty_per_unit.gt' => 'Jumlah pemakaian harus lebih besar dari 0.',
