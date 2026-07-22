@@ -38,6 +38,12 @@ class FinishedGoods extends Component
 
     public ?int $confirmingDeletionId = null;
 
+    /** @var bool Jika true, hapus meskipun ada entri produksi terhubung */
+    public bool $forceDelete = false;
+
+    /** @var int Jumlah entri produksi terhubung (untuk pesan warning) */
+    public int $linkedProductionCount = 0;
+
     /**
      * Reset pagination when search query updates.
      */
@@ -203,11 +209,14 @@ class FinishedGoods extends Component
         $this->authorize('delete', $fg);
 
         $this->confirmingDeletionId = $id;
+        $this->forceDelete = false;
+        $this->linkedProductionCount = 0;
         $this->dispatch('toggle-modal', name: 'delete-confirm', show: true);
     }
 
     /**
-     * Delete finished good record if not referenced in BOM or Production.
+     * Delete finished good. If linked to production entries, show a second
+     * warning confirmation. If forceDelete is set, cascade-delete production entries.
      */
     public function delete(): void
     {
@@ -218,31 +227,49 @@ class FinishedGoods extends Component
         $fg = FinishedGoodModel::findOrFail($this->confirmingDeletionId);
         $this->authorize('delete', $fg);
 
-        // Check reference constraints
+        // Check BOM constraint — BOM must be cleared first via BOM editor
         $linkedBoms = Bom::where('finished_goods_id', $fg->id)->count();
-        $linkedProduction = ProductionEntry::where('finished_goods_id', $fg->id)->count();
-
         if ($linkedBoms > 0) {
-            $this->dispatch('notify', message: "Gagal menghapus: Barang jadi ini memiliki {$linkedBoms} resep BOM yang aktif.", type: 'danger');
-        } elseif ($linkedProduction > 0) {
-            $this->dispatch('notify', message: "Gagal menghapus: Barang jadi ini terhubung dengan {$linkedProduction} entri produksi.", type: 'danger');
-        } else {
-            $oldValues = $fg->toArray();
-            $fg->delete();
-
-            AuditLogger::log(
-                auth()->user(),
-                'finished-good.delete',
-                $fg,
-                $oldValues,
-                null
-            );
-
-            app(DashboardQueryService::class)->invalidateCache();
-            $this->dispatch('notify', message: 'Barang jadi berhasil dihapus.', type: 'success');
+            $this->dispatch('notify', message: "Gagal menghapus: Barang jadi ini masih memiliki {$linkedBoms} resep BOM aktif. Hapus resep terlebih dahulu.", type: 'danger');
+            $this->confirmingDeletionId = null;
+            $this->dispatch('toggle-modal', name: 'delete-confirm', show: false);
+            return;
         }
 
+        // Check production entries
+        $linkedProduction = ProductionEntry::where('finished_goods_id', $fg->id)->count();
+
+        if ($linkedProduction > 0 && ! $this->forceDelete) {
+            // First attempt: show second warning with production info
+            $this->linkedProductionCount = $linkedProduction;
+            $this->forceDelete = true;
+            // Keep modal open — view will switch to warning state
+            return;
+        }
+
+        // Proceed with deletion (cascade production entries if forceDelete)
+        $oldValues = $fg->toArray();
+
+        if ($this->forceDelete) {
+            ProductionEntry::where('finished_goods_id', $fg->id)->delete();
+        }
+
+        $fg->delete();
+
+        AuditLogger::log(
+            auth()->user(),
+            'finished-good.delete',
+            $fg,
+            $oldValues,
+            null
+        );
+
+        app(DashboardQueryService::class)->invalidateCache();
+        $this->dispatch('notify', message: 'Barang jadi berhasil dihapus.', type: 'success');
+
         $this->confirmingDeletionId = null;
+        $this->forceDelete = false;
+        $this->linkedProductionCount = 0;
         $this->dispatch('toggle-modal', name: 'delete-confirm', show: false);
     }
 

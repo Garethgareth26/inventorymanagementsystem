@@ -185,10 +185,25 @@
     {{-- ── Delete Confirmation Modal ──────────────────────────────────── --}}
     <x-feedback.confirmation-modal 
         name="delete-confirm" 
-        title="Hapus Barang Jadi" 
+        title="{{ $forceDelete ? 'Peringatan: Ada Riwayat Produksi' : 'Hapus Barang Jadi' }}" 
         type="danger"
     >
-        Apakah Anda yakin ingin menghapus barang jadi ini? Tindakan ini tidak dapat dibatalkan.
+        @if($forceDelete && $linkedProductionCount > 0)
+            {{-- Second warning: production entries linked --}}
+            <div class="flex flex-col gap-sm">
+                <p class="text-body-md text-text-primary font-semibold">
+                    Barang jadi ini terhubung dengan <span class="text-negative-rose">{{ $linkedProductionCount }} entri produksi</span>.
+                </p>
+                <p class="text-body-md text-text-secondary">
+                    Menghapus barang jadi ini akan <strong>menghapus seluruh riwayat produksi terkait</strong> secara permanen. Data yang dihapus tidak dapat dipulihkan.
+                </p>
+                <p class="text-body-md text-text-secondary">
+                    Apakah Anda tetap yakin ingin melanjutkan penghapusan?
+                </p>
+            </div>
+        @else
+            Apakah Anda yakin ingin menghapus barang jadi ini? Tindakan ini tidak dapat dibatalkan.
+        @endif
 
         <x-slot:cancel>
             <x-ui.secondary-button type="button" wire:click="$dispatch('toggle-modal', {name: 'delete-confirm', show: false})" class="cursor-pointer">
@@ -197,8 +212,12 @@
         </x-slot:cancel>
 
         <x-slot:confirm>
-            <x-ui.primary-button type="button" wire:click="delete" class="cursor-pointer bg-negative-rose hover:bg-negative-rose/90 border-transparent">
-                Hapus
+            <x-ui.primary-button 
+                type="button" 
+                wire:click="delete" 
+                class="cursor-pointer bg-negative-rose hover:bg-negative-rose/90 border-transparent"
+            >
+                {{ $forceDelete ? 'Ya, Hapus Semua' : 'Hapus' }}
             </x-ui.primary-button>
         </x-slot:confirm>
     </x-feedback.confirmation-modal>
